@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{3511DA0E-E918-4A23-A03B-4978D4D67F40}") = "VanillaGravshipExpanded", "Source\VanillaGravshipExpanded.csproj", "{78252315-4078-4FC3-BDF3-D1342DCEA411}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78252315-4078-4FC3-BDF3-D1342DCEA411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78252315-4078-4FC3-BDF3-D1342DCEA411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78252315-4078-4FC3-BDF3-D1342DCEA411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78252315-4078-4FC3-BDF3-D1342DCEA411}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D331E8C0-3033-49A9-A4DF-F165E5FA7856}
+	EndGlobalSection
+EndGlobal
