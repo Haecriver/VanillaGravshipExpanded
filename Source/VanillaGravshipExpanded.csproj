@@ -26,6 +26,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="PipeSystem">
+      <HintPath>..\..\VanillaExpandedFramework\1.6\Assemblies\PipeSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="VEF">
+      <HintPath>..\..\VanillaExpandedFramework\1.6\Assemblies\VEF.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove=".editorconfig" />
     <None Remove="mono_crash.*.json" />
   </ItemGroup>
