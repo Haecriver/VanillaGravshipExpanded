@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+
+  <!-- Replace vanilla comp for oxygen pump with our own. -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="OxygenPump"]/comps/li[@Class="CompProperties_OxygenPusher"]</xpath>
+		<value>
+      <li Class="VanillaGravshipExpanded.CompProperties_ResourceTrader_OxygenPusher">
+        <!-- CompProperties_ResourceTrader props. -->
+        <pipeNet>VGSE_OxygenNet</pipeNet>
+        <consumptionPerTick>0.4</consumptionPerTick>
+        <visualOnlyConsumption>true</visualOnlyConsumption>
+        <!-- Vanilla CompProperties_OxygenPusher props, copied over (since we're replacing them). -->
+        <requiresPower>true</requiresPower>
+        <airPerSecondPerHundredCells>0.01</airPerSecondPerHundredCells>
+      </li>
+    </value>
+	</Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/uiIconPath</xpath>
+    <value>
+      <uiIconPath>Things/Structures/OxygenPump/OxygenPump_MenuIcon</uiIconPath>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/graphicData/texPath</xpath>
+    <value>
+      <texPath>Things/Structures/OxygenPump/OxygenPump</texPath>
+    </value>
+  </Operation>
+
+</Patch>

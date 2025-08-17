@@ -14,6 +14,9 @@
     <pipeDefs>
       <li>VGSE_OxygenPipe</li>
     </pipeDefs>
+    <noLinkedGraphicDefs>
+      <li>OxygenPump</li>
+    </noLinkedGraphicDefs>
     <designator>
       <deconstructIconPath>Things/PipeNetworks/Oxygen/OxygenPipes_Deconstruct</deconstructIconPath>
       <designationCategoryDef>Odyssey</designationCategoryDef>
