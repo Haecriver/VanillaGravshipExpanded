@@ -10,6 +10,8 @@
         <pipeNet>VGSE_OxygenNet</pipeNet>
         <consumptionPerTick>0.4</consumptionPerTick>
         <visualOnlyConsumption>true</visualOnlyConsumption>
+        <!-- Custom CompProperties_ResourceTrader_OxygenPusher props. -->
+        <lowPowerConsumptionFactor>0.1</lowPowerConsumptionFactor>
         <!-- Vanilla CompProperties_OxygenPusher props, copied over (since we're replacing them). -->
         <requiresPower>true</requiresPower>
         <airPerSecondPerHundredCells>0.01</airPerSecondPerHundredCells>
@@ -29,6 +31,10 @@
     <value>
       <texPath>Things/Structures/OxygenPump/OxygenPump</texPath>
     </value>
+  </Operation>
+
+  <Operation Class="PatchOperationRemove">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/comps/li[@Class="CompProperties_LowPowerUnlessVacuum"]</xpath>
   </Operation>
 
 </Patch>
