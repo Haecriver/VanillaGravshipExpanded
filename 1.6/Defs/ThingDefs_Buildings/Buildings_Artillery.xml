@@ -19,6 +19,8 @@
         <passability>Impassable</passability>
         <fillPercent>1.0</fillPercent>
         <tickerType>Normal</tickerType>
+		<stealable>false</stealable>
+		<rotatable>false</rotatable>
         <comps>
             <li Class="CompProperties_Forbiddable" />
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
