@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{78252315-4078-4FC3-BDF3-D1342DCEA411}|Source\\VanillaGravshipExpanded.csproj|e:\\steam\\steamapps\\common\\rimworld\\mods\\vanillagravshipexpanded\\source\\gravshipmapgenutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78252315-4078-4FC3-BDF3-D1342DCEA411}|Source\\VanillaGravshipExpanded.csproj|solutionrelative:source\\gravshipmapgenutility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78252315-4078-4FC3-BDF3-D1342DCEA411}|Source\\VanillaGravshipExpanded.csproj|e:\\steam\\steamapps\\common\\rimworld\\mods\\vanillagravshipexpanded\\source\\mapparents\\iceasteroidmapparent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78252315-4078-4FC3-BDF3-D1342DCEA411}|Source\\VanillaGravshipExpanded.csproj|solutionrelative:source\\mapparents\\iceasteroidmapparent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78252315-4078-4FC3-BDF3-D1342DCEA411}|Source\\VanillaGravshipExpanded.csproj|e:\\steam\\steamapps\\common\\rimworld\\mods\\vanillagravshipexpanded\\source\\vgedefof.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78252315-4078-4FC3-BDF3-D1342DCEA411}|Source\\VanillaGravshipExpanded.csproj|solutionrelative:source\\vgedefof.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78252315-4078-4FC3-BDF3-D1342DCEA411}|Source\\VanillaGravshipExpanded.csproj|e:\\steam\\steamapps\\common\\rimworld\\mods\\vanillagravshipexpanded\\source\\gensteps\\genstep_iceasteroid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78252315-4078-4FC3-BDF3-D1342DCEA411}|Source\\VanillaGravshipExpanded.csproj|solutionrelative:source\\gensteps\\genstep_iceasteroid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IceAsteroidMapParent.cs",
+              "DocumentMoniker": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\Source\\MapParents\\IceAsteroidMapParent.cs",
+              "RelativeDocumentMoniker": "Source\\MapParents\\IceAsteroidMapParent.cs",
+              "ToolTip": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\Source\\MapParents\\IceAsteroidMapParent.cs",
+              "RelativeToolTip": "Source\\MapParents\\IceAsteroidMapParent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T15:33:55.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VGEDefOf.cs",
+              "DocumentMoniker": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\Source\\VGEDefOf.cs",
+              "RelativeDocumentMoniker": "Source\\VGEDefOf.cs",
+              "ToolTip": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\Source\\VGEDefOf.cs",
+              "RelativeToolTip": "Source\\VGEDefOf.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T14:40:30.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GravshipMapGenUtility.cs",
+              "DocumentMoniker": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\Source\\GravshipMapGenUtility.cs",
+              "RelativeDocumentMoniker": "Source\\GravshipMapGenUtility.cs",
+              "ToolTip": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\Source\\GravshipMapGenUtility.cs",
+              "RelativeToolTip": "Source\\GravshipMapGenUtility.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T14:36:57.539Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GenStep_IceAsteroid.cs",
+              "DocumentMoniker": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\Source\\GenSteps\\GenStep_IceAsteroid.cs",
+              "RelativeDocumentMoniker": "Source\\GenSteps\\GenStep_IceAsteroid.cs",
+              "ToolTip": "E:\\Steam\\steamapps\\common\\RimWorld\\Mods\\VanillaGravshipExpanded\\Source\\GenSteps\\GenStep_IceAsteroid.cs",
+              "RelativeToolTip": "Source\\GenSteps\\GenStep_IceAsteroid.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAAAGQAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T14:36:44.615Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

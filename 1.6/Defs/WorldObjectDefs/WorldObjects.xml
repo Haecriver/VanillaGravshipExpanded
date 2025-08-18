@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
-
-    <WorldObjectDef>
-        <defName>VGE_WorldObject_ArtilleryProjectile</defName>
-        <label>artillery projectile</label>
-        <worldObjectClass>VanillaGravshipExpanded.WorldObject_ArtilleryProjectile</worldObjectClass>
-        <texture>Things/Projectiles/GaussShot_Small</texture>
-        <expandingIcon>true</expandingIcon>
-        <expandMore>true</expandMore>
-    </WorldObjectDef>
-
+	<WorldObjectDef>
+		<defName>VGE_WorldObject_ArtilleryProjectile</defName>
+		<label>artillery projectile</label>
+		<worldObjectClass>VanillaGravshipExpanded.WorldObject_ArtilleryProjectile</worldObjectClass>
+		<texture>Things/Projectiles/GaussShot_Small</texture>
+		<expandingIcon>true</expandingIcon>
+		<expandMore>true</expandMore>
+	</WorldObjectDef>
+	<WorldObjectDef ParentName="GeneratedAsteroid">
+		<defName>VGE_IceAsteroid</defName>
+		<worldObjectClass>VanillaGravshipExpanded.IceAsteroidMapParent</worldObjectClass>
+		<description>An ice asteroid that was captured and maneuvered into orbit around the planet during an early colonization effort. Its surface is entirely covered in frozen layers, giving it a reflective, pale appearance unlike most other asteroids.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
+		<label>ice asteroid</label>
+		<!-- hidden -->
+		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<expandingIconTexture>UI/MapIcons/IceAsteroid</expandingIconTexture>
+		<mapGenerator>VGE_IceAsteroid</mapGenerator>
+	</WorldObjectDef>
 </Defs>
