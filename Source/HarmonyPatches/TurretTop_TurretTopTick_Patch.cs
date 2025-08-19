@@ -8,12 +8,9 @@ namespace VanillaGravshipExpanded
     {
         public static bool Prefix(TurretTop __instance)
         {
-            if (__instance.parentTurret is Building_GravshipTurret gravshipTurret)
+            if (__instance.parentTurret is Building_GravshipTurret)
             {
-                if (gravshipTurret.linkedTerminal is null || !gravshipTurret.linkedTerminal.MannableComp.MannedNow)
-                {
-                    return false;
-                }
+                return false;
             }
             return true;
         }

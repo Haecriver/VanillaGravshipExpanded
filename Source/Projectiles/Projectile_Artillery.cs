@@ -44,6 +44,7 @@ namespace VanillaGravshipExpanded
                 var worldProjectile = (WorldObject_ArtilleryProjectile)WorldObjectMaker.MakeWorldObject(VGEDefOf.VGE_WorldObject_ArtilleryProjectile);
                 worldProjectile.Tile = this.Map.Tile;
                 worldProjectile.SetFaction(this.Faction);
+                worldProjectile.startTile = this.Map.Tile;
                 worldProjectile.targetTile = targetTile;
                 worldProjectile.targetCell = targetCell;
                 worldProjectile.missRadius = missRadius;

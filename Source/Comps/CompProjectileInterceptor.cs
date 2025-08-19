@@ -102,7 +102,7 @@ namespace VanillaGravshipExpanded
             if (target is Projectile projectile)
             {
                 float velocity = projectile.def.projectile.speed;
-                float chance = 0.98f * (float)Math.Exp(-Math.Max(0, velocity - 50) / 60f);
+                float chance = 0.98f * (float)Math.Exp(-Math.Max(0, velocity - 30) / 60f);
                 if (Rand.Value < Mathf.Clamp(chance, 0.05f, 0.98f))
                 {
                     success = true;

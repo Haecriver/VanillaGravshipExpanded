@@ -19,8 +19,8 @@
         <passability>Impassable</passability>
         <fillPercent>1.0</fillPercent>
         <tickerType>Normal</tickerType>
-		<stealable>false</stealable>
-		<rotatable>false</rotatable>
+        <stealable>false</stealable>
+        <rotatable>false</rotatable>
         <comps>
             <li Class="CompProperties_Forbiddable" />
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
@@ -34,7 +34,6 @@
         </building>
         <placeWorkers>
             <li>PlaceWorker_TurretTop</li>
-            <li>PlaceWorker_ShowTurretRadius</li>
         </placeWorkers>
     </ThingDef>
 
@@ -136,7 +135,7 @@
         </graphicData>
         <verbs>
             <li>
-                <verbClass>Verb_Shoot</verbClass>
+                <verbClass>VanillaGravshipExpanded.Verb_ShootWithSmoke</verbClass>
                 <defaultProjectile>VGE_Bullet_GaussHowitzer</defaultProjectile>
                 <warmupTime>240</warmupTime>
                 <range>500</range>
@@ -257,7 +256,7 @@
             <li>
                 <verbClass>Verb_Shoot</verbClass>
                 <warmupTime>0</warmupTime>
-                <range>0</range>
+                <range>14.9</range>
                 <burstShotCount>1</burstShotCount>
                 <ticksBetweenBurstShots>20</ticksBetweenBurstShots>
                 <soundCast>GunShotA</soundCast>

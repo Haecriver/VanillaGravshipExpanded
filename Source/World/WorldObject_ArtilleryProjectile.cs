@@ -8,6 +8,7 @@ namespace VanillaGravshipExpanded
     [HotSwappable]
     public class WorldObject_ArtilleryProjectile : WorldObject
     {
+        public PlanetTile startTile;
         public PlanetTile targetTile;
         public IntVec3 targetCell;
         public ThingDef projectileDef;
@@ -19,6 +20,7 @@ namespace VanillaGravshipExpanded
         {
             base.ExposeData();
             Scribe_Values.Look(ref targetTile, "targetTile");
+            Scribe_Values.Look(ref startTile, "startTile");
             Scribe_Values.Look(ref targetCell, "targetCell");
             Scribe_Defs.Look(ref projectileDef, "projectileDef");
             Scribe_Values.Look(ref missRadius, "missRadius");
@@ -45,7 +47,7 @@ namespace VanillaGravshipExpanded
                 return TravelSpeed / num;
             }
         }
-        private Vector3 Start => Find.WorldGrid.GetTileCenter(base.Tile);
+        private Vector3 Start => Find.WorldGrid.GetTileCenter(startTile);
         private Vector3 End => Find.WorldGrid.GetTileCenter(targetTile);
         public override Vector3 DrawPos => Vector3.Slerp(Start, End, traveledPct);
         public override void Tick()
@@ -56,6 +58,34 @@ namespace VanillaGravshipExpanded
             {
                 traveledPct = 1f;
                 OnArrival();
+            }
+        }
+
+        public override void Draw()
+        {
+            float averageTileSize = Tile.Layer.AverageTileSize;
+            float rawTransitionPct = ExpandableWorldObjectsUtility.RawTransitionPct;
+            if (!Tile.LayerDef.isSpace && (bool)Material)
+            {
+                float angle = Find.WorldGrid.GetHeadingFromTo(startTile, targetTile);
+                Material mat = Material;
+                if (projectileDef != null && projectileDef.graphic != null)
+                {
+                    mat = projectileDef.graphic.MatSingle;
+                }
+
+                var propertyBlock = new MaterialPropertyBlock();
+                if (def.expandingIcon && rawTransitionPct > 0f && !ExpandableWorldObjectsUtility.HiddenByRules(this))
+                {
+                    Color color = mat.color;
+                    float num = 1f - rawTransitionPct;
+                    propertyBlock.SetColor(ShaderPropertyIDs.Color, new Color(color.r, color.g, color.b, color.a * num));
+                    WorldRendererUtility.DrawQuadTangentialToPlanet(DrawPos, 0.7f * averageTileSize, DrawAltitude, mat, angle, counterClockwise: false, useSkyboxLayer: false, propertyBlock);
+                }
+                else
+                {
+                    WorldRendererUtility.DrawQuadTangentialToPlanet(DrawPos, 0.7f * averageTileSize, DrawAltitude, mat, angle);
+                }
             }
         }
 

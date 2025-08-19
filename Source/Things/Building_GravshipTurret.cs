@@ -21,7 +21,7 @@ namespace VanillaGravshipExpanded
         private float rotationVelocity;
         public Building_TargetingTerminal linkedTerminal;
         private static readonly Texture2D ForceTargetIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/GravshipArtilleryForceTarget");
-        private static readonly Texture2D HoldFireIcon = ContentFinder<Texture2D>.Get("UI/Commands/HoldFire");
+        private static readonly Texture2D HoldFireIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/GravshipArtilleryHoldFire");
         private static readonly Texture2D LinkIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/LinkWithTerminal");
         private static readonly Texture2D UnlinkIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/UnlinkWithTerminal");
         private static readonly Texture2D SelectIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/SelectLinkedTerminal");
@@ -55,7 +55,7 @@ namespace VanillaGravshipExpanded
             base.Tick();
             if (rotationSpeed > 0)
             {
-                if (CurrentTarget.IsValid)
+                if (MannedByPlayer && CurrentTarget.IsValid && Active && AttackVerb.Available())
                 {
                     var targetAngle = (CurrentTarget.Cell.ToVector3Shifted() - DrawPos).AngleFlat();
                     if (targetAngle < 0)

@@ -56,6 +56,11 @@ namespace VanillaGravshipExpanded
                                 thing.Destroy(DestroyMode.Vanish);
                             }
                         }
+                        var terrain = map.terrainGrid.FoundationAt(cell);
+                        if (terrain == VGEDefOf.Substructure || terrain == VGEDefOf.VGE_DamagedSubstructure)
+                        {
+                            map.terrainGrid.RemoveFoundation(cell);
+                        }
                     }
                 }
             }
