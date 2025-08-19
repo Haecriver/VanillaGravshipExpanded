@@ -20,6 +20,20 @@
 	</Operation>
 
   <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/costList/Steel</xpath>
+    <value>
+      <Steel>30</Steel>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/costList/ComponentIndustrial</xpath>
+    <value>
+      <Steel>1</Steel>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="OxygenPump"]/uiIconPath</xpath>
     <value>
       <uiIconPath>Things/Structures/OxygenPump/OxygenPump_MenuIcon</uiIconPath>

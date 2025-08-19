@@ -47,18 +47,19 @@ public class CompResourceTrader_OxygenPusher : CompResourceTrader
             return;
         }
 
+        var roomCell = parent.Position + Props.oxygenCellOffset.RotatedBy(parent.Rotation);
         // If disabled due to no more vacuum/exposed to vacuum, skip most other checks
         if (lowPowerMode)
         {
-            var r = parent.GetRoom();
-            if (r.ExposedToSpace || r.Vacuum <= 0)
+            var r = roomCell.GetRoom(parent.Map);
+            if (r == null || r.ExposedToSpace || r.Vacuum <= 0)
                 return;
 
             DisableLowPowerMode();
         }
 
-        var room = parent.GetRoom();
-        if (room.ExposedToSpace)
+        var room = roomCell.GetRoom(parent.Map);
+        if (room == null || room.ExposedToSpace)
         {
             EnableLowPowerMode();
             return;

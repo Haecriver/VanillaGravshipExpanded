@@ -310,8 +310,8 @@
     <label>oxygen canister filler</label>
     <description>A hopper-like storage device meant to hold dispensed oxygen in canisters for use later.</description>
     <thingClass>Building_Storage</thingClass>
-    <minifiedDef IsNull="True" />
-    <thingCategories Inherit="False" />
+    <minifiedDef IsNull="True"/>
+    <thingCategories Inherit="False"/>
     <graphicData>
       <texPath>Things/PipeNetworks/Oxygen/OxygenCanisterFiller</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -384,8 +384,8 @@
     <label>oxygen canister emptier</label>
     <description>A hopper-like storage structure meant to input oxygen from canisters into the network, filling up connected tanks.</description>
     <thingClass>Building_Storage</thingClass>
-    <minifiedDef IsNull="True" />
-    <thingCategories Inherit="False" />
+    <minifiedDef IsNull="True"/>
+    <thingCategories Inherit="False"/>
     <graphicData>
       <texPath>Things/PipeNetworks/Oxygen/OxygenCanisterEmptier</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -515,6 +515,153 @@
     </researchPrerequisites>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <rotatable>false</rotatable>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>VGSE_LifeSupportSystem</defName>
+    <label>life support system</label>
+    <description>A vital device that processes harvested oxyalgae into breathable oxygen. Converts biomass into gas and pumps it into the oxygen network to supply pressurized rooms and equipment.</description>
+    <graphicData>
+      <texPath>Things/Structures/LifeSupportTank/LifeSupportTank_Empty</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <blockWind>false</blockWind>
+    <fillPercent>0.4</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.4</staticSunShadowHeight>
+    <pathCost>50</pathCost>
+    <statBases>
+      <WorkToBuild>10000</WorkToBuild>
+      <MaxHitPoints>250</MaxHitPoints>
+      <Flammability>0.5</Flammability>
+      <Beauty>-8</Beauty>
+    </statBases>
+    <size>(2,2)</size>
+    <tickerType>Normal</tickerType>
+    <costList>
+      <Steel>160</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>160</basePowerConsumption>
+        <idlePowerDraw>10</idlePowerDraw>
+      </li>
+      <li Class="PipeSystem.CompProperties_ResourceTrader">
+        <resourceOffOverlay>false</resourceOffOverlay>
+        <producerLowPowerWhenStorageFull>true</producerLowPowerWhenStorageFull>
+        <soundAmbientReceivingResource>WaterMill_Ambience</soundAmbientReceivingResource>
+        <pipeNet>VGSE_OxygenNet</pipeNet>
+        <!-- 0.1(3) oxygen per 100 ticks, or 1 per 750 ticks, or 80 per day. -->
+        <consumptionPerTick>-0.1333333333333333333334</consumptionPerTick>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Refuelable">
+        <fuelCapacity>400</fuelCapacity>
+        <targetFuelLevelConfigurable>true</targetFuelLevelConfigurable>
+        <initialConfigurableTargetFuelLevel>400</initialConfigurableTargetFuelLevel>
+        <!-- 1 per 750 ticks, or 80 per day. -->
+        <fuelConsumptionRate>80</fuelConsumptionRate>
+        <fuelFilter>
+          <thingDefs>
+            <li>VGSE_Oxyalgae</li>
+          </thingDefs>
+        </fuelFilter>
+        <fuelLabel>Oxyalgae</fuelLabel>
+        <fuelGizmoLabel>Oxyalgae</fuelGizmoLabel>
+        <consumeFuelOnlyWhenPowered>true</consumeFuelOnlyWhenPowered>
+        <autoRefuelPercent>1</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
+        <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
+<!--        <canEjectFuel>true</canEjectFuel>-->
+        <drawFuelGaugeInMap>false</drawFuelGaugeInMap>
+      </li>
+    </comps>
+    <designationCategory>Odyssey</designationCategory>
+    <researchPrerequisites>
+      <li>StandardGravtech</li>
+    </researchPrerequisites>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <rotatable>false</rotatable>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>VGSE_IndustrialOxygenPump</defName>
+    <label>industrial oxygen pump</label>
+    <description>A powerful unit that releases large amounts of oxygen into the surrounding room, allowing enclosed areas to repressurize in space. Essential for long stays in orbit.</description>
+    <tickerType>Rare</tickerType>
+    <rotatable>true</rotatable>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <graphicData>
+      <texPath>Things/Structures/IndustrialOxygenPump/IndustrialOxygenPump</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+    </graphicData>
+    <designationCategory>Odyssey</designationCategory>
+    <statBases>
+      <MarketValue>200</MarketValue>
+      <MaxHitPoints>80</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Mass>8</Mass>
+    </statBases>
+    <passability>Impassable</passability>
+    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <overrideMinifiedRot>North</overrideMinifiedRot>
+    <fillPercent>1</fillPercent>
+    <building>
+      <isAirtight>true</isAirtight>
+    </building>
+    <costList>
+      <Steel>45</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>300</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="VanillaGravshipExpanded.CompProperties_ResourceTrader_OxygenPusher">
+        <!-- CompProperties_ResourceTrader props. -->
+        <pipeNet>VGSE_OxygenNet</pipeNet>
+        <consumptionPerTick>2</consumptionPerTick>
+        <visualOnlyConsumption>true</visualOnlyConsumption>
+        <!-- Custom CompProperties_ResourceTrader_OxygenPusher props. -->
+        <lowPowerConsumptionFactor>0.06666666666666666666666666666667</lowPowerConsumptionFactor>
+        <oxygenCellOffset>(0,0,1)</oxygenCellOffset>
+        <!-- Vanilla CompProperties_OxygenPusher props, copied over (since we're replacing them). -->
+        <requiresPower>true</requiresPower>
+        <airPerSecondPerHundredCells>0.05</airPerSecondPerHundredCells>
+      </li>
+      <li Class="CompProperties_AmbientSound">
+        <sound>OxygenPump_Ambient</sound>
+        <disabledOnUnpowered>true</disabledOnUnpowered>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>VanillaGravshipExpanded.PlaceWorker_OxygenPusher</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>OrbitalTech</li>
+    </researchPrerequisites>
+    <uiOrder>2505</uiOrder>
   </ThingDef>
 
 </Defs>
