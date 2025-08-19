@@ -3,9 +3,9 @@
 		<defName>VGE_DamagedSubstructure</defName>
 		<label>damaged gravship substructure</label>
 		<description>A warped and twisted section of gravship substructure. Once a solid truss with decking, it has been bent out of shape by heavy stress or impact. The grav engine’s levitation field still grips it, but its integrity is compromised: any further damage will cause this piece of substructure to collapse completely.</description>
-		<texturePath>Terrain/Substructure/DamagedSubstructure</texturePath>
+		<texturePath>Things/Terrain/Substructure/DamagedSubstructure</texturePath>
 		<fertility>0</fertility>
-		<edgeType>Hard</edgeType>
+		<edgeType>Fade</edgeType>
 		<renderPrecedence>399</renderPrecedence>
 		<constructEffect>ConstructMetal</constructEffect>
 		<isPaintable>true</isPaintable>
