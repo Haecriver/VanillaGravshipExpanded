@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- Gravship scenario starts with astrofuel rather than chemfuel -->
+	<Operation Class="PatchOperationReplace">
+    <xpath>Defs/ScenarioDef[defName="TheGravship"]/scenario/parts/li[@Class="ScenPart_StartingThing_Defined" and thingDef="Chemfuel"]/thingDef</xpath>
+    <value>
+      <thingDef>VGSE_Astrofuel</thingDef>
+    </value>
+	</Operation>
+</Patch>
