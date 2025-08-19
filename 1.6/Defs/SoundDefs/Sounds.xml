@@ -12,8 +12,8 @@
                         <clipPath>GravshipHowitzer_Shot</clipPath>
                     </li>
                 </grains>
-                <volumeRange>45</volumeRange>
-                <pitchRange>0.9~1.1</pitchRange>
+        <volumeRange>67.05882~72.94118</volumeRange>      
+        <pitchRange>0.8516304~1.254348</pitchRange>
             </li>
         </subSounds>
     </SoundDef>
@@ -22,6 +22,7 @@
         <defName>VGE_GravshipTarget_Acquired</defName>
         <context>MapOnly</context>
         <eventNames />
+		<maxSimultaneous>1</maxSimultaneous>  
         <subSounds>
             <li>
                 <grains>
