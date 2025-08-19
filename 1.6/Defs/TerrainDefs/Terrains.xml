@@ -6,7 +6,7 @@
 		<texturePath>Things/Terrain/Substructure/DamagedSubstructure</texturePath>
 		<fertility>0</fertility>
 		<edgeType>Fade</edgeType>
-		<renderPrecedence>399</renderPrecedence>
+		<renderPrecedence>400</renderPrecedence>
 		<constructEffect>ConstructMetal</constructEffect>
 		<isPaintable>true</isPaintable>
 		<isFoundation>true</isFoundation>
