@@ -662,6 +662,7 @@
       <li>OrbitalTech</li>
     </researchPrerequisites>
     <uiOrder>2505</uiOrder>
+    <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
   </ThingDef>
 
 </Defs>

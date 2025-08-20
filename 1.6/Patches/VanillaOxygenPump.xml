@@ -51,4 +51,40 @@
     <xpath>Defs/ThingDef[defName="OxygenPump"]/comps/li[@Class="CompProperties_LowPowerUnlessVacuum"]</xpath>
   </Operation>
 
+  <!-- Add oxygen place worker to Odyssey's oxygen pump. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/placeWorkers</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OxygenPump"]</xpath>
+      <value>
+        <placeWorkers>
+          <li>VanillaGravshipExpanded.PlaceWorker_OxygenPusher</li>
+        </placeWorkers>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OxygenPump"]/placeWorkers</xpath>
+      <value>
+        <li>VanillaGravshipExpanded.PlaceWorker_OxygenPusher</li>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- Add or set drawPlaceWorkersWhileSelected to true for Odyssey's oxygen pump. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/drawPlaceWorkersWhileSelected</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OxygenPump"]</xpath>
+      <value>
+        <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="OxygenPump"]/drawPlaceWorkersWhileSelected</xpath>
+      <value>
+        <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+      </value>
+    </match>
+  </Operation>
+
 </Patch>
