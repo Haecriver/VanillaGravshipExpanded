@@ -7,16 +7,6 @@ using Verse.Sound;
 
 namespace VanillaGravshipExpanded
 {
-    public class TurretExtension_RotationSpeed : DefModExtension
-    {
-        public float rotationSpeed;
-    }
-
-    public class TurretExtension_Barrels : DefModExtension
-    {
-        public List<Vector3> barrels;
-    }
-
     [HotSwappable]
     [StaticConstructorOnStartup]
     public class Building_GravshipTurret : Building_TurretGun

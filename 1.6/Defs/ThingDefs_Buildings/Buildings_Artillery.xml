@@ -163,6 +163,11 @@
                 </targetParams>
             </li>
         </verbs>
+        <modExtensions>
+            <li Class="VanillaGravshipExpanded.TurretExtension_SubstructureDamage">
+                <substructureDamageRadius>1.9</substructureDamageRadius>
+            </li>
+        </modExtensions>
     </ThingDef>
 
     <ThingDef ParentName="BaseBullet">
@@ -374,6 +379,11 @@
                 <graphicClass>Graphic_Single</graphicClass>
             </turretTopLoadedGraphic>
         </building>
+        <modExtensions>
+            <li Class="VanillaGravshipExpanded.TurretExtension_SubstructureDamage">
+                <substructureDamageRadius>1.0</substructureDamageRadius>
+            </li>
+        </modExtensions>
     </ThingDef>
 
     <ThingDef ParentName="BaseBullet">
