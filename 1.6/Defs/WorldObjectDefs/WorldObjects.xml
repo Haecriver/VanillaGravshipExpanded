@@ -30,4 +30,14 @@
 		<expandingIconTexture>UI/MapIcons/AsteroidCluster</expandingIconTexture>
 		<mapGenerator>VGE_AsteroidCluster</mapGenerator>
 	</WorldObjectDef>
+	<WorldObjectDef ParentName="GeneratedAsteroid">
+		<defName>VGE_AsteroidField</defName>
+
+		<description>A dense cluster of countless small vacstone asteroids and rock fragments, slowly drifting together in a loose orbit. While too small to host major mining operations, the field poses a notable navigational challenge.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
+		<label>asteroid field</label>
+		<!-- hidden -->
+		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<expandingIconTexture>UI/MapIcons/AsteroidField</expandingIconTexture>
+		<mapGenerator>VGE_AsteroidField</mapGenerator>
+	</WorldObjectDef>
 </Defs>
