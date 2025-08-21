@@ -8,10 +8,7 @@ public class CompResourceTrader_ConnectedToGravship : CompResourceTrader
 {
     private CompGravshipFacility facility;
 
-    public override bool CanBeOn()
-    {
-        return base.CanBeOn() && (facility == null || facility.CanBeActive);
-    }
+    public override bool CanBeOn() => base.CanBeOn() && (facility == null || (!facility.LinkedBuildings.NullOrEmpty() && facility.CanBeActive));
 
     public override void PostPostMake()
     {
@@ -29,18 +26,10 @@ public class CompResourceTrader_ConnectedToGravship : CompResourceTrader
     private void InitializeComps()
     {
         facility = parent.GetComp<CompGravshipFacility>();
-        
-        // facility.OnLinkAdded += FacilityOnOnLinkAdded;
-        // facility.OnLinkRemoved += FacilityOnOnLinkRemoved;
+        ResourceOn = false;
+
+        facility.OnLinkRemoved += Notify_LinkRemoved;
     }
 
-    // private void FacilityOnOnLinkRemoved(CompFacility arg1, Thing arg2)
-    // {
-    //     throw new System.NotImplementedException();
-    // }
-    //
-    // private void FacilityOnOnLinkAdded(CompFacility arg1, Thing arg2)
-    // {
-    //     throw new System.NotImplementedException();
-    // }
+    public void Notify_LinkRemoved(CompFacility facility, Thing thing) => ResourceOn = false;
 }
