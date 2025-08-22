@@ -1,6 +1,6 @@
 <Patch>
 
-  <!-- Add oxygen and astrofuel to every orbital trader stock. -->
+  <!-- Add oxygen to every orbital trader stock. -->
   <Operation Class="PatchOperationAdd">
     <!-- Use translate() to change text to lowercase (only change relevant characters). -->
     <xpath>Defs/TraderKindDef[translate(orbital, 'TRUE', 'true')="true"]/stockGenerators</xpath>
@@ -10,9 +10,28 @@
         <thingDef>VGSE_OxygenCanister</thingDef>
         <countRange>100~300</countRange>
       </li>
+    </value>
+  </Operation>
+
+  <!-- Add chemfuel to orbital bulk goods trader and slave trader stock (the only ones that carry chemfuel). -->
+  <Operation Class="PatchOperationAdd">
+    <!-- Use translate() to change text to lowercase (only change relevant characters). -->
+    <xpath>Defs/TraderKindDef[defName="Orbital_BulkGoods"]/stockGenerators</xpath>
+    <value>
       <li Class="StockGenerator_SingleDef">
         <thingDef>VGSE_Astrofuel</thingDef>
-        <countRange>250~500</countRange>
+        <countRange>100~300</countRange>
+      </li>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
+    <!-- Use translate() to change text to lowercase (only change relevant characters). -->
+    <xpath>Defs/TraderKindDef[defName="Orbital_PirateMerchant"]/stockGenerators</xpath>
+    <value>
+      <li Class="StockGenerator_SingleDef">
+        <thingDef>VGSE_Astrofuel</thingDef>
+        <countRange>25~100</countRange>
       </li>
     </value>
   </Operation>

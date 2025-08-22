@@ -30,7 +30,7 @@
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="OxygenPump"]/costList/ComponentIndustrial</xpath>
     <value>
-      <Steel>1</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
     </value>
   </Operation>
 
@@ -86,6 +86,51 @@
       <xpath>Defs/ThingDef[defName="OxygenPump"]/drawPlaceWorkersWhileSelected</xpath>
       <value>
         <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+      </value>
+    </match>
+  </Operation>
+
+  <!-- Replace vanilla research -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/researchPrerequisites/li[text()="OrbitalTech"]/text()</xpath>
+    <value>VGE_OxygenNetwork</value>
+  </Operation>
+
+  <!-- Add or create related build commands for Odyssey's oxygen pump. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="OxygenPump"]/building/relatedBuildCommands</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="OxygenPump"]/building</xpath>
+      <value>
+        <relatedBuildCommands>
+          <li>VGSE_IndustrialOxygenPump</li>
+          <li>VGSE_OxygenPipe</li>
+          <li>VGSE_OxygenValve</li>
+          <li>VGSE_SmallOxygenTank</li>
+          <li>VGSE_LargeOxygenTank</li>
+          <li>VGSE_OxygenCanisterFiller</li>
+          <li>VGSE_OxygenCanisterEmptier</li>
+          <li>VGSE_OxygenHarvester</li>
+          <li>VGSE_LifeSupportSystem</li>
+          <!-- In case something makes those craftable. -->
+          <li>VGSE_OxygenReclaimer</li>
+        </relatedBuildCommands>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="OxygenPump"]/building/relatedBuildCommands</xpath>
+      <value>
+        <li>VGSE_IndustrialOxygenPump</li>
+        <li>VGSE_OxygenPipe</li>
+        <li>VGSE_OxygenValve</li>
+        <li>VGSE_SmallOxygenTank</li>
+        <li>VGSE_LargeOxygenTank</li>
+        <li>VGSE_OxygenCanisterFiller</li>
+        <li>VGSE_OxygenCanisterEmptier</li>
+        <li>VGSE_OxygenHarvester</li>
+        <li>VGSE_LifeSupportSystem</li>
+        <!-- In case something makes those craftable. -->
+        <li>VGSE_OxygenReclaimer</li>
       </value>
     </match>
   </Operation>

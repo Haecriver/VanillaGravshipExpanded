@@ -12,6 +12,9 @@
     <pipeDefs>
       <li>VGSE_AstrofuelPipe</li>
     </pipeDefs>
+    <noLinkedGraphicDefs>
+      <li>VGSE_AstrofuelValve</li>
+    </noLinkedGraphicDefs>
     <designator>
       <deconstructIconPath>Things/PipeNetworks/Astrofuel/AstrofuelPipes_Deconstruct</deconstructIconPath>
       <designationCategoryDef>Odyssey</designationCategoryDef>
@@ -62,6 +65,7 @@
     <altitudeLayer>Conduits</altitudeLayer>
     <passability>Standable</passability>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>70</WorkToBuild>
@@ -76,15 +80,6 @@
       <li Class="PipeSystem.CompProperties_Resource">
         <pipeNet>VGSE_AstrofuelNet</pipeNet>
       </li>
-      <!--      <li Class="PipeSystem.CompProperties_SpillWhenDamaged">-->
-      <!--        <spillEachTicks>600</spillEachTicks>-->
-      <!--        <startAtHitPointsPercent>0.333</startAtHitPointsPercent>-->
-      <!--        <amountToDraw>1</amountToDraw>-->
-      <!--        <filthMaxSpawnRadius>1</filthMaxSpawnRadius>-->
-      <!--        <chooseFilthFrom>-->
-      <!--          <li>Filth_Fuel</li>-->
-      <!--        </chooseFilthFrom>-->
-      <!--      </li>-->
     </comps>
     <placeWorkers>
       <li>PipeSystem.PlaceWorker_Pipe</li>

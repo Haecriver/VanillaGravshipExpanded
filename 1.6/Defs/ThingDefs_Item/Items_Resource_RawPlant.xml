@@ -15,6 +15,7 @@
       <Mass>0.014</Mass>
       <Flammability>0.5</Flammability>
       <Nutrition>0.025</Nutrition>
+      <DeteriorationRate>12</DeteriorationRate>
     </statBases>
     <comps>
       <li Class="CompProperties_Rottable">

@@ -15,6 +15,7 @@
     </pipeDefs>
     <noLinkedGraphicDefs>
       <li>OxygenPump</li>
+      <li>VGSE_OxygenValve</li>
     </noLinkedGraphicDefs>
     <designator>
       <deconstructIconPath>Things/PipeNetworks/Oxygen/OxygenPipes_Deconstruct</deconstructIconPath>
@@ -34,7 +35,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VGSE_OxygenPipe</defName>
     <label>oxygen pipe</label>
-    <description>A reinforced tube for moving oxygen around. Can be placed under walls and other buildings. A reinforced tube for moving oxygen around. Can be placed under walls and other buildings.</description>
+    <description>A reinforced tube for moving oxygen around. Can be placed under walls and other buildings.</description>
     <thingClass>PipeSystem.Building_Pipe</thingClass>
     <category>Building</category>
     <tickerType>Rare</tickerType>
@@ -64,6 +65,7 @@
     <altitudeLayer>Conduits</altitudeLayer>
     <passability>Standable</passability>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>0</resourcesFractionWhenDeconstructed>
     <statBases>
       <MaxHitPoints>80</MaxHitPoints>
       <WorkToBuild>35</WorkToBuild>
@@ -78,15 +80,6 @@
       <li Class="PipeSystem.CompProperties_Resource">
         <pipeNet>VGSE_OxygenNet</pipeNet>
       </li>
-<!--      <li Class="PipeSystem.CompProperties_SpillWhenDamaged">-->
-<!--        <spillEachTicks>600</spillEachTicks>-->
-<!--        <startAtHitPointsPercent>0.333</startAtHitPointsPercent>-->
-<!--        <amountToDraw>1</amountToDraw>-->
-<!--        <filthMaxSpawnRadius>1</filthMaxSpawnRadius>-->
-<!--        <chooseFilthFrom>-->
-<!--          <li>Filth_Fuel</li>-->
-<!--        </chooseFilthFrom>-->
-<!--      </li>-->
     </comps>
     <placeWorkers>
       <li>PipeSystem.PlaceWorker_Pipe</li>
@@ -100,7 +93,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <clearBuildingArea>false</clearBuildingArea>
     <researchPrerequisites>
-      <li>BiofuelRefining</li>
+      <li>VGE_OxygenNetwork</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -153,7 +146,7 @@
     <designationCategory>Odyssey</designationCategory>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>BiofuelRefining</li>
+      <li>VGE_OxygenNetwork</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -221,11 +214,11 @@
     </comps>
     <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
     <designationCategory>Odyssey</designationCategory>
-    <staticSunShadowHeight>0.2</staticSunShadowHeight>
+    <staticSunShadowHeight>0.5</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <canOverlapZones>false</canOverlapZones>
     <researchPrerequisites>
-      <li>BiofuelRefining</li>
+      <li>VGE_OxygenNetwork</li>
     </researchPrerequisites>
     <disableImpassableShotOverConfigError>true</disableImpassableShotOverConfigError>
   </ThingDef>
@@ -294,11 +287,11 @@
     </comps>
     <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
     <designationCategory>Odyssey</designationCategory>
-    <staticSunShadowHeight>0.2</staticSunShadowHeight>
+    <staticSunShadowHeight>0.6</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <canOverlapZones>false</canOverlapZones>
     <researchPrerequisites>
-      <li>BiofuelRefining</li>
+      <li>StandardGravtech</li>
     </researchPrerequisites>
     <disableImpassableShotOverConfigError>true</disableImpassableShotOverConfigError>
   </ThingDef>
@@ -325,7 +318,6 @@
     <rotatable>false</rotatable>
     <altitudeLayer>Building</altitudeLayer>
     <passability>PassThroughOnly</passability>
-    <fillPercent>0.5</fillPercent>
     <castEdgeShadows>true</castEdgeShadows>
     <pathCost>50</pathCost>
     <statBases>
@@ -363,7 +355,7 @@
       <li>ITab_Storage</li>
     </inspectorTabs>
     <designationCategory>Odyssey</designationCategory>
-    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <staticSunShadowHeight>0.2</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
     <canOverlapZones>false</canOverlapZones>
     <comps>
@@ -373,7 +365,7 @@
       </li>
     </comps>
     <researchPrerequisites>
-      <li>BiofuelRefining</li>
+      <li>VGE_OxygenNetwork</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -397,11 +389,8 @@
       <allowFlip>false</allowFlip>
     </graphicData>
     <rotatable>false</rotatable>
-    <altitudeLayer>BuildingOnTop</altitudeLayer>
-    <!-- <altitudeLayer>Building</altitudeLayer> -->
-    <passability>Standable</passability>
-    <!-- <passability>PassThroughOnly</passability> -->
-    <fillPercent>0.5</fillPercent>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
     <castEdgeShadows>true</castEdgeShadows>
     <pathCost>50</pathCost>
     <statBases>
@@ -439,7 +428,7 @@
       <li>ITab_Storage</li>
     </inspectorTabs>
     <designationCategory>Odyssey</designationCategory>
-    <staticSunShadowHeight>0.5</staticSunShadowHeight>
+    <staticSunShadowHeight>0.2</staticSunShadowHeight>
     <surfaceType>Item</surfaceType>
     <canOverlapZones>false</canOverlapZones>
     <comps>
@@ -449,7 +438,7 @@
       </li>
     </comps>
     <researchPrerequisites>
-      <li>BiofuelRefining</li>
+      <li>VGE_OxygenNetwork</li>
     </researchPrerequisites>
   </ThingDef>
 
@@ -476,6 +465,7 @@
     <canOverlapZones>false</canOverlapZones>
     <castEdgeShadows>true</castEdgeShadows>
     <staticSunShadowHeight>0.4</staticSunShadowHeight>
+    <pathCost>50</pathCost>
     <statBases>
       <WorkToBuild>10000</WorkToBuild>
       <MaxHitPoints>250</MaxHitPoints>
@@ -488,7 +478,7 @@
       <Steel>200</Steel>
       <ComponentIndustrial>3</ComponentIndustrial>
     </costList>
-    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
@@ -510,7 +500,7 @@
     </comps>
     <designationCategory>Odyssey</designationCategory>
     <researchPrerequisites>
-      <li>BiofuelRefining</li>
+      <li>VGE_OxygenNetwork</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
     <rotatable>false</rotatable>
@@ -542,7 +532,7 @@
     <pathCost>50</pathCost>
     <statBases>
       <WorkToBuild>10000</WorkToBuild>
-      <MaxHitPoints>250</MaxHitPoints>
+      <MaxHitPoints>200</MaxHitPoints>
       <Flammability>0.5</Flammability>
       <Beauty>-8</Beauty>
     </statBases>
@@ -550,15 +540,16 @@
     <tickerType>Normal</tickerType>
     <costList>
       <Steel>160</Steel>
-      <ComponentIndustrial>1</ComponentIndustrial>
+      <ComponentIndustrial>4</ComponentIndustrial>
     </costList>
-    <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+    <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
         <basePowerConsumption>160</basePowerConsumption>
         <idlePowerDraw>10</idlePowerDraw>
       </li>
+      <!-- TODO: Add display string if not connected to oxygen tanks -->
       <li Class="PipeSystem.CompProperties_ResourceTrader">
         <resourceOffOverlay>false</resourceOffOverlay>
         <producerLowPowerWhenStorageFull>true</producerLowPowerWhenStorageFull>
@@ -587,7 +578,6 @@
         <showFuelGizmo>true</showFuelGizmo>
         <drawOutOfFuelOverlay>false</drawOutOfFuelOverlay>
         <showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
-<!--        <canEjectFuel>true</canEjectFuel>-->
         <drawFuelGaugeInMap>false</drawFuelGaugeInMap>
       </li>
       <li>
@@ -617,16 +607,35 @@
     <designationCategory>Odyssey</designationCategory>
     <statBases>
       <MarketValue>200</MarketValue>
-      <MaxHitPoints>80</MaxHitPoints>
+      <MaxHitPoints>100</MaxHitPoints>
       <WorkToBuild>2000</WorkToBuild>
-      <Mass>8</Mass>
     </statBases>
     <passability>Impassable</passability>
+    <blockWind>true</blockWind>
     <terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
     <overrideMinifiedRot>North</overrideMinifiedRot>
+    <coversFloor>true</coversFloor>
+    <blockLight>true</blockLight>
+    <blockWeather>true</blockWeather>
+    <castEdgeShadows>true</castEdgeShadows>
+    <canOverlapZones>false</canOverlapZones>
     <fillPercent>1</fillPercent>
+    <staticSunShadowHeight>1</staticSunShadowHeight>
     <building>
       <isAirtight>true</isAirtight>
+      <relatedBuildCommands>
+        <li>OxygenPump</li>
+        <li>VGSE_OxygenPipe</li>
+        <li>VGSE_OxygenValve</li>
+        <li>VGSE_SmallOxygenTank</li>
+        <li>VGSE_LargeOxygenTank</li>
+        <li>VGSE_OxygenCanisterFiller</li>
+        <li>VGSE_OxygenCanisterEmptier</li>
+        <li>VGSE_OxygenHarvester</li>
+        <li>VGSE_LifeSupportSystem</li>
+        <!-- In case something makes those craftable. -->
+        <li>VGSE_OxygenReclaimer</li>
+      </relatedBuildCommands>
     </building>
     <costList>
       <Steel>45</Steel>
@@ -660,12 +669,14 @@
       <li>VanillaGravshipExpanded.PlaceWorker_OxygenPusher</li>
     </placeWorkers>
     <researchPrerequisites>
-      <li>OrbitalTech</li>
+      <li>VGE_OxygenNetwork</li>
     </researchPrerequisites>
     <uiOrder>2505</uiOrder>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
   </ThingDef>
 
+  <!-- TODO: Make uncraftable -->
   <ThingDef ParentName="GravshipComponentBase">
     <defName>VGSE_OxygenReclaimer</defName>
     <label>oxygen reclaimer</label>
