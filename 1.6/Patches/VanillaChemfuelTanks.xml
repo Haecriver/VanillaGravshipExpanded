@@ -27,15 +27,6 @@
     </value>
   </Operation>
 
-  <!-- Change construction time -->
-  <Operation Class="PatchOperationReplace">
-    <xpath>Defs/ThingDef[defName="ChemfuelTank"]/statBases/WorkToBuild</xpath>
-    <!-- 2000 to 2040 -->
-    <value>
-      <WorkToBuild>2040</WorkToBuild>
-    </value>
-  </Operation>
-
   <!-- Remove vanilla refuelable with pipe resource storage, re-add it as gravship facility (we don't inherit comps), give pipe net explosive content. -->
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="ChemfuelTank"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
@@ -82,6 +73,21 @@
     </value>
   </Operation>
 
+  <!-- Add or set rotatble to true. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="ChemfuelTank"]/drawPlaceWorkersWhileSelected</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="ChemfuelTank"]</xpath>
+      <value>
+        <rotatable>true</rotatable>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="ChemfuelTank"]/drawPlaceWorkersWhileSelected/text()</xpath>
+      <value>true</value>
+    </match>
+  </Operation>
+
   <!-- Large tank -->
 
   <!-- Change label -->
@@ -104,7 +110,7 @@
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="LargeChemfuelTank"]/graphicData/texPath</xpath>
     <value>
-      <texPath>Things/PipeNetworks/Astrofuel/AstrofuelTank</texPath>
+      <texPath>Things/PipeNetworks/Astrofuel/LargeAstrofuelTank</texPath>
     </value>
   </Operation>
 
@@ -154,6 +160,21 @@
     </value>
   </Operation>
 
+  <!-- Add or set rotatble to true. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="LargeChemfuelTank"]/drawPlaceWorkersWhileSelected</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="LargeChemfuelTank"]</xpath>
+      <value>
+        <rotatable>true</rotatable>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="LargeChemfuelTank"]/drawPlaceWorkersWhileSelected/text()</xpath>
+      <value>true</value>
+    </match>
+  </Operation>
+
   <!-- Shared -->
 
   <!-- Disable comp inheritance for vanilla tanks, since we don't want vanilla explosive contents comp -->
@@ -161,15 +182,6 @@
     <xpath>Defs/ThingDef[defName="ChemfuelTank" or defName="LargeChemfuelTank"]/comps</xpath>
     <attribute>Inherit</attribute>
     <value>False</value>
-  </Operation>
-
-  <!-- Change beauty -->
-  <Operation Class="PatchOperationReplace">
-    <xpath>Defs/ThingDef[defName="ChemfuelTank" or defName="LargeChemfuelTank"]/statBases/Beauty</xpath>
-    <!-- -10 to 0 -->
-    <value>
-      <Beauty>0</Beauty>
-    </value>
   </Operation>
 
   <!-- Change flammability -->

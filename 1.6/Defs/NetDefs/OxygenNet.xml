@@ -155,6 +155,8 @@
     <label>small oxygen tank</label>
     <description>An oxygen tank that supplies oxygen to pumps throughout the gravship.</description>
     <drawerType>MapMeshAndRealTime</drawerType>
+    <minifiedDef IsNull="True"/>
+    <thingCategories Inherit="False"/>
     <graphicData>
       <texPath>Things/PipeNetworks/Oxygen/OxygenTank</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -167,10 +169,10 @@
       </damageData>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
-    <passability>Impassable</passability>
-    <pathCost>50</pathCost>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
     <castEdgeShadows>true</castEdgeShadows>
-    <fillPercent>0.40</fillPercent>
+    <fillPercent>0.6</fillPercent>
     <tickerType>Normal</tickerType>
     <statBases>
       <MaxHitPoints>200</MaxHitPoints>
@@ -212,6 +214,7 @@
         <wickTicks>70~150</wickTicks>
       </li>
     </comps>
+    <rotatable>true</rotatable>
     <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
     <designationCategory>Odyssey</designationCategory>
     <staticSunShadowHeight>0.5</staticSunShadowHeight>
@@ -228,6 +231,8 @@
     <label>large oxygen tank</label>
     <description>A large oxygen tank that supplies oxygen to pumps throughout the gravship.</description>
     <drawerType>MapMeshAndRealTime</drawerType>
+    <minifiedDef IsNull="True"/>
+    <thingCategories Inherit="False"/>
     <graphicData>
       <texPath>Things/PipeNetworks/Oxygen/LargeOxygenTank</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
@@ -240,10 +245,10 @@
       </damageData>
     </graphicData>
     <altitudeLayer>Building</altitudeLayer>
-    <passability>Impassable</passability>
-    <pathCost>50</pathCost>
+    <passability>PassThroughOnly</passability>
+    <pathCost>20</pathCost>
     <castEdgeShadows>true</castEdgeShadows>
-    <fillPercent>0.40</fillPercent>
+    <fillPercent>0.6</fillPercent>
     <tickerType>Normal</tickerType>
     <statBases>
       <MaxHitPoints>300</MaxHitPoints>
@@ -285,6 +290,7 @@
         <wickTicks>70~150</wickTicks>
       </li>
     </comps>
+    <rotatable>true</rotatable>
     <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
     <designationCategory>Odyssey</designationCategory>
     <staticSunShadowHeight>0.6</staticSunShadowHeight>

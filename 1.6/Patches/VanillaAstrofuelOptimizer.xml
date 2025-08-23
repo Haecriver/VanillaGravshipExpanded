@@ -31,4 +31,19 @@
     <value>0.15</value>
   </Operation>
 
+  <!-- Add or set rotatble to true. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="FuelOptimizer"]/drawPlaceWorkersWhileSelected</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="FuelOptimizer"]</xpath>
+      <value>
+        <rotatable>true</rotatable>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationReplace">
+      <xpath>Defs/ThingDef[defName="FuelOptimizer"]/drawPlaceWorkersWhileSelected/text()</xpath>
+      <value>true</value>
+    </match>
+  </Operation>
+
 </Patch>
