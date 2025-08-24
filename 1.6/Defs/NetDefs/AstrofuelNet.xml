@@ -461,7 +461,7 @@
     <designationHotKey>Misc4</designationHotKey>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>Electricity</li>
+      <li>VGE_GravshipPower</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
   </ThingDef>
@@ -543,8 +543,7 @@
     <designationHotKey>Misc4</designationHotKey>
     <constructEffect>ConstructMetal</constructEffect>
     <researchPrerequisites>
-      <li>Electricity</li>
-      <li MayRequire="VanillaExpanded.VFEPower">VFE_IndustrialGenerators</li>
+      <li>VGE_AstrofuelRefining</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
     <drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
@@ -626,7 +625,7 @@
     <constructEffect>ConstructMetal</constructEffect>
     <canOverlapZones>false</canOverlapZones>
     <researchPrerequisites>
-      <li>BiofuelRefining</li>
+      <li>VGE_AstrofuelRefining</li>
     </researchPrerequisites>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
   </ThingDef>
