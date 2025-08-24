@@ -9,7 +9,7 @@ public class CompRefuelable_AstrofuelSynthesizer : CompRefuelable
     public override void CompTick()
     {
         // If resource is not, don't drain resources
-        if (!synthesizer.ResourceOn)
+        if (!synthesizer.ResourceOn || synthesizer.PipeNet.AvailableCapacityLastTick <= 0f)
             return;
 
         var prevRate = Props.fuelConsumptionRate;
@@ -39,7 +39,7 @@ public class CompRefuelable_AstrofuelSynthesizer : CompRefuelable
             if (synthesizer.astropurifier != null)
                 Props.fuelConsumptionRate /= 4f;
             // If resource is off, disable refuelable drain display
-            if (!synthesizer.ResourceOn)
+            if (!synthesizer.ResourceOn || synthesizer.PipeNet.AvailableCapacityLastTick <= 0f)
                 Props.consumeFuelOnlyWhenUsed = true;
 
             return base.CompInspectStringExtra();
