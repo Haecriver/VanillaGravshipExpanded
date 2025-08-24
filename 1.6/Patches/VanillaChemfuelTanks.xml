@@ -68,6 +68,8 @@
         <damageAmountBase>14</damageAmountBase>
         <destroyThingOnExplosionSize>2</destroyThingOnExplosionSize>
         <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+        <preExplosionSpawnThingDef>VGE_Filth_Astrofuel</preExplosionSpawnThingDef>
+        <preExplosionSpawnChance>1</preExplosionSpawnChance>
         <wickTicks>70~150</wickTicks>
       </li>
     </value>
@@ -155,6 +157,8 @@
         <damageAmountBase>14</damageAmountBase>
         <destroyThingOnExplosionSize>2</destroyThingOnExplosionSize>
         <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+        <preExplosionSpawnThingDef>VGE_Filth_Astrofuel</preExplosionSpawnThingDef>
+        <preExplosionSpawnChance>1</preExplosionSpawnChance>
         <wickTicks>70~150</wickTicks>
       </li>
     </value>

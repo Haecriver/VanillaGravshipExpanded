@@ -219,6 +219,8 @@
         <damageAmountBase>14</damageAmountBase>
         <destroyThingOnExplosionSize>2</destroyThingOnExplosionSize>
         <startWickHitPointsPercent>0.2</startWickHitPointsPercent>
+        <preExplosionSpawnThingDef>VGE_Filth_Astrofuel</preExplosionSpawnThingDef>
+        <preExplosionSpawnChance>1</preExplosionSpawnChance>
         <wickTicks>70~150</wickTicks>
       </li>
     </comps>
@@ -450,7 +452,7 @@
         <explosiveDamageType>Flame</explosiveDamageType>
         <destroyThingOnExplosionSize>2</destroyThingOnExplosionSize>
         <startWickHitPointsPercent>0.333</startWickHitPointsPercent>
-        <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+        <preExplosionSpawnThingDef>VGE_Filth_Astrofuel</preExplosionSpawnThingDef>
         <preExplosionSpawnChance>1</preExplosionSpawnChance>
         <wickTicks>70~150</wickTicks>
       </li>
@@ -484,7 +486,7 @@
     <altitudeLayer>Building</altitudeLayer>
     <blockWind>true</blockWind>
     <passability>PassThroughOnly</passability>
-    <pathCost>50</pathCost>
+    <pathCost>150</pathCost>
     <fillPercent>1.0</fillPercent>
     <rotatable>false</rotatable>
     <statBases>
@@ -533,7 +535,7 @@
         <explosiveDamageType>Flame</explosiveDamageType>
         <destroyThingOnExplosionSize>2</destroyThingOnExplosionSize>
         <startWickHitPointsPercent>0.333</startWickHitPointsPercent>
-        <preExplosionSpawnThingDef>Filth_Fuel</preExplosionSpawnThingDef>
+        <preExplosionSpawnThingDef>VGE_Filth_Astrofuel</preExplosionSpawnThingDef>
         <preExplosionSpawnChance>1</preExplosionSpawnChance>
         <wickTicks>70~150</wickTicks>
       </li>
