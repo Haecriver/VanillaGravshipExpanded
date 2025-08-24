@@ -135,10 +135,15 @@ namespace VanillaGravshipExpanded
             input = new Blend(new Perlin(0.05000000074505806, 2.0, 0.5, 6, Rand.Int, QualityMode.Medium), input, new Const(0.85000002384185791));
             input = new Power(input, new Const(0.20000000298023224));
 
-            ModuleBase riverBendNoise = new Perlin(GetCurveFrequency, 2.0, 1.0, 2, Rand.Int, QualityMode.Medium);
-            ModuleBase riverBendNoise2 = new Perlin(GetCurveFrequency, 2.0, 1.0, 2, Rand.Int, QualityMode.Medium);
+            ModuleBase chasmNoise = new DistFromPoint((float)map.Size.x * 0.4f);
+            chasmNoise = new Scale(1.3, 1.0, 1.0, chasmNoise);
+            chasmNoise = new Rotate(0.0, Rand.Range(0f, 360f), 0.0, chasmNoise);
+            chasmNoise = new Translate(-map.Center.x, 0.0, -map.Center.z, chasmNoise);
+           
+           
+            chasmNoise = MapNoiseUtility.AddDisplacementNoise(chasmNoise, 0.015f, 40f);
 
-            ModuleBase shatteredAsteroid = new Min(input, riverBendNoise);
+            ModuleBase shatteredAsteroid = new Min(input, chasmNoise);
            
             NoiseDebugUI.StoreNoiseRender(shatteredAsteroid, "shattered asteroid");
 
