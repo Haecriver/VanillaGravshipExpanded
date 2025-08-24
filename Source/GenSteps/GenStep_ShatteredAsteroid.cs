@@ -7,9 +7,10 @@ using System.Xml;
 using UnityEngine;
 using Verse;
 using Verse.Noise;
+
 namespace VanillaGravshipExpanded
 {
-    public class GenStep_PorousAsteroid : GenStep
+    public class GenStep_ShatteredAsteroid : GenStep
     {
         public class MineableCountConfig
         {
@@ -66,6 +67,8 @@ namespace VanillaGravshipExpanded
 
         protected virtual float Radius => 0.224f;
 
+        protected virtual float GetCurveFrequency => 0.007f;
+
         public override void Generate(Map map, GenStepParams parms)
         {
             if (ModLister.CheckOdyssey("Asteroid"))
@@ -107,23 +110,7 @@ namespace VanillaGravshipExpanded
                         map.roofGrid.SetRoof(allCell, RoofDefOf.RoofRockThin);
                     }
                 }
-                HashSet<IntVec3> mainIsland = new HashSet<IntVec3>();
-                map.floodFiller.FloodFill(map.Center, (IntVec3 x) => x.GetTerrain(map) != TerrainDefOf.Space, delegate (IntVec3 x)
-                {
-                    mainIsland.Add(x);
-                });
-                foreach (IntVec3 allCell2 in map.AllCells)
-                {
-                    if (!mainIsland.Contains(allCell2))
-                    {
-                        map.terrainGrid.SetTerrain(allCell2, TerrainDefOf.Space);
-                        map.roofGrid.SetRoof(allCell2, null);
-                        foreach (Thing item in allCell2.GetThingList(map).ToList())
-                        {
-                            item.Destroy();
-                        }
-                    }
-                }
+               
             }
         }
 
@@ -148,12 +135,14 @@ namespace VanillaGravshipExpanded
             input = new Blend(new Perlin(0.05000000074505806, 2.0, 0.5, 6, Rand.Int, QualityMode.Medium), input, new Const(0.85000002384185791));
             input = new Power(input, new Const(0.20000000298023224));
 
-            ModuleBase rawHoles = new Perlin(frequency: 0.1,lacunarity: 2.0,persistence: 0.5,octaves: 2,seed: Rand.Int,quality: QualityMode.Medium);
-            rawHoles = new ScaleBias(-1, 1, rawHoles);
-            ModuleBase porousAsteroid = new Min(input, rawHoles);
-            NoiseDebugUI.StoreNoiseRender(porousAsteroid, "Porous asteroid");
+            ModuleBase riverBendNoise = new Perlin(GetCurveFrequency, 2.0, 1.0, 2, Rand.Int, QualityMode.Medium);
+            ModuleBase riverBendNoise2 = new Perlin(GetCurveFrequency, 2.0, 1.0, 2, Rand.Int, QualityMode.Medium);
 
-            return porousAsteroid;
+            ModuleBase shatteredAsteroid = new Min(input, riverBendNoise);
+           
+            NoiseDebugUI.StoreNoiseRender(shatteredAsteroid, "shattered asteroid");
+
+            return shatteredAsteroid;
         }
 
         private void SpawnOres(Map map, GenStepParams parms)

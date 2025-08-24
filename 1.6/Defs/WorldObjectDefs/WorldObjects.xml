@@ -50,4 +50,24 @@
 		<expandingIconTexture>UI/MapIcons/PorousAsteroid</expandingIconTexture>
 		<mapGenerator>VGE_PorousAsteroid</mapGenerator>
 	</WorldObjectDef>
+	<WorldObjectDef ParentName="GeneratedAsteroid">
+		<defName>VGE_GiantAsteroid</defName>
+
+		<description>A massive vacstone asteroid, far larger than the typical fragments found in orbit. Its sheer bulk makes it a landmark in space, dominating its surroundings with its presence.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
+		<label>giant asteroid</label>
+		<!-- hidden -->
+		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<expandingIconTexture>UI/MapIcons/GiantAsteroid</expandingIconTexture>
+		<mapGenerator>VGE_GiantAsteroid</mapGenerator>
+	</WorldObjectDef>
+	<WorldObjectDef ParentName="GeneratedAsteroid">
+		<defName>VGE_ShatteredAsteroid</defName>
+
+		<description>A vacstone asteroid broken apart by a massive impact. Its pieces remain loosely bound, forming a jagged and uneven shape with wide gaps between its fragments.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
+		<label>giant asteroid</label>
+		<!-- hidden -->
+		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<expandingIconTexture>UI/MapIcons/ShatteredAsteroid</expandingIconTexture>
+		<mapGenerator>VGE_ShatteredAsteroid</mapGenerator>
+	</WorldObjectDef>
 </Defs>
