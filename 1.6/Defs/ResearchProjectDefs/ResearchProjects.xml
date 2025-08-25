@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<ResearchProjectDef>
 		<defName>GravshipBasics</defName>
@@ -79,6 +79,18 @@
 			<li>GravshipBasics</li>
 		</prerequisites>
 		<researchViewX>12</researchViewX>
+		<researchViewY>4.5</researchViewY>
+	</ResearchProjectDef>
+	<ResearchProjectDef>
+		<defName>VGE_GravshipLiving</defName>
+		<label>gravship living</label>
+		<description>This research project is focused on living on a gravship, and will unlock a lot of different improvements that will make living on a gravship easier and more accessible.</description>
+		<baseCost>1500</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>GravshipBasics</li>
+		</prerequisites>
+		<researchViewX>15</researchViewX>
 		<researchViewY>4.5</researchViewY>
 	</ResearchProjectDef>
 </Defs>
