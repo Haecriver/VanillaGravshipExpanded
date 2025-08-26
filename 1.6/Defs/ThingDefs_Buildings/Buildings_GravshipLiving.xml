@@ -63,7 +63,7 @@
       <texPath>Things/Structures/GravshipFurniture/GravBunkBed/GravBunkBed_Bottom</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <shaderType>CutoutComplex</shaderType>
-      <drawSize>(2,2)</drawSize>
+      <drawSize>(4,4)</drawSize>
       <drawOffsetEast>(0, 0, 0.5)</drawOffsetEast>
       <drawOffsetWest>(0, 0, 0.5)</drawOffsetWest>
       <damageData>
@@ -109,7 +109,7 @@
             <texPath>Things/Structures/GravshipFurniture/GravBunkBed/GravBunkBed_Top</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
             <shaderType>CutoutComplex</shaderType>
-            <drawSize>(2,2)</drawSize>
+            <drawSize>(4,4)</drawSize>
             <damageData>
               <rect>(0,0.05,2,1.95)</rect>
             </damageData>
@@ -128,7 +128,7 @@
       <texPath>Things/Structures/GravshipFurniture/GravMedBayBed/GravMedBayBed</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
       <shaderType>CutoutComplex</shaderType>
-      <drawSize>(2,2)</drawSize>
+      <drawSize>(4,4)</drawSize>
     </graphicData>
     <castEdgeShadows>True</castEdgeShadows>
     <statBases>
@@ -573,12 +573,28 @@
     <description>A hardened mass of rapidly-expanding polymer foam. Produced by a sealant popper, it forms an airtight plug that seals breaches in gravship rooms exposed to vacuum. While effective at restoring pressure, it is brittle and easy to destroy.</description>
     <thingClass>Mineable</thingClass>
     <graphicData>
-      <texPath>Things/Structures/GravshipFurniture/SealantGoop/SealantGoop</texPath>
+      <texPath>Things/Structures/GravshipFurniture/SealantGoop/SealantGoop_Atlas</texPath>
       <graphicClass>Graphic_Single</graphicClass>
+      <linkType>CornerFiller</linkType>
+      <linkFlags Inherit="false">
+        <li>Wall</li>
+        <li>Rock</li>
+      </linkFlags>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+        <edgeTop>Damage/Edge</edgeTop>
+        <edgeBot>Damage/Edge</edgeBot>
+        <edgeLeft>Damage/Edge</edgeLeft>
+        <edgeRight>Damage/Edge</edgeRight>
+      </damageData>
       <shadowData>
         <volume>(0.3, 0.3, 0.3)</volume>
       </shadowData>
     </graphicData>
+    <uiIconPath>Things/Structures/GravshipFurniture/SealantGoop/SealantGoop_MenuIcon</uiIconPath>
     <altitudeLayer>Building</altitudeLayer>
     <passability>Impassable</passability>
     <fillPercent>1.0</fillPercent>
@@ -603,6 +619,16 @@
     <pathCost>42</pathCost>
     <rotatable>false</rotatable>
     <mineable>true</mineable>
+    <damageMultipliers>
+      <li>
+        <damageDef>Bomb</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+      <li>
+        <damageDef>Thump</damageDef>
+        <multiplier>2</multiplier>
+      </li>
+    </damageMultipliers>
   </ThingDef>
 
 </Defs>
