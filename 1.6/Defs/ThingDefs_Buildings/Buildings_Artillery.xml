@@ -306,7 +306,7 @@
         <building>
             <turretGunDef>VGE_Gun_JavelinLauncher</turretGunDef>
             <turretBurstCooldownTime>40</turretBurstCooldownTime>
-            <turretTopDrawSize>7</turretTopDrawSize>
+            <turretTopDrawSize>6</turretTopDrawSize>
         </building>
         <comps>
             <li Class="CompProperties_Refuelable">
@@ -437,13 +437,13 @@
         <building>
             <turretGunDef>VGE_Gun_AnticraftEmitter</turretGunDef>
             <turretBurstCooldownTime>20</turretBurstCooldownTime>
-            <turretTopDrawSize>7</turretTopDrawSize>
+            <turretTopDrawSize>6</turretTopDrawSize>
         </building>
         <comps>
             <li Class="CompProperties_Power">
                 <compClass>CompPowerTrader</compClass>
-                <basePowerConsumption>-4000</basePowerConsumption>
-                <idlePowerDraw>-100</idlePowerDraw>
+                <basePowerConsumption>4000</basePowerConsumption>
+                <idlePowerDraw>100</idlePowerDraw>
             </li>
             <li Class="CompProperties_Flickable" />
         </comps>
@@ -480,10 +480,10 @@
                 <forcedMissRadius>0</forcedMissRadius>
                 <canGoWild>true</canGoWild>
                 <burstShotCount>60</burstShotCount>
-                <ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+                <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
                 <soundCast>Shot_BeamRepeater</soundCast>
                 <soundCastTail>GunTail_Heavy</soundCastTail>
-                <muzzleFlashScale>14</muzzleFlashScale>
+                <muzzleFlashScale>26</muzzleFlashScale>
                 <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
                 <aimingChargeMoteOffset>1.07</aimingChargeMoteOffset>
                 <requireLineOfSight>false</requireLineOfSight>
