@@ -3,7 +3,7 @@
   
  
 
-  <StructureLayoutDef ParentName="OrbitalAncientPlatformBase" Name="AbandonedPlatformBase">
+  <StructureLayoutDef ParentName="OrbitalAncientPlatformBase">
     <defName>VGE_DerelictStation</defName>
     <corridorDef>AncientOrbitalCorridorDefense</corridorDef>
     <wallAttachments>
@@ -11,10 +11,13 @@
         <countRange>0~0</countRange>
       </LifeSupportUnit>
     </wallAttachments>
+	<wallDamageRange>100~1000</wallDamageRange>
+	<areaPrunePercent>0.3</areaPrunePercent>
+	<shouldDamage>true</shouldDamage>
     <roomDefs>
       <!-- Special -->
       <AncientCryptosleepRoom_Hostile_Deserted>
-        <countRange>1~2</countRange>
+        <countRange>1~1</countRange>
       </AncientCryptosleepRoom_Hostile_Deserted>
       <RecRoom_Deserted>
         <countRange>1~1</countRange>
@@ -36,8 +39,8 @@
    
     </roomDefs>
     <parts>
-      <Breached>0.75</Breached>
-      <Gore>0.75</Gore>
+      <VGE_BigBreach>5</VGE_BigBreach>
+      <Gore>0.5</Gore>
     </parts>
   </StructureLayoutDef>
 
