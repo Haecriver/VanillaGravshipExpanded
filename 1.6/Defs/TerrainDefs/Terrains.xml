@@ -57,7 +57,6 @@
 		<pollutionCloudColor>(1, 1, 1, 0.66)</pollutionCloudColor>
 		<canEverTerraform>false</canEverTerraform>
 	</TerrainDef>
-
 	<TerrainDef ParentName="FloorBase">
 		<defName>VGE_GravshipSubscaffold</defName>
 		<label>gravship subscaffold</label>
@@ -101,5 +100,27 @@
 		<tags>
 			<li>Substructure</li>
 		</tags>
+	</TerrainDef>
+	<TerrainDef ParentName="PlatformBase">
+		<defName>VGE_AncientOrbitalPlatform</defName>
+		<label>ancient orbital platform</label>
+		<texturePath>Things/Terrain/AncientOrbitalPlatform/AncientOrbitalPlatformTerrain</texturePath>
+		<spaceEdgeGraphicData Inherit="False">
+			<OShapeTexPath>Things/Terrain/AncientOrbitalPlatform/BorderInside/AncientOrbitalPlatformBorderInside_OShape</OShapeTexPath>
+			<UShapeTexPath>Things/Terrain/AncientOrbitalPlatform/BorderInside/AncientOrbitalPlatformInside_UShape</UShapeTexPath>
+			<CornerInnerTexPath>Things/Terrain/AncientOrbitalPlatform/BorderInside/AncientOrbitalPlatformInside_CornerInner</CornerInnerTexPath>
+			<CornerOuterTexPath>Things/Terrain/AncientOrbitalPlatform/BorderInside/AncientOrbitalPlatformInside_CornerOuter</CornerOuterTexPath>
+			<FlatTexPath>Things/Terrain/AncientOrbitalPlatform/BorderInside/AncientOrbitalPlatformInside_Flat</FlatTexPath>
+			<LoopLeftTexPath>Things/Terrain/AncientOrbitalPlatform/AncientOrbitalPlatformEdge_Left</LoopLeftTexPath>
+			<LoopRightTexPath>Things/Terrain/AncientOrbitalPlatform/AncientOrbitalPlatformEdge_Right</LoopRightTexPath>
+			<LoopSingleTexPath>Things/Terrain/AncientOrbitalPlatform/AncientOrbitalPlatformEdge_Single</LoopSingleTexPath>
+			<LoopTexPaths>
+				<li>Things/Terrain/AncientOrbitalPlatform/Loop/AncientOrbitalPlatformEdge_Loop1</li>
+				<li>Things/Terrain/AncientOrbitalPlatform/Loop/AncientOrbitalPlatformEdge_Loop2</li>
+				<li>Things/Terrain/AncientOrbitalPlatform/Loop/AncientOrbitalPlatformEdge_Loop3</li>
+				<li>Things/Terrain/AncientOrbitalPlatform/Loop/AncientOrbitalPlatformEdge_Loop4</li>
+				<li>Things/Terrain/AncientOrbitalPlatform/Loop/AncientOrbitalPlatformEdge_Loop5</li>
+			</LoopTexPaths>
+		</spaceEdgeGraphicData>
 	</TerrainDef>
 </Defs>

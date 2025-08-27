@@ -289,20 +289,19 @@
 		</genSteps>
 	</MapGeneratorDef>
 	<GenStepDef>
-    <defName>VGE_DerelictStation</defName>
- 
-    <order>200</order>
-    <genStep Class="GenStep_OrbitalPlatform">
-      <factionDef>AncientsHostile</factionDef>
-      <platformTerrain>OrbitalPlatform</platformTerrain>
-      <layoutDef>VGE_DerelictStation</layoutDef>
-      <orbitalDebrisDef>Manmade</orbitalDebrisDef>
-      <temperature>20</temperature>
-      <spawnSentryDrones>false</spawnSentryDrones>
-      <exteriorPrefabs>
-        <CrashedShuttle>0~1</CrashedShuttle>
-        <BaricadeTurret>2~5</BaricadeTurret>
-      </exteriorPrefabs>
-    </genStep>
-  </GenStepDef>
+		<defName>VGE_DerelictStation</defName>
+		<order>200</order>
+		<genStep Class="VanillaGravshipExpanded.GenStep_AncientOrbitalPlatform">
+			<factionDef>AncientsHostile</factionDef>
+			<platformTerrain>VGE_AncientOrbitalPlatform</platformTerrain>
+			<layoutDef>VGE_DerelictStation</layoutDef>
+			<orbitalDebrisDef>Manmade</orbitalDebrisDef>
+			<temperature>20</temperature>
+			<spawnSentryDrones>false</spawnSentryDrones>
+			<exteriorPrefabs>
+				<CrashedShuttle>0~1</CrashedShuttle>
+				<BaricadeTurret>2~5</BaricadeTurret>
+			</exteriorPrefabs>
+		</genStep>
+	</GenStepDef>
 </Defs>
