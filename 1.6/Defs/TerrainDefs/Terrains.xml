@@ -63,11 +63,12 @@
 		<label>gravship subscaffold</label>
 		<description>A scaffold layer built to support the framework of gravships. While part of the gravship’s structure, it cannot support buildings and slows movement significantly. It does not count toward the gravship’s substructure limit, making it ideal for walkways, access paths, or expansion staging areas.</description>
 		<texturePath>Things/Terrain/Substructure/Subscaffolding</texturePath>
+		<uiIconPath>UI/MenuIcons/Subscaffold_MenuIcon</uiIconPath>
 		<fertility>0</fertility>
-		<edgeType>Hard</edgeType>
+		<edgeType>Fade</edgeType>
 		<avoidWander>true</avoidWander>
 		<pathCost>52</pathCost>
-		<renderPrecedence>398</renderPrecedence>
+		<renderPrecedence>400</renderPrecedence>
 		<constructEffect>ConstructMetal</constructEffect>
 		<isPaintable>true</isPaintable>
 		<designationCategory>Odyssey</designationCategory>
@@ -94,5 +95,11 @@
 		<researchPrerequisites>
 			<li>StandardGravtech</li>
 		</researchPrerequisites>
+		<placeWorkers>
+			<li>PlaceWorker_InSubstructureFootprint</li>
+		</placeWorkers>
+		<tags>
+			<li>Substructure</li>
+		</tags>
 	</TerrainDef>
 </Defs>

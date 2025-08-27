@@ -8,29 +8,58 @@ namespace VanillaGravshipExpanded
     [HarmonyPatch(typeof(GravshipUtility), nameof(GravshipUtility.GetConnectedSubstructure))]
     public static class GravshipUtility_GetConnectedSubstructure_Patch
     {
-        public static void Postfix(Building_GravEngine engine, HashSet<IntVec3> cells)
+        public static void Prefix(Building_GravEngine engine, HashSet<IntVec3> cells, ref int maxCells, bool requireInsideFootprint = true)
         {
-            Map map = engine.Map;
-            HashSet<IntVec3> subscaffoldCells = new HashSet<IntVec3>();
-            map.floodFiller.FloodFill(engine.Position, delegate (IntVec3 x)
+            if (maxCells != int.MaxValue && engine.validSubstructure == cells)
             {
-                if (x.InBounds(map))
+                GetConnectedSubstructure(engine, ref maxCells, requireInsideFootprint);
+            }
+        }
+
+        public static void GetConnectedSubstructure(Building_GravEngine engine, ref int maxCells, bool requireInsideFootprint = true)
+        {
+            if (!ModsConfig.OdysseyActive)
+            {
+                return;
+            }
+            if (!engine.Spawned)
+            {
+                Log.Error("Tried to get connected substructure for an unspawned engine.");
+                return;
+            }
+            var oldMaxCells = maxCells;
+            List<Thing> footprintMakers = engine.Map.listerThings.ThingsInGroup(ThingRequestGroup.SubstructureFootprint);
+            engine.Map.floodFiller.FloodFill(engine.Position, delegate (IntVec3 x)
+            {
+                if (x.InBounds(engine.Map))
                 {
-                    TerrainDef terrainDef = map.terrainGrid.FoundationAt(x);
-                    return terrainDef != null && (terrainDef == VGEDefOf.VGE_GravshipSubscaffold || terrainDef.IsSubstructure);
+                    TerrainDef terrainDef = engine.Map.terrainGrid.FoundationAt(x);
+                    if (terrainDef != null && terrainDef.IsSubstructure)
+                    {
+                        if (requireInsideFootprint)
+                        {
+                            return GravshipUtility.InsideFootprint(x, engine.Map, footprintMakers);
+                        }
+                        return true;
+                    }
                 }
                 return false;
             }, delegate (IntVec3 x)
             {
-                if (!cells.Contains(x))
+                TerrainDef terrainDef = engine.Map.terrainGrid.FoundationAt(x);
+                if (terrainDef == VGEDefOf.VGE_GravshipSubscaffold)
                 {
-                    subscaffoldCells.Add(x);
+                    oldMaxCells++;
                 }
-                return false;
-            });
-            foreach (IntVec3 subscaffoldCell in subscaffoldCells)
+            }, int.MaxValue);
+            maxCells = oldMaxCells;
+        }
+
+        public static void Postfix(Building_GravEngine engine, HashSet<IntVec3> cells)
+        {
+            if (engine.allConnectedSubstructure == cells)
             {
-                cells.Add(subscaffoldCell);
+                cells.RemoveWhere(x => engine.Map.terrainGrid.FoundationAt(x) == VGEDefOf.VGE_GravshipSubscaffold);
             }
         }
     }

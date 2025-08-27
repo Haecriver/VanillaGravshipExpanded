@@ -51,7 +51,7 @@
     <Operation Class="PatchOperationAdd">
         <xpath>Defs/TerrainDef[defName="Substructure"]</xpath>
         <value>
-            <uiIconPath>Terrain/Surfaces/Substructure/Substructure</uiIconPath>
+            <uiIconPath>UI/MenuIcons/Substructure_MenuIcon</uiIconPath>
         </value>
     </Operation>
 
