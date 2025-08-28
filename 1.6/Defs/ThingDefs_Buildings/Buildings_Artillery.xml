@@ -12,6 +12,9 @@
     <ThingDef Name="VGE_GravshipArtilleryBase" ParentName="VGE_GravshipBuildingBase" Abstract="True">
         <thingClass>Building_TurretGun</thingClass>
         <drawerType>MapMeshAndRealTime</drawerType>
+        <drawHighlight>true</drawHighlight>
+        <drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+        <hasTooltip>true</hasTooltip>
         <graphicData>
             <graphicClass>Graphic_Single</graphicClass>
             <texPath>Things/Structures/Artillery/GravshipArtillery_Base_Normal</texPath>
@@ -267,7 +270,7 @@
         </graphicData>
         <verbs>
             <li>
-                <verbClass>VanillaGravshipExpanded.Verb_ShootWithWorldTargeting</verbClass>
+                <verbClass>Verb_Shoot</verbClass>
                 <warmupTime>0</warmupTime>
                 <range>14.9</range>
                 <burstShotCount>1</burstShotCount>
@@ -485,7 +488,7 @@
                 <soundCastTail>GunTail_Heavy</soundCastTail>
                 <muzzleFlashScale>26</muzzleFlashScale>
                 <aimingChargeMote>Mote_BeamRepeater_Charge</aimingChargeMote>
-                <aimingChargeMoteOffset>1.07</aimingChargeMoteOffset>
+                <aimingChargeMoteOffset>2.5</aimingChargeMoteOffset>
                 <requireLineOfSight>false</requireLineOfSight>
                 <forceNormalTimeSpeed>false</forceNormalTimeSpeed>
                 <targetParams>
@@ -508,7 +511,7 @@
             <damageAmountBase>5</damageAmountBase>
             <flyOverhead>true</flyOverhead>
             <beamMoteDef>VGE_Mote_BeamRepeaterLaser</beamMoteDef>
-            <beamStartOffset>1</beamStartOffset>
+            <beamStartOffset>2.5</beamStartOffset>
             <armorPenetrationBase>0.5</armorPenetrationBase>
         </projectile>
     </ThingDef>

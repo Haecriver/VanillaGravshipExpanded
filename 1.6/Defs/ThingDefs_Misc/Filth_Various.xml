@@ -29,4 +29,26 @@
     </filth>
   </ThingDef>
 
+  <ThingDef ParentName="BaseFilth">
+    <defName>VGE_Filth_DamagedSubstructure</defName>
+    <label>damaged substructure debris</label>
+    <description>Debris from damaged gravship substructure.</description>
+    <statBases>
+      <Beauty>-10</Beauty>
+      <Cleanliness>-5</Cleanliness>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Filth/DamagedSubstructureFilth</texPath>
+      <graphicClass>Graphic_Cluster</graphicClass>
+      <onGroundRandomRotateAngle>360</onGroundRandomRotateAngle>
+    </graphicData>
+    <filth>
+      <ignoreFilthMultiplierStat>true</ignoreFilthMultiplierStat>
+      <disappearsInDays>45~50</disappearsInDays>
+      <rainWashes>false</rainWashes>
+      <cleaningWorkToReduceThickness>35</cleaningWorkToReduceThickness>
+      <cleaningSound>Interact_CleanFilth</cleaningSound>
+    </filth>
+  </ThingDef>
+
 </Defs>

@@ -9,8 +9,8 @@ namespace VanillaGravshipExpanded
     {
         public static void Postfix(DamageWorker __instance, Explosion explosion, IntVec3 c)
         {
-            var projectile = explosion.weapon?.GetModExtension<TurretExtension_SubstructureDamage>();
-            if (projectile == null)
+            var modExtension = explosion.weapon?.GetModExtension<TurretExtension_SubstructureDamage>();
+            if (modExtension == null)
             {
                 return;
             }
@@ -19,24 +19,37 @@ namespace VanillaGravshipExpanded
             var map = explosion.Map;
             var explosionCenter = explosion.Position;
 
-            if (cell.DistanceTo(explosionCenter) > projectile.substructureDamageRadius)
+            if (cell.DistanceTo(explosionCenter) > modExtension.substructureDamageRadius)
             {
                 return;
             }
 
             var terrain = cell.GetTerrain(map);
-            TerrainDef newTerrain = null;
             if (terrain == TerrainDefOf.Substructure)
             {
-                newTerrain = VGEDefOf.VGE_DamagedSubstructure;
+                map.terrainGrid.SetTerrain(cell, VGEDefOf.VGE_DamagedSubstructure);
+                SpawnDebrisFilth(cell, map);
             }
             else if (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold)
             {
-                map.terrainGrid.Notify_TerrainDestroyed(cell);
+                map.terrainGrid.RemoveFoundation(cell, false);
             }
-            if (newTerrain != null)
+        }
+
+        private static void SpawnDebrisFilth(IntVec3 cell, Map map)
+        {
+            CellRect area = CellRect.FromCell(cell).ExpandedBy(1);
+            int count = 0;
+            foreach (IntVec3 filthCell in area.Cells.InRandomOrder())
             {
-                map.terrainGrid.SetTerrain(cell, newTerrain);
+                if (filthCell.InBounds(map) && FilthMaker.TryMakeFilth(filthCell, map, VGEDefOf.VGE_Filth_DamagedSubstructure))
+                {
+                    count++;
+                    if (count >= 3)
+                    {
+                        break;
+                    }
+                }
             }
         }
     }

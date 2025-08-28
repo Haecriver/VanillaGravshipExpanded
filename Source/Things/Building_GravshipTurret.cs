@@ -81,10 +81,11 @@ namespace VanillaGravshipExpanded
                 barrels = barrelExt.barrels;
             }
         }
+
+        protected float angleDiff;
         public override void Tick()
         {
             base.Tick();
-
             if (linkedTerminal != null && (linkedTerminal.Destroyed || !linkedTerminal.Spawned))
             {
                 Unlink();
@@ -108,8 +109,8 @@ namespace VanillaGravshipExpanded
                     {
                         curAngle -= 360;
                     }
-                    var angleDiff = Mathf.Min(Mathf.Abs(curAngle - targetAngle), 360 - Mathf.Abs(curAngle - targetAngle));
-                    if (angleDiff > 0.1f)
+                    angleDiff = Mathf.Min(Mathf.Abs(curAngle - targetAngle), 360 - Mathf.Abs(curAngle - targetAngle));
+                    if (angleDiff > 0.1f && AttackVerb.state != VerbState.Bursting && burstCooldownTicksLeft <= 0)
                     {
                         burstWarmupTicksLeft++;
                     }
@@ -120,6 +121,7 @@ namespace VanillaGravshipExpanded
                 }
             }
         }
+
         public override void ExposeData()
         {
             base.ExposeData();

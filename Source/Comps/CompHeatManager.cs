@@ -120,7 +120,6 @@ namespace VanillaGravshipExpanded
                 float roomHeat = heatPerCell * room.CellCount;
                 room.PushHeat(roomHeat);
             }
-            Log.Message("Pushed heat: " + heatAmount);
             return true;
         }
 

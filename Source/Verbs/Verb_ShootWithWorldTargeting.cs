@@ -7,7 +7,7 @@ namespace VanillaGravshipExpanded
     public class Verb_ShootWithWorldTargeting : Verb_LaunchProjectile
     {
         public override int ShotsPerBurst => base.BurstShotCount;
-
+        public Building_GravshipTurret Turret => (Building_GravshipTurret)caster;
         public override void WarmupComplete()
         {
             base.WarmupComplete();
@@ -19,31 +19,46 @@ namespace VanillaGravshipExpanded
                 casterPawn.skills.Learn(SkillDefOf.Shooting, num * num2);
             }
         }
-
+        
         public override bool TryCastShot()
         {
-            var target = CurrentTarget;
-            if (target.Cell.InBounds(caster.Map) is false)
+            var originalWarmupTime = verbProps.warmupTime;
+            if (caster is Building_GravshipTurret building_GravshipTurret && building_GravshipTurret.MannedByPlayer)
             {
-                ThingDef projectile = Projectile;
-                ShootLine resultingLine;
-                TryFindShootLineFromTo(caster.Position, currentTarget, out resultingLine);
-                Projectile projectile2 = (Projectile)GenSpawn.Spawn(projectile, resultingLine.Source, caster.Map);
-                ProjectileHitFlags projectileHitFlags4 = ProjectileHitFlags.IntendedTarget;
-                Vector3 drawPos = caster.DrawPos;
-                Thing equipmentSource = base.EquipmentSource;
-                var turret = caster as Building_GravshipTurret;
-                projectile2.Launch(turret, drawPos, resultingLine.Dest, currentTarget, projectileHitFlags4, preventFriendlyFire, equipmentSource, null);
-                return true;
+                var gravshipTargeting = building_GravshipTurret.ManningPawn.GetStatValue(VGEDefOf.VGE_GravshipTargeting);
+                float alpha = 1.2f;
+                float multiplier = Mathf.Clamp(Mathf.Pow(gravshipTargeting, -alpha), 0.1f, 2.0f);
+                verbProps.warmupTime *= multiplier;
             }
-            else
+            try
             {
-                bool num = base.TryCastShot();
-                if (num && CasterIsPawn)
+                var target = CurrentTarget;
+                if (target.Cell.InBounds(caster.Map) is false)
                 {
-                    CasterPawn.records.Increment(RecordDefOf.ShotsFired);
+                    ThingDef projectile = Projectile;
+                    ShootLine resultingLine;
+                    TryFindShootLineFromTo(caster.Position, currentTarget, out resultingLine);
+                    Projectile projectile2 = (Projectile)GenSpawn.Spawn(projectile, resultingLine.Source, caster.Map);
+                    ProjectileHitFlags projectileHitFlags4 = ProjectileHitFlags.IntendedTarget;
+                    Vector3 drawPos = caster.DrawPos;
+                    Thing equipmentSource = base.EquipmentSource;
+                    var turret = caster as Building_GravshipTurret;
+                    projectile2.Launch(turret, drawPos, resultingLine.Dest, currentTarget, projectileHitFlags4, preventFriendlyFire, equipmentSource, null);
+                    return true;
                 }
-                return num;
+                else
+                {
+                    bool num = base.TryCastShot();
+                    if (num && CasterIsPawn)
+                    {
+                        CasterPawn.records.Increment(RecordDefOf.ShotsFired);
+                    }
+                    return num;
+                }
+            }
+            finally
+            {
+                verbProps.warmupTime = originalWarmupTime;
             }
         }
     }

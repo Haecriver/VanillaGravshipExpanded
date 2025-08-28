@@ -31,7 +31,6 @@ public static class Building_GravEngine_ConsumeFuel_Patch
 
         var heatManager = __instance.GetComp<CompHeatManager>();
         heatManager.AddHeat(cost);
-        
         ApplyCooldownReduction(__instance);
     }
 
@@ -41,10 +40,8 @@ public static class Building_GravEngine_ConsumeFuel_Patch
         if (totalReduction > 0f)
         {
             int originalCooldownTicks = gravEngine.cooldownCompleteTick - GenTicks.TicksGame;
-            Log.Message($"Original cooldown is {originalCooldownTicks / (float)GenDate.TicksPerDay} days");
             int reducedCooldownTicks = Mathf.RoundToInt(originalCooldownTicks * (1f - totalReduction));
             gravEngine.cooldownCompleteTick = GenTicks.TicksGame + reducedCooldownTicks;
-            Log.Message($"Reduced cooldown by {totalReduction * 100f}% to {reducedCooldownTicks / (float)GenDate.TicksPerDay} days");
         }
     }
 

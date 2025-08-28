@@ -98,8 +98,6 @@
     <comps>
       <li Class="CompProperties_AffectedByFacilities">
         <linkableFacilities>
-          <li>EndTable</li>
-          <li>Dresser</li>
           <li>VGE_CrewLockers</li>
         </linkableFacilities>
       </li>
@@ -542,15 +540,12 @@
     <comps>
       <li Class="CompProperties_Explosive">
         <explosiveRadius>7</explosiveRadius>
-        <explosiveDamageType>Extinguish</explosiveDamageType>
+        <explosiveDamageType>VGE_SealantPopper</explosiveDamageType>
         <startWickHitPointsPercent>-1</startWickHitPointsPercent>
         <startWickOnDamageTaken>
           <li>Flame</li>
         </startWickOnDamageTaken>
-        <postExplosionSpawnThingDef>VGE_SealantGoop</postExplosionSpawnThingDef>
-        <postExplosionSpawnChance>1</postExplosionSpawnChance>
-        <postExplosionSpawnThingCount>1</postExplosionSpawnThingCount>
-        <applyDamageToExplosionCellsNeighbors>true</applyDamageToExplosionCellsNeighbors>
+        <applyDamageToExplosionCellsNeighbors>false</applyDamageToExplosionCellsNeighbors>
         <explosionEffect>ExtinguisherExplosion</explosionEffect>
         <explosionSound>Explosion_FirefoamPopper</explosionSound>
       </li>
@@ -568,11 +563,15 @@
     </comps>
   </ThingDef>
 
-  <ThingDef ParentName="BuildingBase">
+  <ThingDef>
     <defName>VGE_SealantGoop</defName>
     <label>sealant goop</label>
     <description>A hardened mass of rapidly-expanding polymer foam. Produced by a sealant popper, it forms an airtight plug that seals breaches in gravship rooms exposed to vacuum. While effective at restoring pressure, it is brittle and easy to destroy.</description>
     <thingClass>Mineable</thingClass>
+    <category>Building</category>
+    <selectable>true</selectable>
+    <drawerType>MapMeshOnly</drawerType>
+    <altitudeLayer>Building</altitudeLayer>
     <graphicData>
       <texPath>Things/Structures/GravshipFurniture/SealantGoop/SealantGoop_Atlas</texPath>
       <graphicClass>Graphic_Single</graphicClass>
