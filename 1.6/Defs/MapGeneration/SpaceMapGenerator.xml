@@ -295,7 +295,7 @@
 			<factionDef>AncientsHostile</factionDef>
 			<platformTerrain>VGE_AncientOrbitalPlatform</platformTerrain>
 			<layoutDef>VGE_DerelictStation</layoutDef>
-			<orbitalDebrisDef>Manmade</orbitalDebrisDef>
+			<orbitalDebrisDef>VGE_MixedDebris</orbitalDebrisDef>
 			<temperature>20</temperature>
 			<spawnSentryDrones>false</spawnSentryDrones>
 			<exteriorPrefabs>
