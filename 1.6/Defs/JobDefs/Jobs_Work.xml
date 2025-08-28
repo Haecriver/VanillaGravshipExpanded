@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<JobDef>
+		<defName>VGE_BeatAstrofire</defName>
+		<driverClass>VanillaGravshipExpanded.JobDriver_BeatAstrofire</driverClass>
+		<reportString>beating astrofire out.</reportString>
+		<neverShowWeapon>true</neverShowWeapon>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+	<JobDef>
+		<defName>VGE_ExtinguishAstrofiresNearby</defName>
+		<driverClass>VanillaGravshipExpanded.JobDriver_ExtinguishAstrofiresNearby</driverClass>
+		<reportString>extinguishing astrofires nearby.</reportString>
+		<neverShowWeapon>true</neverShowWeapon>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+	<JobDef>
+		<defName>VGE_ExtinguishSelfAstrofire</defName>
+		<driverClass>VanillaGravshipExpanded.JobDriver_ExtinguishSelfAstrofire</driverClass>
+		<reportString>extinguishing self.</reportString>
+		<neverShowWeapon>true</neverShowWeapon>
+		<casualInterruptible>false</casualInterruptible>
+	</JobDef>
+</Defs>

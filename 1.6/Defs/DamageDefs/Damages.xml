@@ -13,4 +13,20 @@
     <soundExplosion>Explosion_Stun</soundExplosion>
     <combatLogRules>Damage_Extinguish</combatLogRules>
   </DamageDef>
+  
+  <DamageDef>
+    <defName>VGE_ExtinguishAstrofire</defName>
+    <label>extinguish</label>
+    <workerClass>VanillaGravshipExpanded.DamageWorker_ExtinguishAstrofire</workerClass>
+    <canInterruptJobs>false</canInterruptJobs>
+    <makesBlood>false</makesBlood>
+    <defaultDamage>999999</defaultDamage>
+    <hediff>CoveredInFirefoam</hediff>
+    <explosionCellFleck>BlastExtinguisher</explosionCellFleck>
+    <explosionColorEdge>(1, 1, 1, 0.05)</explosionColorEdge>
+    <soundExplosion>Explosion_Stun</soundExplosion>
+    <harmsHealth>false</harmsHealth>
+    <combatLogRules>Damage_Extinguish</combatLogRules>
+    <consideredHelpful>true</consideredHelpful>
+  </DamageDef>
 </Defs>

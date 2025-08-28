@@ -9,8 +9,10 @@ namespace VanillaGravshipExpanded
         public static StatDef VGE_GravshipTargeting, VGE_AccuracyGlobal;
         public static WorldObjectDef VGE_ArtilleryProjectile;
         public static SoundDef VGE_GravshipTarget_Acquired;
-        public static ThingDef Gun_MiniTurret, VGE_PointDefenseTurret, VGE_GaussSmoke, VGE_SealantGoop, VGE_Filth_DamagedSubstructure;
+        public static ThingDef Gun_MiniTurret, VGE_PointDefenseTurret, VGE_GaussSmoke, VGE_SealantGoop, VGE_Filth_DamagedSubstructure, VGE_Astrofire, VGE_AstrofireSpark;
         public static TerrainDef VGE_GravshipSubscaffold, VGE_DamagedSubstructure, VGE_AsteroidIce;
         public static OrbitalDebrisDef VGE_IceAsteroid, VGE_AsteroidCluster, VGE_MixedDebris;
+        public static DamageDef VGE_ExtinguishAstrofire;
+        public static JobDef VGE_BeatAstrofire, VGE_ExtinguishAstrofiresNearby, VGE_ExtinguishSelfAstrofire;
     }
 }

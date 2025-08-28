@@ -27,7 +27,7 @@
 			<li>PlaceWorker_BuildingsValidOverSubstructure</li>
 		</placeWorkers>
 	</TerrainDef>
-	<TerrainDef ParentName="NaturalTerrainBase" Name="Ice">
+	<TerrainDef ParentName="NaturalTerrainBase">
 		<defName>VGE_AsteroidIce</defName>
 		<label>asteroid ice</label>
 		<texturePath>Things/Terrain/AsteroidIce</texturePath>

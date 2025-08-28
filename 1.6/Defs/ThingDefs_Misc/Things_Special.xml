@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+ 
+  <ThingDef>
+    <defName>VGE_Astrofire</defName>
+    <label>astrofire</label>
+    <thingClass>VanillaGravshipExpanded.Astrofire</thingClass>
+    <category>Attachment</category>
+    <tickerType>Normal</tickerType>
+    <forceDebugSpawnable>true</forceDebugSpawnable>
+    <graphicData>
+      <texPath>Effects/Astrofire</texPath>
+      <graphicClass>Graphic_Flicker</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+    </graphicData> 
+    <altitudeLayer>PawnState</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <comps>
+      <li Class="CompProperties_Glower">
+        <glowRadius>4</glowRadius>
+        <glowColor>(146,76,237)</glowColor>
+      </li>
+    </comps>
+  </ThingDef>
+  
+  <ThingDef>
+    <defName>VGE_AstrofireSpark</defName>
+    <label>astrofire spark</label>
+    <category>Projectile</category>
+    <thingClass>VanillaGravshipExpanded.AstrofireSpark</thingClass>
+    <graphicData>
+      <texPath>Effects/Astrospark</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Transparent</shaderType>
+    </graphicData>
+    <tickerType>Normal</tickerType>
+    <altitudeLayer>Projectile</altitudeLayer>
+    <useHitPoints>false</useHitPoints>
+    <neverMultiSelect>true</neverMultiSelect>
+    <projectile>
+      <alwaysFreeIntercept>true</alwaysFreeIntercept>
+      <speed>1.5</speed>
+    </projectile>
+  </ThingDef>
+
+ 
+</Defs>
