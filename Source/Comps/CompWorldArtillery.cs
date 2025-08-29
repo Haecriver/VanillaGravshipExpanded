@@ -1,4 +1,4 @@
-using RimWorld;
+﻿using RimWorld;
 using RimWorld.Planet;
 using System;
 using System.Collections.Generic;
@@ -8,15 +8,26 @@ using Verse;
 
 namespace VanillaGravshipExpanded
 {
+    [Flags]
+    public enum ArtilleryFiringMode
+    {
+        None = 0,
+        PlanetToPlanet = 1,
+        PlanetToSpace = 2,
+        SpaceToSpace = 4,
+        SpaceToPlanet = 8
+    }
+
     public class CompProperties_WorldArtillery : CompProperties
     {
         public int worldMapAttackRange;
+        public ArtilleryFiringMode firingMode;
+        
         public CompProperties_WorldArtillery()
         {
             compClass = typeof(CompWorldArtillery);
         }
     }
-    
     [HotSwappable]
     [StaticConstructorOnStartup]
     public class CompWorldArtillery : ThingComp
@@ -172,6 +183,10 @@ namespace VanillaGravshipExpanded
                     {
                         return false;
                     }
+                    if (!IsValidTargetForFiringMode(t))
+                    {
+                        return false;
+                    }
                     return true;
                 },
                 null
@@ -204,6 +219,40 @@ namespace VanillaGravshipExpanded
             Vector3 normalized = (targetCell.ToVector3() - parentPos).normalized;
             IntVec3 outCell = new IntVec3(targetCell.x + (int)Math.Round(normalized.x), targetCell.y, targetCell.z + (int)Math.Round(normalized.z));
             return new LocalTargetInfo(outCell);
+        }
+
+        private bool IsValidTargetForFiringMode(GlobalTargetInfo target)
+        {
+            var sourceMap = parent.Map;
+            if (sourceMap == null)
+                return false;
+            bool sourceIsOnPlanet = sourceMap.Tile.Valid && !sourceMap.Tile.LayerDef.isSpace;
+            bool targetIsOnPlanet = Find.WorldObjects.MapParentAt(target.Tile) is MapParent mapParent &&
+                                   mapParent.Map != null &&
+                                   mapParent.Map.Tile.Valid &&
+                                   !mapParent.Map.Tile.LayerDef.isSpace;
+            ArtilleryFiringMode requiredMode;
+            if (sourceIsOnPlanet && targetIsOnPlanet)
+            {
+                requiredMode = ArtilleryFiringMode.PlanetToPlanet;
+            }
+            else if (sourceIsOnPlanet && !targetIsOnPlanet)
+            {
+                requiredMode = ArtilleryFiringMode.PlanetToSpace;
+            }
+            else if (!sourceIsOnPlanet && !targetIsOnPlanet)
+            {
+                requiredMode = ArtilleryFiringMode.SpaceToSpace;
+            }
+            else if (!sourceIsOnPlanet && targetIsOnPlanet)
+            {
+                requiredMode = ArtilleryFiringMode.SpaceToPlanet;
+            }
+            else
+            {
+                return false;
+            }
+            return (Props.firingMode & requiredMode) != 0;
         }
 
         public void Reset()

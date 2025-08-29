@@ -28,6 +28,7 @@
             <li Class="CompProperties_Forbiddable" />
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
                 <worldMapAttackRange>36</worldMapAttackRange>
+                <firingMode>PlanetToSpace, SpaceToSpace, SpaceToPlanet</firingMode>
             </li>
         </comps>
         <building>

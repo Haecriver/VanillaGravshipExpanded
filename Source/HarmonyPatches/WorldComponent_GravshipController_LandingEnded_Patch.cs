@@ -40,8 +40,9 @@ namespace VanillaGravshipExpanded
                             if (terrain == TerrainDefOf.Substructure)
                             {
                                 map.terrainGrid.SetFoundation(cell, VGEDefOf.VGE_DamagedSubstructure);
+                                DamageWorker_ExplosionDamageTerrain_Patch.SpawnDebrisFilth(cell, map);
                             }
-                            else if (terrain == VGEDefOf.VGE_DamagedSubstructure)
+                            else if (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold)
                             {
                                 map.terrainGrid.RemoveFoundation(cell, false);
                             }
@@ -64,7 +65,7 @@ namespace VanillaGravshipExpanded
                             }
                         }
                         var terrain = map.terrainGrid.FoundationAt(cell);
-                        if (terrain == TerrainDefOf.Substructure || terrain == VGEDefOf.VGE_DamagedSubstructure)
+                        if (terrain == TerrainDefOf.Substructure || terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold)
                         {
                             map.terrainGrid.RemoveFoundation(cell, false);
                         }

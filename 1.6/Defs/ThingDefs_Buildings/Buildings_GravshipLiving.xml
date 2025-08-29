@@ -15,6 +15,15 @@
     <thingCategories>
       <li>BuildingsMisc</li>
     </thingCategories>
+    <graphicData>
+      <drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+      <drawOffsetSouth>(0,0,-0.75)</drawOffsetSouth>
+      <drawOffsetWest>(-0.85,0,0)</drawOffsetWest>
+      <drawOffsetEast>(0.85,0,0)</drawOffsetEast>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+    </graphicData>
     <leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
     <altitudeLayer>BuildingOnTop</altitudeLayer>
     <passability>Standable</passability>
@@ -64,8 +73,6 @@
       <graphicClass>Graphic_Multi</graphicClass>
       <shaderType>CutoutComplex</shaderType>
       <drawSize>(4,4)</drawSize>
-      <drawOffsetEast>(0, 0, 0.5)</drawOffsetEast>
-      <drawOffsetWest>(0, 0, 0.5)</drawOffsetWest>
       <damageData>
         <rect>(0,0.05,2,1.95)</rect>
       </damageData>
@@ -412,14 +419,8 @@
     <graphicData>
       <texPath>Things/Structures/GravshipFurniture/WallMountedOrbitalTraderBeacon/WallMountedOrbitalTradeBeacon</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <shadowData>
-        <volume>(0.3, 0.2, 0.3)</volume>
-        <offset>(0,0,-0.1)</offset>
-      </shadowData>
-      <drawSize>(2,2)</drawSize>
-      <damageData>
-        <enabled>false</enabled>
-      </damageData>
+      <drawSize>(1,1)</drawSize>
+      <drawOffsetSouth>(0,0,-0.7)</drawOffsetSouth>
     </graphicData>
     <statBases>
       <MaxHitPoints>75</MaxHitPoints>

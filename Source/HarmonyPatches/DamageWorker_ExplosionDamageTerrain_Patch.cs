@@ -36,7 +36,7 @@ namespace VanillaGravshipExpanded
             }
         }
 
-        private static void SpawnDebrisFilth(IntVec3 cell, Map map)
+        public static void SpawnDebrisFilth(IntVec3 cell, Map map)
         {
             CellRect area = CellRect.FromCell(cell).ExpandedBy(1);
             int count = 0;
