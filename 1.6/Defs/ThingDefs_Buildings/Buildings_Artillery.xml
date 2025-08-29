@@ -120,6 +120,7 @@
                 <fuelCapacity>150</fuelCapacity>
                 <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
                 <showFuelGizmo>true</showFuelGizmo>
+                <initialFuelPercent>1</initialFuelPercent>
             </li>
         </comps>
         <modExtensions>
@@ -245,6 +246,7 @@
                 <fuelCapacity>75</fuelCapacity>
                 <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
                 <showFuelGizmo>true</showFuelGizmo>
+                <initialFuelPercent>1</initialFuelPercent>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_ProjectileInterceptor">
                 <interceptionRadius>14.9</interceptionRadius>
@@ -325,6 +327,7 @@
                 <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
                 <showFuelGizmo>true</showFuelGizmo>
                 <outOfFuelMessage>Missing rockets</outOfFuelMessage>
+                <initialFuelPercent>1</initialFuelPercent>
             </li>
         </comps>
         <modExtensions>
@@ -446,7 +449,7 @@
         <comps>
             <li Class="CompProperties_Power">
                 <compClass>CompPowerTrader</compClass>
-                <basePowerConsumption>4000</basePowerConsumption>
+                <basePowerConsumption>10000</basePowerConsumption>
                 <idlePowerDraw>100</idlePowerDraw>
             </li>
             <li Class="CompProperties_Flickable" />
@@ -478,13 +481,13 @@
             <li>
                 <verbClass>VanillaGravshipExpanded.Verb_ShootWithWorldTargeting</verbClass>
                 <defaultProjectile>VGE_Bullet_AnticraftEmitter</defaultProjectile>
-                <warmupTime>10</warmupTime>
+                <warmupTime>600</warmupTime>
                 <range>99999</range>
                 <minRange>20.0</minRange>
                 <forcedMissRadius>0</forcedMissRadius>
                 <canGoWild>true</canGoWild>
-                <burstShotCount>60</burstShotCount>
-                <ticksBetweenBurstShots>4</ticksBetweenBurstShots>
+                <burstShotCount>40</burstShotCount>
+                <ticksBetweenBurstShots>6</ticksBetweenBurstShots>
                 <soundCast>Shot_BeamRepeater</soundCast>
                 <soundCastTail>GunTail_Heavy</soundCastTail>
                 <muzzleFlashScale>26</muzzleFlashScale>
