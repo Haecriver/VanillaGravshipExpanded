@@ -238,6 +238,8 @@ namespace VanillaGravshipExpanded
         private void DoComplexCalcs()
         {
             bool flag = false;
+            Thing fireToDestroy = null;
+
             flammableList.Clear();
             flammabilityMax = 0f;
             if (!base.Position.GetTerrain(base.Map).extinguishesFire)
@@ -269,6 +271,14 @@ namespace VanillaGravshipExpanded
                                 TryAttachAstrofire(list[i], fireSize * 0.2f, instigator);
                             }
                         }
+                        if(thing is Fire)
+                        {
+                            fireToDestroy = thing;
+                        }
+                    }
+                    if(fireToDestroy != null)
+                    {
+                        fireToDestroy.Destroy();
                     }
                 }
                 else
