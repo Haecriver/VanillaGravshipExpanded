@@ -13,8 +13,29 @@ public class Building_VacBarrier_Recolorable : Building_VacBarrier
     private static readonly List<Building_VacBarrier_Recolorable> TmpExtraBarriers = new(64);
     private static int LastBarrierGizmoUpdateFrameCount = 0;
     private static Color? ColorClipboard;
+    private static bool AlwaysOpenTempOverride = true; // Always keep as true unless calling base.StuckOpen
 
     public Color barrierColor;
+    public bool tempStuckInactive;
+
+    public override bool AlwaysOpen => AlwaysOpenTempOverride;
+
+    public bool StuckInactive
+    {
+        get
+        {
+            try
+            {
+                AlwaysOpenTempOverride = false;
+                // StuckOpen will return true since AlwaysOpen would normally return true. We need to temporarily set it to false. 
+                return StuckOpen;
+            }
+            finally
+            {
+                AlwaysOpenTempOverride = true;
+            }
+        }
+    }
 
     public override Graphic Graphic
     {
@@ -35,12 +56,29 @@ public class Building_VacBarrier_Recolorable : Building_VacBarrier
         }
     }
 
+    public override void Tick()
+    {
+        base.Tick();
+
+        var prevOpen = tempStuckInactive;
+        tempStuckInactive = StuckInactive;
+
+        if (prevOpen != tempStuckInactive)
+            Vacuum?.Dirty();
+    }
+
     public override void PostMake()
     {
         base.PostMake();
 
         if (def.colorGenerator != null)
             barrierColor = def.colorGenerator.NewRandomizedColor();
+    }
+
+    public override void SpawnSetup(Map map, bool respawningAfterLoad)
+    {
+        base.SpawnSetup(map, respawningAfterLoad);
+        tempStuckInactive = StuckInactive;
     }
 
     public override void ExposeData()
@@ -57,6 +95,20 @@ public class Building_VacBarrier_Recolorable : Building_VacBarrier
             return graphicData.Graphic;
         // Use colored version
         return graphicData.Graphic.GetColoredVersion(graphicData.Graphic.Shader, barrierColor, DrawColorTwo);
+    }
+
+    public override string GetInspectString()
+    {
+        try
+        {
+            AlwaysOpenTempOverride = false;
+            // StuckOpen will return true since AlwaysOpen would normally return true. We need to temporarily set it to false. 
+            return base.GetInspectString();
+        }
+        finally
+        {
+            AlwaysOpenTempOverride = true;
+        }
     }
 
     public override IEnumerable<Gizmo> GetGizmos()

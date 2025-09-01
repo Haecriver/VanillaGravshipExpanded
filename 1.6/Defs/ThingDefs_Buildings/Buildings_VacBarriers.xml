@@ -7,7 +7,7 @@
     <statBases>
       <Flammability>0</Flammability>
     </statBases>
-    <rotatable>true</rotatable>
+    <rotatable>false</rotatable>
     <graphicData>
       <shaderType>TransparentPostLight</shaderType>
       <damageData>
@@ -40,7 +40,14 @@
     </colorGenerator>
   </ThingDef>
 
-  <ThingDef ParentName="VGE_VacBarrierBase">
+  <ThingDef Name="VGE_VacBarrierMultiCellBase" ParentName="VGE_VacBarrierBase" Abstract="True">
+    <rotatable>true</rotatable>
+    <placeWorkers>
+      <li>PlaceWorker_MultiCellDoor</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <ThingDef ParentName="VGE_VacBarrierMultiCellBase">
     <defName>VGE_VacBarrierDouble</defName>
     <label>vac barrier (2x1)</label>
     <statBases>
@@ -80,7 +87,7 @@
     </comps>
   </ThingDef>
 
-  <ThingDef ParentName="VGE_VacBarrierBase">
+  <ThingDef ParentName="VGE_VacBarrierMultiCellBase">
     <defName>VGE_VacBarrierTriple</defName>
     <label>vac barrier (3x1)</label>
     <statBases>
@@ -120,8 +127,7 @@
     </comps>
   </ThingDef>
 
-
-  <ThingDef ParentName="VGE_VacBarrierBase">
+  <ThingDef ParentName="VGE_VacBarrierMultiCellBase">
     <defName>VGE_VacBarrierQuintuple</defName>
     <label>vac barrier (5x1)</label>
     <statBases>
