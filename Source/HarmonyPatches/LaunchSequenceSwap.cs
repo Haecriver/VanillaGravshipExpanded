@@ -53,7 +53,8 @@ namespace VanillaGravshipExpanded
             Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
         }
     }
-
+    
+    [HotSwappable]
     [HarmonyPatch(typeof(TilePicker), "StopTargeting")]
     public static class TilePicker_StopTargeting_Patch
     {
@@ -82,8 +83,18 @@ namespace VanillaGravshipExpanded
                     engine.ConsumeFuel(tile);
                     Find.GravshipController.InitiateTakeoff(engine, tile);
                     SoundDefOf.Gravship_Launch.PlayOneShotOnCamera();
+                    Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
                 };
             }
+        }
+    }
+    
+    [HarmonyPatch(typeof(LordJob_Ritual), "ApplyOutcome")]
+    public static class LordJob_Ritual_ApplyOutcome_Patch
+    {
+        public static void Postfix(LordJob_Ritual __instance)
+        {
+            Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
         }
     }
 
