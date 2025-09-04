@@ -46,6 +46,10 @@ public class CompApparelOxygenProvider : CompApparelReloadable, IReloadableComp
         LastCheckTick = Find.TickManager.TicksGame;
         LastCheckPawn = pawn;
 
+        // Return early if there's never vacuum in the biome
+        if (pawn.MapHeld?.Biome?.inVacuum != true)
+            return;
+
         // Return early if the wearer doesn't need to breathe
         if (pawn.RaceProps.IsMechanoid || (pawn.IsMutant && !pawn.mutant.Def.breathesAir))
             return;
