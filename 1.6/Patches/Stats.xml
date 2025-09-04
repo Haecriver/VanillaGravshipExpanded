@@ -20,4 +20,23 @@
     </match>
   </Operation>
 
+  <!-- Add oxygen pack stat part to vacuum resistance. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/StatDef[defName="VacuumResistance"]/parts</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/StatDef[defName="VacuumResistance"]</xpath>
+      <value>
+        <parts>
+          <li Class="VanillaGravshipExpanded.StatPart_OxygenPack"/>
+        </parts>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/StatDef[defName="VacuumResistance"]/statFactors</xpath>
+      <value>
+        <li Class="VanillaGravshipExpanded.StatPart_OxygenPack"/>
+      </value>
+    </match>
+  </Operation>
+
 </Patch>
