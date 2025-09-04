@@ -255,6 +255,7 @@
 			<WorkToBuild>3500</WorkToBuild>
 			<Mass>50</Mass>
 			<Flammability>0.6</Flammability>
+			<VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
 		</statBases>
 		<size>(3,3)</size>
 		<costList>
@@ -289,6 +290,10 @@
 				<startWickHitPointsPercent>0.2</startWickHitPointsPercent>
 				<wickTicks>70~150</wickTicks>
 			</li>
+			<li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			 <li Class="CompProperties_Breakdownable"/>
 		</comps>
 		<rotatable>true</rotatable>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
@@ -537,6 +542,7 @@
 			<MaxHitPoints>200</MaxHitPoints>
 			<Flammability>0.5</Flammability>
 			<Beauty>-8</Beauty>
+			<VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
 		</statBases>
 		<size>(2,2)</size>
 		<tickerType>Normal</tickerType>
@@ -588,6 +594,10 @@
 			<li>
 				<compClass>VEF.Graphics.CompDirtyMapMeshOnRefuelableChange</compClass>
 			</li>
+			 <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			
 		</comps>
 		<designationCategory>Odyssey</designationCategory>
 		<researchPrerequisites>
@@ -706,6 +716,7 @@
 			<MaxHitPoints>125</MaxHitPoints>
 			<WorkToBuild>10000</WorkToBuild>
 			<Flammability>0.3</Flammability>
+			<VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
 			<Mass>50</Mass>
 		</statBases>
 		<size>(2,2)</size>
@@ -736,6 +747,9 @@
 				<requiresLOS>false</requiresLOS>
 				<maxSimultaneous>4</maxSimultaneous>
 				<maxDistance>500</maxDistance>
+			</li>
+			 <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       <fleckEmissionRate>1</fleckEmissionRate>
 			</li>
 		</comps>
 		<designationCategory>Odyssey</designationCategory>

@@ -13,5 +13,22 @@
       <li>VGE_GiantThruster</li>
     </value>
   </Operation>
+  
+   <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/comps</xpath>
+    <value>
+       <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			 <li Class="CompProperties_Breakdownable"/>
+    </value>
+  </Operation>
+  
+   <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/statBases</xpath>
+    <value>
+        <VGE_MaintenanceSensitivity>3</VGE_MaintenanceSensitivity>
+    </value>
+  </Operation>
 
 </Patch>

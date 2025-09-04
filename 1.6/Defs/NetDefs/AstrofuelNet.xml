@@ -178,6 +178,7 @@
       <WorkToBuild>7000</WorkToBuild>
       <Mass>150</Mass>
       <Flammability>0.6</Flammability>
+	  <VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
     </statBases>
     <size>(6,3)</size>
     <costList>
@@ -224,6 +225,10 @@
         <preExplosionSpawnChance>1</preExplosionSpawnChance>
         <wickTicks>70~150</wickTicks>
       </li>
+	  <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			 <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
     <designationCategory>Odyssey</designationCategory>
@@ -656,10 +661,12 @@
     <pathCost>20</pathCost>
     <castEdgeShadows>true</castEdgeShadows>
     <fillPercent>0.40</fillPercent>
+	<tickerType>Normal</tickerType>
     <statBases>
       <MaxHitPoints>150</MaxHitPoints>
       <Flammability>0.3</Flammability>
       <Mass>50</Mass>
+	   <VGE_MaintenanceSensitivity>3</VGE_MaintenanceSensitivity>
     </statBases>
     <size>(2,2)</size>
     <costList>
@@ -673,6 +680,10 @@
         <maxSimultaneous>1</maxSimultaneous>
         <mustBePlacedAdjacent>true</mustBePlacedAdjacent>
       </li>
+	   <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			 <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
     <!-- TODO: Make non-buildable once done testing. -->
@@ -704,6 +715,7 @@
       <Beauty>-10</Beauty>
       <WorkToBuild>18000</WorkToBuild>
       <Mass>45</Mass>
+	  <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
     </statBases>
     <size>(3, 3)</size>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
@@ -755,6 +767,9 @@
         <pipeNet>VGE_AstrofuelNet</pipeNet>
         <outOfFuelOverlayPath>UI/Overlays/NoAstrofuel</outOfFuelOverlayPath>
       </li>
+	   <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       <fleckEmissionRate>1</fleckEmissionRate>
+			</li>
     </comps>
     <uiOrder>2206</uiOrder>
   </ThingDef>

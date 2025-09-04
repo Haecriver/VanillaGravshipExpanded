@@ -47,6 +47,30 @@
             <resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
         </value>
     </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="GravFieldExtender"]/statBases</xpath>
+        <value>
+             <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
+        </value>
+    </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="GravFieldExtender"]</xpath>
+        <value>
+             <tickerType>Normal</tickerType>
+        </value>
+    </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="GravFieldExtender"]/comps</xpath>
+        <value>
+              <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			 <li Class="CompProperties_Breakdownable"/>
+        </value>
+    </Operation>
 
     <Operation Class="PatchOperationAdd">
         <xpath>Defs/TerrainDef[defName="Substructure"]</xpath>

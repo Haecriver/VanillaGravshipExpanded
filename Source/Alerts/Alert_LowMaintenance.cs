@@ -55,7 +55,7 @@ namespace VanillaGravshipExpanded
                 {
                     CompGravMaintainable comp = maintainable.TryGetComp<CompGravMaintainable>();
                     if (comp != null) {
-                        if (comp.maintenance > 0.3f)
+                        if (comp.maintenance > comp.Props.minMaintenanceForAlert)
                         {
                             continue;
                         }

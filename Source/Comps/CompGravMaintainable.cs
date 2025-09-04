@@ -31,7 +31,7 @@ namespace VanillaGravshipExpanded
             FleckSystem system = parent.Map.flecks.CreateFleckSystemFor(VGEDefOf.VGE_MaintenanceSmoke);
             system.Prewarm(VGEDefOf.VGE_MaintenanceSmoke.Lifetime, null, delegate
             {
-                if (maintenance < 0.3f)
+                if (maintenance < Props.minMaintenanceForAlert)
                 {
                     EmissionTick(system);
                 }             
@@ -60,7 +60,7 @@ namespace VanillaGravshipExpanded
             {
                 CompTickLong();
             }
-            if (maintenance < 0.3f)
+            if (maintenance < Props.minMaintenanceForAlert)
             {
 
                 EmissionTick(parent.Map.flecks);
@@ -72,6 +72,10 @@ namespace VanillaGravshipExpanded
             if (this.parent.IsHashIntervalTick(8))
             {
                 CompTickLong();
+            }
+            if (maintenance < Props.minMaintenanceForAlert)
+            {
+                EmissionTick(parent.Map.flecks);
             }
         }
 
@@ -90,6 +94,10 @@ namespace VanillaGravshipExpanded
             {
                 maintenance = 0.05f;
                 Signal_Breakdown();
+            }
+            if (maintenance < Props.minMaintenanceForAlert)
+            {
+                EmissionTick(parent.Map.flecks);
             }
 
         }
@@ -147,7 +155,7 @@ namespace VanillaGravshipExpanded
 
         private void EmissionTick(IFleckCreator fleckDestination)
         {
-            if (!(Rand.Value < 0.01f))
+            if (!(Rand.Value < Props.fleckEmissionRate))
             {
                 return;
             }

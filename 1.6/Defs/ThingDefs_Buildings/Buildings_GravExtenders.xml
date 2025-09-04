@@ -15,6 +15,7 @@
       <Mass>40</Mass>
       <WorkToBuild>3200</WorkToBuild>
       <Beauty>0</Beauty>
+	   <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
     </statBases>
     <size>(3,3)</size>
     <fillPercent>0.4</fillPercent>
@@ -27,6 +28,7 @@
     <researchPrerequisites>
       <li>AdvancedGravtech</li>
     </researchPrerequisites>
+	<tickerType>Normal</tickerType>
     <costList>
       <Gravcore>2</Gravcore>
       <GravlitePanel>80</GravlitePanel>
@@ -59,6 +61,10 @@
         <maxDistance>18.9</maxDistance>
         <onlyRequiresLooseConnection>true</onlyRequiresLooseConnection>
       </li>
+	   <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			 <li Class="CompProperties_Breakdownable"/>
     </comps>
     <uiOrder>2301</uiOrder>
   </ThingDef>

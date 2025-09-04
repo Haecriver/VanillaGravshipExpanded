@@ -53,6 +53,23 @@
     <xpath>Defs/ThingDef[defName="SmallThruster"]/graphicData/drawSize/text()</xpath>
     <value>(2, 3)</value>
   </Operation>
+  
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="SmallThruster"]/comps</xpath>
+    <value>
+       <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       <fleckEmissionRate>1</fleckEmissionRate>
+		</li>
+    </value>
+  </Operation>
+  
+    <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="SmallThruster"]/statBases</xpath>
+    <value>
+       <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
+    </value>
+  </Operation>
 
   <!-- Large thruster -->
 
@@ -86,6 +103,22 @@
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="LargeThruster"]/graphicData/drawSize/text()</xpath>
     <value>(3, 4)</value>
+  </Operation>
+  
+    <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LargeThruster"]/comps</xpath>
+    <value>
+       <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+		<fleckEmissionRate>1</fleckEmissionRate>
+		</li>
+    </value>
+  </Operation>
+  
+    <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="LargeThruster"]/statBases</xpath>
+    <value>
+       <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
+    </value>
   </Operation>
 
 </Patch>

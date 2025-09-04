@@ -45,5 +45,29 @@
       <value>true</value>
     </match>
   </Operation>
+  
+  <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="FuelOptimizer"]/statBases</xpath>
+        <value>
+             <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
+        </value>
+    </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="FuelOptimizer"]</xpath>
+        <value>
+             <tickerType>Normal</tickerType>
+        </value>
+    </Operation>
+	
+	<Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="FuelOptimizer"]/comps</xpath>
+        <value>
+              <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			 <li Class="CompProperties_Breakdownable"/>
+        </value>
+    </Operation>
 
 </Patch>
