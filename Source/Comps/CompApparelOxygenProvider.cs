@@ -3,11 +3,9 @@ using RimWorld;
 using RimWorld.Utility;
 using UnityEngine;
 using Verse;
-using Verse.Sound;
 
 namespace VanillaGravshipExpanded;
 
-// public class CompApparelOxygenProvider : ThingComp, IReloadableComp
 public class CompApparelOxygenProvider : CompApparelReloadable, IReloadableComp
 {
     private static int LastCheckTick = -1;

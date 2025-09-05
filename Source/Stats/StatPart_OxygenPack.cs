@@ -29,6 +29,9 @@ public class StatPart_OxygenPack : StatPart
 
     private static CompApparelOxygenProvider GetRelevantApparel(Pawn pawn, float baseVacuumResistance)
     {
+        if (pawn?.apparel?.WornApparel == null)
+            return null;
+
         foreach (var apparel in pawn.apparel.WornApparel)
         {
             var comp = apparel.GetComp<CompApparelOxygenProvider>();
