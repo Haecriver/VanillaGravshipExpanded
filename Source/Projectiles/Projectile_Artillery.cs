@@ -63,8 +63,7 @@ namespace VanillaGravshipExpanded
                 var edgeCell = comp.FindEdgeCell(launcher.Map, comp.worldTarget);
                 this.targetTile = comp.worldTarget.Tile;
                 this.targetCell = comp.targetCell;
-                var shooter = turret.ManningPawn;
-                float newMiss = comp.FinalForcedMissRadius(comp.worldTarget, shooter);
+                float newMiss = comp.FinalForcedMissRadius(comp.worldTarget);
                 this.missRadius = newMiss;
                 intendedTarget = edgeCell;
                 base.Launch(launcher, origin, edgeCell, intendedTarget, hitFlags, preventFriendlyFire, equipment, targetCoverDef);

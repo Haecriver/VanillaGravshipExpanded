@@ -12,7 +12,8 @@ namespace VanillaGravshipExpanded
         {
             base.WarmupComplete();
             var casterPawn = (caster as Building_GravshipTurret).ManningPawn;
-            if (currentTarget.Thing is Pawn { Downed: false, IsColonyMech: false } pawn && casterPawn.skills != null)
+            if (casterPawn == null || casterPawn.skills == null) return;
+            if (currentTarget.Thing is Pawn { Downed: false, IsColonyMech: false } pawn)
             {
                 float num = (pawn.HostileTo(caster) ? 170f : 20f);
                 float num2 = verbProps.AdjustedFullCycleTime(this, casterPawn);
@@ -25,7 +26,7 @@ namespace VanillaGravshipExpanded
             var originalWarmupTime = verbProps.warmupTime;
             if (caster is Building_GravshipTurret building_GravshipTurret && building_GravshipTurret.MannedByPlayer)
             {
-                var gravshipTargeting = building_GravshipTurret.ManningPawn.GetStatValue(VGEDefOf.VGE_GravshipTargeting);
+                var gravshipTargeting = building_GravshipTurret.linkedTerminal.GravshipTargeting;
                 float alpha = 1.2f;
                 float multiplier = Mathf.Clamp(Mathf.Pow(gravshipTargeting, -alpha), 0.1f, 2.0f);
                 verbProps.warmupTime *= multiplier;

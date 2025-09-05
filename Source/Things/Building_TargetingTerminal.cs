@@ -10,6 +10,10 @@ namespace VanillaGravshipExpanded
     public class Building_TargetingTerminal : Building
     {
         public Building_GravshipTurret linkedTurret;
+        
+        public virtual bool MannedByPlayer => MannableComp?.MannedNow ?? false;
+        
+        public virtual float GravshipTargeting => MannableComp?.ManningPawn?.GetStatValue(VGEDefOf.VGE_GravshipTargeting) ?? 0f;
 
         private CompMannable mannableComp;
 

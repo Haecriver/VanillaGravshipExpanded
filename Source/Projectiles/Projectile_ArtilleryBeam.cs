@@ -65,8 +65,7 @@ namespace VanillaGravshipExpanded
             Map targetMap = Find.Maps.Find(m => m.Tile == targetTile);
             var comp = launcher.TryGetComp<CompWorldArtillery>();
             var turret = launcher as Building_GravshipTurret;
-            var shooter = turret?.ManningPawn;
-            var hitChance = comp.GetHitChance(new GlobalTargetInfo(targetCell, targetMap), shooter);
+            var hitChance = comp.GetHitChance(new GlobalTargetInfo(targetCell, targetMap));
             ArtilleryUtility.SpawnArtilleryProjectile(targetTile, Tile, def, launcher, targetCell, 0f, hitChance);
         }
     }

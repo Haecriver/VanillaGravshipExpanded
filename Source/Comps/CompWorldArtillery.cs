@@ -75,20 +75,20 @@ namespace VanillaGravshipExpanded
             return finalResult;
         }
 
-        public float GetHitChance(GlobalTargetInfo target, Pawn shooter)
+        public float GetHitChance(GlobalTargetInfo target)
         {
-            var launcher = parent as Building_TurretGun;
+            var launcher = parent as Building_GravshipTurret;
             var distance = ArtilleryUtility.GetDistanceDistance(launcher.Map.Tile, target.Tile);
             var hitFactor = HitFactorFromShooter(launcher, distance);
-            var targetingStat = shooter?.GetStatValue(VGEDefOf.VGE_GravshipTargeting) ?? 1f;
+            var targetingStat = launcher.linkedTerminal?.GravshipTargeting ?? 1f;
             var targetingMultiplier = GetTargetingMultiplier(targetingStat);
             float hitChance = hitFactor * targetingMultiplier;
             return hitChance;
         }
 
-        public virtual float FinalForcedMissRadius(GlobalTargetInfo target, Pawn shooter)
+        public virtual float FinalForcedMissRadius(GlobalTargetInfo target)
         {
-            var launcher = parent as Building_TurretGun;
+            var launcher = parent as Building_GravshipTurret;
             var verb = launcher.AttackVerb;
             var baseMissRadius = verb.verbProps.ForcedMissRadius;
             var distance = ArtilleryUtility.GetDistanceDistance(launcher.Map.Tile, target.Tile);
@@ -106,7 +106,7 @@ namespace VanillaGravshipExpanded
                 worldMultiplier = 1.2f;
             }
 
-            var targetingStat = shooter?.GetStatValue(VGEDefOf.VGE_GravshipTargeting) ?? 1f;
+            var targetingStat = launcher.linkedTerminal?.GravshipTargeting ?? 1f;
             var forcedMiss = (baseMissRadius * worldMultiplier) / GetTargetingMultiplier(targetingStat);
             return forcedMiss;
         }
@@ -235,7 +235,7 @@ namespace VanillaGravshipExpanded
             var turret = parent as Building_GravshipTurret;
             ThingDef projectile = turret.AttackVerb.verbProps.defaultProjectile;
             float num = projectile.projectile.explosionRadius + projectile.projectile.explosionRadiusDisplayPadding;
-            float forcedMissRadius = FinalForcedMissRadius(worldTarget, turret.ManningPawn);
+            float forcedMissRadius = FinalForcedMissRadius(worldTarget);
             if (forcedMissRadius > 0f && turret.AttackVerb.BurstShotCount > 1)
             {
                 num += forcedMissRadius;

@@ -23,7 +23,7 @@ namespace VanillaGravshipExpanded
         private static readonly Texture2D UnlinkIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/UnlinkWithTerminal");
         private static readonly Texture2D SelectIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/SelectLinkedTerminal");
         public static readonly Material NoLinkOverlay = MaterialPool.MatFrom("UI/Overlays/NoLinkedTargetingTerminal");
-        public bool MannedByPlayer => linkedTerminal?.MannableComp?.MannedNow ?? false;
+        public bool MannedByPlayer => linkedTerminal?.MannedByPlayer ?? false;
 
         public Pawn ManningPawn => linkedTerminal?.MannableComp?.ManningPawn;
 
@@ -58,7 +58,7 @@ namespace VanillaGravshipExpanded
         {
             get
             {
-                if (linkedTerminal != null && linkedTerminal.MannableComp.MannedNow)
+                if (linkedTerminal != null && linkedTerminal.MannedByPlayer)
                 {
                     return true;
                 }
