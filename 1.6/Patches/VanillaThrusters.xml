@@ -30,9 +30,13 @@
 
   <!-- Add substructure support multiplier stat -->
   <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[defName="SmallThruster"]/comps/li[@Class="CompProperties_GravshipThruster"]/statOffsets</xpath>
+    <xpath>Defs/ThingDef[defName="SmallThruster"]/comps</xpath>
     <value>
-      <VGE_SubstructureSupportMultiplier>0.01</VGE_SubstructureSupportMultiplier>
+      <li Class="VanillaGravshipExpanded.CompProperties_ConstantGravshipFacilityBonus">
+        <statOffsets>
+          <VGE_SubstructureSupportMultiplier>0.01</VGE_SubstructureSupportMultiplier>
+        </statOffsets>
+      </li>
     </value>
   </Operation>
 
@@ -53,21 +57,21 @@
     <xpath>Defs/ThingDef[defName="SmallThruster"]/graphicData/drawSize/text()</xpath>
     <value>(2, 3)</value>
   </Operation>
-  
+
 
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="SmallThruster"]/comps</xpath>
     <value>
-       <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-       <fleckEmissionRate>1</fleckEmissionRate>
-		</li>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+        <fleckEmissionRate>1</fleckEmissionRate>
+      </li>
     </value>
   </Operation>
-  
-    <Operation Class="PatchOperationAdd">
+
+  <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="SmallThruster"]/statBases</xpath>
     <value>
-       <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
+      <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
     </value>
   </Operation>
 
@@ -87,9 +91,13 @@
 
   <!-- Add substructure support multiplier stat -->
   <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[defName="LargeThruster"]/comps/li[@Class="CompProperties_GravshipThruster"]/statOffsets</xpath>
+    <xpath>Defs/ThingDef[defName="LargeThruster"]/comps</xpath>
     <value>
-      <VGE_SubstructureSupportMultiplier>0.05</VGE_SubstructureSupportMultiplier>
+      <li Class="VanillaGravshipExpanded.CompProperties_ConstantGravshipFacilityBonus">
+        <statOffsets>
+          <VGE_SubstructureSupportMultiplier>0.05</VGE_SubstructureSupportMultiplier>
+        </statOffsets>
+      </li>
     </value>
   </Operation>
 
@@ -104,20 +112,20 @@
     <xpath>Defs/ThingDef[defName="LargeThruster"]/graphicData/drawSize/text()</xpath>
     <value>(3, 4)</value>
   </Operation>
-  
-    <Operation Class="PatchOperationAdd">
+
+  <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="LargeThruster"]/comps</xpath>
     <value>
-       <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-		<fleckEmissionRate>1</fleckEmissionRate>
-		</li>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+        <fleckEmissionRate>1</fleckEmissionRate>
+      </li>
     </value>
   </Operation>
-  
-    <Operation Class="PatchOperationAdd">
+
+  <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="LargeThruster"]/statBases</xpath>
     <value>
-       <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
+      <VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
     </value>
   </Operation>
 

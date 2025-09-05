@@ -731,7 +731,6 @@
       <li Class="CompProperties_GravshipThruster">
         <statOffsets>
           <GravshipRange>20</GravshipRange>
-          <VGE_SubstructureSupportMultiplier>0.1</VGE_SubstructureSupportMultiplier>
         </statOffsets>
         <componentTypeDef>Thruster</componentTypeDef>
         <exclusionAreaSize>(3, 0, 9)</exclusionAreaSize>
@@ -761,6 +760,11 @@
           <rotationOverTimeRange>-180.0~180.0</rotationOverTimeRange>
           <scaleRange>5.0~7.5</scaleRange>
         </exhaustSettings>
+      </li>
+      <li Class="VanillaGravshipExpanded.CompProperties_ConstantGravshipFacilityBonus">
+        <statOffsets>
+          <VGE_SubstructureSupportMultiplier>0.1</VGE_SubstructureSupportMultiplier>
+        </statOffsets>
       </li>
       <li Class="CompProperties_Breakdownable" />
       <li Class="VanillaGravshipExpanded.CompProperties_ResourceThruster">

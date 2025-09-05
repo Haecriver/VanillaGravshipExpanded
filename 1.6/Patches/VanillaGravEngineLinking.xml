@@ -14,21 +14,31 @@
       <li>VGE_GunnerSubpersonaCore</li>
     </value>
   </Operation>
-  
-   <Operation Class="PatchOperationAdd">
+
+  <!-- Make grav engine affected by constant gravship bonuses (bonuses from connected, but potentially inactive facilities). -->
+  <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="GravEngine"]/comps</xpath>
     <value>
-       <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-       
-			</li>
-			 <li Class="CompProperties_Breakdownable"/>
+      <li>
+        <compClass>VanillaGravshipExpanded.CompAffectedByConstantGravshipFacilityBonus</compClass>
+      </li>
     </value>
   </Operation>
-  
-   <Operation Class="PatchOperationAdd">
+
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/comps</xpath>
+    <value>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+        
+      </li>
+      <li Class="CompProperties_Breakdownable"/>
+    </value>
+  </Operation>
+
+  <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="GravEngine"]/statBases</xpath>
     <value>
-        <VGE_MaintenanceSensitivity>3</VGE_MaintenanceSensitivity>
+      <VGE_MaintenanceSensitivity>3</VGE_MaintenanceSensitivity>
     </value>
   </Operation>
 
