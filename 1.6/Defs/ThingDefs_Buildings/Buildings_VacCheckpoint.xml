@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <ThingDef ParentName="DoorBase">
+    <defName>VGE_VacCheckpoint</defName>
+    <label>vac checkpoint</label>
+    <description>A safety checkpoint indicating the entrance to vacuum environment. Colonists will not cross it without required vacuum resistance.</description>
+    <thingClass>VanillaGravshipExpanded.Building_VacCheckpoint</thingClass>
+    <graphicData>
+      <texPath>Things/Structures/VacCheckpoint/VacCheckpoint</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Things/Structures/VacCheckpoint/VacCheckpoint</uiIconPath>
+    <altitudeLayer>FloorEmplacement</altitudeLayer>
+    <statBases>
+      <WorkToBuild>0</WorkToBuild>
+      <Flammability>0</Flammability>
+    </statBases>
+    <rotatable>false</rotatable>
+    <useHitPoints>False</useHitPoints>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <holdsRoof>false</holdsRoof>
+    <fillPercent>0</fillPercent>
+    <size>(1,1)</size>
+    <stuffCategories Inherit="False"/>
+    <useStuffTerrainAffordance>false</useStuffTerrainAffordance>
+    <terrainAffordanceNeeded IsNull="True" />
+    <designationCategory>Odyssey</designationCategory>
+    <uiOrder>2000</uiOrder>
+    <passability>Standable</passability>
+    <building>
+      <isAirtight>false</isAirtight>
+      <!-- Just in case -->
+      <alwaysExchangeVacuum>true</alwaysExchangeVacuum>
+      <!-- Same as inactive vac barrier -->
+      <doorTempEqualizeRate>14</doorTempEqualizeRate>
+      <sowTag>SupportPlantsOnly</sowTag>
+      <canPlaceOverImpassablePlant>false</canPlaceOverImpassablePlant>
+      <ai_chillDestination>false</ai_chillDestination>
+      <wakeDormantPawnsOnConstruction>false</wakeDormantPawnsOnConstruction>
+      <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
+<!--      <isEdifice>false</isEdifice>-->
+    </building>
+<!--    <designationHotKey>Misc10</designationHotKey>-->
+<!--    <drawPlaceWorkersWhileSelected>True</drawPlaceWorkersWhileSelected>-->
+  </ThingDef>
+
+</Defs>
