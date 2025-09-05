@@ -16,12 +16,27 @@ namespace VanillaGravshipExpanded
         {
             var gravship = __instance.gravship;
             ApplyCrashlanding(gravship);
+            RegenScaffondingSections(gravship);
+        }
+        
+        private static void RegenScaffondingSections(Gravship gravship)
+        {
+            var map = gravship.Engine.Map;
+            var foundations = gravship.Foundations.Keys;
+            ulong dirtyFlags = (ulong)MapMeshFlagDefOf.Terrain;
+            foreach (var cell in foundations)
+            {
+                var loc = cell + gravship.Engine.Position;
+                if (loc.InBounds(map) && loc.GetTerrain(map) == VGEDefOf.VGE_GravshipSubscaffold)
+                {
+                    map.mapDrawer.MapMeshDirty(loc, dirtyFlags, regenAdjacentCells: true, regenAdjacentSections: false);
+                }
+            }
         }
 
         private static void ApplyCrashlanding(Gravship gravship)
         {
             var map = gravship.Engine.Map;
-            var foundations = gravship.Foundations.Keys;
             foreach (var blocker in GravshipMapGenUtility.BlockingThings)
             {
                 if (blocker.def.destroyable)
