@@ -72,6 +72,7 @@
 		<isPaintable>true</isPaintable>
 		<designationCategory>Odyssey</designationCategory>
 		<isFoundation>true</isFoundation>
+		<holdSnowOrSand>false</holdSnowOrSand>
 		<preventCraters>true</preventCraters>
 		<affordances Inherit="false">
 			<li>Walkable</li>

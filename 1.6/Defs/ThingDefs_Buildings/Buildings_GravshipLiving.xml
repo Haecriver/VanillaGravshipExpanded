@@ -264,6 +264,7 @@
     <researchPrerequisites>
       <li>VGE_GravshipLiving</li>
     </researchPrerequisites>
+    <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
     <graphicData>
       <texPath>Things/Structures/GravshipFurniture/GravShelf/GravShelf</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
