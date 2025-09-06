@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -23,7 +24,7 @@ public class Building_VacCheckpoint : Building_Door
             return false;
         if (allowDrafted && pawn.Drafted)
             return false;
-        if (pawn.Faction != Faction.OfPlayer)
+        if (pawn.Faction != Faction)
             return false;
         if (pawn.InMentalState)
             return false;
@@ -48,35 +49,25 @@ public class Building_VacCheckpoint : Building_Door
         foreach (var gizmo in base.GetGizmos())
             yield return gizmo;
 
-        yield return new Command_Action
+        if (Faction == Faction.OfPlayer)
         {
-            defaultLabel = "VGE_SetVacuumResistance".Translate(),
-            defaultDesc = "VGE_SetVacuumResistanceDesc".Translate(),
-            icon = VacuumResistanceGizmo,
-            // TODO: Make a custom dialog, since the vanilla one seems to do some weird rounding.
-            action = () => Find.WindowStack.Add(new Dialog_Slider(x => "VGE_VacuumResistancePercent".Translate(x), 0, 100, SetSelectedVacCheckpointsTo, (int)(requiredResistance * 100))),
-        };
-    }
-
-    private static void SetSelectedVacCheckpointsTo(int resistancePercent)
-    {
-        var resistance = Mathf.Clamp01(resistancePercent / 100f);
-
-        foreach (var selected in Find.Selector.SelectedObjects)
-        {
-            if (selected is Building_VacCheckpoint checkpoint)
-                checkpoint.requiredResistance = resistance;
+            yield return new Command_Action
+            {
+                defaultLabel = "VGE_VacCheckpoint_SetVacuumResistance".Translate(),
+                defaultDesc = "VGE_VacCheckpoint_SetVacuumResistanceDesc".Translate(),
+                icon = VacuumResistanceGizmo,
+                action = () => Find.WindowStack.Add(new Dialog_ConfigureVacuumRequirement(requiredResistance, allowDrafted)),
+            };
         }
     }
 
     public override string GetInspectString()
     {
-        var str = base.GetInspectString();
+        var str = new StringBuilder(base.GetInspectString());
 
-        if (!str.NullOrEmpty())
-            str += "\n";
-        str += "VGE_MinimumVacuumResistance".Translate(requiredResistance);
+        str.AppendInNewLine("VGE_VacCheckpoint_MinimumVacuumResistance".Translate(requiredResistance));
+        str.AppendInNewLine((allowDrafted ? "VGE_VacCheckpoint_AllowDrafted" : "VGE_VacCheckpoint_DisallowDrafted").Translate());
 
-        return str;
+        return str.ToString();
     }
 }

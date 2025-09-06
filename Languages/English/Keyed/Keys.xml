@@ -30,10 +30,13 @@
     <VGE_Alert_LowMaintenance>Gravship maintenance low</VGE_Alert_LowMaintenance>
     <VGE_Alert_LowMaintenance_Desc>Some gravship components have low maintenance. This can result in negative launch outcomes and eventual break downs. Consider assigning a colonist to maintain them. Gravship components with low maintenance:\n\n {0}</VGE_Alert_LowMaintenance_Desc>
 
-    <VGE_SetVacuumResistance>Set desired vacuum resistance</VGE_SetVacuumResistance>
-    <VGE_SetVacuumResistanceDesc>Set the percentage of vacuum resistance required to cross through this checkpoint. Colonists without sufficient vacuum resistance will not naturally path through this checkpoint. Does not affect drafted colonists.</VGE_SetVacuumResistanceDesc>
-    <VGE_VacuumResistancePercent>Vacuum resistance: {0}%</VGE_VacuumResistancePercent>
-    <VGE_MinimumVacuumResistance>Minimum vacuum resistance: {0_percentage}</VGE_MinimumVacuumResistance>
+    <VGE_VacCheckpoint_SetVacuumResistance>Set desired vacuum resistance</VGE_VacCheckpoint_SetVacuumResistance>
+    <VGE_VacCheckpoint_SetVacuumResistanceDesc>Set the percentage of vacuum resistance required to cross through this checkpoint. Colonists without sufficient vacuum resistance will not naturally path through this checkpoint. Does not affect drafted colonists.</VGE_VacCheckpoint_SetVacuumResistanceDesc>
+    <VGE_VacCheckpoint_VacuumResistancePercent>Vacuum resistance: {0_percentage}</VGE_VacCheckpoint_VacuumResistancePercent>
+    <VGE_VacCheckpoint_MinimumVacuumResistance>Minimum vacuum resistance: {0_percentage}</VGE_VacCheckpoint_MinimumVacuumResistance>
+    <VGE_VacCheckpoint_AllowDrafted>Drafted colonists always allowed passage</VGE_VacCheckpoint_AllowDrafted>
+    <VGE_VacCheckpoint_DisallowDrafted>Drafted colonists check for vacuum resistance</VGE_VacCheckpoint_DisallowDrafted>
+    <VGE_VacCheckpoint_AllowDraftedCheckbox>Always allow drafted</VGE_VacCheckpoint_AllowDraftedCheckbox>
     <VGE_OxygenPackInactive>inactive</VGE_OxygenPackInactive>
 
     <!-- Mod options -->
