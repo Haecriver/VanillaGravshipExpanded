@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RitualBehaviorDef[defName='GravshipLaunch']/roles</xpath>
+		<value>
+			<li Class="RitualRoleColonist">
+				<id>gravtechResearcher</id>
+				<label>gravtech researcher</label>
+				<maxCount>1</maxCount>
+				<required>false</required>
+				<usedSkill>Intellectual</usedSkill>
+				<usedStat>VGE_GravshipResearch</usedStat>
+				<allowChild>false</allowChild>
+				<blocksSocialInteraction>false</blocksSocialInteraction>
+				<countsAsParticipant>true</countsAsParticipant>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>/Defs/RitualBehaviorDef[defName='GravshipLaunch']/stages/li/roleBehaviors</xpath>
+		<value>
+			<li>
+				<roleId>gravtechResearcher</roleId>
+				<dutyDef>ArriveToCell</dutyDef>
+				<customPositions>
+					<li Class="VanillaGravshipExpanded.RitualPosition_GravtechConsole">
+						<faceThing>true</faceThing>
+					</li>
+				</customPositions>
+			</li>
+		</value>
+	</Operation>
+</Patch>

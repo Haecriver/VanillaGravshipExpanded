@@ -16,44 +16,31 @@ namespace VanillaGravshipExpanded
         public RitualObligation forObligation;
         public Pawn selectedPawn;
         public Dictionary<string, Pawn> forcedForRole;
-        public GravshipLaunchState(Precept_Ritual instance, TargetInfo targetInfo, RitualObligation forObligation, Pawn selectedPawn, Dictionary<string, Pawn> forcedForRole, Action launchAction)
+        public PlanetTile targetTile;
+        public GravshipLaunchState(Precept_Ritual instance, TargetInfo targetInfo, RitualObligation forObligation, Pawn selectedPawn, Dictionary<string, Pawn> forcedForRole, PlanetTile targetTile)
         {
             this.instance = instance;
             this.targetInfo = targetInfo;
             this.forObligation = forObligation;
             this.selectedPawn = selectedPawn;
             this.forcedForRole = forcedForRole;
-        }
-    }
-
-    [HarmonyPatch(typeof(LordJob_Ritual), "ExposeData")]
-    public static class LordJob_Ritual_ExposeData_Patch
-    {
-        public static Dictionary<LordJob_Ritual, PlanetTile> targetTile = new ();
-        public static void Postfix(LordJob_Ritual __instance)
-        {
-            PlanetTile targetTile = PlanetTile.Invalid;
-            if (!LordJob_Ritual_ExposeData_Patch.targetTile.TryGetValue(__instance, out targetTile))
-            {
-                targetTile = PlanetTile.Invalid;
-            }
-            Scribe_Values.Look(ref targetTile, "targetTile", PlanetTile.Invalid);
-            if (targetTile != null)
-            {
-                LordJob_Ritual_ExposeData_Patch.targetTile[__instance] = targetTile;
-            }
-        }
-    }
-
-    [HarmonyPatch(typeof(Dialog_BeginLordJob), "Cancel")]
-    public static class Dialog_BeginLordJob_Cancel_Patch
-    {
-        public static void Postfix()
-        {
-            Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
+            this.targetTile = targetTile;
         }
     }
     
+    [HotSwappable]
+    [HarmonyPatch(typeof(Window), "PostClose")]
+    public static class Window_PostClose_Patch
+    {
+        public static void Postfix(Window __instance)
+        {
+            if (__instance is Dialog_BeginGravshipLaunch)
+            {
+                Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
+            }
+        }
+    }
+
     [HotSwappable]
     [HarmonyPatch(typeof(TilePicker), "StopTargeting")]
     public static class TilePicker_StopTargeting_Patch
@@ -73,7 +60,7 @@ namespace VanillaGravshipExpanded
     {
         public static void Prefix(Building_GravEngine engine, ref Action launchAction)
         {
-            var lordJob = engine.Map.lordManager.lords.Select(x => x.LordJob).OfType<LordJob_Ritual>().FirstOrDefault(lordJob => lordJob.ritual.def == PreceptDefOf.GravshipLaunch);
+            var lordJob = engine.Map.lordManager.lords.Select(x => x.LordJob).OfType<LordJob_Ritual>().FirstOrDefault(lordJob => lordJob.ritual.def.IsGravshipLaunch());
             if (lordJob is not null && LordJob_Ritual_ExposeData_Patch.targetTile.TryGetValue(lordJob, out var tile))
             {
                 launchAction = delegate
@@ -88,7 +75,7 @@ namespace VanillaGravshipExpanded
             }
         }
     }
-    
+
     [HarmonyPatch(typeof(LordJob_Ritual), "ApplyOutcome")]
     public static class LordJob_Ritual_ApplyOutcome_Patch
     {
@@ -115,25 +102,64 @@ namespace VanillaGravshipExpanded
                     Find.CameraDriver.JumpToCurrentMapLoc(gravEngine.Position);
                     state.instance.ShowRitualBeginWindow(state.targetInfo, state.forObligation, state.selectedPawn, state.forcedForRole);
                     targetTile = tile;
+                    state.targetTile = tile;
                 };
             }
         }
     }
-    
+
+    [HotSwappable]
+    [HarmonyPatch(typeof(RitualOutcomeEffectWorker_GravshipLaunch), "Apply")]
+    public static class RitualOutcomeEffectWorker_GravshipLaunch_Apply_Patch
+    {
+        public static void Postfix(float progress, Dictionary<Pawn, int> totalPresence, LordJob_Ritual jobRitual)
+        {
+            var engine = jobRitual.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;
+            var launchInfo = engine.launchInfo;
+            LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo] = engine.Map.Tile;
+            Log.Message($"[Gravdata] Launch source tile set to: {engine.Map.Tile}");
+            RememberResearcher(jobRitual);
+        }
+
+
+        private static void RememberResearcher(LordJob_Ritual lordJob)
+        {
+            Pawn pawn = null;
+            if (lordJob.ritual.def == VGEDefOf.VGE_GravjumperLaunch)
+            {
+                pawn = lordJob.assignments.AssignedPawns("pilot").FirstOrDefault();
+            }
+            else if (lordJob.ritual.def == PreceptDefOf.GravshipLaunch || lordJob.ritual.def == VGEDefOf.VGE_GravhulkLaunch)
+            {
+                pawn = lordJob.assignments.AssignedPawns("gravtechResearcher").FirstOrDefault();
+            }
+            if (pawn != null)
+            {
+                var engine = lordJob.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;
+                LaunchInfo_ExposeData_Patch.gravtechResearcherPawns[engine.launchInfo] = pawn;
+            }
+            if (pawn != null)
+            {
+                Log.Message($"[Gravdata] Gravship launch ritual successful with pawn: {pawn.Name}");
+            }
+            else
+            {
+                Log.Message($"[Gravdata] Gravship launch ritual successful, but no pawn found");
+            }
+        }
+    }
+
     [HotSwappable]
     [HarmonyPatch(typeof(RitualBehaviorWorker_GravshipLaunch), "TryExecuteOn")]
     public static class RitualBehaviorWorker_GravshipLaunch_TryExecuteOn_Patch
     {
         public static void Postfix(TargetInfo target, Pawn organizer, Precept_Ritual ritual, RitualObligation obligation, RitualRoleAssignments assignments, bool playerForced = false)
         {
-            var lordJob = target.Map.lordManager.lords.Select(x => x.LordJob).OfType<LordJob_Ritual>().FirstOrDefault(lordJob => lordJob.ritual.def == PreceptDefOf.GravshipLaunch);
-            if (lordJob is not null)
-            {
-                LordJob_Ritual_ExposeData_Patch.targetTile[lordJob] = SettlementProximityGoodwillUtility_CheckConfirmSettle_Patch.targetTile;
-            }
+            var lordJob = target.Map.lordManager.lords.Select(x => x.LordJob).OfType<LordJob_Ritual>().FirstOrDefault(lordJob => lordJob.ritual.def.IsGravshipLaunch());
+            LordJob_Ritual_ExposeData_Patch.targetTile[lordJob] = SettlementProximityGoodwillUtility_CheckConfirmSettle_Patch.targetTile;
         }
     }
-    
+
     [HotSwappable]
     [HarmonyPatch(typeof(Precept_Ritual), "ShowRitualBeginWindow")]
     public static class Dialog_BeginRitual_ShowRitualBeginWindow_Patch
@@ -141,12 +167,12 @@ namespace VanillaGravshipExpanded
         public static GravshipLaunchState state;
         public static bool Prefix(Precept_Ritual __instance, TargetInfo targetInfo, RitualObligation forObligation = null, Pawn selectedPawn = null, Dictionary<string, Pawn> forcedForRole = null)
         {
-            if (__instance.def == PreceptDefOf.GravshipLaunch)
+            if (__instance.def.IsGravshipLaunch())
             {
                 if (state is null)
                 {
                     var comp = targetInfo.Thing.TryGetComp<CompPilotConsole>();
-                    state = new(__instance, targetInfo, forObligation, selectedPawn, forcedForRole, null);
+                    state = new(__instance, targetInfo, forObligation, selectedPawn, forcedForRole, PlanetTile.Invalid);
                     comp.StartChoosingDestination_NewTemp();
                     return false;
                 }

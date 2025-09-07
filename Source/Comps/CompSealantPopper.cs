@@ -43,8 +43,8 @@ namespace VanillaGravshipExpanded
 
         private void TriggerSealantPopper()
         {
-            CompExplosive explosive = parent.TryGetComp<CompExplosive>();
-            if (explosive != null && !explosive.wickStarted)
+            var explosive = parent.TryGetComp<CompExplosive>();
+            if (!explosive.wickStarted)
             {
                 explosive.StartWick();
             }

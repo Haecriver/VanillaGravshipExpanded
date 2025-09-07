@@ -15,7 +15,7 @@ namespace VanillaGravshipExpanded
             Find.WindowStack.Add(new Dialog_MessageBox("VGE_MapDecisionText".Translate(), "VGE_KeepMap".Translate(), null, "VGE_DiscardMap".Translate(), delegate
             {
                 map.Parent.Abandon(wasGravshipLaunch: true);
-            }, "VGE_MapDecisionTitle".Translate(), buttonADestructive: false));
+            }, buttonADestructive: false));
         }
     }
 }

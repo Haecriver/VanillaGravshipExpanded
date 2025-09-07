@@ -15,10 +15,48 @@ namespace VanillaGravshipExpanded
         public static void Prefix(WorldComponent_GravshipController __instance)
         {
             var gravship = __instance.gravship;
+            ApplyGravDataYield(gravship);
             ApplyCrashlanding(gravship);
             RegenScaffondingSections(gravship);
         }
-        
+
+        private static void ApplyGravDataYield(Gravship gravship)
+        {
+            var launchInfo = gravship.Engine.launchInfo;
+            var landingTile = gravship.Engine.Tile;
+            float quality = gravship.Engine.launchInfo.quality;
+
+            Log.Message($"[Gravdata] Landing at tile: {landingTile}");
+            Log.Message($"[Gravdata] Quality: {quality}");
+
+            LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.TryGetValue(launchInfo, out var researcherPawn);
+            Log.Message($"[Gravdata] Researcher pawn: {researcherPawn?.Name}");
+
+            var launchSourceTile = LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo];
+            var distanceTravelled = GravshipHelper.GetDistance(launchSourceTile, landingTile);
+            Log.Message($"[Gravdata] Distance travelled: {distanceTravelled} - from {launchSourceTile} to {landingTile}");
+
+            var gravdataYield = GravdataUtility.CalculateGravdataYield(distanceTravelled, quality, gravship.Engine, researcherPawn);
+
+            Log.Message($"[Gravdata] Calculated gravdata yield: {gravdataYield}");
+            if (World_ExposeData_Patch.currentGravtechProject != null)
+            {
+                Log.Message($"[Gravdata] Adding {gravdataYield} to project: {World_ExposeData_Patch.currentGravtechProject.defName}");
+                Find.ResearchManager.AddProgress(World_ExposeData_Patch.currentGravtechProject, gravdataYield);
+                if (World_ExposeData_Patch.currentGravtechProject.IsFinished)
+                {
+                    Log.Message($"[Gravdata] Project completed: {World_ExposeData_Patch.currentGravtechProject.defName}");
+                    World_ExposeData_Patch.currentGravtechProject = null;
+                }
+            }
+            else
+            {
+                Log.Message($"[Gravdata] No current project selected, gravdata lost");
+            }
+            LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.Remove(launchInfo);
+            LaunchInfo_ExposeData_Patch.launchSourceTiles.Remove(launchInfo);
+        }
+
         private static void RegenScaffondingSections(Gravship gravship)
         {
             var map = gravship.Engine.Map;

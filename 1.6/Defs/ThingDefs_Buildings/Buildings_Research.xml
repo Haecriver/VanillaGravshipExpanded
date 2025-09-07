@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<ThingDef ParentName="GravshipComponentBase">
+		<defName>VGE_GravtechConsole</defName>
+		<label>gravtech console</label>
+		<description>An interface used to analyze gravdata gathered from gravship launches and travel. It draws power directly from the grav engine.</description>
+		<graphicData>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<texPath>Things/Structures/GravtechConsole/GravtechConsole</texPath>
+			<drawSize>(4,2)</drawSize>
+		</graphicData>
+		<costList>
+			<Steel>100</Steel>
+			<ComponentIndustrial>6</ComponentIndustrial>
+		</costList>
+		<fillPercent>0.3</fillPercent>
+		<statBases>
+			<WorkToBuild>3000</WorkToBuild>
+			<MaxHitPoints>250</MaxHitPoints>
+			<Flammability>0.5</Flammability>
+			<Beauty>-4</Beauty>
+			<Mass>10</Mass>
+		</statBases>
+		<size>(3,1)</size>
+		<passability>PassThroughOnly</passability>
+		<pathCost>50</pathCost>
+		<comps>
+			<li Class="CompProperties_GravshipFacility">
+				<maxSimultaneous>1</maxSimultaneous>
+				<maxDistance>200</maxDistance>
+			</li>
+			<li Class="VanillaGravshipExpanded.CompProperties_GravdataYield">
+				<multiplier>5</multiplier>
+			</li>
+			<li Class="CompProperties_Breakdownable" />
+		</comps>
+		<placeWorkers>
+			<li>PlaceWorker_PreventInteractionSpotOverlap</li>
+		</placeWorkers>
+		<researchPrerequisites>
+			<li>StandardGravtech</li>
+		</researchPrerequisites>
+		<rotatable>true</rotatable>
+		<canOverlapZones>false</canOverlapZones>
+		<resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+		<designationCategory>Odyssey</designationCategory>
+		<hasInteractionCell>true</hasInteractionCell>
+		<interactionCellOffset>(0, 0,-1)</interactionCellOffset>
+		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
+		<uiOrder>2101</uiOrder>
+	</ThingDef>
+</Defs>

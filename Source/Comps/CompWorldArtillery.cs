@@ -78,7 +78,7 @@ namespace VanillaGravshipExpanded
         public float GetHitChance(GlobalTargetInfo target)
         {
             var launcher = parent as Building_GravshipTurret;
-            var distance = ArtilleryUtility.GetDistanceDistance(launcher.Map.Tile, target.Tile);
+            var distance = GravshipHelper.GetDistance(launcher.Map.Tile, target.Tile);
             var hitFactor = HitFactorFromShooter(launcher, distance);
             var targetingStat = launcher.linkedTerminal?.GravshipTargeting ?? 1f;
             var targetingMultiplier = GetTargetingMultiplier(targetingStat);
@@ -91,7 +91,7 @@ namespace VanillaGravshipExpanded
             var launcher = parent as Building_GravshipTurret;
             var verb = launcher.AttackVerb;
             var baseMissRadius = verb.verbProps.ForcedMissRadius;
-            var distance = ArtilleryUtility.GetDistanceDistance(launcher.Map.Tile, target.Tile);
+            var distance = GravshipHelper.GetDistance(launcher.Map.Tile, target.Tile);
             var worldMultiplier = 1.0f;
             if (distance > 49)
             {
@@ -215,7 +215,7 @@ namespace VanillaGravshipExpanded
                 null,
                 delegate (GlobalTargetInfo t)
                 {
-                    var distance = ArtilleryUtility.GetDistanceDistance(parent.Map.Tile, t.Tile);
+                    var distance = GravshipHelper.GetDistance(parent.Map.Tile, t.Tile);
                     if (distance > Props.worldMapAttackRange)
                     {
                         return false;
@@ -264,10 +264,8 @@ namespace VanillaGravshipExpanded
             if (sourceMap == null)
                 return false;
             bool sourceIsOnPlanet = sourceMap.Tile.Valid && !sourceMap.Tile.LayerDef.isSpace;
-            bool targetIsOnPlanet = Find.WorldObjects.MapParentAt(target.Tile) is MapParent mapParent &&
-                                   mapParent.Map != null &&
-                                   mapParent.Map.Tile.Valid &&
-                                   !mapParent.Map.Tile.LayerDef.isSpace;
+            bool targetIsOnPlanet = Find.WorldObjects.MapParentAt(target.Tile) is MapParent mapParent && mapParent.Map != null && mapParent.Map.Tile.Valid && !mapParent.Map.Tile.LayerDef.isSpace;
+            
             ArtilleryFiringMode requiredMode;
             if (sourceIsOnPlanet && targetIsOnPlanet)
             {

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
@@ -19,16 +20,35 @@ namespace VanillaGravshipExpanded
                 var outcome = __instance.outcome.extraOutcomeDescriptions.First();
                 __state = outcome.description;
                 var engine = __instance.target.Thing.TryGetComp<CompPilotConsole>()?.engine;
-                if (engine == null)
-                    return;
                 var cooldownReduction = Building_GravEngine_ConsumeFuel_Patch.GetCooldownReduction(engine);
-                if (cooldownReduction <= 0f)
-                    return;
-                var info = "VGE_LaunchHeatsinkCooldownInfo".Translate(cooldownReduction.ToStringPercent());
-                outcome.description += " " + info;
+                if (cooldownReduction > 0f)
+                {
+                    var info = "VGE_LaunchHeatsinkCooldownInfo".Translate(cooldownReduction.ToStringPercent());
+                    outcome.description += " " + info;
+                }
+                if (World_ExposeData_Patch.currentGravtechProject == null)
+                {
+                    var warningPart = "Warning".Translate().ToString().ToUpper();
+                    var messagePart = "VGE_NoGravtechProjectSelected".Translate();
+                    var coloredWarning = $"<color=red>{warningPart}:</color> {messagePart}";
+                    outcome.description += "\n\n" + coloredWarning + "\n";
+                }
+                else if (Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state != null)
+                {
+                    Pawn researcherPawn = __instance.assignments.AssignedPawns("gravtechResearcher").FirstOrDefault();
+                    var gravshipState = Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state;
+                    float distanceTravelled = GravshipHelper.GetDistance(engine.Map.Tile, gravshipState.targetTile);
+                    List<QualityFactor> list = __instance.PopulateQualityFactors(out var qualityRange);
+                    var quality = __instance.PredictedQuality(list).min;
+                    int gravdataYield = GravdataUtility.CalculateGravdataYield(distanceTravelled, quality, engine, researcherPawn);
+                    var gravdataInfo = "VGE_GravdataYieldInfo".Translate(gravdataYield);
+                    outcome.description += " " + gravdataInfo;
+
+                    outcome.description += "\n\n" + "DEV: " + $"Distance: {distanceTravelled}, Quality: {quality}, Researcher: {researcherPawn?.Name}, ResearchStat: {researcherPawn?.GetStatValue(VGEDefOf.VGE_GravshipResearch)}, YieldMultiplier: {GravdataUtility.CalculateYieldMultiplier(engine)}\n";
+                }
             }
         }
-        
+
         public static void Postfix(Dialog_BeginRitual __instance, string __state)
         {
             if (__state.NullOrEmpty() is false)

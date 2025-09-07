@@ -2,6 +2,8 @@ using System.Linq;
 using RimWorld;
 using Verse;
 using UnityEngine;
+using RimWorld.Planet;
+using System.Collections.Generic;
 
 namespace VanillaGravshipExpanded
 {
@@ -60,6 +62,53 @@ namespace VanillaGravshipExpanded
                 }
             }
             sectionLayer.FinalizeMesh(MeshParts.All);
+        }
+
+        private static PlanetTile cachedOrigin;
+        private static PlanetTile cachedDest;
+        private static int cachedDistance;
+        private static PlanetLayer cachedOriginLayer;
+        private static PlanetLayer cachedDestLayer;
+        private static readonly List<PlanetLayerConnection> connections = new List<PlanetLayerConnection>();
+
+        public static int GetDistance(PlanetTile from, PlanetTile to)
+        {
+            if (cachedOrigin == from && cachedDest == to)
+            {
+                return cachedDistance;
+            }
+            cachedOrigin = from;
+            cachedDest = to;
+            cachedDistance = 0;
+            if (from.Layer != to.Layer)
+            {
+                if (cachedOriginLayer == from.Layer && cachedDestLayer == to.Layer)
+                {
+                }
+                else
+                {
+                    if (!from.Layer.TryGetPath(to.Layer, connections, out var cost))
+                    {
+                        connections.Clear();
+                        return 0;
+                    }
+                    Log.Message($"[Gravdata] Path from {from.Layer} to {to.Layer} with cost {cost} connections: {connections.Select(c => c.origin + " -> " + c.target + " (" + c.fuelCost + ")").ToStringSafeEnumerable()}");
+                    cachedOriginLayer = to.Layer;
+                    cachedDestLayer = from.Layer;
+                    connections.Clear();
+                }
+                from = to.Layer.GetClosestTile_NewTemp(from);
+            }
+            cachedDistance = (int)(Find.WorldGrid.TraversalDistanceBetween(from, to) * to.LayerDef.rangeDistanceFactor);
+            Log.Message($"[Gravdata] Distance from {from} to {to} is {cachedDistance} with range distance factor {to.LayerDef.rangeDistanceFactor}");
+            return cachedDistance;
+        }
+        
+        public static bool IsGravshipLaunch(this PreceptDef ritual)
+        {
+            return ritual == PreceptDefOf.GravshipLaunch ||
+                   ritual == VGEDefOf.VGE_GravjumperLaunch ||
+                   ritual == VGEDefOf.VGE_GravhulkLaunch;
         }
     }
 }

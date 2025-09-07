@@ -12,6 +12,7 @@
       <li>VGE_GravFieldAmplifier</li>
       <li>VGE_GiantThruster</li>
       <li>VGE_GunnerSubpersonaCore</li>
+      <li>VGE_GravtechConsole</li>
     </value>
   </Operation>
 
@@ -29,9 +30,9 @@
     <xpath>Defs/ThingDef[defName="GravEngine"]/comps</xpath>
     <value>
       <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-        
+
       </li>
-      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Breakdownable" />
     </value>
   </Operation>
 

@@ -1,111 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
-	<ResearchProjectDef>
-		<defName>GravshipBasics</defName>
-		<label>gravship basics</label>
-		<description>Allows the construction of basic gravship components.</description>
-		<baseCost>500</baseCost>
+	<ResearchProjectDef Name="VGE_GravtechResearchBase" Abstract="True">
+		<tab>VGE_Gravtech</tab>
 		<techLevel>Spacer</techLevel>
-		<researchViewX>9</researchViewX>
-		<researchViewY>4.5</researchViewY>
 	</ResearchProjectDef>
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="VGE_GravtechResearchBase">
 		<defName>VGE_GravshipWeaponry</defName>
 		<label>gravship weaponry</label>
-		<description>Allows the construction of gravship artillery and other defensive systems.</description>
-		<baseCost>2000</baseCost>
-		<techLevel>Spacer</techLevel>
+		<description>Construct gravship artillery and point defense turrets to fight other ships in orbit or provide bombardments from the sky.</description>
+		<baseCost>200</baseCost>
 		<prerequisites>
-			<li>GravshipBasics</li>
+			<li>StandardGravtech</li>
 		</prerequisites>
-		<researchViewX>10</researchViewX>
-		<researchViewY>4.5</researchViewY>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>1.50</researchViewY>
 	</ResearchProjectDef>
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="VGE_GravtechResearchBase">
 		<defName>VGE_CompactWorkspaces</defName>
 		<label>compact workspaces</label>
 		<description>Unlock smaller variants of workbenches designed for gravships. Compact enough to fit into tight quarters without sacrificing essential functions.</description>
-		<baseCost>2000</baseCost>
-		<techLevel>Spacer</techLevel>
+		<baseCost>200</baseCost>
 		<prerequisites>
-			<li>GravshipBasics</li>
+			<li>StandardGravtech</li>
 		</prerequisites>
-		<researchViewX>11</researchViewX>
-		<researchViewY>4.5</researchViewY>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>2.50</researchViewY>
 	</ResearchProjectDef>
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="VGE_GravtechResearchBase">
 		<defName>VGE_OxygenNetwork</defName>
 		<label>oxygen network</label>
 		<description>Harvest and store oxygen for use on gravships. Unlocks construction of vacsuits and other survival gear needed to operate in vacuum.</description>
-		<baseCost>500</baseCost>
-		<techLevel>Spacer</techLevel>
+		<baseCost>100</baseCost>
 		<prerequisites>
 			<li>BasicGravtech</li>
 		</prerequisites>
-		<researchViewX>12</researchViewX>
-		<researchViewY>4.5</researchViewY>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>2.50</researchViewY>
 	</ResearchProjectDef>
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="VGE_GravtechResearchBase">
 		<defName>VGE_AstrofuelRefining</defName>
 		<label>astrofuel refining</label>
 		<description>Construct astrofuel synthesizers that automatically convert chemfuel into astrofuel for gravship use.</description>
-		<baseCost>500</baseCost>
-		<techLevel>Spacer</techLevel>
+		<baseCost>200</baseCost>
 		<prerequisites>
-			<li>BasicGravtech</li>
+			<li>StandardGravtech</li>
 		</prerequisites>
-		<researchViewX>13</researchViewX>
-		<researchViewY>4.5</researchViewY>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>3.50</researchViewY>
 	</ResearchProjectDef>
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="VGE_GravtechResearchBase">
 		<defName>VGE_GravshipPower</defName>
 		<label>gravship power</label>
-		<description>todo.</description>
-		<baseCost>500</baseCost>
-		<techLevel>Spacer</techLevel>
+		<description>Construct gravship solar panelling, gravcore power cells, and astrofuel generators to supply energy for gravship systems.</description>
+		<baseCost>100</baseCost>
 		<prerequisites>
 			<li>BasicGravtech</li>
 		</prerequisites>
-		<researchViewX>14</researchViewX>
-		<researchViewY>4.5</researchViewY>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>1.50</researchViewY>
 	</ResearchProjectDef>
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="VGE_GravtechResearchBase">
 		<defName>VGE_HeatDissipation</defName>
 		<label>heat dissipation</label>
-		<description>Allows the construction of heat dissipation systems for gravships, including heatsinks and gravheat absorbers to manage thermal buildup during space travel.</description>
-		<baseCost>1500</baseCost>
-		<techLevel>Spacer</techLevel>
+		<description>Harvest structural heat generated during gravship launches and dissipate it safely. Excess heat can be converted into usable power.</description>
+		<baseCost>200</baseCost>
 		<prerequisites>
-			<li>GravshipBasics</li>
+			<li>StandardGravtech</li>
 		</prerequisites>
-		<researchViewX>12</researchViewX>
-		<researchViewY>4.5</researchViewY>
+		<researchViewX>3.00</researchViewX>
+		<researchViewY>4.50</researchViewY>
 	</ResearchProjectDef>
-	<ResearchProjectDef>
+	<ResearchProjectDef ParentName="VGE_GravtechResearchBase">
 		<defName>VGE_GravshipLiving</defName>
 		<label>gravship living</label>
-		<description>This research project is focused on living on a gravship, and will unlock a lot of different improvements that will make living on a gravship easier and more accessible.</description>
-		<baseCost>1500</baseCost>
-		<techLevel>Spacer</techLevel>
+		<description>Build gravship-exclusive furniture such as bunk beds, lockers, and medbay beds to keep crew comfortable and functional in long voyages.</description>
+		<baseCost>100</baseCost>
 		<prerequisites>
-			<li>GravshipBasics</li>
+			<li>BasicGravtech</li>
 		</prerequisites>
-		<researchViewX>15</researchViewX>
-		<researchViewY>4.5</researchViewY>
-	</ResearchProjectDef>
-	<ResearchProjectDef>
-		<defName>VGE_AdvancedGravtech</defName>
-		<label>advanced gravtech</label>
-		<description>Unlock gravhulks, massive gravships capable of supporting entire colonies. Also allows crafting of gravlite panels, essential ultratech material for advanced gravship construction.</description>
-		<baseCost>1500</baseCost>
-		<techLevel>Spacer</techLevel>
-		<prerequisites>
-			<li>VGE_GravshipWeaponry</li>
-			<li>VGE_CompactWorkspaces</li>
-			<li>VGE_HeatDissipation</li>
-			<li>VGE_AstrofuelRefining</li>
-		</prerequisites>
-		<researchViewX>16</researchViewX>
-		<researchViewY>4.5</researchViewY>
+		<researchViewX>1.00</researchViewX>
+		<researchViewY>4.50</researchViewY>
 	</ResearchProjectDef>
 </Defs>

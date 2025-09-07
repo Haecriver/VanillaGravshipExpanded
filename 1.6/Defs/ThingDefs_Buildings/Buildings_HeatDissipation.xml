@@ -16,6 +16,9 @@
         <statBases>
             <Flammability>1.0</Flammability>
         </statBases>
+        <researchPrerequisites>
+            <li>VGE_HeatDissipation</li>
+        </researchPrerequisites>
         <resourcesFractionWhenDeconstructed>0.5</resourcesFractionWhenDeconstructed>
     </ThingDef>
 
@@ -32,7 +35,7 @@
             <WorkToBuild>3260</WorkToBuild>
             <Beauty>-2</Beauty>
             <Mass>30</Mass>
-			<VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
+            <VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
         </statBases>
         <size>(2,2)</size>
         <costList>
@@ -63,10 +66,10 @@
                 <maxSimultaneous>10</maxSimultaneous>
                 <maxDistance>500</maxDistance>
             </li>
-			 <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-       
-			</li>
-			 <li Class="CompProperties_Breakdownable"/>
+            <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+
+            </li>
+            <li Class="CompProperties_Breakdownable" />
         </comps>
     </ThingDef>
 
@@ -83,7 +86,7 @@
             <WorkToBuild>4800</WorkToBuild>
             <Beauty>-6</Beauty>
             <Mass>50</Mass>
-			<VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
+            <VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
         </statBases>
         <size>(3,3)</size>
         <costList>
@@ -114,10 +117,10 @@
                 <maxSimultaneous>6</maxSimultaneous>
                 <maxDistance>500</maxDistance>
             </li>
-			 <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-       
-			</li>
-			 <li Class="CompProperties_Breakdownable"/>
+            <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+
+            </li>
+            <li Class="CompProperties_Breakdownable" />
         </comps>
     </ThingDef>
 
@@ -136,10 +139,9 @@
             <WorkToBuild>5200</WorkToBuild>
             <Beauty>-10</Beauty>
             <Mass>50</Mass>
-			<VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
+            <VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
         </statBases>
         <size>(3,3)</size>
-		
         <costList>
             <Steel>160</Steel>
             <Gold>60</Gold>
@@ -161,10 +163,10 @@
                 <maxSimultaneous>2</maxSimultaneous>
                 <maxDistance>500</maxDistance>
             </li>
-			 <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-       
-			</li>
-			 <li Class="CompProperties_Breakdownable"/>
+            <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+
+            </li>
+            <li Class="CompProperties_Breakdownable" />
         </comps>
     </ThingDef>
 
