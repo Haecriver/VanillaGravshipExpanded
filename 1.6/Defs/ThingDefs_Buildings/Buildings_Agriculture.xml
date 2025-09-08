@@ -24,6 +24,7 @@
 		<pathCost>0</pathCost>
 		<constructEffect>ConstructMetal</constructEffect>
 		<fillPercent>0</fillPercent>
+		 <blockWind>false</blockWind>
 		<canOverlapZones>false</canOverlapZones>
 		<constructionSkillPrerequisite>5</constructionSkillPrerequisite>
 		<statBases>

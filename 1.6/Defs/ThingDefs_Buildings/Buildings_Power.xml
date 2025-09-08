@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ThingDef ParentName="GravshipComponentBase">
+		<defName>VGE_GravcorePowerCoil</defName>
+		<label>gravcore power coil</label>
+		<description>A massive gravtech reactor that channels and amplifies gravitational wave energy into immense electrical output. Its reinforced coils can handle extreme flux, making it one of the most potent power sources available for gravships. Adjacent gravcore power cells will multiply the power output by 15% for each gravcore power cell.</description>
+		<graphicData>
+			<graphicClass>Graphic_Single</graphicClass>
+			<texPath>Things/Structures/Power/GravcorePowerCoil</texPath>
+			<drawSize>(3, 3)</drawSize>
+		</graphicData>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<MaxHitPoints>400</MaxHitPoints>
+			<Flammability>0.3</Flammability>
+			<Beauty>-15</Beauty>
+			<WorkToBuild>12000</WorkToBuild>
+			<Mass>50</Mass>
+			<VGE_GravPowerAdjacency>1</VGE_GravPowerAdjacency>
+			<VGE_MaintenanceSensitivity>3</VGE_MaintenanceSensitivity>
+		</statBases>
+		<size>(3, 3)</size>
+		<constructionSkillPrerequisite>10</constructionSkillPrerequisite>
+		<resourcesFractionWhenDeconstructed>1</resourcesFractionWhenDeconstructed>
+		<fillPercent>0.4</fillPercent>
+		<passability>PassThroughOnly</passability>
+		<pathCost>20</pathCost>
+		<canOverlapZones>false</canOverlapZones>
+		<rotatable>false</rotatable>
+		<designationCategory>Odyssey</designationCategory>
+		<costList>
+			<Gravcore>3</Gravcore>
+			<GravlitePanel>120</GravlitePanel>
+			<ComponentSpacer>5</ComponentSpacer>
+			<Steel>100</Steel>
+		</costList>
+		<researchPrerequisites>
+			<li>AdvancedGravtech</li>
+		</researchPrerequisites>
+		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
+		<comps>
+			<li Class="CompProperties_Power">
+				<compClass>VanillaGravshipExpanded.CompPowerPlantGravcoreAdjacency</compClass>
+				<basePowerConsumption>-3600</basePowerConsumption>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>GravcorePowerCell</li>
+				</linkableFacilities>
+			</li>
+			<li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			<li Class="CompProperties_Breakdownable"/>
+		</comps>
+		<uiOrder>2300</uiOrder>
+	</ThingDef>
+	<ThingDef ParentName="GravshipComponentBase">
+		<defName>VGE_GravshipCapacitor</defName>
+		<label>gravship capacitor</label>
+		<description>Stores high amounts of electricity for later use. Constructed in the gravship substructure, gravship capacitors do not obstruct movement.</description>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<thingClass>VanillaGravshipExpanded.Building_GravCapacitor</thingClass>
+		<graphicData>
+			<texPath>Things/Structures/Agrocell/Agrocell</texPath>
+			<graphicClass>Graphic_Multi</graphicClass>
+			<drawSize>(1,3)</drawSize>
+			<damageData>
+				<cornerTL>Damage/Corner</cornerTL>
+				<cornerTR>Damage/Corner</cornerTR>
+				<cornerBL>Damage/Corner</cornerBL>
+				<cornerBR>Damage/Corner</cornerBR>
+			</damageData>
+		</graphicData>
+		<rotatable>true</rotatable>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>Standable</passability>
+		<pathCost>0</pathCost>
+		<blockWind>false</blockWind>
+		<castEdgeShadows>false</castEdgeShadows>
+		<fillPercent>0</fillPercent>
+		<tickerType>Normal</tickerType>
+		<statBases>
+			<MaxHitPoints>100</MaxHitPoints>
+			<WorkToBuild>1400</WorkToBuild>
+			<Flammability>1.0</Flammability>
+			<Beauty>-15</Beauty>
+			<VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
+		</statBases>
+		<size>(1,3)</size>
+		<building>
+			<destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+		</building>
+		<costList>
+			<Steel>70</Steel>
+			<GravlitePanel>10</GravlitePanel>
+			<ComponentIndustrial>4</ComponentIndustrial>
+		</costList>
+		<comps>
+			<li Class="CompProperties_Battery">
+				<storedEnergyMax>1500</storedEnergyMax>
+				<efficiency>0.5</efficiency>
+				<shortCircuitInRain>true</shortCircuitInRain>
+				<transmitsPower>true</transmitsPower>
+			</li>
+			<li Class="CompProperties_Breakdownable"/>
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
+			<li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+       
+			</li>
+			
+		</comps>
+		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
+		<designationCategory>Odyssey</designationCategory>
+		<uiOrder>2020</uiOrder>
+		<constructEffect>ConstructMetal</constructEffect>
+		<designationHotKey>Misc4</designationHotKey>
+		<canOverlapZones>false</canOverlapZones>
+		<researchPrerequisites>
+			<li>VGE_GravshipPower</li>
+		</researchPrerequisites>
+	</ThingDef>
+</Defs>
