@@ -14,6 +14,7 @@
       <li>VGE_GunnerSubpersonaCore</li>
       <li>VGE_GravtechConsole</li>
       <li>VGE_GiantAstrofuelTank</li>
+      <li>VGE_CopilotConsole</li>
     </value>
   </Operation>
 
@@ -33,7 +34,7 @@
       <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
 
       </li>
-      <li Class="CompProperties_Breakdownable" />
+      <li Class="CompProperties_Breakdownable"/>
     </value>
   </Operation>
 
@@ -41,6 +42,83 @@
     <xpath>Defs/ThingDef[defName="GravEngine"]/statBases</xpath>
     <value>
       <VGE_MaintenanceSensitivity>3</VGE_MaintenanceSensitivity>
+      <WorkToBuild>65400</WorkToBuild>
+    </value>
+  </Operation>
+
+  <!-- Make grav engine a power plant -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/comps</xpath>
+    <value>
+      <li Class="CompProperties_Power">
+        <compClass>VanillaGravshipExpanded.CompPowerPlantGravEngine</compClass>
+        <basePowerConsumption>-4800</basePowerConsumption>
+        <transmitsPower>true</transmitsPower>
+      </li>
+    </value>
+  </Operation>
+
+  <!-- Replace label -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/label/text()</xpath>
+    <value>gravship engine</value>
+  </Operation>
+
+  <!-- Replace description -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/description/text()</xpath>
+    <value>The ultratech heart of a gravship. The grav engine generates lift by inverting and intensifying the effect of gravity in a field around itself. This engine can lift upwards, but does not produce forward thrust. It can't function far from a large gravity well like a planet, so it is useless for interplanetary travel.\n\nWhen launched, anything on substructure that's connected to the grav engine will be transported to a new map.\n\nGlitterworld engineers use gravships to launch orbital platforms and build skyrippers. They require massive and hyper-specialized facilities to produce, making them a rare sight outside of glitterworlds.</value>
+  </Operation>
+
+  <!-- Replace subsbtructure support -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/statBases/SubstructureSupport/text()</xpath>
+    <value>250</value>
+  </Operation>
+
+  <!-- Replace market value -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/statBases/MarketValue/text()</xpath>
+    <value>6700</value>
+  </Operation>
+
+  <!-- Replace market value -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/comps/li[@Class="CompProperties_SubstructureFootprint"]/radius/text()</xpath>
+    <value>11.9</value>
+  </Operation>
+
+  <!-- Give cost to grav engine -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="GravEngine"]</xpath>
+    <value>
+      <costList>
+        <Gravcore>3</Gravcore>
+        <GravlitePanel>120</GravlitePanel>
+        <ComponentSpacer>8</ComponentSpacer>
+        <Steel>180</Steel>
+      </costList>
+    </value>
+  </Operation>
+
+  <!-- Make the engine deconstructible -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/building/deconstructible/text()</xpath>
+    <value>true</value>
+  </Operation>
+
+  <!-- Change grav engine graphic -->
+  <!-- Orb and cooldown graphic are hardcoded, so we need to handle it with C# -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/graphicData/texPath/text()</xpath>
+    <value>Things/Structures/GravEngines/GravEngine/GravEngine</value>
+  </Operation>
+
+  <!-- Give grav engine menu icon -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="GravEngine"]</xpath>
+    <value>
+      <uiIconPath>Things/Structures/GravEngines/GravEngine/GravEngine_MenuIcon</uiIconPath>
     </value>
   </Operation>
 
