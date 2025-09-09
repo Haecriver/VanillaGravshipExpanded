@@ -14,6 +14,11 @@ namespace VanillaGravshipExpanded
                 return;
             }
 
+            if (__instance.Map == null)
+            {
+                return;
+            }
+
             var spaceComp = __instance.Map.GetComponent<SpaceDeterioration_MapComponent>();
             if (spaceComp.IsThingInSpace(__instance))
             {

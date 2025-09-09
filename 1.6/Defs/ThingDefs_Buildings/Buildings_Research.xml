@@ -7,7 +7,7 @@
 		<description>An interface used to analyze gravdata gathered from gravship launches and travel. It draws power directly from the grav engine.</description>
 		<graphicData>
 			<graphicClass>Graphic_Multi</graphicClass>
-			<texPath>Things/Structures/GravtechConsole/GravtechConsole</texPath>
+			<texPath>Things/Structures/GravtechResearchBench/GravtechResearchBench</texPath>
 			<drawSize>(4,2)</drawSize>
 		</graphicData>
 		<costList>

@@ -124,7 +124,7 @@ namespace VanillaGravshipExpanded
             
             thing.TakeDamage(new DamageInfo(DamageDefOf.Deterioration, damage, 0f, -1f, null, null, null, DamageInfo.SourceCategory.ThingOrUnknown));
             
-            if (thing.HitPoints <= 0)
+            if (!thing.Destroyed && thing.HitPoints <= 0)
             {
                 thing.Destroy();
             }
