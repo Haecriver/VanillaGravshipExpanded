@@ -1,0 +1,15 @@
+<loadFolders>
+
+	
+	<v1.6>
+		<li>/</li>
+		<li>1.6</li>
+		
+		
+		<li IfModActive="vanillaexpanded.skills">1.6/Mods/VanillaSkillsExpanded</li>
+	
+		
+	</v1.6>
+</loadFolders>
+
+
