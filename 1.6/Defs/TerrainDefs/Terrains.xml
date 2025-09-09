@@ -124,4 +124,26 @@
 			</LoopTexPaths>
 		</spaceEdgeGraphicData>
 	</TerrainDef>
+	<TerrainDef ParentName="PlatformBase">
+		<defName>VGE_Compressed_Vacstone</defName>
+		<label>compressed vacstone</label>
+		<texturePath>Things/Terrain/CompressedHewnRock/CompressedHewnRock</texturePath>
+		<spaceEdgeGraphicData Inherit="False">
+			<OShapeTexPath>Terrain/Surfaces/OrbitalPlatform/BorderInside/OrbitalPlatformBorderInside_OShape</OShapeTexPath>
+			<UShapeTexPath>Terrain/Surfaces/OrbitalPlatform/BorderInside/OrbitalPlatformBorderInside_UShape</UShapeTexPath>
+			<CornerInnerTexPath>Terrain/Surfaces/OrbitalPlatform/BorderInside/OrbitalPlatformBorderInside_CornerInner</CornerInnerTexPath>
+			<CornerOuterTexPath>Terrain/Surfaces/OrbitalPlatform/BorderInside/OrbitalPlatformBorderInside_CornerOuter</CornerOuterTexPath>
+			<FlatTexPath>Terrain/Surfaces/OrbitalPlatform/BorderInside/OrbitalPlatformBorderInside_Flat</FlatTexPath>
+			<LoopLeftTexPath>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Left</LoopLeftTexPath>
+			<LoopRightTexPath>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Right</LoopRightTexPath>
+			<LoopSingleTexPath>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Single</LoopSingleTexPath>
+			<LoopTexPaths>
+				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop1</li>
+				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop2</li>
+				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop3</li>
+				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop4</li>
+				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop5</li>
+			</LoopTexPaths>
+		</spaceEdgeGraphicData>
+	</TerrainDef>
 </Defs>
