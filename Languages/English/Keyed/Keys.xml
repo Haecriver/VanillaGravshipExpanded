@@ -68,4 +68,5 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_SetDesiredMaintenance>Set desired maintenance</VGE_SetDesiredMaintenance>
     <VGE_SetDesiredMaintenanceDesc>Set the desired maintenance for all gravship components on this gravship. Colonists assigned to construction will maintain the structures if they fall below the set level.</VGE_SetDesiredMaintenanceDesc>
     <VGE_RapidlyDeterioratingInSpace>Rapidly deteriorating due to the vacuum of space.</VGE_RapidlyDeterioratingInSpace>
+    <ConfirmGravEngineLaunch>Are you sure you want to launch?\n\nYou will be given a choice to keep the current map as well as anything not on gravship substructure, but if you choose to discard it, it will be permanently lost.</ConfirmGravEngineLaunch>
 </LanguageData>
