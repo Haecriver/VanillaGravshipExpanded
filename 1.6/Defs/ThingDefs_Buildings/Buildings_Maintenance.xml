@@ -8,7 +8,7 @@
 		<interactionCellIcon>DiningChair</interactionCellIcon>
 		<noRightClickDraftAttack>true</noRightClickDraftAttack>
 		<graphicData>
-			<texPath>Things/Structures/Production/GravshipCookingStove</texPath>
+			<texPath>Things/Structures/EngineeringConsole/EngineeringConsole</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<drawSize>(4,2)</drawSize>
 			<damageData>
