@@ -17,5 +17,6 @@ namespace VanillaGravshipExpanded
         public static FleckDef VGE_MaintenanceSmoke;
         public static ResearchTabDef VGE_Gravtech;
         public static PreceptDef GravshipLaunch, VGE_GravjumperLaunch, VGE_GravhulkLaunch;
+        public static GameConditionDef VGE_SpaceSolarFlare;
     }
 }
