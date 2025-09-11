@@ -31,4 +31,20 @@
 			<li>Orbit</li>
 		</layerWhitelist>
 	</GameConditionDef>
+	
+	<GameConditionDef>
+		<defName>VGE_Comet</defName>
+		<conditionClass>VanillaGravshipExpanded.GameCondition_Comet</conditionClass>
+		<label>comet</label>
+		<description>A massive comet is passing nearby, its brilliant tail lighting up the void around your gravship. The spectacle inspires awe among the crew, raising their spirits until it will fade from view.</description>
+		<endMessage>The comet has passed.</endMessage>
+		<letterText>A massive comet is passing nearby, its brilliant tail lighting up the void around your gravship. The spectacle inspires awe among the crew, raising their spirits until it will fade from view.</letterText>
+		<letterDef>PositiveEvent</letterDef>
+		<canBePermanent>true</canBePermanent>
+		<allowUnderground>false</allowUnderground>
+		
+		<layerWhitelist>
+			<li>Orbit</li>
+		</layerWhitelist>
+	</GameConditionDef>
 </Defs>
