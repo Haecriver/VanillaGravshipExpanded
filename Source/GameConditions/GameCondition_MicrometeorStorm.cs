@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -84,7 +85,7 @@ namespace VanillaGravshipExpanded
 
         private void ApplyMicrometeorDamage(Map map, int tickInterval, int delta)
         {
-            foreach (var building in map.listerBuildings.allBuildingsColonist)
+            foreach (var building in map.listerBuildings.allBuildingsColonist.Concat(map.listerBuildings.allBuildingsNonColonist).ToList())
             {
                 if (building.IsHashIntervalTick(tickInterval, delta) && !building.Position.Roofed(map) && Rand.Chance(0.5f))
                 {
@@ -95,14 +96,14 @@ namespace VanillaGravshipExpanded
                 }
             }
 
-            foreach (var pawn in map.mapPawns.AllPawnsSpawned)
+            foreach (var pawn in map.mapPawns.AllPawnsSpawned.ToList())
             {
                 if (pawn.IsHashIntervalTick(tickInterval, delta) && !pawn.Position.Roofed(map) && Rand.Chance(0.5f))
                 {
-                    var bodyPart = pawn.health.hediffSet.GetNotMissingParts().RandomElementWithFallback();
+                    var bodyPart = pawn.health.hediffSet.GetNotMissingParts().Where(x => x.depth == BodyPartDepth.Outside).RandomElementWithFallback();
                     if (bodyPart != null)
                     {
-                        var dinfo = new DamageInfo(DamageDefOf.Cut, 12f, 99f, -1f, null, bodyPart);
+                        var dinfo = new DamageInfo(DamageDefOf.Cut, 12f, 0f, -1f, null, bodyPart);
                         pawn.TakeDamage(dinfo);
                     }
                 }
