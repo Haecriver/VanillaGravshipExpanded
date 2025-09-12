@@ -14,7 +14,7 @@
 		<worldObjectClass>VanillaGravshipExpanded.IceAsteroidMapParent</worldObjectClass>
 		<description>An ice asteroid that was captured and maneuvered into orbit around the planet during an early colonization effort. Its surface is entirely covered in frozen layers, giving it a reflective, pale appearance unlike most other asteroids.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>ice asteroid</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<nameMaker>VGE_NamerWorldObject_IceAsteroid</nameMaker>
 		<expandingIconTexture>UI/MapIcons/IceAsteroid</expandingIconTexture>
 		<mapGenerator>VGE_IceAsteroid</mapGenerator>
 	</WorldObjectDef>
@@ -22,7 +22,7 @@
 		<defName>VGE_AsteroidCluster</defName>
 		<description>A vacstone asteroid cluster orbiting the planet, consisting of several fragments drifting in close formation. It may have once been a larger body that broke apart, or a group of smaller asteroids captured together by gravity.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>asteroid cluster</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<nameMaker>VGE_NamerWorldObject_AsteroidCluster</nameMaker>
 		<expandingIconTexture>UI/MapIcons/AsteroidCluster</expandingIconTexture>
 		<mapGenerator>VGE_AsteroidCluster</mapGenerator>
 	</WorldObjectDef>
@@ -30,7 +30,7 @@
 		<defName>VGE_AsteroidField</defName>
 		<description>A dense cluster of countless small vacstone asteroids and rock fragments, slowly drifting together in a loose orbit. While too small to host major mining operations, the field poses a notable navigational challenge.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>asteroid field</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<nameMaker>VGE_NamerWorldObject_AsteroidField</nameMaker>
 		<expandingIconTexture>UI/MapIcons/AsteroidField</expandingIconTexture>
 		<mapGenerator>VGE_AsteroidField</mapGenerator>
 	</WorldObjectDef>
@@ -38,7 +38,7 @@
 		<defName>VGE_PorousAsteroid</defName>
 		<description>A vacstone asteroid riddled with countless cavities and hollow chambers, formed by ages of impacts and erosion. Its honeycombed structure makes it fragile and unstable, with many of its tunnels collapsing into each other over time.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>porous asteroid</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<nameMaker>VGE_NamerWorldObject_PorousAsteroid</nameMaker>
 		<expandingIconTexture>UI/MapIcons/PorousAsteroid</expandingIconTexture>
 		<mapGenerator>VGE_PorousAsteroid</mapGenerator>
 	</WorldObjectDef>
@@ -46,7 +46,7 @@
 		<defName>VGE_GiantAsteroid</defName>
 		<description>A massive vacstone asteroid, far larger than the typical fragments found in orbit. Its sheer bulk makes it a landmark in space, dominating its surroundings with its presence.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>giant asteroid</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<nameMaker>VGE_NamerWorldObject_GiantAsteroid</nameMaker>
 		<expandingIconTexture>UI/MapIcons/GiantAsteroid</expandingIconTexture>
 		<mapGenerator>VGE_GiantAsteroid</mapGenerator>
 	</WorldObjectDef>
@@ -54,7 +54,7 @@
 		<defName>VGE_ShatteredAsteroid</defName>
 		<description>A vacstone asteroid broken apart by a massive impact. Its pieces remain loosely bound, forming a jagged and uneven shape with wide gaps between its fragments.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>giant asteroid</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<nameMaker>VGE_NamerWorldObject_ShatteredAsteroid</nameMaker>
 		<expandingIconTexture>UI/MapIcons/ShatteredAsteroid</expandingIconTexture>
 		<mapGenerator>VGE_ShatteredAsteroid</mapGenerator>
 	</WorldObjectDef>
@@ -62,7 +62,7 @@
 		<defName>VGE_DenseAsteroid</defName>
 		<description>A vacstone asteroid so tightly packed and solid that it leaves little usable surface. Its sheer density makes it difficult to find safe or practical landing zones.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>dense asteroid</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<nameMaker>VGE_NamerWorldObject_DenseAsteroid</nameMaker>
 		<expandingIconTexture>UI/MapIcons/DenseAsteroid</expandingIconTexture>
 		<mapGenerator>VGE_DenseAsteroid</mapGenerator>
 	</WorldObjectDef>
@@ -70,7 +70,7 @@
 		<defName>VGE_SmallAsteroid</defName>
 		<description>A very small vacstone asteroid drifting through orbit. Asteroids of this size are often unstable and eventually fall as meteors, striking surfaces below.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>small asteroid</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		<nameMaker>VGE_NamerWorldObject_SmallAsteroid</nameMaker>
 		<expandingIconTexture>UI/MapIcons/SmallAsteroid</expandingIconTexture>
 		<mapGenerator>VGE_SmallAsteroid</mapGenerator>
 	</WorldObjectDef>
@@ -78,7 +78,7 @@
 		<defName>VGE_AsteroidWithRuins</defName>
 		<description>A vacstone asteroid with the shattered remains of an old orbital station clinging to its surface. Twisted beams, broken modules, and drifting debris hint at a structure long abandoned. Most of the station has collapsed into the asteroid itself, leaving only fragments scattered across its exterior.\n\nThis location can be reached using transport pods, shuttles, or a gravship.</description>
 		<label>asteroid with ruins</label>
-		<nameMaker>NamerWorldObject_AsteroidBasic</nameMaker>
+		
 		<expandingIconTexture>UI/MapIcons/AsteroidWithRuins</expandingIconTexture>
 		<mapGenerator>VGE_AsteroidWithRuins</mapGenerator>
 	</WorldObjectDef>
