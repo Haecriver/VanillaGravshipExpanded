@@ -19,5 +19,6 @@ namespace VanillaGravshipExpanded
         public static PreceptDef GravshipLaunch, VGE_GravjumperLaunch, VGE_GravhulkLaunch;
         public static GameConditionDef VGE_SpaceSolarFlare, VGE_GravitationalAnomaly, VGE_DustCloud;
         public static ThingDef VGE_SmallDebris, VGE_MediumDebris, VGE_LargeDebris, VGE_SmallAsteroid, VGE_MediumAsteroid, VGE_LargeAsteroid;
+        public static WeatherDef VGE_ToxicDustCloud;
     }
 }

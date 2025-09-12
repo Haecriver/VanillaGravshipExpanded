@@ -101,10 +101,26 @@
 		<conditionClass>VanillaGravshipExpanded.GameCondition_DustCloud</conditionClass>
 		<label>dust cloud</label>
 		<description>A dense cosmic dust cloud has drifted across your sector, shrouding your gravship in particulate haze. Visibility is almost zero, and targeting systems are struggling to lock onto anything. The dust will eventually clear as the cloud drifts away.</description>
-		<endMessage>The dust cloud has dispersed.</endMessage>
+		<endMessage>The dust cloud started to disperse.</endMessage>
 		<letterText>A dense cosmic dust cloud has drifted across your sector, shrouding your gravship in particulate haze. Visibility is almost zero, and targeting systems are struggling to lock onto anything. The dust will eventually clear as the cloud drifts away.</letterText>
 		<letterDef>NegativeEvent</letterDef>
 		<weatherDef>VGE_DustCloud</weatherDef>
+		<canBePermanent>true</canBePermanent>
+		<allowUnderground>false</allowUnderground>
+		<preventShuttleLaunch>true</preventShuttleLaunch>
+		<layerWhitelist>
+			<li>Orbit</li>
+		</layerWhitelist>
+	</GameConditionDef>
+	<GameConditionDef>
+		<defName>VGE_ToxicDustCloud</defName>
+		<conditionClass>VanillaGravshipExpanded.GameCondition_ToxicDustCloud</conditionClass>
+		<label>toxic dust cloud</label>
+		<description>A drifting cloud of highly toxic cosmic dust has enveloped your gravship. Microscopic particulates are seeping into every exposed space, corroding surfaces and poisoning the crew. The dust cloud will persist only briefly, but its effects are immediate and dangerous.</description>
+		<endMessage>The toxic dust cloud started to disperse.</endMessage>
+		<letterText>A drifting cloud of highly toxic cosmic dust has enveloped your gravship. Microscopic particulates are seeping into every exposed space, corroding surfaces and poisoning the crew. The dust cloud will persist only briefly, but its effects are immediate and dangerous.</letterText>
+		<letterDef>ThreatBig</letterDef>
+		<weatherDef>VGE_ToxicDustCloud</weatherDef>
 		<canBePermanent>true</canBePermanent>
 		<allowUnderground>false</allowUnderground>
 		<preventShuttleLaunch>true</preventShuttleLaunch>
