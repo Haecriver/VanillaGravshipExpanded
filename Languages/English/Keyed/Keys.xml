@@ -96,5 +96,6 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_ConvertGravdataDesc>Convert stored gravdata into points towards the chosen non-gravtech research project. Conversion rate is one to one.</VGE_ConvertGravdataDesc>
     <VGE_NoNonGravtechProjectSelected>No non-gravtech research project selected.</VGE_NoNonGravtechProjectSelected>
     <VGE_ConvertedGravdataToResearch>Converted {0} gravdata to research points for {1}.</VGE_ConvertedGravdataToResearch>
-
+    <VGE_EscapePodCrash>Escape pod crash</VGE_EscapePodCrash>
+    <VGE_EscapePodCrashDesc>A damaged escape pod has crashed on the map. It can be hacked open to reveal what's inside.</VGE_EscapePodCrashDesc>
 </LanguageData>

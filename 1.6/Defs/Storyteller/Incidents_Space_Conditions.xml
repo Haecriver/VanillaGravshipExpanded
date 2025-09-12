@@ -141,23 +141,41 @@
     </layerWhitelist>
   </IncidentDef>
   <IncidentDef>
-      <defName>VGE_ToxicDustCloud</defName>
-      <label>toxic dust cloud</label>
-      <category>Misc</category>
-      <targetTags>
-        <li>Map_PlayerHome</li>
-        <li>Map_Misc</li>
-      </targetTags>
-      <workerClass>IncidentWorker_MakeGameCondition</workerClass>
-      <gameCondition>VGE_ToxicDustCloud</gameCondition>
-      <letterLabel>Toxic dust cloud</letterLabel>
-      <letterDef>ThreatBig</letterDef>
-      <baseChance>0.8</baseChance>
-      <minRefireDays>20</minRefireDays>
-      <durationDays>0.5~2.5</durationDays>
-      <layerWhitelist>
-        <li>Orbit</li>
-      </layerWhitelist>
+    <defName>VGE_ToxicDustCloud</defName>
+    <label>toxic dust cloud</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+      <li>Map_Misc</li>
+    </targetTags>
+    <workerClass>IncidentWorker_MakeGameCondition</workerClass>
+    <gameCondition>VGE_ToxicDustCloud</gameCondition>
+    <letterLabel>Toxic dust cloud</letterLabel>
+    <letterDef>ThreatBig</letterDef>
+    <baseChance>0.8</baseChance>
+    <minRefireDays>20</minRefireDays>
+    <durationDays>0.5~2.5</durationDays>
+    <layerWhitelist>
+      <li>Orbit</li>
+    </layerWhitelist>
   </IncidentDef>
- 
+
+  <IncidentDef>
+    <defName>VGE_EscapePodCrash</defName>
+    <label>escape pod crash</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+      <li>Map_Misc</li>
+    </targetTags>
+    <workerClass>VanillaGravshipExpanded.IncidentWorker_EscapePodCrash</workerClass>
+    <letterLabel>Escape pod crash</letterLabel>
+    <letterDef>NegativeEvent</letterDef>
+    <baseChance>0.8</baseChance>
+    <minRefireDays>15</minRefireDays>
+    <layerWhitelist>
+      <li>Orbit</li>
+    </layerWhitelist>
+  </IncidentDef>
+
 </Defs>
