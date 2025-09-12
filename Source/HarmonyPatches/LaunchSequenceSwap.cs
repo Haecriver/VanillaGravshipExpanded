@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -118,6 +118,11 @@ namespace VanillaGravshipExpanded
             var launchInfo = engine.launchInfo;
             LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo] = engine.Map.Tile;
             Log.Message($"[Gravdata] Launch source tile set to: {engine.Map.Tile}");
+            if (Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsGravliftLaunch)
+            {
+                LaunchInfo_ExposeData_Patch.isGravliftLaunch[launchInfo] = true;
+                Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsGravliftLaunch = false;
+            }
             RememberResearcher(jobRitual);
         }
 
@@ -165,11 +170,20 @@ namespace VanillaGravshipExpanded
     public static class Dialog_BeginRitual_ShowRitualBeginWindow_Patch
     {
         public static GravshipLaunchState state;
+        public static bool IsGravliftLaunch = false;
         public static bool Prefix(Precept_Ritual __instance, TargetInfo targetInfo, RitualObligation forObligation = null, Pawn selectedPawn = null, Dictionary<string, Pawn> forcedForRole = null)
         {
             if (__instance.def.IsGravshipLaunch())
             {
-                if (state is null)
+                if (IsGravliftLaunch)
+                {
+                    int currentTileId = targetInfo.Map.Tile;
+                    PlanetLayer orbitLayer = Find.WorldGrid.Orbit;
+                    PlanetTile orbitTile = orbitLayer.GetClosestTile_NewTemp(currentTileId);
+                    SettlementProximityGoodwillUtility_CheckConfirmSettle_Patch.targetTile = orbitTile;
+                    return true;
+                }
+                else if (state is null)
                 {
                     var comp = targetInfo.Thing.TryGetComp<CompPilotConsole>();
                     state = new(__instance, targetInfo, forObligation, selectedPawn, forcedForRole, PlanetTile.Invalid);

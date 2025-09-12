@@ -141,4 +141,45 @@
 			<li>GravshipUpgrade</li>
 		</tradeTags>
 	</ThingDef>
+	<ThingDef ParentName="GravshipComponentBase">
+		<defName>VGE_Gravlift</defName>
+		<label>gravlift</label>
+		<description>A complex vertical launch and stabilization platform integrated into the gravship's core structure. The gravlift provides the immense thrust required for vertical takeoff from planetary surfaces and stabilizes orbital insertion, allowing the gravship to remain suspended in space.</description>
+		<thingClass>VanillaGravshipExpanded.Building_Gravlift</thingClass>
+		<tickerType>Normal</tickerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
+		<graphicData>
+			<texPath>Things/Structures/Gravlift/Gravlift</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(2, 2)</drawSize>
+		</graphicData>
+		<statBases>
+			<MaxHitPoints>200</MaxHitPoints>
+			<Flammability>0.3</Flammability>
+			<Beauty>-10</Beauty>
+			<Mass>40</Mass>
+		</statBases>
+		<size>(2, 2)</size>
+		<rotatable>false</rotatable>
+		<fillPercent>0.4</fillPercent>
+		<passability>PassThroughOnly</passability>
+		<pathCost>20</pathCost>
+		<canOverlapZones>false</canOverlapZones>
+		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
+		<costList>
+			<Gravcore>1</Gravcore>
+			<GravlitePanel>60</GravlitePanel>
+			<ComponentSpacer>4</ComponentSpacer>
+		</costList>
+		<comps>
+			<li Class="CompProperties_GravshipFacility">
+				<requiresLOS>false</requiresLOS>
+				<maxSimultaneous>1</maxSimultaneous>
+				<maxDistance>500</maxDistance>
+			</li>
+		</comps>
+		<tradeTags>
+			<li>GravshipUpgrade</li>
+		</tradeTags>
+	</ThingDef>
 </Defs>

@@ -1,3 +1,4 @@
+using System.Linq;
 using HarmonyLib;
 using PipeSystem;
 using RimWorld;
@@ -6,6 +7,7 @@ using UnityEngine;
 using Verse;
 
 namespace VanillaGravshipExpanded;
+
 [HotSwappable]
 [HarmonyPatch(typeof(Building_GravEngine), nameof(Building_GravEngine.ConsumeFuel))]
 public static class Building_GravEngine_ConsumeFuel_Patch
@@ -17,6 +19,12 @@ public static class Building_GravEngine_ConsumeFuel_Patch
         // Grab cached values
         if (!GravshipUtility.TryGetPathFuelCost(__instance.Map.Tile, tile, out var cost, out _))
             return;
+
+        if (LaunchInfo_ExposeData_Patch.isGravliftLaunch.TryGetValue(__instance.launchInfo, out bool isLiftLaunch) && isLiftLaunch)
+        {
+            cost = 20f;
+            Log.Message("[VGE] Overriding fuel cost for gravlift launch. Using cost: " + cost);
+        }
 
         // Divide cost by total fuel (cached before vanilla code started lowering it) to get a ratio of fuel we'll need to set each fuel tank to
         var ratio = cost / __state;
