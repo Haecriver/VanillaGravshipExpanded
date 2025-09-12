@@ -74,6 +74,7 @@
 			</damageData>
 		</graphicData>
 		<rotatable>true</rotatable>
+		<uiIconScale>0.25</uiIconScale>
 		<altitudeLayer>Building</altitudeLayer>
 		<passability>Standable</passability>
 		<pathCost>0</pathCost>
@@ -99,7 +100,7 @@
 			<ComponentIndustrial>4</ComponentIndustrial>
 		</costList>
 		<comps>
-			<li Class="CompProperties_Battery">
+			<li Class="VanillaGravshipExpanded.CompProperties_VariableEfficiencyBattery">
 				<storedEnergyMax>1500</storedEnergyMax>
 				<efficiency>0.5</efficiency>
 				<shortCircuitInRain>true</shortCircuitInRain>
@@ -114,6 +115,11 @@
 			</li>
 			<li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
        
+			</li>
+			<li Class="CompProperties_AffectedByFacilities">
+				<linkableFacilities>
+					<li>VGE_CapacitorHarmonizer</li>
+				</linkableFacilities>
 			</li>
 		</comps>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>

@@ -33,8 +33,12 @@
 		<showIfUndefined>false</showIfUndefined>
 		<displayPriorityInCategory>3101</displayPriorityInCategory>
 		<parts>
+
 			<li Class="VanillaGravshipExpanded.StatPart_EngineeringConsole" />
 			<li Class="VanillaGravshipExpanded.StatPart_ToxicDustCloud" />
+
+			<li Class="VanillaGravshipExpanded.StatPart_MaintenanceHub"/>
+
 		</parts>
 	</StatDef>
 	<StatDef>
