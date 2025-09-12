@@ -92,7 +92,7 @@ namespace VanillaGravshipExpanded
             var verb = launcher.AttackVerb;
             var baseMissRadius = verb.verbProps.ForcedMissRadius;
             var distance = GravshipHelper.GetDistance(launcher.Map.Tile, target.Tile);
-            var worldMultiplier = 1.0f;
+            var worldMultiplier = 1f;
             if (distance > 49)
             {
                 worldMultiplier = 2.0f;
@@ -105,9 +105,14 @@ namespace VanillaGravshipExpanded
             {
                 worldMultiplier = 1.2f;
             }
+            var mapMultiplier = 1f;
+            if (launcher.Map.gameConditionManager.ConditionIsActive(VGEDefOf.VGE_DustCloud))
+            {
+                mapMultiplier = 3f;
+            }
 
             var targetingStat = launcher.linkedTerminal?.GravshipTargeting ?? 1f;
-            var forcedMiss = (baseMissRadius * worldMultiplier) / GetTargetingMultiplier(targetingStat);
+            var forcedMiss = (baseMissRadius * worldMultiplier * mapMultiplier) / GetTargetingMultiplier(targetingStat);
             return forcedMiss;
         }
 

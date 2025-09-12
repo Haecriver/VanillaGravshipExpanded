@@ -55,7 +55,7 @@
 		<description>A micrometeor storm is pelting the area with tiny, high-velocity debris. Exposed structures and people are slowly damaged by the constant bombardment.\n\nThe storm is expected to last about a day.</description>
 		<endMessage>The micrometeor storm has ended.</endMessage>
 		<letterText>A micrometeor storm is pelting the area with tiny, high-velocity debris. Exposed structures and people are slowly damaged by the constant bombardment.\n\nThe storm is expected to last about a day.</letterText>
-		<letterDef>NegativeEvent</letterDef>
+		<letterDef>ThreatBig</letterDef>
 		<canBePermanent>true</canBePermanent>
 		<allowUnderground>false</allowUnderground>
 		<preventShuttleLaunch>true</preventShuttleLaunch>
@@ -71,7 +71,7 @@
 		<description>A drifting cloud of ancient wreckage has crossed our flight path. Pieces of metal and scrap hurtle past the ship. Some will miss, others might not.\n\nThe debris will pass us by in about 12 hours.</description>
 		<endMessage>The space debris has passed.</endMessage>
 		<letterText>A drifting cloud of ancient wreckage has crossed our flight path. Pieces of metal and scrap hurtle past the ship. Some will miss, others might not.\n\nThe debris will pass us by in about 12 hours.</letterText>
-		<letterDef>NegativeEvent</letterDef>
+		<letterDef>ThreatBig</letterDef>
 		<canBePermanent>true</canBePermanent>
 		<allowUnderground>false</allowUnderground>
 		<preventShuttleLaunch>true</preventShuttleLaunch>
@@ -87,7 +87,24 @@
 		<description>An asteroid shower has crossed into your gravship’s sector. Countless fragments of vacstone streak across the void, some slamming into the hull with explosive force. Most will burn away or miss, but not all.</description>
 		<endMessage>The asteroid shower has passed.</endMessage>
 		<letterText>An asteroid shower has crossed into your gravship’s sector. Countless fragments of vacstone streak across the void, some slamming into the hull with explosive force. Most will burn away or miss, but not all.</letterText>
+		<letterDef>ThreatBig</letterDef>
+		<canBePermanent>true</canBePermanent>
+		<allowUnderground>false</allowUnderground>
+		<preventShuttleLaunch>true</preventShuttleLaunch>
+		<layerWhitelist>
+			<li>Orbit</li>
+		</layerWhitelist>
+	</GameConditionDef>
+
+	<GameConditionDef>
+		<defName>VGE_DustCloud</defName>
+		<conditionClass>VanillaGravshipExpanded.GameCondition_DustCloud</conditionClass>
+		<label>dust cloud</label>
+		<description>A dense cosmic dust cloud has drifted across your sector, shrouding your gravship in particulate haze. Visibility is almost zero, and targeting systems are struggling to lock onto anything. The dust will eventually clear as the cloud drifts away.</description>
+		<endMessage>The dust cloud has dispersed.</endMessage>
+		<letterText>A dense cosmic dust cloud has drifted across your sector, shrouding your gravship in particulate haze. Visibility is almost zero, and targeting systems are struggling to lock onto anything. The dust will eventually clear as the cloud drifts away.</letterText>
 		<letterDef>NegativeEvent</letterDef>
+		<weatherDef>VGE_DustCloud</weatherDef>
 		<canBePermanent>true</canBePermanent>
 		<allowUnderground>false</allowUnderground>
 		<preventShuttleLaunch>true</preventShuttleLaunch>

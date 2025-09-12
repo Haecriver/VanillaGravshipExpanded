@@ -121,4 +121,24 @@
     </layerWhitelist>
   </IncidentDef>
 
+  <IncidentDef>
+    <defName>VGE_DustCloud</defName>
+    <label>dust cloud</label>
+    <category>Misc</category>
+    <targetTags>
+      <li>Map_PlayerHome</li>
+      <li>Map_Misc</li>
+    </targetTags>
+    <workerClass>IncidentWorker_MakeGameCondition</workerClass>
+    <gameCondition>VGE_DustCloud</gameCondition>
+    <letterLabel>Dust cloud</letterLabel>
+    <letterDef>NegativeEvent</letterDef>
+    <baseChance>1.0</baseChance>
+    <minRefireDays>15</minRefireDays>
+    <durationDays>0.5~1.5</durationDays>
+    <layerWhitelist>
+      <li>Orbit</li>
+    </layerWhitelist>
+  </IncidentDef>
+
 </Defs>
