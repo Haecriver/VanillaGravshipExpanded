@@ -6,8 +6,16 @@ namespace VanillaGravshipExpanded;
 
 // Inherit from vanilla GravshipLaunch in case some mods care about that. It also handles CanUseTargetInternal method.
 // As opposed to the vanilla class, we require this obligation's Def to specify buildings in thingDefs list.
-public class RitualObligationTargetWorker_GravshipLaunchBase : RitualObligationTargetWorker_GravshipLaunch
+public class RitualObligationTargetWorker_GravshipLaunchSpecificConsole : RitualObligationTargetWorker_GravshipLaunch
 {
+    public RitualObligationTargetWorker_GravshipLaunchSpecificConsole()
+    {
+    }
+
+    public RitualObligationTargetWorker_GravshipLaunchSpecificConsole(RitualObligationTargetFilterDef def) : base(def)
+    {
+    }
+
     public override IEnumerable<TargetInfo> GetTargets(RitualObligation obligation, Map map)
     {
         foreach (var targetDef in def.thingDefs)
@@ -18,6 +26,14 @@ public class RitualObligationTargetWorker_GravshipLaunchBase : RitualObligationT
                     yield return thing;
             }
         }
+    }
+
+    public override RitualTargetUseReport CanUseTargetInternal(TargetInfo target, RitualObligation obligation)
+    {
+        if (!target.HasThing || !def.thingDefs.Contains(target.Thing.def))
+            return false;
+
+        return base.CanUseTargetInternal(target, obligation);
     }
 
     public override IEnumerable<string> GetTargetInfos(RitualObligation obligation)

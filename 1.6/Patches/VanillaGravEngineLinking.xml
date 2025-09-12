@@ -128,4 +128,12 @@
     </value>
   </Operation>
 
+  <!-- Give grav engine designation category -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="GravEngine"]</xpath>
+    <value>
+      <designationCategory>Odyssey</designationCategory>
+    </value>
+  </Operation>
+
 </Patch>

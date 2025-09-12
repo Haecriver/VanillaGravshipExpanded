@@ -41,4 +41,20 @@
     <value>VanillaGravshipExpanded.RitualPosition_CopilotWithConsole</value>
   </Operation>
 
+  <!-- Replace vanilla ritual obligation with our own, which targets specific consoles only -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/RitualObligationTargetFilterDef[defName="GravshipLaunch"]/workerClass/text()</xpath>
+    <value>VanillaGravshipExpanded.RitualObligationTargetWorker_GravshipLaunchSpecificConsole</value>
+  </Operation>
+
+  <!-- Specify that we're specifically targeting the pilot console -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/RitualObligationTargetFilterDef[defName="GravshipLaunch"]</xpath>
+    <value>
+      <thingDefs>
+        <li>PilotConsole</li>
+      </thingDefs>
+    </value>
+  </Operation>
+
 </Patch>
