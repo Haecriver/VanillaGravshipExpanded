@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using PipeSystem;
@@ -27,15 +28,25 @@ public static class Building_GravEngine_ConsumeFuel_Patch
         }
 
         // Divide cost by total fuel (cached before vanilla code started lowering it) to get a ratio of fuel we'll need to set each fuel tank to
+        LaunchInfo_ExposeData_Patch.lastCost[__instance.launchInfo] = cost;
         var ratio = cost / __state;
+        
+        // Create the fuel spent data directly
+        var fuelSpentData = new FuelSpentData();
         foreach (var comp in __instance.GravshipComponents)
         {
             if (comp.Props.providesFuel && comp.CanBeActive)
             {
                 var storage = comp.parent.GetComp<CompResourceStorage>();
-                storage?.DrawResource(storage.AmountStored * ratio);
+                if (storage == null)
+                    continue;
+                var toSpend = storage.AmountStored * ratio;
+                fuelSpentData.fuelData[storage.parent] = toSpend;
+                storage.DrawResource(toSpend);
             }
         }
+        
+        LaunchInfo_ExposeData_Patch.fuelSpentPerTank[__instance.launchInfo] = fuelSpentData;
 
         var heatManager = __instance.GetComp<CompHeatManager>();
         heatManager.AddHeat(cost);

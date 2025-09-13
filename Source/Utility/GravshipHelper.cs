@@ -11,6 +11,12 @@ namespace VanillaGravshipExpanded
     [StaticConstructorOnStartup]
     public static class GravshipHelper
     {
+        private static readonly SimpleCurve LaunchBoonChanceFromQualityCurve = new SimpleCurve
+        {
+            new CurvePoint(0f, 0f),
+            new CurvePoint(0.5f, 0.03f),
+            new CurvePoint(1f, 0.3f)
+        };
         public static readonly Material TileMaterial = MaterialPool.MatFrom("Things/Terrain/Substructure/SubscaffoldingTile", ShaderDatabase.Cutout);
         public static readonly Material MaskOverlayMaterial = SolidColorMaterials.NewSolidColorMaterial(new Color(1f, 1f, 0f), ShaderDatabase.TransparentPostLight);
         public static void AddScaffoldQuad(LayerSubMesh subMesh, IntVec3 cell, float y)
@@ -109,6 +115,11 @@ namespace VanillaGravshipExpanded
             return ritual == PreceptDefOf.GravshipLaunch ||
                    ritual == VGEDefOf.VGE_GravjumperLaunch ||
                    ritual == VGEDefOf.VGE_GravhulkLaunch;
+        }
+        
+        public static float LaunchBoonChanceFromQuality(float quality)
+        {
+            return LaunchBoonChanceFromQualityCurve.Evaluate(quality);
         }
     }
 }

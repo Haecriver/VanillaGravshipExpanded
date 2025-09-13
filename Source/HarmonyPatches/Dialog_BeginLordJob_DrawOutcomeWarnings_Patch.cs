@@ -44,6 +44,10 @@ namespace VanillaGravshipExpanded
                     var gravdataInfo = "VGE_GravdataYieldInfo".Translate(gravdataYield);
                     outcome.description += " " + gravdataInfo;
 
+                    float boonChance = GravshipHelper.LaunchBoonChanceFromQuality(quality);
+                    var boonInfo = "VGE_LaunchBoonChanceInfo".Translate((boonChance * 100).ToString("F1"));
+                    outcome.description += "\n\n" + boonInfo;
+
                     outcome.description += "\n\n" + "DEV: " + $"Distance: {distanceTravelled}, Quality: {quality}, Researcher: {researcherPawn?.Name}, ResearchStat: {researcherPawn?.GetStatValue(VGEDefOf.VGE_GravshipResearch)}, YieldMultiplier: {GravdataUtility.CalculateYieldMultiplier(engine)}\n";
                 }
             }

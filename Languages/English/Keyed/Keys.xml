@@ -81,8 +81,8 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_Maintain>Maintain part</VGE_Maintain>
     <VGE_Alert_LowMaintenance>Gravship maintenance low</VGE_Alert_LowMaintenance>
     <VGE_Alert_LowMaintenance_Desc>Some gravship components have low maintenance. This can result in negative launch outcomes and eventual break downs. Consider assigning a colonist to maintain them. Gravship components with low maintenance:\n\n {0}</VGE_Alert_LowMaintenance_Desc>
-	<VGE_StatsReport_EngineeringConsole>Engineering console present</VGE_StatsReport_EngineeringConsole>
-	<VGE_StatsReport_MaintenanceHubs>Maintenance hubs present</VGE_StatsReport_MaintenanceHubs>
+    <VGE_StatsReport_EngineeringConsole>Engineering console present</VGE_StatsReport_EngineeringConsole>
+    <VGE_StatsReport_MaintenanceHubs>Maintenance hubs present</VGE_StatsReport_MaintenanceHubs>
 
     <VGE_SetDesiredMaintenance>Set desired maintenance</VGE_SetDesiredMaintenance>
     <VGE_SetDesiredMaintenanceDesc>Set the desired maintenance for all gravship components on this gravship. Colonists assigned to construction will maintain the structures if they fall below the set level.</VGE_SetDesiredMaintenanceDesc>
@@ -90,6 +90,8 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <!-- Gravdata -->
     <VGE_GravdataYieldInfo>Estimated gravdata yield: {0}</VGE_GravdataYieldInfo>
     <VGE_NoGravtechProjectSelected>No gravtech research project selected. Launching will not yield any gravdata.</VGE_NoGravtechProjectSelected>
+    <VGE_LaunchBoonChanceInfo>With the current predictions, there is a {0}% chance for a positive boon to happen.</VGE_LaunchBoonChanceInfo>
+    <VGE_LaunchBoonOutcomeChanceLetterExtra>Based on the gravship's launch, there was a {0_percentage} chance of a positive outcome.</VGE_LaunchBoonOutcomeChanceLetterExtra>
     <VGE_GravdataStored>Gravdata stored: {0}</VGE_GravdataStored>
     <VGE_GravdataStoredInfo>Stored gravdata will automatically be applied to the selected gravtech research project on next landing.</VGE_GravdataStoredInfo>
     <VGE_ConvertGravdata>Convert gravdata</VGE_ConvertGravdata>
@@ -98,9 +100,9 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_ConvertedGravdataToResearch>Converted {0} gravdata to research points for {1}.</VGE_ConvertedGravdataToResearch>
     <VGE_EscapePodCrash>Escape pod crash</VGE_EscapePodCrash>
     <VGE_EscapePodCrashDesc>A damaged escape pod has crashed on the map. It can be hacked open to reveal what's inside.</VGE_EscapePodCrashDesc>
-    
+
     <!-- Gravlift -->
     <VGE_LaunchToOrbit>Launch to orbit</VGE_LaunchToOrbit>
     <VGE_LaunchToOrbitDesc>Launch the gravship directly upwards and stabilize it in orbit. This is still considered a gravship journey and the grav engine will enter cooldown, potentially leaving you stranded in orbit.</VGE_LaunchToOrbitDesc>
-    <VGE_CantLaunchAlreadyInOrbit>Can't launch to orbit: Already in orbit.</VGE_CantLaunchAlreadyInOrbit>
+    <VGE_CantLaunchAlreadyInOrbit>Can't use: already in orbit.</VGE_CantLaunchAlreadyInOrbit>
 </LanguageData>

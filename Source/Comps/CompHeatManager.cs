@@ -14,6 +14,7 @@ namespace VanillaGravshipExpanded
         }
     }
 
+    [HotSwappable]
     public class CompHeatManager : ThingComp
     {
         public CompProperties_HeatManager Props => props as CompProperties_HeatManager;
@@ -34,6 +35,7 @@ namespace VanillaGravshipExpanded
         public void AddHeat(float amount)
         {
             heatUnits += amount;
+            Log.Message("[VGE] Added " + amount + " heat units to grav engine. Total: " + heatUnits);
             if (heatUnits > 0)
             {
                 DistributeHeat();
@@ -118,7 +120,10 @@ namespace VanillaGravshipExpanded
             foreach (var room in cachedShipRooms)
             {
                 float roomHeat = heatPerCell * room.CellCount;
+                Log.Message("[VGE] about to push  " + roomHeat + " heat to room " + room.ID
+                 + " - room temperature is " + room.Temperature + " room cells: " + room.CellCount);
                 room.PushHeat(roomHeat);
+                Log.Message("[VGE] Pushed " + roomHeat + " heat to room " + room.ID + " - room temperature is " + room.Temperature + " room cells: " + room.CellCount);
             }
             return true;
         }
