@@ -75,7 +75,7 @@
 		</graphicData>
 		<rotatable>true</rotatable>
 		<uiIconScale>0.25</uiIconScale>
-		<altitudeLayer>Building</altitudeLayer>
+		<altitudeLayer>FloorEmplacement</altitudeLayer>
 		<passability>Standable</passability>
 		<pathCost>0</pathCost>
 		<blockWind>false</blockWind>
