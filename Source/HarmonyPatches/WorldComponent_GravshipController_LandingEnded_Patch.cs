@@ -46,10 +46,11 @@ namespace VanillaGravshipExpanded
             bool negateMaintenance = false;
             int distanceTravelled = 0;
             var gravship = __state.gravship;
-            ApplyGravDataYield(gravship, out distanceTravelled);                     
+            ApplyGravDataYield(gravship, out distanceTravelled);
             TryTriggerLaunchBoon(gravship, out negateMaintenance);
-            if (!negateMaintenance) {
-                CalculateMaintenanceLoss(gravship, distanceTravelled,1);
+            if (!negateMaintenance)
+            {
+                CalculateMaintenanceLoss(gravship, distanceTravelled, 1);
             }
             gravdataCorruptionOccurred[gravship.Engine] = false;
             foreach (var kvp in __state.outcomes)
@@ -64,7 +65,7 @@ namespace VanillaGravshipExpanded
             var launchInfo = gravship.Engine?.launchInfo;
             if (launchInfo == null)
             {
-                Log.Error($"[Gravdata] No launch info found, skipping gravdata yield");
+                Log.Error($"[VGE] No launch info found, skipping gravdata yield");
                 distanceTravelled = 0;
                 return;
             }
@@ -72,44 +73,44 @@ namespace VanillaGravshipExpanded
             float quality = launchInfo.quality;
             int gravdataYield;
 
-            Log.Message($"[Gravdata] Landing at tile: {landingTile}");
-            Log.Message($"[Gravdata] Quality: {quality}");
+            Log.Message($"[VGE] Landing at tile: {landingTile}");
+            Log.Message($"[VGE] Quality: {quality}");
 
             LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.TryGetValue(launchInfo, out var researcherPawn);
-            Log.Message($"[Gravdata] Researcher pawn: {researcherPawn?.Name}");
+            Log.Message($"[VGE] Researcher pawn: {researcherPawn?.Name}");
 
             var launchSourceTile = LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo];
             distanceTravelled = GravshipHelper.GetDistance(launchSourceTile, landingTile);
-            Log.Message($"[Gravdata] Distance travelled: {distanceTravelled} - from {launchSourceTile} to {landingTile}");
+            Log.Message($"[VGE] Distance travelled: {distanceTravelled} - from {launchSourceTile} to {landingTile}");
 
             var blackBox = gravship.Engine.GravshipComponents.Select(comp => comp.parent).OfType<Building_GravshipBlackBox>().FirstOrDefault();
 
             if (gravdataCorruptionOccurred.TryGetValue(gravship.Engine, out bool corruptionOccurred) && corruptionOccurred)
             {
                 gravdataYield = 0;
-                Log.Message($"[Gravdata] Gravdata corruption occurred, yield set to 0");
+                Log.Message($"[VGE] Gravdata corruption occurred, yield set to 0");
                 if (blackBox != null)
                 {
-                    Log.Message($"[Gravdata] Clearing black box due to gravdata corruption");
+                    Log.Message($"[VGE] Clearing black box due to gravdata corruption");
                     blackBox.TakeGravdata(blackBox.StoredGravdata);
                 }
             }
             else
             {
                 gravdataYield = GravdataUtility.CalculateGravdataYield(distanceTravelled, quality, gravship.Engine, researcherPawn);
-                Log.Message($"[Gravdata] Calculated gravdata yield: {gravdataYield}");
+                Log.Message($"[VGE] Calculated gravdata yield: {gravdataYield}");
             }
 
             int remainingGravdata = gravdataYield;
             if (blackBox != null)
             {
                 var toAdd = blackBox.TakeGravdata(blackBox.StoredGravdata);
-                Log.Message($"[Gravdata] Fetching {toAdd} gravdata from black box");
+                Log.Message($"[VGE] Fetching {toAdd} gravdata from black box");
                 remainingGravdata += toAdd;
             }
             if (World_ExposeData_Patch.currentGravtechProject != null)
             {
-                Log.Message($"[Gravdata] Adding {remainingGravdata} to project: {World_ExposeData_Patch.currentGravtechProject.defName}");
+                Log.Message($"[VGE] Adding {remainingGravdata} to project: {World_ExposeData_Patch.currentGravtechProject.defName}");
                 float progressNeeded = World_ExposeData_Patch.currentGravtechProject.Cost - Find.ResearchManager.GetProgress(World_ExposeData_Patch.currentGravtechProject);
                 int progressToAdd = Mathf.Min(remainingGravdata, (int)progressNeeded);
 
@@ -118,18 +119,18 @@ namespace VanillaGravshipExpanded
 
                 if (World_ExposeData_Patch.currentGravtechProject.IsFinished)
                 {
-                    Log.Message($"[Gravdata] Project completed: {World_ExposeData_Patch.currentGravtechProject.defName}");
+                    Log.Message($"[VGE] Project completed: {World_ExposeData_Patch.currentGravtechProject.defName}");
                     World_ExposeData_Patch.currentGravtechProject = null;
                 }
             }
             if (blackBox != null && remainingGravdata > 0)
             {
-                Log.Message($"[Gravdata] Storing {remainingGravdata} gravdata in black box");
+                Log.Message($"[VGE] Storing {remainingGravdata} gravdata in black box");
                 blackBox.AddGravdata(remainingGravdata);
             }
             else if (remainingGravdata > 0)
             {
-                Log.Message($"[Gravdata] No black box, {remainingGravdata} gravdata lost");
+                Log.Message($"[VGE] No black box, {remainingGravdata} gravdata lost");
             }
 
             LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.Remove(launchInfo);
@@ -138,19 +139,21 @@ namespace VanillaGravshipExpanded
 
         public static void CalculateMaintenanceLoss(Gravship gravship, int distanceTravelled, float chance)
         {
-            
+
 
             GravMaintainables_MapComponent comp = gravship.Engine.Map.GetComponent<GravMaintainables_MapComponent>();
 
-            if (comp != null) {
-                gravship.Engine.Map.GetComponent<GravMaintainables_MapComponent>().ChangeGlobalMaintenance(-0.001f * distanceTravelled,chance);
+            if (comp != null)
+            {
+                gravship.Engine.Map.GetComponent<GravMaintainables_MapComponent>().ChangeGlobalMaintenance(-0.001f * distanceTravelled, chance);
 
             }
-            else{
-                Log.Error($"[Gravdata] Map lacked the GravMaintainables_MapComponent, can't handle maintenance loss");
+            else
+            {
+                Log.Error($"[VGE] Map lacked the GravMaintainables_MapComponent, can't handle maintenance loss");
             }
 
-        
+
         }
 
         private static void TryTriggerLaunchBoon(Gravship gravship, out bool negateMaintenance)
@@ -159,7 +162,7 @@ namespace VanillaGravshipExpanded
             var launchInfo = gravship.Engine?.launchInfo;
             if (launchInfo == null)
             {
-                
+
                 return;
             }
 
@@ -178,7 +181,8 @@ namespace VanillaGravshipExpanded
                     if (launchBoons.TryRandomElementByWeight(x => x.weight, out LaunchBoonDef selectedBoon))
                     {
                         selectedBoon.Worker.ApplyBoon(gravship);
-                        if (selectedBoon.negateMaintenance) {
+                        if (selectedBoon.negateMaintenance)
+                        {
                             negateMaintenance = true;
                         }
                     }

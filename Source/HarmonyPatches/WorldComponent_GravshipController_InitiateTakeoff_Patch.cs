@@ -1,5 +1,6 @@
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace VanillaGravshipExpanded
@@ -9,7 +10,6 @@ namespace VanillaGravshipExpanded
     {
         public static void Postfix(WorldComponent_GravshipController __instance)
         {
-            __instance.mapHasGravAnchor = true;
             foreach (var pawn in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive)
             {
                 pawn.needs?.mood?.thoughts?.memories?.RemoveMemoriesOfDef(VGEDefOf.VGE_CrewEuphoria);

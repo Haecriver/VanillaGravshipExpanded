@@ -40,7 +40,7 @@ namespace VanillaGravshipExpanded
 
         public static bool IsSustructureOrScaffold(this TerrainDef terrainDef)
         {
-            return terrainDef.HasTag("Substructure") || terrainDef == VGEDefOf.VGE_DamagedSubstructure 
+            return terrainDef.HasTag("Substructure") || terrainDef == VGEDefOf.VGE_DamagedSubstructure
             || terrainDef == VGEDefOf.VGE_GravshipSubscaffold;
         }
 
@@ -98,7 +98,7 @@ namespace VanillaGravshipExpanded
                         connections.Clear();
                         return 0;
                     }
-                    Log.Message($"[Gravdata] Path from {from.Layer} to {to.Layer} with cost {cost} connections: {connections.Select(c => c.origin + " -> " + c.target + " (" + c.fuelCost + ")").ToStringSafeEnumerable()}");
+                    Log.Message($"[VGE] Path from {from.Layer} to {to.Layer} with cost {cost} connections: {connections.Select(c => c.origin + " -> " + c.target + " (" + c.fuelCost + ")").ToStringSafeEnumerable()}");
                     cachedOriginLayer = to.Layer;
                     cachedDestLayer = from.Layer;
                     connections.Clear();
@@ -106,17 +106,17 @@ namespace VanillaGravshipExpanded
                 from = to.Layer.GetClosestTile_NewTemp(from);
             }
             cachedDistance = (int)(Find.WorldGrid.TraversalDistanceBetween(from, to) * to.LayerDef.rangeDistanceFactor);
-            Log.Message($"[Gravdata] Distance from {from} to {to} is {cachedDistance} with range distance factor {to.LayerDef.rangeDistanceFactor}");
+            Log.Message($"[VGE] Distance from {from} to {to} is {cachedDistance} with range distance factor {to.LayerDef.rangeDistanceFactor}");
             return cachedDistance;
         }
-        
+
         public static bool IsGravshipLaunch(this PreceptDef ritual)
         {
             return ritual == PreceptDefOf.GravshipLaunch ||
                    ritual == VGEDefOf.VGE_GravjumperLaunch ||
                    ritual == VGEDefOf.VGE_GravhulkLaunch;
         }
-        
+
         public static float LaunchBoonChanceFromQuality(float quality)
         {
             return LaunchBoonChanceFromQualityCurve.Evaluate(quality);

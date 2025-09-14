@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -27,7 +27,7 @@ namespace VanillaGravshipExpanded
             this.targetTile = targetTile;
         }
     }
-    
+
     [HotSwappable]
     [HarmonyPatch(typeof(Window), "PostClose")]
     public static class Window_PostClose_Patch
@@ -117,7 +117,7 @@ namespace VanillaGravshipExpanded
             var engine = jobRitual.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;
             var launchInfo = engine.launchInfo;
             LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo] = engine.Map.Tile;
-            Log.Message($"[Gravdata] Launch source tile set to: {engine.Map.Tile}");
+            Log.Message($"[VGE] Launch source tile set to: {engine.Map.Tile}");
             if (Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsGravliftLaunch)
             {
                 LaunchInfo_ExposeData_Patch.isGravliftLaunch[launchInfo] = true;
@@ -145,11 +145,11 @@ namespace VanillaGravshipExpanded
             }
             if (pawn != null)
             {
-                Log.Message($"[Gravdata] Gravship launch ritual successful with pawn: {pawn.Name}");
+                Log.Message($"[VGE] Gravship launch ritual successful with pawn: {pawn.Name}");
             }
             else
             {
-                Log.Message($"[Gravdata] Gravship launch ritual successful, but no pawn found");
+                Log.Message($"[VGE] Gravship launch ritual successful, but no pawn found");
             }
         }
     }
