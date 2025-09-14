@@ -52,8 +52,8 @@
 			<li Class="CompProperties_Forbiddable" />
 			<li Class="CompProperties_Flickable" />
 			<li Class="CompProperties_Glower">
-				<overlightRadius>2.0</overlightRadius>
-				<glowRadius>2</glowRadius>
+				<overlightRadius>3</overlightRadius>
+				<glowRadius>3</glowRadius>
 				<glowColor>(370,370,370,0)</glowColor>
 			</li>
 			<li Class="CompProperties_Power">
