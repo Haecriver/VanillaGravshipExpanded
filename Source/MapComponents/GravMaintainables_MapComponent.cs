@@ -54,5 +54,23 @@ namespace VanillaGravshipExpanded
                 return totalMaintenance/ maintainables_InMap.Count;
             } else return 1;         
         }
+
+        public void ChangeGlobalMaintenance(float amount, float chance)
+        {
+            if (maintainables_InMap.Count > 0)
+            {
+                foreach (Thing thing in maintainables_InMap)
+                {
+                    if (Rand.Chance(chance))
+                    {
+                        CompGravMaintainable comp = thing.TryGetComp<CompGravMaintainable>();
+                        comp.maintenance += amount * thing.GetStatValue(VGEDefOf.VGE_MaintenanceSensitivity);
+                    }
+                    
+                }
+                
+            }
+
+        }
     }
 }

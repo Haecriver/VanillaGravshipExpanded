@@ -7,6 +7,8 @@ namespace VanillaGravshipExpanded
     {
         public float weight;
 
+        public bool negateMaintenance = false;
+
         [MustTranslate]
         public string letterLabel;
 
