@@ -74,7 +74,7 @@
 			</damageData>
 		</graphicData>
 		<rotatable>true</rotatable>
-		<uiIconScale>0.25</uiIconScale>
+		<uiIconScale>0.75</uiIconScale>
 		<altitudeLayer>FloorEmplacement</altitudeLayer>
 		<passability>Standable</passability>
 		<pathCost>0</pathCost>
