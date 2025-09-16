@@ -34,6 +34,9 @@
         </comps>
         <building>
             <ai_combatDangerous>true</ai_combatDangerous>
+            <claimable>false</claimable>
+            <deconstructible>false</deconstructible>
+            <repairable>false</repairable>
         </building>
         <placeWorkers>
             <li>PlaceWorker_TurretTop</li>
