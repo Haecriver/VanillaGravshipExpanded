@@ -21,6 +21,13 @@ namespace VanillaGravshipExpanded
         }
         private CompGravMaintainable comp => job.GetTarget(TargetIndex.A).Thing.TryGetComp<CompGravMaintainable>();
 
+        public override void ExposeData()
+        {
+            base.ExposeData();
+            Scribe_Values.Look(ref this.statValuePawn, "statValuePawn", 1, false);
+            Scribe_Values.Look(ref this.statValueObject, "statValueObject", 1, false);
+        }
+
         public override IEnumerable<Toil> MakeNewToils()
         {
             Thing building = this.job.GetTarget(TargetIndex.A).Thing;
