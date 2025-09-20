@@ -138,11 +138,11 @@
 			<LoopRightTexPath>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Right</LoopRightTexPath>
 			<LoopSingleTexPath>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Single</LoopSingleTexPath>
 			<LoopTexPaths>
-				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop1</li>
-				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop2</li>
-				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop3</li>
-				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop4</li>
-				<li>Things/Natural/CompressedAsteroidEdge/CompressedAsteroidEdge_Loop5</li>
+				<li>Things/Natural/CompressedAsteroidEdge/Loop/CompressedAsteroidEdge_Loop1</li>
+				<li>Things/Natural/CompressedAsteroidEdge/Loop/CompressedAsteroidEdge_Loop2</li>
+				<li>Things/Natural/CompressedAsteroidEdge/Loop/CompressedAsteroidEdge_Loop3</li>
+				<li>Things/Natural/CompressedAsteroidEdge/Loop/CompressedAsteroidEdge_Loop4</li>
+				<li>Things/Natural/CompressedAsteroidEdge/Loop/CompressedAsteroidEdge_Loop5</li>
 			</LoopTexPaths>
 		</spaceEdgeGraphicData>
 	</TerrainDef>
