@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
@@ -27,6 +28,7 @@ public static class GravshipUtility_GetPlayerGravEngine_Patch
             if (ci.Calls(listerThingsMethodTarget))
             {
                 // Replace the vanilla method call with our own
+                ci.opcode = OpCodes.Call;
                 ci.operand = listerThingsMethodReplacement;
 
                 replacedThingsOfDefCalls++;
@@ -48,9 +50,9 @@ public static class GravshipUtility_GetPlayerGravEngine_Patch
         const int expectedListFindCalls = 1;
 
         if (replacedThingsOfDefCalls != expectedThingsOfDefCalls)
-            Log.Error($"Patching GravshipUtility.GetPlayerGravEngine - unexpected amount of patches. Expected patches: {expectedThingsOfDefCalls}, actual patch amount: {replacedThingsOfDefCalls}. Game may fail to find custom VE grav engines.");
+            Log.Error($"Patching GravshipUtility:GetPlayerGravEngine - unexpected amount of patches. Expected patches: {expectedThingsOfDefCalls}, actual patch amount: {replacedThingsOfDefCalls}. Game may fail to find custom VE grav engines.");
         if (insertedCallsAfterListFind != expectedListFindCalls)
-            Log.Error($"Patching GravshipUtility.GetPlayerGravEngine - unexpected amount of patches. Expected patches: {expectedListFindCalls}, actual patch amount: {insertedCallsAfterListFind}. Game may fail to find custom VE grav engines that were minified.");
+            Log.Error($"Patching GravshipUtility:GetPlayerGravEngine - unexpected amount of patches. Expected patches: {expectedListFindCalls}, actual patch amount: {insertedCallsAfterListFind}. Game may fail to find custom VE grav engines that were minified.");
     }
 
     private static List<Thing> ReplacedThingsOfDef(ListerThings lister, ThingDef def)
