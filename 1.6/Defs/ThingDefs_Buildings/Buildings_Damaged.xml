@@ -99,10 +99,8 @@
 		<graphicData>
 			<texPath>Things/Structures/Destroyed/DestroyedSmallAstrofuelThruster</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
-			<drawSize>(1.1, 2.2)</drawSize>
-			<shadowData>
-				<volume>(1, 1, 2)</volume>
-			</shadowData>
+			<drawSize>(2, 3)</drawSize>
+			
 		</graphicData>
 	</ThingDef>
 	<ThingDef ParentName="VGE_DamagedBuildingBase">
@@ -125,10 +123,8 @@
 		<graphicData>
 			<texPath>Things/Structures/Destroyed/DestroyedLateralThruster</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
-			<drawSize>(2.2, 2.2)</drawSize>
-			<shadowData>
-				<volume>(1.8, 0.75, 1.8)</volume>
-			</shadowData>
+			<drawSize>(3, 4)</drawSize>
+			
 		</graphicData>
 	</ThingDef>
 	<ThingDef ParentName="VGE_DamagedBuildingBase">
