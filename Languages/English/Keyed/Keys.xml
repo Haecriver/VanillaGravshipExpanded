@@ -62,6 +62,9 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_RapidlyDeterioratingInSpace>Rapidly deteriorating due to the vacuum of space.</VGE_RapidlyDeterioratingInSpace>
     <ConfirmGravEngineLaunch>Are you sure you want to launch?\n\nYou will be given a choice to keep the current map as well as anything not on gravship substructure, but if you choose to discard it, it will be permanently lost.</ConfirmGravEngineLaunch>
 
+    <VGE_SingleGravEngineOnly>You can't build {0} if you already have another grav engine.</VGE_SingleGravEngineOnly>
+    <VGE_SingleGravEngineBlueprintOnly>You can't build {0} if you already have another grav engine under construction.</VGE_SingleGravEngineBlueprintOnly>
+
 
     <!-- Mod options -->
 

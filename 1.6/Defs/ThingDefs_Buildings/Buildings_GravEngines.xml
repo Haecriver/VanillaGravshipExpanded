@@ -106,6 +106,9 @@
         <transmitsPower>true</transmitsPower>
       </li>
     </comps>
+    <placeWorkers>
+      <li>VanillaGravshipExpanded.PlaceWorker_OnlySingleGravEngine</li>
+    </placeWorkers>
   </ThingDef>
 
   <ThingDef ParentName="GravshipComponentBase">
@@ -204,6 +207,9 @@
         <transmitsPower>true</transmitsPower>
       </li>
     </comps>
+    <placeWorkers>
+      <li>VanillaGravshipExpanded.PlaceWorker_OnlySingleGravEngine</li>
+    </placeWorkers>
   </ThingDef>
 
 </Defs>

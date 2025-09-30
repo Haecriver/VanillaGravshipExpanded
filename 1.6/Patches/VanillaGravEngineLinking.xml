@@ -137,4 +137,23 @@
     </value>
   </Operation>
 
+  <!-- Give grav engine place worker to make sure there's only 1 engine. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/placeWorkers</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GravEngine"]</xpath>
+      <value>
+        <placeWorkers>
+          <li>VanillaGravshipExpanded.PlaceWorker_OnlySingleGravEngine</li>
+        </placeWorkers>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GravEngine"]/placeWorkers</xpath>
+      <value>
+        <li>VanillaGravshipExpanded.PlaceWorker_OnlySingleGravEngine</li>
+      </value>
+    </match>
+  </Operation>
+
 </Patch>
