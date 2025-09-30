@@ -114,4 +114,8 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_CooldownRemaining>Cooldown remaining: {0}</VGE_CooldownRemaining>
     <VGE_ResourceProcessorInfo>{0} {1} production completes in: {2}\nRemaining production processes to complete: {3}</VGE_ResourceProcessorInfo>
 
+    <!-- Chemfuel to astrofuel replacements -->
+    <VGE_StoredAstrofuel>stored astrofuel</VGE_StoredAstrofuel>
+    <VGE_AstrofuelPerTile>{0} astrofuel per tile</VGE_AstrofuelPerTile>
+
 </LanguageData>
