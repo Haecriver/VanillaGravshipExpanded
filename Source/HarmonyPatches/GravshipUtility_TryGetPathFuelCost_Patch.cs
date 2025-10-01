@@ -2,6 +2,8 @@
 using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
+using UnityEngine;
 using Verse;
 
 namespace VanillaGravshipExpanded;
@@ -21,23 +23,51 @@ public static class GravshipUtility_TryGetPathFuelCost_Patch
 
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr)
     {
-        var replacements = 0;
+        var modifyFuelFactorMethod = typeof(GravshipUtility_TryGetPathFuelCost_Patch).DeclaredMethod(nameof(ModifyFuelFactor));
+
+        var minCostReplacements = 0;
+        var fuelFactorReplacements = 0;
 
         foreach (var ci in instr)
         {
+            yield return ci;
+
             // Drop the minimum cost of the gravship launch from 50 to 25, since we're cutting everything else in half.
             if (ci.opcode == OpCodes.Ldc_R4 && ci.operand is 50f)
             {
                 ci.operand = 25f;
-                replacements++;
+                minCostReplacements++;
             }
-
-            yield return ci;
+            // Apply 25% extra fuel efficiency if the target tile has a grav anchor.
+            // We could handle it as a prefix, but for the sake of having this value cached - adding transpiler so the check will also get cached.
+            else if (ci.IsLdarg(5))
+            {
+                // Insert the 2nd argument (target PlanetTile)
+                yield return CodeInstruction.LoadArgument(1);
+                // Modify the value by surrounding it in our method
+                yield return new CodeInstruction(OpCodes.Call, modifyFuelFactorMethod);
+                fuelFactorReplacements++;
+            }
         }
 
-        const int expectedGravshipRangeCalls = 1;
+        const int expectedMinCostReplacements = 1;
+        const int expectedFuelFactorReplacements = 1;
 
-        if (replacements != expectedGravshipRangeCalls)
-            Log.Error($"Patching GravshipUtility:TryGetPathFuelCost - unexpected amount of patches. Expected patches: {expectedGravshipRangeCalls}, actual patch amount: {replacements}. Gravship launch cost may be incorrect/broken.");
+        if (minCostReplacements != expectedMinCostReplacements)
+            Log.Error($"Patching GravshipUtility:TryGetPathFuelCost - unexpected amount of minimum cost patches. Expected patches: {expectedMinCostReplacements}, actual patch amount: {minCostReplacements}. Gravship launch cost may be incorrect/broken.");
+        if (fuelFactorReplacements != expectedFuelFactorReplacements)
+            Log.Error($"Patching GravshipUtility:TryGetPathFuelCost - unexpected amount of fuel factor patches. Expected patches: {expectedFuelFactorReplacements}, actual patch amount: {fuelFactorReplacements}. Grav anchor fuel efficiency bonus may be broken/incorrect.");
+    }
+
+    private static float ModifyFuelFactor(float fuelFactor, PlanetTile to)
+    {
+        if (!to.Valid)
+            return fuelFactor;
+
+        var map = Current.Game.FindMap(to);
+        if (map != null && map.listerThings.AnyThingWithDef(ThingDefOf.GravAnchor))
+            return Mathf.Max(fuelFactor - 0.25f, 0f);
+
+        return fuelFactor;
     }
 }
