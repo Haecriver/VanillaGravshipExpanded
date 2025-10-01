@@ -39,6 +39,10 @@ namespace VanillaGravshipExpanded
             //    .Where(x => x.modContentPack.IsOfficialMod is false && x.weight > 0)
             //    .ToList()
             //    .ForEach((LandingOutcomeDef d) => d.Worker.ApplyOutcome(gravship)); // This is for dev testing only. Remove before release.
+
+            // Remove cooldown if there's a grav anchor
+            if (__instance.map.listerThings.AnyThingWithDef(ThingDefOf.GravAnchor))
+                __instance.gravship.engine.cooldownCompleteTick = GenTicks.TicksGame;
         }
 
         public static void Postfix(WorldComponent_GravshipController __instance, (Gravship gravship, Dictionary<LandingOutcomeDef, float> outcomes) __state)
