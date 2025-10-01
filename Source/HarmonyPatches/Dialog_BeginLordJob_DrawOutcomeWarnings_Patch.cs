@@ -21,12 +21,22 @@ namespace VanillaGravshipExpanded
                 __state = outcome.description;
                 var engine = __instance.target.Thing.TryGetComp<CompPilotConsole>()?.engine;
                 var gravshipState = Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state;
-                var cooldownReduction = Building_GravEngine_ConsumeFuel_Patch.GetCooldownReduction(engine);
-                if (cooldownReduction > 0f)
+
+                var map = gravshipState != null ? Current.Game.FindMap(gravshipState.targetTile) : null;
+                if (map != null && map.listerThings.AnyThingWithDef(ThingDefOf.GravAnchor))
                 {
-                    var info = "VGE_LaunchHeatsinkCooldownInfo".Translate(cooldownReduction.ToStringPercent());
-                    outcome.description += " " + info;
+                    outcome.description += " " + "VGE_LaunchGravAnchorCooldownInfo".Translate();
                 }
+                else
+                {
+                    var cooldownReduction = Building_GravEngine_ConsumeFuel_Patch.GetCooldownReduction(engine);
+                    if (cooldownReduction > 0f)
+                    {
+                        var info = "VGE_LaunchHeatsinkCooldownInfo".Translate(cooldownReduction.ToStringPercent());
+                        outcome.description += " " + info;
+                    }
+                }
+
                 if (World_ExposeData_Patch.currentGravtechProject == null && engine.GravshipComponents.Any(x => x.parent is Building_GravshipBlackBox) is false)
                 {
                     var warningPart = "Warning".Translate().ToString().ToUpper();
@@ -44,9 +54,9 @@ namespace VanillaGravshipExpanded
                     var gravdataInfo = "VGE_GravdataYieldInfo".Translate(gravdataYield);
                     outcome.description += " " + gravdataInfo;
                     
-                    if (GravshipUtility.TryGetPathFuelCost(engine.Map.Tile, gravshipState.targetTile, out var cost, out _))
+                    if (GravshipUtility.TryGetPathFuelCost(engine.Map.Tile, gravshipState.targetTile, out var cost, out _, fuelFactor: engine.FuelUseageFactor))
                     {
-                        outcome.description += "\n\n" + "VGE_LaunchHeatUnitsInfo".Translate(cost);
+                        outcome.description += "\n\n" + "VGE_LaunchFuelAndHeatUnitsInfo".Translate(cost);
                     }
                     
                     outcome.description += "\n\n" + "DEV: " + $"Distance: {distanceTravelled}, Quality: {quality}, Researcher: {researcherPawn?.Name}, ResearchStat: {researcherPawn?.GetStatValue(VGEDefOf.VGE_GravshipResearch)}, YieldMultiplier: {GravdataUtility.CalculateYieldMultiplier(engine)}, Cost: {cost}\n";

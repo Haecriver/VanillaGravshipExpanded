@@ -121,5 +121,21 @@ namespace VanillaGravshipExpanded
         {
             return LaunchBoonChanceFromQualityCurve.Evaluate(quality);
         }
+
+        public static bool PlayerHasGravEngineUnderConstruction() => Find.Maps.Any(PlayerHasGravEngineUnderConstruction);
+
+        public static bool PlayerHasGravEngineUnderConstruction(Map map)
+        {
+            return HasBlueprintOrFrameOnMap(ThingDefOf.GravEngine) || HasBlueprintOrFrameOnMap(VGEDefOf.VGE_GravjumperEngine) || HasBlueprintOrFrameOnMap(VGEDefOf.VGE_GravhulkEngine);
+
+            bool HasBlueprintOrFrameOnMap(ThingDef def)
+            {
+                if (def.blueprintDef != null && map.listerThings.AnyThingWithDef(def.blueprintDef))
+                    return true;
+                if (def.frameDef != null && map.listerThings.AnyThingWithDef(def.frameDef))
+                    return true;
+                return false;
+            }
+        }
     }
 }

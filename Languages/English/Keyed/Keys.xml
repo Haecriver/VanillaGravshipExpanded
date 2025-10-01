@@ -44,8 +44,9 @@
     <VGE_NoGravEngine>No grav engine found</VGE_NoGravEngine>
     <VGE_NoCooldownToAbsorb>No cooldown to absorb</VGE_NoCooldownToAbsorb>
     <VGE_GravheatAbsorberCoolingDown>Gravheat absorber is cooling down. Available in: {0}</VGE_GravheatAbsorberCoolingDown>
+    <VGE_LaunchGravAnchorCooldownInfo>However, landing in a location containing a grav anchor will completely remove the launch cooldown.</VGE_LaunchGravAnchorCooldownInfo>
     <VGE_LaunchHeatsinkCooldownInfo>The heatsinks will reduce the launch cooldown time by {0}.</VGE_LaunchHeatsinkCooldownInfo>
-    <VGE_LaunchHeatUnitsInfo>This launch will generate about {0} heat units, raising the temperature across the gravship.</VGE_LaunchHeatUnitsInfo>
+    <VGE_LaunchFuelAndHeatUnitsInfo>This launch will use {0} astrofuel and generate about {0} heat units, raising the temperature across the gravship.</VGE_LaunchFuelAndHeatUnitsInfo>
 
     <VGE_DesignatorRemoveSubstructure>Remove substructure</VGE_DesignatorRemoveSubstructure>
     <VGE_DesignatorRemoveSubstructureDesc>Remove substructure from the gravship.</VGE_DesignatorRemoveSubstructureDesc>
@@ -61,6 +62,9 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
 
     <VGE_RapidlyDeterioratingInSpace>Rapidly deteriorating due to the vacuum of space.</VGE_RapidlyDeterioratingInSpace>
     <ConfirmGravEngineLaunch>Are you sure you want to launch?\n\nYou will be given a choice to keep the current map as well as anything not on gravship substructure, but if you choose to discard it, it will be permanently lost.</ConfirmGravEngineLaunch>
+
+    <VGE_SingleGravEngineOnly>You can't build {0} if you already have another grav engine.</VGE_SingleGravEngineOnly>
+    <VGE_SingleGravEngineBlueprintOnly>You can't build {0} if you already have another grav engine under construction.</VGE_SingleGravEngineBlueprintOnly>
 
 
     <!-- Mod options -->
@@ -113,5 +117,9 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_RemainingShieldTime>Remaining shield time: {0}</VGE_RemainingShieldTime>
     <VGE_CooldownRemaining>Cooldown remaining: {0}</VGE_CooldownRemaining>
     <VGE_ResourceProcessorInfo>{0} {1} production completes in: {2}\nRemaining production processes to complete: {3}</VGE_ResourceProcessorInfo>
+
+    <!-- Chemfuel to astrofuel replacements -->
+    <VGE_StoredAstrofuel>stored astrofuel</VGE_StoredAstrofuel>
+    <VGE_AstrofuelPerTile>{0} astrofuel per tile</VGE_AstrofuelPerTile>
 
 </LanguageData>
