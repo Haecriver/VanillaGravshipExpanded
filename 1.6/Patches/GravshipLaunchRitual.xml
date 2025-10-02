@@ -105,6 +105,10 @@
           </li>
         </facilityQualityOffsets>
       </li>
+      <li Class="VanillaGravshipExpanded.RitualOutcomeComp_LandingOnGravAnchor">
+        <label>landing near grav anchor</label>
+        <qualityOffset>0.2</qualityOffset>
+      </li>
     </value>
   </Operation>
 
