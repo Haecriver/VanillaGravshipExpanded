@@ -94,17 +94,6 @@
           </li>
         </facilityQualityOffsets>
       </li>
-      <li Class="VanillaGravshipExpanded.RitualOutcomeComp_MannedGravshipFacilities">
-        <label>manned copilot console</label>
-        <roleId>copilot</roleId>
-        <facilitiesPerPawn>1</facilitiesPerPawn>
-        <facilityQualityOffsets>
-          <li>
-            <key>VGE_CopilotConsole</key>
-            <value>0.1</value>
-          </li>
-        </facilityQualityOffsets>
-      </li>
       <li Class="RitualOutcomeComp_GravshipFacilities">
         <label>pilot subpersona core</label>
         <facilityQualityOffsets>
