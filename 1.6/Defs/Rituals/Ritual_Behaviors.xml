@@ -105,8 +105,8 @@
         <usedSkill>Intellectual</usedSkill>
         <usedStat>VGE_GravshipResearch</usedStat>
         <allowChild>false</allowChild>
-        <blocksSocialInteraction>false</blocksSocialInteraction>
-        <countsAsParticipant>true</countsAsParticipant>
+        <blocksSocialInteraction>true</blocksSocialInteraction>
+        <countsAsParticipant>false</countsAsParticipant>
       </li>
       <li Class="RitualRoleColonist">
         <id>gravtechEngineer</id>
