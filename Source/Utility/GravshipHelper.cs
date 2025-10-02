@@ -126,16 +126,8 @@ namespace VanillaGravshipExpanded
 
         public static bool PlayerHasGravEngineUnderConstruction(Map map)
         {
-            return HasBlueprintOrFrameOnMap(ThingDefOf.GravEngine) || HasBlueprintOrFrameOnMap(VGEDefOf.VGE_GravjumperEngine) || HasBlueprintOrFrameOnMap(VGEDefOf.VGE_GravhulkEngine);
-
-            bool HasBlueprintOrFrameOnMap(ThingDef def)
-            {
-                if (def.blueprintDef != null && map.listerThings.AnyThingWithDef(def.blueprintDef))
-                    return true;
-                if (def.frameDef != null && map.listerThings.AnyThingWithDef(def.frameDef))
-                    return true;
-                return false;
-            }
+            return ListerThingsUtility.AnyThingWithBuildBlueprintDefs(map, ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine) ||
+                   ListerThingsUtility.AnyThingWithFrameDefs(map, ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine);
         }
     }
 }

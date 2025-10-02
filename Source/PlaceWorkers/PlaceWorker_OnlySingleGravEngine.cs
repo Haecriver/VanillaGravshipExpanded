@@ -11,9 +11,19 @@ public class PlaceWorker_OnlySingleGravEngine : PlaceWorker
         if (thing == null)
         {
             if (GravshipUtility.PlayerHasGravEngine())
-                return "VGE_SingleGravEngineOnly".Translate(checkingDef);
+                return "VGE_BuildSingleGravEngineOnly".Translate(checkingDef);
             if (GravshipHelper.PlayerHasGravEngineUnderConstruction())
-                return "VGE_SingleGravEngineBlueprintOnly".Translate(checkingDef);
+                return "VGE_BuildSingleGravEngineBuildBlueprintOnly".Translate(checkingDef);
+        }
+        // Disallow installing a duplicate grav engine on the same map
+        else
+        {
+            if (ListerThingsUtility.AnyThingWithDefs(map, ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine))
+                return "VGE_InstallSingleGravEngineOnMap".Translate(thingToIgnore);
+            if (GravshipHelper.PlayerHasGravEngineUnderConstruction(map))
+                return "VGE_InstallSingleGravEngineBuildBlueprintOnly".Translate(thingToIgnore);
+            if (ListerThingsUtility.AnyThingWithInstallBlueprintDefs(map, ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine))
+                return "VGE_InstallSingleGravEngineInstallBlueprintOnly".Translate(thingToIgnore);
         }
 
         return true;
