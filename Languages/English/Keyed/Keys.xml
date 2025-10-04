@@ -42,6 +42,8 @@
     <VGE_OxygenReplenishOnOffNoWearerDesc>This determines whether the wearer will automatically replenish oxygen canisters when oxygen in their equipment is below {MIN} u³.\n\nAutomatic oxygen replenishment is currently {ONOFF}.</VGE_OxygenReplenishOnOffNoWearerDesc>
     <VGE_IneffectiveOxygenPack>Ineffective oxygen pack</VGE_IneffectiveOxygenPack>
     <VGE_IneffectiveOxygenPackDesc>Someone is wearing an oxygen pack without any vacuum-protective apparel. The oxygen pack will not work. Consider equipping other vacuum-resistant apparel.\n\nColonists without vacuum-protective apparel:</VGE_IneffectiveOxygenPackDesc>
+    <VGE_EquippingIneffectiveOxygenPack>{PAWN} is equipping an oxygen pack without wearing vacuum resistant gear. {APPAREL_labelNoParenthesis} will not work.</VGE_EquippingIneffectiveOxygenPack>
+    <VGE_EquippingOnOtherIneffectiveOxygenPack>{PAWN} is equipping an oxygen pack on {TARGET} without wearing vacuum resistant gear. {APPAREL_labelNoParenthesis} will not work.</VGE_EquippingOnOtherIneffectiveOxygenPack>
 
     <VGE_HeatsinkHeatStored>{0} / {1} heat units</VGE_HeatsinkHeatStored>
     <VGE_AbsorbGravheat>Absorb gravheat</VGE_AbsorbGravheat>
