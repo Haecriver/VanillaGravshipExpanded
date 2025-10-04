@@ -23,6 +23,7 @@
     <VGE_ConfirmCrashLanding>Landing on this location will be considered a crash. Any highlighted structures underneath the gravship will damage any structures on the gravship in corresponding locations.\n\nThe substructure may also become damaged and will need replacing before the next launch.\n\nSome indestructible objects underneath may completely destroy the substructure and any objects on it.\n\nConsider picking a different landing zone.</VGE_ConfirmCrashLanding>
     <VGE_CrashLandingWarning>Landing on this location will be considered a crash and will damage the gravship.</VGE_CrashLandingWarning>
 
+    <!-- Vac checkpoints -->
     <VGE_VacCheckpoint_SetVacuumResistance>Set desired vacuum resistance</VGE_VacCheckpoint_SetVacuumResistance>
     <VGE_VacCheckpoint_SetVacuumResistanceDesc>Set the percentage of vacuum resistance required to cross through this checkpoint. Colonists without sufficient vacuum resistance will not naturally path through this checkpoint. Does not affect drafted colonists.</VGE_VacCheckpoint_SetVacuumResistanceDesc>
     <VGE_VacCheckpoint_VacuumResistancePercent>Vacuum resistance: {0_percentage}</VGE_VacCheckpoint_VacuumResistancePercent>
@@ -30,6 +31,8 @@
     <VGE_VacCheckpoint_AllowDrafted>Drafted colonists always allowed passage</VGE_VacCheckpoint_AllowDrafted>
     <VGE_VacCheckpoint_DisallowDrafted>Drafted colonists check for vacuum resistance</VGE_VacCheckpoint_DisallowDrafted>
     <VGE_VacCheckpoint_AllowDraftedCheckbox>Always allow drafted</VGE_VacCheckpoint_AllowDraftedCheckbox>
+
+    <!-- Oxygen packs -->
     <VGE_OxygenPackInactive>inactive</VGE_OxygenPackInactive>
     <VGE_OxygenUnits>oxygen u³</VGE_OxygenUnits>
     <VGE_OxygenDrainIfActive>Oxygen drain per day (if active): {0} u³</VGE_OxygenDrainIfActive>
@@ -37,6 +40,8 @@
     <VGE_OxygenReplenishDisabled>Automatic replenishment of oxygen disabled.</VGE_OxygenReplenishDisabled>
     <VGE_OxygenReplenishOnOffDesc>This determines whether {PAWN_nameDef} will automatically replenish oxygen canisters when oxygen in {PAWN_possessive} equipment is below {MIN} u³.\n\nAutomatic oxygen replenishment is currently {ONOFF}.</VGE_OxygenReplenishOnOffDesc>
     <VGE_OxygenReplenishOnOffNoWearerDesc>This determines whether the wearer will automatically replenish oxygen canisters when oxygen in their equipment is below {MIN} u³.\n\nAutomatic oxygen replenishment is currently {ONOFF}.</VGE_OxygenReplenishOnOffNoWearerDesc>
+    <VGE_IneffectiveOxygenPack>Ineffective oxygen pack</VGE_IneffectiveOxygenPack>
+    <VGE_IneffectiveOxygenPackDesc>Someone is wearing an oxygen pack without any vacuum-protective apparel. The oxygen pack will not work. Consider equipping other vacuum-resistant apparel.\n\nColonists without vacuum-protective apparel:</VGE_IneffectiveOxygenPackDesc>
 
     <VGE_HeatsinkHeatStored>{0} / {1} heat units</VGE_HeatsinkHeatStored>
     <VGE_AbsorbGravheat>Absorb gravheat</VGE_AbsorbGravheat>
