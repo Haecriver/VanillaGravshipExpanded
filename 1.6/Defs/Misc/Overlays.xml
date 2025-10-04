@@ -13,8 +13,7 @@
 
   <VEF.Graphics.CustomOverlayDef>
     <defName>VGE_MultipleGravEnginesOverlay</defName>
-    <!-- TODO: Change to actual overlay -->
-    <overlayPath>UI/Overlays/NoLinkedTargetingTerminal</overlayPath>
+    <overlayPath>UI/Overlays/TooManyGravEngines_Overlay</overlayPath>
   </VEF.Graphics.CustomOverlayDef>
 
 </Defs>
