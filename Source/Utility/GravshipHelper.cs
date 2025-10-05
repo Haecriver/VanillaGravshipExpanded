@@ -19,6 +19,10 @@ namespace VanillaGravshipExpanded
         };
         public static readonly Material TileMaterial = MaterialPool.MatFrom("Things/Terrain/Substructure/SubscaffoldingTile", ShaderDatabase.Cutout);
         public static readonly Material MaskOverlayMaterial = SolidColorMaterials.NewSolidColorMaterial(new Color(1f, 1f, 0f), ShaderDatabase.TransparentPostLight);
+        public static readonly Texture2D GravjumperTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravjumper_WorldIcon");
+        public static readonly Texture2D GravshipTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravship_WorldIcon");
+        public static readonly Texture2D GravhulkTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravhulk_WorldIcon");
+
         public static void AddScaffoldQuad(LayerSubMesh subMesh, IntVec3 cell, float y)
         {
             int count = subMesh.verts.Count;
@@ -128,6 +132,17 @@ namespace VanillaGravshipExpanded
         {
             return ListerThingsUtility.AnyThingWithBuildBlueprintDefs(map, ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine) ||
                    ListerThingsUtility.AnyThingWithFrameDefs(map, ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine);
+        }
+
+        public static Texture2D GetExpandingTextureForEngine(ThingDef engineDef)
+        {
+            if (engineDef == ThingDefOf.GravEngine)
+                return GravshipTexture;
+            if (engineDef == VGEDefOf.VGE_GravjumperEngine)
+                return GravjumperTexture;
+            if (engineDef == VGEDefOf.VGE_GravhulkEngine)
+                return GravhulkTexture;
+            return null;
         }
     }
 }
