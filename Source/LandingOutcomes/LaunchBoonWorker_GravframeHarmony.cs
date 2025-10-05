@@ -5,7 +5,7 @@ using Verse;
 
 namespace VanillaGravshipExpanded
 {
-    public abstract class LaunchBoonWorker_GravframeHarmony:LaunchBoonWorker
+    public class LaunchBoonWorker_GravframeHarmony:LaunchBoonWorker
     {
 
         public LaunchBoonWorker_GravframeHarmony(LaunchBoonDef def)
