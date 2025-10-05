@@ -111,6 +111,9 @@
     <placeWorkers>
       <li>VanillaGravshipExpanded.PlaceWorker_OnlySingleGravEngine</li>
     </placeWorkers>
+    <researchPrerequisites>
+      <li>BasicGravtech</li>
+    </researchPrerequisites>
     <notifyMapRemoved>true</notifyMapRemoved>
   </ThingDef>
 
@@ -216,6 +219,9 @@
     <placeWorkers>
       <li>VanillaGravshipExpanded.PlaceWorker_OnlySingleGravEngine</li>
     </placeWorkers>
+    <researchPrerequisites>
+      <li>AdvancedGravtech</li>
+    </researchPrerequisites>
     <notifyMapRemoved>true</notifyMapRemoved>
   </ThingDef>
 

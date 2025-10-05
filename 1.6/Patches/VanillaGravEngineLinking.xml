@@ -164,4 +164,23 @@
     </match>
   </Operation>
 
+  <!-- Add research prerequisite to the engine. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/researchPrerequisites</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GravEngine"]</xpath>
+      <value>
+        <researchPrerequisites>
+          <li>StandardGravtech</li>
+        </researchPrerequisites>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GravEngine"]/researchPrerequisites</xpath>
+      <value>
+        <li>StandardGravtech</li>
+      </value>
+    </match>
+  </Operation>
+
 </Patch>
