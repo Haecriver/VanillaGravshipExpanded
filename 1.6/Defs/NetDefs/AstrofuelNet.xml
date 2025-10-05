@@ -686,8 +686,6 @@
 			 <li Class="CompProperties_Breakdownable"/>
     </comps>
     <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
-    <!-- TODO: Make non-buildable once done testing. -->
-    <designationCategory>Odyssey</designationCategory>
     <staticSunShadowHeight>0.2</staticSunShadowHeight>
     <constructEffect>ConstructMetal</constructEffect>
     <canOverlapZones>false</canOverlapZones>
