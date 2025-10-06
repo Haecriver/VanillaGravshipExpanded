@@ -16,9 +16,6 @@ namespace VanillaGravshipExpanded
 
         private static readonly List<SkyOverlay> overlays = new List<SkyOverlay> { gravitationalAnomalyOverlay };
 
-
-        private Sustainer sustainer;
-
         public override List<SkyOverlay> SkyOverlays(Map map)
         {
             return overlays;
