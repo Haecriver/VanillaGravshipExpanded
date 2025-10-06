@@ -70,14 +70,20 @@ namespace VanillaGravshipExpanded
 
         public override void CompTickInterval(int delta)
         {
+            if (!parent.Spawned)
+                return;
+
             if (this.parent.IsHashIntervalTick(GenTicks.TickLongInterval, delta))
             {
-                CompTickLong();
+                TickInterval();
             }
         }
 
         public override void CompTick()
         {
+            if (!parent.Spawned)
+                return;
+
             if (maintenance < Props.minMaintenanceForAlert)
             {
                 EmissionTick(parent.Map.flecks);
@@ -86,9 +92,12 @@ namespace VanillaGravshipExpanded
 
         public override void CompTickRare()
         {
+            if (!parent.Spawned)
+                return;
+
             if (this.parent.IsHashIntervalTick(GenTicks.TickLongInterval, GenTicks.TickRareInterval))
             {
-                CompTickLong();
+                TickInterval();
             }
             if (maintenance < Props.minMaintenanceForAlert)
             {
@@ -99,7 +108,19 @@ namespace VanillaGravshipExpanded
 
         public override void CompTickLong()
         {
+            if (!parent.Spawned)
+                return;
 
+            TickInterval();
+            if (maintenance < Props.minMaintenanceForAlert)
+            {
+                EmissionTick(parent.Map.flecks);
+            }
+
+        }
+
+        private void TickInterval()
+        {
             if (maintenance > 0)
             {
                 maintenance -= (1f / 1800) * this.parent.GetStatValue(VGEDefOf.VGE_MaintenanceSensitivity);
@@ -112,11 +133,6 @@ namespace VanillaGravshipExpanded
                 maintenance = 0.05f;
                 Signal_Breakdown();
             }
-            if (maintenance < Props.minMaintenanceForAlert)
-            {
-                EmissionTick(parent.Map.flecks);
-            }
-
         }
 
         public void Signal_Breakdown()
