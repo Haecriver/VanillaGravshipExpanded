@@ -20,12 +20,26 @@ namespace VanillaGravshipExpanded
             base.PostExposeData();
             Scribe_Values.Look(ref this.maintenance, "maintenance", 1, false);
 
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+                InitializeComps();
+        }
+
+        public override void PostPostMake()
+        {
+            base.PostPostMake();
+            InitializeComps();
+        }
+
+        private void InitializeComps()
+        {
+            // Initialize comps from ExposeData and PostMake to best handle minifiable stuff, handling it the same way as vanilla does it.
+            // This ensures we only need to grab the comp once (when building is made or game loaded), rather than every time it spawns.
+            compBreakdownable = this.parent.GetComp<CompBreakdownable>();
         }
 
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
-            compBreakdownable = this.parent.TryGetComp<CompBreakdownable>();
 
 
             FleckSystem system = parent.Map.flecks.CreateFleckSystemFor(VGEDefOf.VGE_MaintenanceSmoke);
