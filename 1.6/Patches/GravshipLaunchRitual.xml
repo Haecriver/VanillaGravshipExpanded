@@ -45,6 +45,14 @@
     </value>
   </Operation>
 
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/RitualBehaviorDef[defName='GravshipLaunch']/stages/li/endTriggers/li/roleIds</xpath>
+    <value>
+      <li>gravtechResearcher</li>
+      <li>gravtechEngineer</li>
+    </value>
+  </Operation>
+
   <!-- Add extra bonuses for new roles, thrusters, copilot console -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/RitualOutcomeEffectDef[defName="GravshipLaunch"]/comps</xpath>
@@ -84,8 +92,8 @@
           </li>
         </facilityQualityOffsets>
       </li>
-	   <li Class="VanillaGravshipExpanded.RitualOutcomeComp_AverageMaintenance">
-        <label>Average maintenance of the gravship</label>     
+      <li Class="VanillaGravshipExpanded.RitualOutcomeComp_AverageMaintenance">
+        <label>Average maintenance of the gravship</label>
         <curve>
           <points>
             <li>(0, -1)</li>

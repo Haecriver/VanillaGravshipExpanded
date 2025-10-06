@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
 using RimWorld.Planet;
@@ -112,6 +113,33 @@ namespace VanillaGravshipExpanded
     [HarmonyPatch(typeof(RitualOutcomeEffectWorker_GravshipLaunch), "Apply")]
     public static class RitualOutcomeEffectWorker_GravshipLaunch_Apply_Patch
     {
+        public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+        {
+            var anyThingWithDefMethod = AccessTools.Method(typeof(ListerThings), nameof(ListerThings.AnyThingWithDef));
+            var helperMethod = AccessTools.Method(typeof(RitualOutcomeEffectWorker_GravshipLaunch_Apply_Patch), nameof(CheckForGravAnchor));
+
+            foreach (var instruction in instructions)
+            {
+                if (instruction.Calls(anyThingWithDefMethod))
+                {
+                    yield return new CodeInstruction(OpCodes.Call, helperMethod);
+                }
+                else
+                {
+                    yield return instruction;
+                }
+            }
+        }
+
+        public static bool CheckForGravAnchor(ListerThings lister, ThingDef def)
+        {
+            if (def == ThingDefOf.GravAnchor)
+            {
+                return false;
+            }
+            return lister.AnyThingWithDef(def);
+        }
+
         public static void Postfix(float progress, Dictionary<Pawn, int> totalPresence, LordJob_Ritual jobRitual)
         {
             var engine = jobRitual.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;

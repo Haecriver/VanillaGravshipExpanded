@@ -29,6 +29,8 @@ namespace VanillaGravshipExpanded
         public Pawn ManningPawn => linkedTerminal?.MannableComp?.ManningPawn;
         
         public virtual float GravshipTargeting => linkedTerminal?.GravshipTargeting ?? 0f;
+        
+        protected virtual bool ShowNoLinkedTerminalOverlay => true;
 
         public Vector3 CastSource
         {
@@ -85,7 +87,10 @@ namespace VanillaGravshipExpanded
             }
 
             overlayDrawer = map.GetComponent<CustomOverlayDrawer>();
-            overlayDrawer.Enable(this, VGEDefOf.VGE_NoLinkedTerminalOverlay);
+            if (ShowNoLinkedTerminalOverlay)
+            {
+                overlayDrawer.Enable(this, VGEDefOf.VGE_NoLinkedTerminalOverlay);
+            }
         }
 
         public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)

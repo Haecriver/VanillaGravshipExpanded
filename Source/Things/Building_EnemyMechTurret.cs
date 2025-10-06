@@ -16,6 +16,8 @@ namespace VanillaGravshipExpanded
         public override float GravshipTargeting => 1f;
         public override bool CanSetForcedTarget => true;
         public override bool HideForceTargetGizmo => true;
+        
+        protected override bool ShowNoLinkedTerminalOverlay => false;
         private int GetTargetPriority(Thing t)
         {
             if (t is Building_GravshipTurret)
@@ -50,7 +52,6 @@ namespace VanillaGravshipExpanded
                     var target = GetTargetForMap(map);
                     if (target.IsValid)
                     {
-                        Log.Message("Found target: " + target.Thing);
                         if (target.Thing.Map != Map)
                         {
                             comp.StartAttack(new GlobalTargetInfo(target.Thing), target, this);

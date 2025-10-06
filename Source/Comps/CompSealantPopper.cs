@@ -15,21 +15,14 @@ namespace VanillaGravshipExpanded
     }
     public class CompSealantPopper : ThingComp
     {
-        private int nextCheckTick = 0;
         private CompProperties_SealantPopper Props => (CompProperties_SealantPopper)props;
 
         public override void CompTick()
         {
             base.CompTick();
-
-            if (Find.TickManager.TicksGame >= nextCheckTick)
+            if (parent.IsHashIntervalTick(Props.checkIntervalTicks) && IsRoomVacuum())
             {
-                nextCheckTick = Find.TickManager.TicksGame + Props.checkIntervalTicks;
-
-                if (IsRoomVacuum())
-                {
-                    TriggerSealantPopper();
-                }
+                TriggerSealantPopper();
             }
         }
 

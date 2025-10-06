@@ -28,7 +28,7 @@ namespace VanillaGravshipExpanded
         private CompPowerTrader powerComp;
 
         public float StoredHeat => storedHeat;
-        public bool IsActive => storedHeat > 0 && (powerComp?.PowerOn ?? false) && CanBeOn(out _);
+        public bool IsActive => StoredHeat < Props.maxHeat && (powerComp?.PowerOn ?? false) && CanBeOn(out _);
         private Graphic overlayGraphic;
         public Graphic OverlayGraphic => overlayGraphic ??= GraphicDatabase.Get<Graphic_Multi>(parent.Graphic.path + "_Overlay", parent.Graphic.Shader, parent.Graphic.drawSize, parent.Graphic.color);
 

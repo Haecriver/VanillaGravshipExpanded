@@ -15,7 +15,8 @@ namespace VanillaGravshipExpanded
             {
                 return true;
             }
-            return terrGrid.FoundationAt(c) != VGEDefOf.VGE_GravshipSubscaffold;
+            var foundationDef = terrGrid.FoundationAt(c);
+            return foundationDef != VGEDefOf.VGE_GravshipSubscaffold && foundationDef != VGEDefOf.VGE_MechanoidSubstructure;
         }
     }
 }

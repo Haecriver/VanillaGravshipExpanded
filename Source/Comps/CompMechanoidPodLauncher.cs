@@ -117,6 +117,10 @@ namespace VanillaGravshipExpanded
 
         public override string CompInspectStringExtra()
         {
+            if (podsLeft <= 0)
+            {
+                return "VGE_MechanoidPodsLeft".Translate(podsLeft);
+            }
             return "VGE_MechanoidPodGestation".Translate(pawnKind.LabelCap, ticksToSpawn.ToStringTicksToPeriod()) + "\n" + "VGE_MechanoidPodsLeft".Translate(podsLeft);
         }
 

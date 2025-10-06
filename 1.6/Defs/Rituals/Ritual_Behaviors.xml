@@ -45,6 +45,8 @@
             <roleIds>
               <li>pilot</li>
               <li>copilot</li>
+              <li>gravtechResearcher</li>
+              <li>gravtechEngineer</li>
             </roleIds>
           </li>
         </endTriggers>
@@ -129,6 +131,8 @@
             <roleIds>
               <li>pilot</li>
               <li>copilot</li>
+              <li>gravtechResearcher</li>
+              <li>gravtechEngineer</li>
             </roleIds>
           </li>
         </endTriggers>

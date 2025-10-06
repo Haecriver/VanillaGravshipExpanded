@@ -35,11 +35,7 @@ namespace VanillaGravshipExpanded
                     outcome.weight = 0;
                 }
             }
-            //DefDatabase<LandingOutcomeDef>.AllDefsListForReading
-            //    .Where(x => x.modContentPack.IsOfficialMod is false && x.weight > 0)
-            //    .ToList()
-            //    .ForEach((LandingOutcomeDef d) => d.Worker.ApplyOutcome(gravship)); // This is for dev testing only. Remove before release.
-
+            
             // Remove cooldown if there's a grav anchor
             if (__instance.map.listerThings.AnyThingWithDef(ThingDefOf.GravAnchor))
                 __instance.gravship.engine.cooldownCompleteTick = GenTicks.TicksGame;
@@ -67,7 +63,7 @@ namespace VanillaGravshipExpanded
         private static void ApplyGravDataYield(Gravship gravship, out int distanceTravelled)
         {
             var launchInfo = gravship.Engine?.launchInfo;
-            if (launchInfo == null)
+            if (launchInfo == null || LaunchInfo_ExposeData_Patch.launchSourceTiles.TryGetValue(launchInfo, out var launchSourceTile) is false)
             {
                 Log.Error($"[VGE] No launch info found, skipping gravdata yield");
                 distanceTravelled = 0;
@@ -83,7 +79,6 @@ namespace VanillaGravshipExpanded
             LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.TryGetValue(launchInfo, out var researcherPawn);
             Log.Message($"[VGE] Researcher pawn: {researcherPawn?.Name}");
 
-            var launchSourceTile = LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo];
             distanceTravelled = GravshipHelper.GetDistance(launchSourceTile, landingTile);
             Log.Message($"[VGE] Distance travelled: {distanceTravelled} - from {launchSourceTile} to {landingTile}");
 
@@ -242,6 +237,11 @@ namespace VanillaGravshipExpanded
                     if (blocker.Destroyed is false)
                     {
                         blocker.Destroy(DestroyMode.Vanish);
+                    }
+                    var comp = blocker.TryGetComp<CompExplosive>();
+                    if (comp != null)
+                    {
+                        comp.Detonate(map, ignoreUnspawned: true);
                     }
                 }
                 else
