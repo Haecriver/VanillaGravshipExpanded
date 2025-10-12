@@ -122,11 +122,7 @@
 		<canOverlapZones>false</canOverlapZones>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
 		<comps>
-			<li Class="CompProperties_GravshipFacility">
-				<requiresLOS>false</requiresLOS>
-				<maxSimultaneous>4</maxSimultaneous>
-				<maxDistance>500</maxDistance>
-			</li>
+			
 			<li Class="CompProperties_Power">
 				<compClass>CompPowerTrader</compClass>
 				<basePowerConsumption>100</basePowerConsumption>

@@ -1,5 +1,7 @@
 using RimWorld;
+using UnityEngine.UIElements;
 using Verse;
+using Verse.Noise;
 
 namespace VanillaGravshipExpanded
 {
@@ -9,7 +11,7 @@ namespace VanillaGravshipExpanded
         {
             if (req.HasThing && req.Thing.Map != null)
             {
-                if (req.Thing.Map.weatherManager.curWeather == VGEDefOf.VGE_ToxicDustCloud)
+                if (req.Thing.Map.weatherManager.curWeather == VGEDefOf.VGE_ToxicDustCloud && !req.Thing.Position.Roofed(req.Thing.Map))
                 {
                     val *= 5f;
                 }
@@ -20,7 +22,7 @@ namespace VanillaGravshipExpanded
         {
             if (req.HasThing && req.Thing.Map != null)
             {
-                if (req.Thing.Map.weatherManager.curWeather == VGEDefOf.VGE_ToxicDustCloud)
+                if (req.Thing.Map.weatherManager.curWeather == VGEDefOf.VGE_ToxicDustCloud && !req.Thing.Position.Roofed(req.Thing.Map))
                 {
                     return VGEDefOf.VGE_ToxicDustCloud.LabelCap + ": x5";
                 }

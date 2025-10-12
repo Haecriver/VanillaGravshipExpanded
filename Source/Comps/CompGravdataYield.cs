@@ -6,6 +6,8 @@ namespace VanillaGravshipExpanded
     {
         public float multiplier = 1f;
 
+        public float offset = 0f;
+
         public CompProperties_GravdataYield()
         {
             compClass = typeof(CompGravdataYield);
@@ -17,5 +19,7 @@ namespace VanillaGravshipExpanded
         public CompProperties_GravdataYield Props => (CompProperties_GravdataYield)props;
 
         public float Multiplier => Props.multiplier;
+
+        public float Offset => Props.offset;
     }
 }

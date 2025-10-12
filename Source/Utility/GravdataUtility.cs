@@ -18,6 +18,7 @@ namespace VanillaGravshipExpanded
                 if (comp != null)
                 {
                     yieldMultiplier *= comp.Multiplier;
+                    yieldMultiplier += comp.Offset;
                 }
             }
             return yieldMultiplier;
