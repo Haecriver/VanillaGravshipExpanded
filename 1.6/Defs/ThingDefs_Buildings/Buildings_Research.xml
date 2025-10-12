@@ -115,11 +115,12 @@
 			<ComponentIndustrial>2</ComponentIndustrial>
 			<ComponentSpacer>6</ComponentSpacer>
 		</costList>
-		<useHitPoints>false</useHitPoints>
+		
 		<statBases>
 			<Flammability>0.4</Flammability>
 			<Beauty>-5</Beauty>
 			<Mass>20</Mass>
+			<MaxHitPoints>120</MaxHitPoints>
 		</statBases>
 		<pathCost>20</pathCost>
 		<size>(2,1)</size>
