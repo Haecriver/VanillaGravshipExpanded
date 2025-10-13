@@ -90,7 +90,7 @@
 		<thing>VGE_MechanoidResourceProcessor</thing>
 	</KCSG.SymbolDef>
 	<KCSG.SymbolDef>
-		<defName>VGE_LargeMechanoidThruster</defName>
+		<defName>VGE_LargeMechanoidThruster_East</defName>
 		<thing>VGE_LargeMechanoidThruster</thing>
 		<rotation>East</rotation>
 	</KCSG.SymbolDef>
@@ -111,8 +111,18 @@
 		<thing>VGE_MechanoidGravEngine</thing>
 	</KCSG.SymbolDef>
 	<KCSG.SymbolDef>
-		<defName>VGE_LargeMechanoidThruster</defName>
+		<defName>VGE_LargeMechanoidThruster_South</defName>
 		<thing>VGE_LargeMechanoidThruster</thing>
 		<rotation>South</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>VGE_LargeMechanoidThruster_West</defName>
+		<thing>VGE_LargeMechanoidThruster</thing>
+		<rotation>West</rotation>
+	</KCSG.SymbolDef>
+	<KCSG.SymbolDef>
+		<defName>VGE_LargeMechanoidThruster_North</defName>
+		<thing>VGE_LargeMechanoidThruster</thing>
+		<rotation>North</rotation>
 	</KCSG.SymbolDef>
 </Defs>

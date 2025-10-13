@@ -5,45 +5,49 @@
 		<spawnConduits>false</spawnConduits>
 		<layouts>
 			<li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidResourceProcessor,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidGravEngine,.,.,.,.,VGE_MassDriver,.,.,.,.,.,.,.,.,VGE_HeavyChargeAnnihilator,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidResourceProcessor,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidResourceProcessor,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,VGE_LargeMechanoidThruster_East,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster_West,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidGravEngine,.,.,.,.,VGE_MassDriver,.,.,.,.,.,.,.,.,VGE_HeavyChargeAnnihilator,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster_West,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,VGE_LargeMechanoidThruster_East,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidResourceProcessor,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
 			</li>
 		</layouts>
 		<terrainGrid>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
 		</terrainGrid>
 		<forceGenerateRoof>true</forceGenerateRoof>
 		<modRequirements>
@@ -55,47 +59,47 @@
 		<spawnConduits>false</spawnConduits>
 		<layouts>
 			<li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,VGE_HeavyChargeAnnihilator,.,.,.,VGE_MassDriver,.,.,.,.,VGE_MechanoidGravEngine,.,.,.,VGE_MechanoidResourceProcessor,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster_South,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster_West,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,VGE_HeavyChargeAnnihilator,.,.,.,VGE_MassDriver,.,.,.,.,VGE_MechanoidGravEngine,.,.,.,VGE_MechanoidResourceProcessor,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster_West,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster_North,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
 			</li>
 		</layouts>
 		<terrainGrid>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.</li>
-			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.</li>
-			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
-			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
-			<li>.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.</li>
-			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
-			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
-			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.</li>
+			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
+			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
+			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.</li>
+			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
 		</terrainGrid>
 		<forceGenerateRoof>true</forceGenerateRoof>
 		<modRequirements>
@@ -107,65 +111,69 @@
 		<spawnConduits>false</spawnConduits>
 		<layouts>
 			<li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,VGE_MassDriver,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,VGE_MechanoidGravEngine,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,VGE_LargeMechanoidThruster,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,VGE_LargeMechanoidThruster,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,VGE_HeavyChargeAnnihilator,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,VGE_MechanoidResourceProcessor,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,VGE_LargeMechanoidThruster_South,.,.,.,.,.,.,.,.,VGE_LargeMechanoidThruster_South,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,VGE_MassDriver,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,VGE_MechanoidGravEngine,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,VGE_LargeMechanoidThruster_North,.,.,VGE_MechanoidAstrofuelNode,.,.,.,.,VGE_MechanoidAstrofuelNode,.,.,VGE_LargeMechanoidThruster_North,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,VGE_HeavyChargeAnnihilator,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,VGE_MechanoidResourceProcessor,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
 			</li>
 		</layouts>
 		<terrainGrid>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.</li>
-			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.</li>
-			<li>.,.,.,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,.,.,.</li>
-			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
-			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
-			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.</li>
-			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
+			<li>.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.</li>
+			<li>.,.,.,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,VGE_MechanoidSubstructure,.,.,.,.</li>
+			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.</li>
+			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.</li>
+			<li>.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,VGE_MechanoidSubstructure,.,.,.,VGE_MechanoidSubstructure,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
+			<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
 		</terrainGrid>
 		<forceGenerateRoof>true</forceGenerateRoof>
 		<modRequirements>
