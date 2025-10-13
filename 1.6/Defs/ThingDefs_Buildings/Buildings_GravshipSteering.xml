@@ -38,7 +38,7 @@
 		<hasInteractionCell>true</hasInteractionCell>
 		<interactionCellOffset>(0, 0, -1)</interactionCellOffset>
 		<researchPrerequisites>
-			<li>StandardGravtech</li>
+			<li>BasicGravtech</li>
 		</researchPrerequisites>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
 		<comps>
