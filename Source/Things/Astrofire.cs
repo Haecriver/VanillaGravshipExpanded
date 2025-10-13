@@ -266,7 +266,7 @@ namespace VanillaGravshipExpanded
                             {
                                 flammabilityMax = statValue;
                             }
-                            if (parent == null && fireSize > 0.4f && list[i].def.category == ThingCategory.Pawn && Rand.Chance(FireUtility.ChanceToAttachFireCumulative(list[i], 150f)))
+                            if (parent == null && fireSize > 0.4f && list[i].def.category == ThingCategory.Pawn && Rand.Chance(AstrofireUtility.ChanceToAttachAstrofireCumulative(list[i], 150f)))
                             {
                                 AstrofireUtility.TryAttachAstrofire(list[i], fireSize * 0.2f, instigator);
                             }
@@ -361,17 +361,17 @@ namespace VanillaGravshipExpanded
             {
                 BattleLogEntry_DamageTaken battleLogEntry_DamageTaken = new BattleLogEntry_DamageTaken(pawn, RulePackDefOf.DamageEvent_Fire);
                 Find.BattleLog.Add(battleLogEntry_DamageTaken);
-                DamageInfo dinfo = new DamageInfo(DamageDefOf.Flame, num * 2, 0f, -1f, instigator ?? this);
+                DamageInfo dinfo = new DamageInfo(VGEDefOf.VGE_AstrofireDamage, num * 2, 0f, -1f, instigator ?? this);
                 dinfo.SetBodyRegion(BodyPartHeight.Undefined, BodyPartDepth.Outside);
                 targ.TakeDamage(dinfo).AssociateWithLog(battleLogEntry_DamageTaken);
                 if (pawn.apparel != null && pawn.apparel.WornApparel.TryRandomElement(out Apparel result))
                 {
-                    result.TakeDamage(new DamageInfo(DamageDefOf.Flame, num * 2, 0f, -1f, instigator ?? this));
+                    result.TakeDamage(new DamageInfo(VGEDefOf.VGE_AstrofireDamage, num * 2, 0f, -1f, instigator ?? this));
                 }
             }
             else
             {
-                targ.TakeDamage(new DamageInfo(DamageDefOf.Flame, num * 2, 0f, -1f, instigator ?? this));
+                targ.TakeDamage(new DamageInfo(VGEDefOf.VGE_AstrofireDamage, num * 2, 0f, -1f, instigator ?? this));
             }
         }
 
