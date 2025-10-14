@@ -4,6 +4,7 @@ using Verse;
 
 namespace VanillaGravshipExpanded
 {
+    [HotSwappable]
     public class Verb_ShootWithWorldTargeting : Verb_LaunchProjectile
     {
         public override int ShotsPerBurst => base.BurstShotCount;
@@ -26,6 +27,13 @@ namespace VanillaGravshipExpanded
             var target = CurrentTarget;
             if (target.Cell.InBounds(caster.Map) is false)
             {
+                var turret = caster as Building_GravshipTurret;
+                var comp = caster.TryGetComp<CompWorldArtillery>();
+                if (comp.worldTarget.IsValid is false || comp.worldTarget.Map is null)
+                {
+                    turret.ResetForcedTarget();
+                    return false;
+                }
                 ThingDef projectile = Projectile;
                 ShootLine resultingLine;
                 TryFindShootLineFromTo(caster.Position, currentTarget, out resultingLine);
@@ -33,7 +41,6 @@ namespace VanillaGravshipExpanded
                 ProjectileHitFlags projectileHitFlags4 = ProjectileHitFlags.IntendedTarget;
                 Vector3 drawPos = caster.DrawPos;
                 Thing equipmentSource = base.EquipmentSource;
-                var turret = caster as Building_GravshipTurret;
                 projectile2.Launch(turret, drawPos, resultingLine.Dest, currentTarget, projectileHitFlags4, preventFriendlyFire, equipmentSource, null);
                 return true;
             }

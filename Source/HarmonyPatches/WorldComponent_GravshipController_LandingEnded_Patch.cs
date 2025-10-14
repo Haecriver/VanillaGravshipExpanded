@@ -193,7 +193,9 @@ namespace VanillaGravshipExpanded
                     }
                 }
             }
-
+            
+            var landmarkSpotted = DefDatabase<LaunchBoonDef>.GetNamedSilentFail("VGE_LandmarkSpotted");
+            landmarkSpotted.Worker.ApplyBoon(gravship);
         }
 
         private static void RegenScaffondingSections(Gravship gravship)

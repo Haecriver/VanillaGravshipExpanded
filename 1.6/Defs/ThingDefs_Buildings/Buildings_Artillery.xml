@@ -26,10 +26,6 @@
         <rotatable>false</rotatable>
         <comps>
             <li Class="CompProperties_Forbiddable" />
-            <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
-                <worldMapAttackRange>36</worldMapAttackRange>
-                <firingMode>PlanetToSpace, SpaceToSpace, SpaceToPlanet</firingMode>
-            </li>
         </comps>
         <building>
             <turretTopDrawSize>5</turretTopDrawSize>
@@ -122,6 +118,10 @@
                 <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
                 <showFuelGizmo>true</showFuelGizmo>
                 <initialFuelPercent>1</initialFuelPercent>
+            </li>
+            <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
+                <worldMapAttackRange>36</worldMapAttackRange>
+                <firingMode>GroundToSpace, GroundToGround, SpaceToSpace, SpaceToGround</firingMode>
             </li>
         </comps>
         <modExtensions>
@@ -330,6 +330,10 @@
                 <outOfFuelMessage>Missing rockets</outOfFuelMessage>
                 <initialFuelPercent>1</initialFuelPercent>
             </li>
+            <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
+                <worldMapAttackRange>36</worldMapAttackRange>
+                <firingMode>GroundToSpace, GroundToGround, SpaceToSpace, SpaceToGround</firingMode>
+            </li>
         </comps>
         <modExtensions>
             <li Class="VanillaGravshipExpanded.TurretExtension_RotationSpeed">
@@ -454,6 +458,10 @@
                 <idlePowerDraw>100</idlePowerDraw>
             </li>
             <li Class="CompProperties_Flickable" />
+            <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
+                <worldMapAttackRange>36</worldMapAttackRange>
+                <firingMode>GroundToSpace, SpaceToSpace, SpaceToGround</firingMode>
+            </li>
         </comps>
         <modExtensions>
             <li Class="VanillaGravshipExpanded.TurretExtension_RotationSpeed">

@@ -12,10 +12,10 @@ namespace VanillaGravshipExpanded
     public enum ArtilleryFiringMode
     {
         None = 0,
-        PlanetToPlanet = 1,
-        PlanetToSpace = 2,
+        GroundToGround = 1,
+        GroundToSpace = 2,
         SpaceToSpace = 4,
-        SpaceToPlanet = 8
+        SpaceToGround = 8
     }
 
     public class CompProperties_WorldArtillery : CompProperties
@@ -163,6 +163,17 @@ namespace VanillaGravshipExpanded
             Find.WorldTargeter.BeginTargeting(
                 (GlobalTargetInfo globalTarget) =>
                 {
+                    string failReason;
+                    if (!IsWithinRange(globalTarget, out failReason))
+                    {
+                        Messages.Message(failReason, MessageTypeDefOf.RejectInput, false);
+                        return false;
+                    }
+                    if (!IsValidTargetForFiringMode(globalTarget, out failReason))
+                    {
+                        Messages.Message(failReason, MessageTypeDefOf.RejectInput, false);
+                        return false;
+                    }
                     if (Find.WorldObjects.MapParentAt(globalTarget.Tile) is MapParent mapParent && mapParent.Map != null)
                     {
                         var map = mapParent.Map;
@@ -196,7 +207,6 @@ namespace VanillaGravshipExpanded
                         });
                         return true;
                     }
-                    Messages.Message("VGE_GravshipArtilleryNeedsVisibleMap".Translate(), MessageTypeDefOf.RejectInput, false);
                     return false;
                 },
                 true,
@@ -219,19 +229,7 @@ namespace VanillaGravshipExpanded
                     GenDraw.DrawWorldRadiusRing(planetTile, maxAttackDistance);
                 },
                 null,
-                delegate (GlobalTargetInfo t)
-                {
-                    var distance = GravshipHelper.GetDistance(parent.Map.Tile, t.Tile);
-                    if (distance > Props.worldMapAttackRange)
-                    {
-                        return false;
-                    }
-                    if (!IsValidTargetForFiringMode(t))
-                    {
-                        return false;
-                    }
-                    return true;
-                },
+                null,
                 null
             );
         }
@@ -282,36 +280,55 @@ namespace VanillaGravshipExpanded
             return new LocalTargetInfo(outCell);
         }
 
-        private bool IsValidTargetForFiringMode(GlobalTargetInfo target)
+        private bool IsValidTargetForFiringMode(GlobalTargetInfo target, out string failReason)
         {
             var sourceMap = parent.Map;
             if (sourceMap == null)
+            {
+                failReason = "VGE_GravshipArtilleryNeedsVisibleMap".Translate();
                 return false;
-            bool sourceIsOnPlanet = sourceMap.Tile.Valid && !sourceMap.Tile.LayerDef.isSpace;
-            bool targetIsOnPlanet = Find.WorldObjects.MapParentAt(target.Tile) is MapParent mapParent && mapParent.Map != null && mapParent.Map.Tile.Valid && !mapParent.Map.Tile.LayerDef.isSpace;
+            }
+            bool sourceIsOnGround = sourceMap.Tile.Valid && !sourceMap.Tile.LayerDef.isSpace;
+            bool targetIsOnGround = Find.WorldObjects.MapParentAt(target.Tile) is MapParent mapParent && mapParent.Map != null && mapParent.Map.Tile.Valid && !mapParent.Map.Tile.LayerDef.isSpace;
 
             ArtilleryFiringMode requiredMode;
-            if (sourceIsOnPlanet && targetIsOnPlanet)
+            string invalidModeKey;
+            if (sourceIsOnGround && targetIsOnGround)
             {
-                requiredMode = ArtilleryFiringMode.PlanetToPlanet;
+                requiredMode = ArtilleryFiringMode.GroundToGround;
+                invalidModeKey = "VGE_GravshipArtilleryInvalidGroundToGround";
             }
-            else if (sourceIsOnPlanet && !targetIsOnPlanet)
+            else if (sourceIsOnGround && !targetIsOnGround)
             {
-                requiredMode = ArtilleryFiringMode.PlanetToSpace;
+                requiredMode = ArtilleryFiringMode.GroundToSpace;
+                invalidModeKey = "VGE_GravshipArtilleryInvalidGroundToSpace";
             }
-            else if (!sourceIsOnPlanet && !targetIsOnPlanet)
+            else if (!sourceIsOnGround && !targetIsOnGround)
             {
                 requiredMode = ArtilleryFiringMode.SpaceToSpace;
+                invalidModeKey = "VGE_GravshipArtilleryInvalidSpaceToSpace";
             }
-            else if (!sourceIsOnPlanet && targetIsOnPlanet)
+            else if (!sourceIsOnGround && targetIsOnGround)
             {
-                requiredMode = ArtilleryFiringMode.SpaceToPlanet;
+                requiredMode = ArtilleryFiringMode.SpaceToGround;
+                invalidModeKey = "VGE_GravshipArtilleryInvalidSpaceToGround";
             }
             else
             {
+                failReason = "VGE_GravshipArtilleryInvalidFiringMode".Translate();
                 return false;
             }
-            return (Props.firingMode & requiredMode) != 0;
+            bool isValid = (Props.firingMode & requiredMode) != 0;
+            failReason = isValid ? null : invalidModeKey.Translate();
+            return isValid;
+        }
+
+        private bool IsWithinRange(GlobalTargetInfo target, out string failReason)
+        {
+            var distance = GravshipHelper.GetDistance(parent.Map.Tile, target.Tile);
+            bool isWithinRange = distance <= Props.worldMapAttackRange;
+            failReason = isWithinRange ? null : "VGE_GravshipArtilleryOutOfRange".Translate();
+            return isWithinRange;
         }
 
         public void Reset()

@@ -25,7 +25,7 @@
 		<leaveResourcesWhenKilled>false</leaveResourcesWhenKilled>
 		<altitudeLayer>BuildingOnTop</altitudeLayer>
 		<passability>Standable</passability>
-		<terrainAffordanceNeeded IsNull="True"/>
+		<terrainAffordanceNeeded IsNull="True" />
 		<pathCost>0</pathCost>
 		<building>
 			<isEdifice>false</isEdifice>
@@ -126,14 +126,28 @@
 						<li>(0.000,0.000,0.307)</li>
 					</South>
 					<East>
-						<li>(0.000,0.000,0.195)</li>
-						<li>(0.000,0.000,-0.455)</li>
+						<li>(0.195,1.000,0.195)</li>
+						<li>(0.195,0.666,0.755)</li>
 					</East>
 					<West>
-						<li>(-0.231,0.000,0.000)</li>
-						<li>(-0.209,0.000,0.733)</li>
+						<li>(-0.186,0.000,0.000)</li>
+						<li>(-0.186,0.000,0.733)</li>
 					</West>
 				</pawnOffsets>
+				<topGraphicOffsets>
+					<North>
+						<li>(0.000,0.000,0.000)</li>
+					</North>
+					<South>
+						<li>(0.000,0.000,0.000)</li>
+					</South>
+					<East>
+						<li>(0.000,0.000,0.000)</li>
+					</East>
+					<West>
+						<li>(0.000,0.000,0.000)</li>
+					</West>
+				</topGraphicOffsets>
 				<labelOffsets>
 					<Vertical>
 						<li>(0.000,0.000,-0.635)</li>
@@ -144,6 +158,7 @@
 						<li>(0.000,0.000,-0.321)</li>
 					</Horizontal>
 				</labelOffsets>
+				<preventSharingThought>True</preventSharingThought>
 			</li>
 		</comps>
 	</ThingDef>
@@ -410,8 +425,8 @@
 				<shortCircuitInRain>true</shortCircuitInRain>
 				<basePowerConsumption>200</basePowerConsumption>
 			</li>
-			<li Class="CompProperties_Flickable"/>
-			<li Class="CompProperties_Breakdownable"/>
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Breakdownable" />
 			<li Class="CompProperties_Usable" MayRequire="Ludeon.RimWorld.Biotech">
 				<useJob>TriggerObject</useJob>
 				<useLabel>Summon diabolus threat</useLabel>
@@ -469,8 +484,8 @@
 				<compClass>CompPowerTrader</compClass>
 				<basePowerConsumption>40</basePowerConsumption>
 			</li>
-			<li Class="CompProperties_Flickable"/>
-			<li Class="CompProperties_Breakdownable"/>
+			<li Class="CompProperties_Flickable" />
+			<li Class="CompProperties_Breakdownable" />
 		</comps>
 	</ThingDef>
 	<ThingDef ParentName="FurnitureWithQualityBase">

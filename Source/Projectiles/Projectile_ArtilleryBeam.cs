@@ -38,9 +38,13 @@ namespace VanillaGravshipExpanded
             else
             {
                 base.Launch(launcher, origin, usedTarget, intendedTarget, hitFlags, preventFriendlyFire, equipment, targetCoverDef);
+                var position = ExactPosition.ToIntVec3();
                 SpawnMote(originTarget, usedTarget);
                 def.projectile.flyOverhead = false;
-                base.Position = ExactPosition.ToIntVec3();
+                if (position.InBounds(base.Map))
+                {
+                    base.Position = ExactPosition.ToIntVec3();
+                }
                 ImpactSomething();
                 def.projectile.flyOverhead = true;
             }
@@ -63,6 +67,7 @@ namespace VanillaGravshipExpanded
         public void SpawnWorldProjectile()
         {
             Map targetMap = Find.Maps.Find(m => m.Tile == targetTile);
+            Log.Message("Target map: " + targetMap + " - Target tile: " + targetTile);
             var comp = launcher.TryGetComp<CompWorldArtillery>();
             var turret = launcher as Building_GravshipTurret;
             var globalTarget = target.HasThing ? new GlobalTargetInfo(target.Thing) : new GlobalTargetInfo(target.Cell, targetMap);

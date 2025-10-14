@@ -88,7 +88,7 @@
         <comps>
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
                 <worldMapAttackRange>36</worldMapAttackRange>
-                <firingMode>PlanetToSpace, SpaceToSpace, SpaceToPlanet</firingMode>
+                <firingMode>GroundToSpace, SpaceToSpace, SpaceToGround</firingMode>
             </li>
         </comps>
         <killedLeavings>

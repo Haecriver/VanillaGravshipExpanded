@@ -34,10 +34,8 @@ namespace VanillaGravshipExpanded
                     var engine = gravship.Engine;
                     var text = LetterText.Formatted(engine.RenamableLabel.Named("GRAVSHIP"), engine.launchInfo.pilot.Named("PILOT"), engine.launchInfo.copilot.Named("COPILOT"), selectedLandmark.label.Named("LANDMARK"));
                     SendStandardLetter(gravship.Engine, null, new LookTargets(landmarkTile), text);
-                    return;
                 }
             }
-            SendStandardLetter(gravship.Engine, null, gravship.Engine);
         }
 
         private bool FindValidLandmarkTile(PlanetTile originTile, out PlanetTile result)
