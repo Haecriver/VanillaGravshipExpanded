@@ -46,7 +46,15 @@ namespace VanillaGravshipExpanded
             base.SpawnSetup(map, respawningAfterLoad);
 
             overlayDrawer = map.GetComponent<CustomOverlayDrawer>();
-            overlayDrawer.Enable(this, VGEDefOf.VGE_NoLinkedTurretOverlay);
+            if (linkedTurret == null)
+                EnableOverlay();
+        }
+
+        public override void DeSpawn(DestroyMode mode = DestroyMode.Vanish)
+        {
+            base.DeSpawn(mode);
+
+            overlayDrawer = null;
         }
 
         public override void Tick()
@@ -129,7 +137,7 @@ namespace VanillaGravshipExpanded
             linkedTurret = turret;
             turret.LinkTo(this);
             SoundDefOf.Tick_High.PlayOneShotOnCamera();
-            overlayDrawer?.Disable(this, VGEDefOf.VGE_NoLinkedTurretOverlay);
+            DisableOverlay();
         }
 
         public void Unlink()
@@ -137,7 +145,7 @@ namespace VanillaGravshipExpanded
             linkedTurret?.Unlink();
             linkedTurret = null;
             SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-            overlayDrawer?.Enable(this, VGEDefOf.VGE_NoLinkedTurretOverlay);
+            EnableOverlay();
         }
 
         private void SelectLinkedTurret()
@@ -148,5 +156,9 @@ namespace VanillaGravshipExpanded
                 Find.Selector.Select(linkedTurret);
             }
         }
+
+        public void EnableOverlay() => overlayDrawer?.Enable(this, VGEDefOf.VGE_NoLinkedTurretOverlay);
+
+        public void DisableOverlay() => overlayDrawer?.Disable(this, VGEDefOf.VGE_NoLinkedTurretOverlay);
     }
 }

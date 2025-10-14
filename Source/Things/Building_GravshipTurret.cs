@@ -87,9 +87,9 @@ namespace VanillaGravshipExpanded
             }
 
             overlayDrawer = map.GetComponent<CustomOverlayDrawer>();
-            if (ShowNoLinkedTerminalOverlay)
+            if (linkedTerminal == null && ShowNoLinkedTerminalOverlay)
             {
-                overlayDrawer.Enable(this, VGEDefOf.VGE_NoLinkedTerminalOverlay);
+                EnableOverlay();
             }
         }
 
@@ -169,18 +169,23 @@ namespace VanillaGravshipExpanded
             linkedTerminal = terminal;
             terminal.linkedTurret = this;
             SoundDefOf.Tick_High.PlayOneShotOnCamera();
-            overlayDrawer?.Disable(this, VGEDefOf.VGE_NoLinkedTerminalOverlay);
+            DisableOverlay();
+            linkedTerminal.DisableOverlay();
         }
 
         public void Unlink()
         {
             if (linkedTerminal != null)
             {
+                linkedTerminal.EnableOverlay();
                 linkedTerminal.linkedTurret = null;
             }
             linkedTerminal = null;
             SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-            overlayDrawer?.Enable(this, VGEDefOf.VGE_NoLinkedTerminalOverlay);
+            if (ShowNoLinkedTerminalOverlay)
+            {
+                EnableOverlay();
+            }
         }
 
         private void SelectLinkedTerminal()
@@ -258,6 +263,10 @@ namespace VanillaGravshipExpanded
                 };
             }
         }
+
+        public void EnableOverlay() => overlayDrawer?.Enable(this, VGEDefOf.VGE_NoLinkedTerminalOverlay);
+
+        public void DisableOverlay() => overlayDrawer?.Disable(this, VGEDefOf.VGE_NoLinkedTerminalOverlay);
     }
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
