@@ -618,8 +618,8 @@
       </li>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>500</basePowerConsumption>
-        <idlePowerDraw>20</idlePowerDraw>
+        <basePowerConsumption>-500</basePowerConsumption>
+        <idlePowerDraw>-20</idlePowerDraw>
       </li>
       <li Class="CompProperties_AffectedByFacilities">
         <linkableFacilities>
