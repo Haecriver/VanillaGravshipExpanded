@@ -30,6 +30,9 @@
 		<li>OskarPotocki.VanillaFactionsExpanded.Core</li>
 
 	</loadAfter>
+  <incompatibleWith>
+    <li>Bulldog.VanillaChemfuelExpandedOdysseyPatch</li>
+  </incompatibleWith>
 
 	<packageId>vanillaexpanded.gravship</packageId>
 	<description>Text.todo
