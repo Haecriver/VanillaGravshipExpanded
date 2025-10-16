@@ -3,7 +3,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>VGE_CompactStove</defName>
 		<label>compact stove</label>
-		<description>A space-efficient, electrically-powered stove designed for use aboard gravships. Despite its smaller frame, it contains a high-efficiency cooktop and integrated prep surface, as well as a butchering slate.</description>
+		<description>A space-efficient, gravship-powered stove designed for use aboard gravships. Despite its smaller frame, it contains a high-efficiency cooktop and integrated prep surface, as well as a butchering slate. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable_HeatPush</thingClass>
 		<interactionCellIcon>DiningChair</interactionCellIcon>
 		<noRightClickDraftAttack>true</noRightClickDraftAttack>
@@ -52,12 +52,6 @@
 			<li>ITab_Bills</li>
 		</inspectorTabs>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>300</basePowerConsumption>
-			</li>
-			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_HeatPusher">
 				<compClass>CompHeatPusherPowered</compClass>
@@ -102,7 +96,7 @@
 	<ThingDef ParentName="BenchBase">
 		<defName>VGE_CompactDrugLab</defName>
 		<label>compact drug lab</label>
-		<description>A space-efficient, electrically-powered drug lab designed for use aboard gravships. Despite its smaller frame, it’s equipped with containers, heaters, and measurement devices for producing various drugs.</description>
+		<description>A space-efficient, gravship-powered drug lab designed for use aboard gravships. Despite its smaller frame, it’s equipped with containers, heaters, and measurement devices for producing various drugs. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<graphicData>
 			<texPath>Things/Structures/Production/GravshipDrugLab</texPath>
@@ -146,12 +140,6 @@
 			<li>ITab_Bills</li>
 		</inspectorTabs>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>150</basePowerConsumption>
-			</li>
-			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
@@ -188,7 +176,7 @@
 	<ThingDef ParentName="BenchBase">
 		<defName>VGE_CompactMachiningTable</defName>
 		<label>compact machining table</label>
-		<description>A space-efficient, electrically-powered machining table designed for use aboard gravships. Despite its smaller frame, it’s ideal for assembling machinery like guns and ammunition, or breaking down dead mechanoids.</description>
+		<description>A space-efficient, gravship-powered machining table designed for use aboard gravships. Despite its smaller frame, it’s ideal for assembling machinery like guns and ammunition, or breaking down dead mechanoids. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<graphicData>
 			<texPath>Things/Structures/Production/GravshipMachiningBench</texPath>
@@ -232,12 +220,6 @@
 			<li>ITab_Bills</li>
 		</inspectorTabs>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>300</basePowerConsumption>
-			</li>
-			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
@@ -277,7 +259,7 @@
 	<ThingDef ParentName="BenchBase">
 		<defName>VGE_CompactSmithy</defName>
 		<label>compact smithy</label>
-		<description>A space-efficient, electrically-powered smithy designed for use aboard gravships. Despite its smaller frame, it can be used to smith non-mechanical weapons and tools.</description>
+		<description>A space-efficient, gravship-powered smithy designed for use aboard gravships. Despite its smaller frame, it can be used to smith non-mechanical weapons and tools. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<graphicData>
 			<texPath>Things/Structures/Production/GravshipSmithy</texPath>
@@ -321,12 +303,6 @@
 			<li>ITab_Bills</li>
 		</inspectorTabs>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>180</basePowerConsumption>
-			</li>
-			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
@@ -365,8 +341,8 @@
 	</ThingDef>
 	<ThingDef ParentName="BenchBase">
 		<defName>VGE_CompactTailor</defName>
-		<label>compact tailor</label>
-		<description>A space-efficient, electrically-powered tailor bench designed for use aboard gravships. Despite its smaller frame, this workbench comes with a sewing machine for rapid tailoring of clothes. Can work without electricity at 50% of normal speed.</description>
+		<label>compact tailor bench</label>
+		<description>A space-efficient, gravship-powered tailor bench designed for use aboard gravships. Despite its smaller frame, this workbench comes with a sewing machine for rapid tailoring of clothes. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<graphicData>
 			<texPath>Things/Structures/Production/GravshipTailoringBench</texPath>
@@ -410,12 +386,6 @@
 			<li>ITab_Bills</li>
 		</inspectorTabs>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>100</basePowerConsumption>
-			</li>
-			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
@@ -452,7 +422,7 @@
 	<ThingDef ParentName="BenchBase">
 		<defName>VGE_CompactRefinery</defName>
 		<label>compact biofuel refinery</label>
-		<description>A space-efficient, electrically-powered biofuel refinery designed for use aboard gravships. Despite its smaller frame, it refines biological matter like wood or plant matter into chemfuel.</description>
+		<description>A space-efficient, gravship-powered biofuel refinery designed for use aboard gravships. Despite its smaller frame, it refines biological matter like wood or plant matter into chemfuel. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<graphicData>
 			<texPath>Things/Structures/Production/GravshipBiofuelRefinery</texPath>
@@ -496,12 +466,6 @@
 			<li>ITab_Bills</li>
 		</inspectorTabs>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>150</basePowerConsumption>
-			</li>
-			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
@@ -537,7 +501,7 @@
 	<ThingDef ParentName="BenchBase">
 		<defName>VGE_CompactFabBench</defName>
 		<label>compact fabrication bench</label>
-		<description>A space-efficient, electrically-powered fabrication bench designed for use aboard gravships. Despite its smaller frame, it’s equipped with advanced tools for producing technological marvels from simpler materials.</description>
+		<description>A space-efficient, gravship-powered fabrication bench designed for use aboard gravships. Despite its smaller frame, it’s equipped with advanced tools for producing technological marvels from simpler materials. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<graphicData>
 			<texPath>Things/Structures/Production/GravshipFabricationBench</texPath>
@@ -582,12 +546,6 @@
 			<li>ITab_Bills</li>
 		</inspectorTabs>
 		<comps>
-			<li Class="CompProperties_Power">
-				<compClass>CompPowerTrader</compClass>
-				<shortCircuitInRain>true</shortCircuitInRain>
-				<basePowerConsumption>250</basePowerConsumption>
-			</li>
-			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
