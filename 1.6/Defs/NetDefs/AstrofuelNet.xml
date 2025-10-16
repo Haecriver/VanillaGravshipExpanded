@@ -34,7 +34,7 @@
   <ThingDef ParentName="BuildingBase">
     <defName>VGE_AstrofuelPipe</defName>
     <label>astrofuel pipe</label>
-    <description>A large pipe for transporting high-grade astrofuel around. Can be placed under walls and other buildings.</description>
+    <description>A large pipe for transporting high-grade astrofuel around. Unlike other pipes, it’s big, bulky, acts as cover and can’t be stood on. Astrofuel pipes can’t be placed on workbench interaction spots and in doorways.</description>
     <thingClass>PipeSystem.Building_Pipe</thingClass>
     <category>Building</category>
     <pathCost>30</pathCost>
