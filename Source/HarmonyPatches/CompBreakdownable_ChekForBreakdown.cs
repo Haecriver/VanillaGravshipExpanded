@@ -4,7 +4,7 @@ using Verse.AI;
 
 namespace VanillaGravshipExpanded
 {
-    [HarmonyPatch(typeof(CompBreakdownable), "ChekForBreakdown")]
+    [HarmonyPatch(typeof(CompBreakdownable), nameof(CompBreakdownable.CheckForBreakdown))]
     public static class VanillaGravshipExpanded_CompBreakdownable_ChekForBreakdown_Patch
     {
         public static bool Prefix(CompBreakdownable __instance)
