@@ -191,7 +191,9 @@
 				</affectedDamageDefs>
 			</li>
 		</comps>
-		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
+		<placeWorkers>
+			<li>VanillaGravshipExpanded.PlaceWorker_OnSubstructureOrSubscaffold</li>
+		</placeWorkers>
 		<designationCategory>Odyssey</designationCategory>
 		<uiOrder>2100</uiOrder>
 		<designationHotKey>Misc5</designationHotKey>

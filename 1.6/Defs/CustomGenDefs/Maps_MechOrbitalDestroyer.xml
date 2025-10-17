@@ -3,6 +3,7 @@
 	<KCSG.StructureLayoutDef>
 		<defName>VGE_MechOrbitalDestroyer_Alpha</defName>
 		<spawnConduits>false</spawnConduits>
+		<randomRotation>true</randomRotation>
 		<layouts>
 			<li>
 				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
@@ -57,6 +58,7 @@
 	<KCSG.StructureLayoutDef>
 		<defName>VGE_MechOrbitalDestroyer_Beta</defName>
 		<spawnConduits>false</spawnConduits>
+		<randomRotation>true</randomRotation>
 		<layouts>
 			<li>
 				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>
@@ -109,6 +111,7 @@
 	<KCSG.StructureLayoutDef>
 		<defName>VGE_MechOrbitalDestroyer_Gamma</defName>
 		<spawnConduits>false</spawnConduits>
+		<randomRotation>true</randomRotation>
 		<layouts>
 			<li>
 				<li>.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.</li>

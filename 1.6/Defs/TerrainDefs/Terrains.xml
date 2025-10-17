@@ -74,7 +74,7 @@
 		<fertility>0</fertility>
 		<edgeType>Fade</edgeType>
 		<avoidWander>true</avoidWander>
-		<pathCost>52</pathCost>
+		<pathCost>9</pathCost>
 		<renderPrecedence>400</renderPrecedence>
 		<constructEffect>ConstructMetal</constructEffect>
 		<isPaintable>true</isPaintable>

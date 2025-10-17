@@ -1,4 +1,4 @@
-﻿using RimWorld;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -10,7 +10,7 @@ public class CompPowerPlantGravEngine : CompPowerPlant
     {
         get
         {
-            if (parent is not Building_GravEngine gravEngine)
+            if (parent is not Building_GravEngine gravEngine || UnityData.IsInMainThread is false || Current.ProgramState == ProgramState.MapInitializing)
                 return 0f;
 
             var count = gravEngine.ValidSubstructure.Count;

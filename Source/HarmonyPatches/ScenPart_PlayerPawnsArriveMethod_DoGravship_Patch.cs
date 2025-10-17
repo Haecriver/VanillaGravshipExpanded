@@ -1,9 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
+using System.Linq;
 using HarmonyLib;
+using KCSG;
 using PipeSystem;
 using RimWorld;
+using RimWorld.Planet;
+using RimWorld.SketchGen;
 using Verse;
 
 namespace VanillaGravshipExpanded;
@@ -11,43 +14,83 @@ namespace VanillaGravshipExpanded;
 [HarmonyPatch(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.DoGravship))]
 public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
 {
-    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+    public static bool Prefix(Map map, List<Thing> startingItems)
     {
-        var targetLoc = -1;
-        var patchCount = 0;
-
-        foreach (var instr in instructions)
+        List<CellRect> orGenerateVar = MapGenerator.GetOrGenerateVar<List<CellRect>>("UsedRects");
+        map.regionAndRoomUpdater.Enabled = true;
+        IntVec3 playerStartSpot = MapGenerator.PlayerStartSpot;
+        var cellRect = CellRect.CenteredOn(playerStartSpot, VGEDefOf.VGE_StartingGravjumper.Sizes.x, VGEDefOf.VGE_StartingGravjumper.Sizes.z);
+        var hashSet = cellRect.Cells.ToHashSet();
+        if (!MapGenerator.PlayerStartSpotValid)
         {
-            // Will catch the local index changing, but not if it's 0 through 3 (as those don't have an operand)
-            if (instr.IsStloc() && instr.operand is LocalBuilder builder && builder.LocalType == typeof(List<Thing>))
-                targetLoc = builder.LocalIndex;
-            // Insert before the end
-            else if (instr.opcode == OpCodes.Ret)
+            GenStep_ReserveGravshipArea.SetStartSpot(map, hashSet, orGenerateVar);
+            playerStartSpot = MapGenerator.PlayerStartSpot;
+        }
+        GravshipPlacementUtility.ClearAreaForGravship(map, playerStartSpot, hashSet);
+        List<Thing> list = new List<Thing>();
+        cellRect = CellRect.CenteredOn(playerStartSpot, cellRect.Width, cellRect.Height);
+        GenOption.GetAllMineableIn(cellRect, map);
+        LayoutUtils.CleanRect(VGEDefOf.VGE_StartingGravjumper, map, cellRect, true);
+        Log.Message("Faction.OfPlayer: " + Faction.OfPlayer);
+        VGEDefOf.VGE_StartingGravjumper.Generate(cellRect, map, Faction.OfPlayer);
+
+        orGenerateVar.Add(cellRect);
+        foreach (Pawn startingAndOptionalPawn in Find.GameInitData.startingAndOptionalPawns)
+        {
+            if (!cellRect.TryRandomElement((IntVec3 c) => c.Standable(map) && (c.GetTerrain(map)?.IsSubstructure ?? false), out var result))
             {
-                if (targetLoc < 0)
-                    throw new Exception("Patching gravship start failed - could not find list of spawned buildings. Gravships will start with empty fuel tanks.");
-
-                // Load the list of generated gravship buildings. Also move labels from return instruction, so we don't skip over our inserted code.
-                yield return CodeInstruction.LoadLocal(targetLoc).MoveLabelsFrom(instr);
-                // Call our method with the list of generated buildings.
-                yield return CodeInstruction.Call(typeof(ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch), nameof(RefillStorageTanks));
-                patchCount++;
+                Log.Error("Could not find a valid spawn location for pawn " + startingAndOptionalPawn.Name);
             }
-
-            yield return instr;
+            else
+            {
+                GenPlace.TryPlaceThing(startingAndOptionalPawn, result, map, ThingPlaceMode.Near);
+            }
         }
-
-        const int expectedPatches = 1;
-        if (patchCount != expectedPatches)
-            Log.Error($"Patching gravship start failed - unexpected amount of patches. Expected patches: {expectedPatches}, actual patch amount: {patchCount}. There may be some issues.");
-    }
-
-    private static void RefillStorageTanks(List<Thing> things)
-    {
-        foreach (var thing in things)
+        foreach (Thing startingItem in startingItems)
         {
-            var comp = thing.TryGetComp<CompResourceStorage>();
-            comp?.AddResource(comp.Props.storageCapacity);
+            if (startingItem.def.CanHaveFaction)
+            {
+                startingItem.SetFactionDirect(Faction.OfPlayer);
+            }
+            int num = startingItem.stackCount;
+            int num2 = 99;
+            while (num > 0 && num2-- > 0)
+            {
+                if (list.Where((Thing t) => t.def == ThingDefOf.Shelf || t.def == ThingDefOf.ShelfSmall).TryRandomElement(out var result2))
+                {
+                    IntVec3 randomCell = result2.OccupiedRect().RandomCell;
+                    Thing thing = startingItem.SplitOff(Math.Min(startingItem.def.stackLimit, num));
+                    num -= thing.stackCount;
+                    GenPlace.TryPlaceThing(thing, randomCell, map, ThingPlaceMode.Near);
+                }
+            }
         }
+        foreach (Thing item in list)
+        {
+            if (item.def == ThingDefOf.Door)
+            {
+                MapGenerator.rootsToUnfog.AddRange(GenAdj.CellsAdjacentCardinal(item));
+            }
+            if (item.TryGetComp(out CompRefuelable comp))
+            {
+                comp.Refuel(comp.Props.fuelCapacity);
+            }
+            if (item is Building_GravEngine building_GravEngine)
+            {
+                building_GravEngine.silentlyActivate = true;
+            }
+            if (item.TryGetComp<CompResourceStorage>() is CompResourceStorage compResourceStorage)
+            {
+                compResourceStorage.AddResource(compResourceStorage.Props.storageCapacity);
+            }
+        }
+        foreach (IntVec3 item2 in cellRect)
+        {
+            if (item2.GetTerrain(map) == TerrainDefOf.Substructure)
+            {
+                map.areaManager.Home[item2] = true;
+            }
+        }
+        return false;
     }
 }

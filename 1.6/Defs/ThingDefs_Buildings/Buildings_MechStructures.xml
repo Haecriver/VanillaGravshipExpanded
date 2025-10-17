@@ -26,9 +26,6 @@
         <fillPercent>0.6</fillPercent>
         <tickerType>Normal</tickerType>
         <comps>
-            <li Class="CompProperties_CanBeDormant">
-                <compClass>CompMechanoid</compClass>
-            </li>
             <li Class="CompProperties_WakeUpDormant">
                 <wakeUpSound>MechanoidsWakeUp</wakeUpSound>
             </li>
@@ -88,7 +85,11 @@
         <comps>
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
                 <worldMapAttackRange>36</worldMapAttackRange>
-                <firingMode>GroundToSpace, SpaceToSpace, SpaceToGround</firingMode>
+                <firingMode>GroundToSpace, SpaceToGround, SpaceToSpace, GroundToGround</firingMode>
+            </li>
+            <li Class="CompProperties_CanBeDormant">
+                <compClass>CompMechanoid</compClass>
+                <startsDormant>true</startsDormant>
             </li>
         </comps>
         <killedLeavings>
