@@ -312,7 +312,7 @@
 		<minifiedDef IsNull="True"/>
 		<thingCategories Inherit="False"/>
 		<graphicData>
-			<texPath>Things/PipeNetworks/Astrofuel/AstrofuelDrain</texPath>
+			<texPath>Things/PipeNetworks/Astrofuel/AstrofuelTap</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<damageData>
 				<cornerTL>Damage/Corner</cornerTL>
@@ -385,7 +385,7 @@
 		<minifiedDef IsNull="True"/>
 		<thingCategories Inherit="False"/>
 		<graphicData>
-			<texPath>Things/PipeNetworks/Astrofuel/AstrofuelTap</texPath>
+			<texPath>Things/PipeNetworks/Astrofuel/AstrofuelDrain</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 			<damageData>
 				<cornerTL>Damage/Corner</cornerTL>
