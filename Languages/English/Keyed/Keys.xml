@@ -51,6 +51,8 @@
     <VGE_IneffectiveOxygenPackDesc>Someone is wearing an oxygen pack without any vacuum-protective apparel. The oxygen pack will not work. Consider equipping other vacuum-resistant apparel.\n\nColonists without vacuum-protective apparel:</VGE_IneffectiveOxygenPackDesc>
     <VGE_EquippingIneffectiveOxygenPack>{PAWN} is equipping an oxygen pack without wearing vacuum resistant gear. {APPAREL_labelNoParenthesis} will not work.</VGE_EquippingIneffectiveOxygenPack>
     <VGE_EquippingOnOtherIneffectiveOxygenPack>{PAWN} is equipping an oxygen pack on {TARGET} without wearing vacuum resistant gear. {APPAREL_labelNoParenthesis} will not work.</VGE_EquippingOnOtherIneffectiveOxygenPack>
+    <VGE_Refill>Reload {GEAR_labelShort} with {AMMO_label}</VGE_Refill>
+    <VGE_RefillCannotCarryEnough>Cannot carry enough {AMMO_label} to refill 1 charge.</VGE_RefillCannotCarryEnough>
 
     <VGE_HeatsinkHeatStored>{0} / {1} heat units</VGE_HeatsinkHeatStored>
     <VGE_AbsorbGravheat>Absorb gravheat</VGE_AbsorbGravheat>
