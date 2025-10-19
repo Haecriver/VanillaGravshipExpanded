@@ -157,18 +157,10 @@ namespace VanillaGravshipExpanded
 
         private static void RememberResearcher(LordJob_Ritual lordJob)
         {
-            Pawn pawn = null;
-            if (lordJob.ritual.def == VGEDefOf.VGE_GravjumperLaunch)
-            {
-                pawn = lordJob.assignments.AssignedPawns("pilot").FirstOrDefault();
-            }
-            else if (lordJob.ritual.def == PreceptDefOf.GravshipLaunch || lordJob.ritual.def == VGEDefOf.VGE_GravhulkLaunch)
-            {
-                pawn = lordJob.assignments.AssignedPawns("gravtechResearcher").FirstOrDefault();
-            }
+            Pawn pawn = GravdataUtility.GetResearcher(lordJob?.assignments);
             if (pawn != null)
             {
-                var engine = lordJob.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;
+                var engine = lordJob!.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;
                 LaunchInfo_ExposeData_Patch.gravtechResearcherPawns[engine.launchInfo] = pawn;
             }
             if (pawn != null)

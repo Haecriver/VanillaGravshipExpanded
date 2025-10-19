@@ -43,5 +43,25 @@ namespace VanillaGravshipExpanded
             Log.ResetMessageCount();
             return gravdataYield;
         }
+
+        public static Pawn GetResearcher(RitualRoleAssignments assignments)
+        {
+            var role = GetResearcherRole(assignments);
+            if (role == null)
+                return null;
+
+            return assignments.AssignedPawns(role).FirstOrDefault();
+        }
+
+        public static RitualRole GetResearcherRole(RitualRoleAssignments assignments)
+        {
+            // Just for safety
+            if (assignments == null)
+                return null;
+
+            // If the ritual type allows for reasearcher, use that role.
+            // If the ritual doesn't allow for it (like gravjump), use pilot role instead.
+            return assignments.GetRole("gravtechResearcher") ?? assignments.GetRole("pilot");
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace VanillaGravshipExpanded
 
                 if (gravshipState != null)
                 {
-                    Pawn researcherPawn = __instance.assignments.AssignedPawns("gravtechResearcher").FirstOrDefault();
+                    Pawn researcherPawn = GravdataUtility.GetResearcher(__instance.assignments);
                     float distanceTravelled = GravshipHelper.GetDistance(engine.Map.Tile, gravshipState.targetTile);
                     List<QualityFactor> list = __instance.PopulateQualityFactors(out var qualityRange);
                     var quality = __instance.PredictedQuality(list).min;
