@@ -142,7 +142,8 @@ namespace VanillaGravshipExpanded
 
         public static void Postfix(float progress, Dictionary<Pawn, int> totalPresence, LordJob_Ritual jobRitual)
         {
-            var engine = jobRitual.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;
+            var engine = jobRitual.selectedTarget.Thing?.TryGetComp<CompPilotConsole>()?.engine;
+            if (engine is null) return;
             var launchInfo = engine.launchInfo;
             LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo] = engine.Map.Tile;
             Log.Message($"[VGE] Launch source tile set to: {engine.Map.Tile}");
