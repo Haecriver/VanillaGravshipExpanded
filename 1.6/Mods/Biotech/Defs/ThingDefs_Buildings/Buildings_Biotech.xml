@@ -13,6 +13,7 @@
             <drawSize>(1, 1)</drawSize>
         </graphicData>
         <statBases>
+            <WorkToBuild>1600</WorkToBuild>
             <MaxHitPoints>80</MaxHitPoints>
             <Flammability>0.7</Flammability>
             <Beauty>0</Beauty>
@@ -25,6 +26,8 @@
         <fillPercent>0.4</fillPercent>
         <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
         <designationCategory>VGE_Combat</designationCategory>
+        <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+        <constructEffect>ConstructMetal</constructEffect>
         <researchPrerequisites>
             <li>VGE_GravshipWeaponry</li>
             <li>HighMechtech</li>
