@@ -697,6 +697,7 @@
 				<lowPowerWhenRefuelableEmpty>true</lowPowerWhenRefuelableEmpty>
 				<soundAmbientReceivingResource>Recipe_Cremate</soundAmbientReceivingResource>
 				<pipeNet>VGE_AstrofuelNet</pipeNet>
+        <resourceOffOverlay>false</resourceOffOverlay>
 				<!-- 0.(6) per 100 ticks, or 0.00(6) per tick, or 1 per 150 ticks, or 400 per day. -->
 				<consumptionPerTick>-0.66666666666666666666666666666667</consumptionPerTick>
 			</li>
