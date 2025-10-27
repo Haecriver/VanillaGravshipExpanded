@@ -115,12 +115,13 @@
 			<ComponentIndustrial>2</ComponentIndustrial>
 			<ComponentSpacer>6</ComponentSpacer>
 		</costList>
-		
+		<tickerType>Normal</tickerType>
 		<statBases>
 			<Flammability>0.4</Flammability>
 			<Beauty>-5</Beauty>
 			<Mass>20</Mass>
 			<MaxHitPoints>120</MaxHitPoints>
+			<VGE_MaintenanceSensitivity>3</VGE_MaintenanceSensitivity>
 		</statBases>
 		<pathCost>20</pathCost>
 		<size>(2,1)</size>
@@ -139,6 +140,7 @@
 				<offset>1</offset>
 			</li>
 			<li Class="CompProperties_Breakdownable"/>
+			<li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable"></li>
 		</comps>
 		<tradeTags>
 			<li>GravshipUpgrade</li>
