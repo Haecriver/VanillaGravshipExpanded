@@ -37,5 +37,7 @@ namespace VanillaGravshipExpanded
         public static TerrainDef VGE_FakeTerrain;
         public static ThingDef VGE_LandingStructure;
 
+        public static ResearchProjectDef Electricity;
+
     }
 }
