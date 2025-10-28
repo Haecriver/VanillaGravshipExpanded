@@ -11,6 +11,7 @@
 		</resource>
 		<pipeDefs>
 			<li>VGE_OxygenPipe</li>
+			<li>VGE_HiddenOxygenPipe</li>
 		</pipeDefs>
 		<noLinkedGraphicDefs>
 			<li>OxygenPump</li>

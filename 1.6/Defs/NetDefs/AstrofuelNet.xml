@@ -11,6 +11,7 @@
 		</resource>
 		<pipeDefs>
 			<li>VGE_AstrofuelPipe</li>
+			<li>VGE_HiddenAstrofuelPipe</li>
 		</pipeDefs>
 		<noLinkedGraphicDefs>
 			<li>VGE_AstrofuelValve</li>
