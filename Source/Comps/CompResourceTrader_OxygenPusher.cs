@@ -72,7 +72,7 @@ public class CompResourceTrader_OxygenPusher : CompResourceTrader
             return;
         }
 
-        var maxConsumption = Props.consumptionPerTick / 100f * GenTicks.TickRareInterval;
+        var maxConsumption = Props.consumptionPerTick * (60f * CompOxygenPusher.IntervalToPerSecond);
         var consumption = maxConsumption;
         // Don't draw too much
         if (consumption > available)

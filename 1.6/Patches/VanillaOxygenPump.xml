@@ -8,7 +8,8 @@
       <li Class="VanillaGravshipExpanded.CompProperties_ResourceTrader_OxygenPusher">
         <!-- CompProperties_ResourceTrader props. -->
         <pipeNet>VGE_OxygenNet</pipeNet>
-        <consumptionPerTick>0.4</consumptionPerTick>
+        <!-- 1 per second divided by 60 ticks per second -->
+        <consumptionPerTick>0.01666666666666666666666666666667</consumptionPerTick>
         <visualOnlyConsumption>true</visualOnlyConsumption>
         <!-- Custom CompProperties_ResourceTrader_OxygenPusher props. -->
         <lowPowerConsumptionFactor>0.1</lowPowerConsumptionFactor>
