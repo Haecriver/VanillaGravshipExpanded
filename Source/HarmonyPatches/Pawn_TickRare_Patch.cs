@@ -23,7 +23,7 @@ public static class Pawn_TickRare_Patch
                 return;
 
             var change = 100f / room.CellCount * (1f - resistance) * __instance.BodySize * (ChangePerInterval * 0.2f);
-            room.Vacuum += change;
+            room.Vacuum = room.UnsanitizedVacuum + change;
         }
     }
 }
