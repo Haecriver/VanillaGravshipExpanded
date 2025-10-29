@@ -7,7 +7,7 @@ namespace VanillaGravshipExpanded
 {
     public class GameCondition_DisableElectricityAndHeatWave : GameCondition
     {
-        public override bool ElectricityDisabled => true;
+        public override bool ElectricityDisabled => false;
 
 
 
