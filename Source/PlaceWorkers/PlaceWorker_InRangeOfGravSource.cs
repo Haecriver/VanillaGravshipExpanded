@@ -10,9 +10,12 @@ namespace VanillaGravshipExpanded
         {
             Map currentMap = Find.CurrentMap;
             CompProperties_GravshipFacility compProperties = def.GetCompProperties<CompProperties_GravshipFacility>();
-            foreach (Thing item in currentMap.listerThings.ThingsOfDef(ThingDefOf.GravEngine))
+            foreach (var building in compProperties.linkableBuildings)
             {
-                GenDraw.DrawLineBetween(center.ToVector3Shifted(), item.TrueCenter(), center.InHorDistOf(item.Position, compProperties.maxDistance) ? SimpleColor.Green : SimpleColor.Red);
+                foreach (Thing item in currentMap.listerThings.ThingsOfDef(building))
+                {
+                    GenDraw.DrawLineBetween(center.ToVector3Shifted(), item.TrueCenter(), center.InHorDistOf(item.Position, compProperties.maxDistance) ? SimpleColor.Green : SimpleColor.Red);
+                }
             }
             foreach (Thing item2 in currentMap.listerThings.ThingsOfDef(VGEDefOf.VGE_GravFieldAmplifier))
             {
@@ -27,11 +30,14 @@ namespace VanillaGravshipExpanded
                 return AcceptanceReport.WasRejected;
             }
             CompProperties_GravshipFacility compProperties = thingDef.GetCompProperties<CompProperties_GravshipFacility>();
-            foreach (Thing item in map.listerThings.ThingsOfDef(ThingDefOf.GravEngine))
+            foreach (var building in compProperties.linkableBuildings)
             {
-                if (loc.InHorDistOf(item.Position, compProperties.maxDistance))
+                foreach (Thing item in map.listerThings.ThingsOfDef(building))
                 {
-                    return AcceptanceReport.WasAccepted;
+                    if (loc.InHorDistOf(item.Position, compProperties.maxDistance))
+                    {
+                        return AcceptanceReport.WasAccepted;
+                    }
                 }
             }
             foreach (Thing item2 in map.listerThings.ThingsOfDef(VGEDefOf.VGE_GravFieldAmplifier))
