@@ -15,7 +15,7 @@ namespace VanillaGravshipExpanded
  
         public override IEnumerable<FiringIncident> MakeIntervalIncidents(IIncidentTarget target)
         {
-            if (!VGEDefOf.Electricity.IsFinished) {
+            if (!Props.research.IsFinished) {
                 yield break;
             }
             else
