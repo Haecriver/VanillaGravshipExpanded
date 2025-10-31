@@ -27,12 +27,12 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
             playerStartSpot = MapGenerator.PlayerStartSpot;
         }
         GravshipPlacementUtility.ClearAreaForGravship(map, playerStartSpot, hashSet);
-        List<Thing> list = new List<Thing>();
+        HashSet<Thing> list = new HashSet<Thing>();
         cellRect = CellRect.CenteredOn(playerStartSpot, cellRect.Width, cellRect.Height);
         GenOption.GetAllMineableIn(cellRect, map);
         LayoutUtils.CleanRect(VGEDefOf.VGE_StartingGravjumper, map, cellRect, true);
         Log.Message("Faction.OfPlayer: " + Faction.OfPlayer);
-        VGEDefOf.VGE_StartingGravjumper.Generate(cellRect, map, Faction.OfPlayer);
+        VGEDefOf.VGE_StartingGravjumper.Generate(cellRect, map, list, Faction.OfPlayer);
 
         orGenerateVar.Add(cellRect);
         foreach (Pawn startingAndOptionalPawn in Find.GameInitData.startingAndOptionalPawns)
@@ -56,7 +56,7 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
             int num2 = 99;
             while (num > 0 && num2-- > 0)
             {
-                if (list.Where((Thing t) => t.def == ThingDefOf.Shelf || t.def == ThingDefOf.ShelfSmall).TryRandomElement(out var result2))
+                if (list.Where((Thing t) => t.def == ThingDefOf.Shelf || t.def == ThingDefOf.ShelfSmall || t.def == VGEDefOf.VGE_GravshipShelf).TryRandomElement(out var result2))
                 {
                     IntVec3 randomCell = result2.OccupiedRect().RandomCell;
                     Thing thing = startingItem.SplitOff(Math.Min(startingItem.def.stackLimit, num));
