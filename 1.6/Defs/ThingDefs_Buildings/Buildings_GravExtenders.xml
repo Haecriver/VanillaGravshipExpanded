@@ -58,7 +58,7 @@
         </statOffsets>
         <requiresLOS>false</requiresLOS>
         <maxSimultaneous>4</maxSimultaneous>
-        <maxDistance>18.9</maxDistance>
+        <maxDistance>500</maxDistance>
         <onlyRequiresLooseConnection>true</onlyRequiresLooseConnection>
       </li>
 	   <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">

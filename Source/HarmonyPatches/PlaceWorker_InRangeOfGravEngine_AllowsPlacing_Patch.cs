@@ -9,5 +9,5 @@ namespace VanillaGravshipExpanded;
 public class PlaceWorker_InRangeOfGravEngine_AllowsPlacing_Patch
 {
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr, MethodBase baseMethod)
-        => PlaceWorker_InRangeOfGravEngine_DrawGhost_Patch.ListAllAllowedGravEngines(instr, baseMethod, 1);
+        => PlaceWorker_InRangeOfGravEngine_DrawGhost_Patch.ListAllAllowedGravEngines(instr, baseMethod, 1, 3);
 }

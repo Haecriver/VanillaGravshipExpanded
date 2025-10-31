@@ -34,6 +34,14 @@
         </value>
     </Operation>
 
+    <!-- Max distance is now determined by whatever it is trying to link to. -->
+    <Operation Class="PatchOperationReplace">
+        <xpath>Defs/ThingDef[defName="GravFieldExtender"]/comps/li[@Class="CompProperties_GravshipFacility"]/maxDistance</xpath>
+        <value>
+            <maxDistance>500</maxDistance>
+        </value>
+    </Operation>
+
     <Operation Class="PatchOperationReplace">
         <xpath>Defs/ThingDef[defName="GravFieldExtender"]/description</xpath>
         <value>

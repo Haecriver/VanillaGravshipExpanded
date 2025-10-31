@@ -14,12 +14,14 @@ namespace VanillaGravshipExpanded
             {
                 foreach (Thing item in currentMap.listerThings.ThingsOfDef(building))
                 {
-                    GenDraw.DrawLineBetween(center.ToVector3Shifted(), item.TrueCenter(), center.InHorDistOf(item.Position, compProperties.maxDistance) ? SimpleColor.Green : SimpleColor.Red);
+                    var distance = item.TryGetComp<CompSubstructureFootprint>()?.Props.radius ?? compProperties.maxDistance;
+                    GenDraw.DrawLineBetween(center.ToVector3Shifted(), item.TrueCenter(), center.InHorDistOf(item.Position, distance) ? SimpleColor.Green : SimpleColor.Red);
                 }
             }
             foreach (Thing item2 in currentMap.listerThings.ThingsOfDef(VGEDefOf.VGE_GravFieldAmplifier))
             {
-                GenDraw.DrawLineBetween(center.ToVector3Shifted(), item2.TrueCenter(), center.InHorDistOf(item2.Position, compProperties.maxDistance) ? SimpleColor.Green : SimpleColor.Red);
+                var distance = item2.TryGetComp<CompSubstructureFootprint>()?.Props.radius ?? compProperties.maxDistance;
+                GenDraw.DrawLineBetween(center.ToVector3Shifted(), item2.TrueCenter(), center.InHorDistOf(item2.Position, distance) ? SimpleColor.Green : SimpleColor.Red);
             }
         }
 
@@ -34,7 +36,8 @@ namespace VanillaGravshipExpanded
             {
                 foreach (Thing item in map.listerThings.ThingsOfDef(building))
                 {
-                    if (loc.InHorDistOf(item.Position, compProperties.maxDistance))
+                    var distance = item.TryGetComp<CompSubstructureFootprint>()?.Props.radius ?? compProperties.maxDistance;
+                    if (loc.InHorDistOf(item.Position, distance))
                     {
                         return AcceptanceReport.WasAccepted;
                     }
@@ -42,7 +45,8 @@ namespace VanillaGravshipExpanded
             }
             foreach (Thing item2 in map.listerThings.ThingsOfDef(VGEDefOf.VGE_GravFieldAmplifier))
             {
-                if (loc.InHorDistOf(item2.Position, compProperties.maxDistance))
+                var distance = item2.TryGetComp<CompSubstructureFootprint>()?.Props.radius ?? compProperties.maxDistance;
+                if (loc.InHorDistOf(item2.Position, distance))
                 {
                     return AcceptanceReport.WasAccepted;
                 }
