@@ -41,7 +41,7 @@
 		<comps>
 			<li Class="CompProperties_Power">
 				<compClass>VanillaGravshipExpanded.CompPowerPlantGravcoreAdjacency</compClass>
-				<basePowerConsumption>-3600</basePowerConsumption>
+				<basePowerConsumption>-5000</basePowerConsumption>
 				<transmitsPower>true</transmitsPower>
 			</li>
 			<li Class="CompProperties_AffectedByFacilities">
