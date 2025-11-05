@@ -56,8 +56,8 @@
             </li>
             <li>
                 <capacity>Sight</capacity>
-                <weight>1</weight>
-				<max>0.5</max>
+                <weight>0.5</weight>
+				<max>1.0</max>
             </li>
             <li>
                 <capacity>Manipulation</capacity>
