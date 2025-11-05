@@ -252,6 +252,11 @@
                 <glowRadius>8</glowRadius>
                 <glowColor>(255, 40, 40, 0)</glowColor>
             </li>
+            <li Class="VanillaGravshipExpanded.CompProperties_GravEngineInspectable">
+                <!-- <inspectDuration> defaults to 240 and <setToPlayerFaction> defaults to true. -->
+                <!-- Both match the behaviour on inspecting vanilla grav engines. -->
+                <setToPlayerFaction>false</setToPlayerFaction>
+            </li>
         </comps>
         <building>
             <ai_combatDangerous>false</ai_combatDangerous>

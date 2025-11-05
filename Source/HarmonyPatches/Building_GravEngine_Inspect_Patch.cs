@@ -18,7 +18,9 @@ namespace VanillaGravshipExpanded
             if (__state)
                 return;
 
-            QuestUtility.SendQuestTargetSignals(__instance.Map.Parent.questTags, "Inspected", __instance.Named("SUBJECT"));
+            // Remember to mirror any changes in GravshipHelper:InspectGravEngine
+
+            QuestUtility.SendQuestTargetSignals(__instance.Map.Parent.questTags, QuestUtility.QuestTargetSignalPart_Inspected, __instance.Named(SignalArgsNames.Subject));
             Find.ResearchManager.FinishProject(ResearchProjectDefOf.BasicGravtech);
         }
     }

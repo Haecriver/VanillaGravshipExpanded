@@ -144,5 +144,60 @@ namespace VanillaGravshipExpanded
                 return GravhulkTexture;
             return null;
         }
+
+        public static void InspectGravEngine(Thing thing = null, IIncidentTarget incidentTarget = null, List<string> questTags = null, bool silent = false, bool setToPlayerFaction = true)
+        {
+            // Remember to mirror any (relevant) changes in Building_GravEngine_Inspect_Patch:Postfix
+
+            if (Find.ResearchManager.gravEngineInspected)
+                return;
+
+            incidentTarget ??= thing?.MapHeld ?? (IIncidentTarget)Find.AnyPlayerHomeMap ?? Find.World;
+            if (incidentTarget == null)
+            {
+                Log.Error("No possible incident target found.");
+                return;
+            }
+
+            Find.ResearchManager.gravEngineInspected = true;
+
+            if (thing != null)
+            {
+                if (questTags != null)
+                    QuestUtility.SendQuestTargetSignals(questTags, QuestUtility.QuestTargetSignalPart_Inspected, thing.Named(SignalArgsNames.Subject));
+                QuestUtility.SendQuestTargetSignals(thing.Map.Parent.questTags, QuestUtility.QuestTargetSignalPart_Inspected, thing.Named(SignalArgsNames.Subject));
+            }
+
+            LessonAutoActivator.TeachOpportunity(ConceptDefOf.Gravship, OpportunityType.Important);
+            Find.ResearchManager.FinishProject(ResearchProjectDefOf.BasicGravtech);
+
+            if (setToPlayerFaction && thing != null && thing.def.CanHaveFaction && thing.Faction != Faction.OfPlayer)
+                thing.SetFaction(Faction.OfPlayer);
+
+            var quest = QuestUtility.GenerateQuestAndMakeAvailable(QuestScriptDefOf.GravEngine, StorytellerUtility.DefaultThreatPointsNow(incidentTarget));
+            if (!silent)
+            {
+                var diaNode = new DiaNode("GravEngineInspectedLetterContents".Translate());
+                var diaOption = new DiaOption("ViewQuest".Translate())
+                {
+                    resolveTree = true,
+                    action = () =>
+                    {
+                        Find.MainTabsRoot.SetCurrentTab(MainButtonDefOf.Quests);
+                        ((MainTabWindow_Quests)MainButtonDefOf.Quests.TabWindow).Select(quest);
+                    }
+                };
+                diaNode.options.Add(diaOption);
+                diaNode.options.Add(new DiaOption("Close".Translate())
+                {
+                    resolveTree = true
+                });
+                var dialog_NodeTree = new Dialog_NodeTree(diaNode)
+                {
+                    forcePause = true
+                };
+                Find.WindowStack.Add(dialog_NodeTree);
+            }
+        }
     }
 }
