@@ -47,18 +47,18 @@ namespace VanillaGravshipExpanded
             {
                 case EventPhase.Buildup:
                 case EventPhase.FadeOut:
-                    options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_SmallAsteroid, 0.7f));
+                    options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_SmallAsteroid_Projectile, 0.7f));
                     options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_MediumAsteroid, 0.3f));
                     break;
 
                 case EventPhase.Peak:
-                    options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_SmallAsteroid, 0.25f));
+                    options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_SmallAsteroid_Projectile, 0.25f));
                     options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_MediumAsteroid, 0.40f));
                     options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_LargeAsteroid, 0.35f));
                     break;
 
                 default:
-                    options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_SmallAsteroid, 1.0f));
+                    options.Add(new Pair<ThingDef, float>(VGEDefOf.VGE_SmallAsteroid_Projectile, 1.0f));
                     break;
             }
 

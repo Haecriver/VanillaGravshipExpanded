@@ -12,7 +12,9 @@ namespace VanillaGravshipExpanded
 {
     public class CompAbilityAnalyzeTheStars : CompAbilityEffect
     {
-       public List<WorldObjectDef> possibleObjects = new List<WorldObjectDef>() { VGEDefOf.OrbitalItemStash, VGEDefOf.AsteroidBasic, VGEDefOf.AsteroidMiningSite };
+       public List<WorldObjectDef> possibleObjects = new List<WorldObjectDef>() { VGEDefOf.OrbitalItemStash, VGEDefOf.AsteroidBasic, VGEDefOf.AsteroidMiningSite,
+           VGEDefOf.VGE_IceAsteroid,VGEDefOf.VGE_AsteroidCluster,VGEDefOf.VGE_AsteroidField,VGEDefOf.VGE_PorousAsteroid,VGEDefOf.VGE_GiantAsteroid,
+           VGEDefOf.VGE_ShatteredAsteroid,VGEDefOf.VGE_DenseAsteroid,VGEDefOf.VGE_SmallAsteroid,VGEDefOf.VGE_AsteroidWithRuins,VGEDefOf.VGE_DerelictStation};
         public List<ThingDef> mineables = new List<ThingDef>() { ThingDefOf.MineableGold, VGEDefOf.MineablePlasteel, VGEDefOf.MineableUranium };
 
 

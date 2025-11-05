@@ -62,7 +62,7 @@
   </ThingDef>
 
   <ThingDef ParentName="VGE_AsteroidBase">
-    <defName>VGE_SmallAsteroid</defName>
+    <defName>VGE_SmallAsteroid_Projectile</defName>
     <label>small asteroid</label>
     <graphicData>
       <texPath>Things/Projectiles/SpaceAsteroid/SpaceAsteroid_Small</texPath>

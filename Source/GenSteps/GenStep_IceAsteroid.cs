@@ -30,7 +30,7 @@ namespace VanillaGravshipExpanded
                 {
                     GenerateArcheanTree(map, parms);
                 }
-                map.OrbitalDebris = VGEDefOf.VGE_IceAsteroid;
+                map.OrbitalDebris = VGEDefOf.VGE_IceAsteroidDebris;
             }
         }
 

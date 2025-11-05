@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
 	<OrbitalDebrisDef>
-		<defName>VGE_IceAsteroid</defName>
+		<defName>VGE_IceAsteroidDebris</defName>
 		<graphics>
 			<li>
 				<weighting>0.2</weighting>
@@ -39,7 +39,7 @@
 		</graphics>
 	</OrbitalDebrisDef>
 	<OrbitalDebrisDef>
-		<defName>VGE_AsteroidCluster</defName>
+		<defName>VGE_AsteroidClusterDebris</defName>
 		<graphics>
 			<li>
 				<weighting>0.2</weighting>
