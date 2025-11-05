@@ -53,37 +53,36 @@ namespace VanillaGravshipExpanded
             return name.Length != 0;
         }
 
+        public void WasOpenedByHotkey()
+        {
+            startAcceptingInputAtFrame = Time.frameCount + 1;
+        }
+
+
 
         public override void DoWindowContents(Rect inRect)
         {
+
+            Text.Font = GameFont.Small;
             bool flag = false;
             if (Event.current.type == EventType.KeyDown && (Event.current.keyCode == KeyCode.Return || Event.current.keyCode == KeyCode.KeypadEnter))
             {
                 flag = true;
                 Event.current.Use();
             }
-            var outRect = new Rect(inRect);
-            outRect.yMin += 40f;
-            outRect.yMax -= 40f;
-            outRect.width -= 16f;
-
+            Rect rect = new Rect(inRect);
             Text.Font = GameFont.Medium;
+            rect.height = Text.LineHeight + 10f;
+         
             var IntroLabel = new Rect(0, 0, 300, 32f);
             Widgets.Label(IntroLabel, "VGE_RenameAsteroid".Translate().CapitalizeFirst());
             Text.Font = GameFont.Small;
             var IntroLabel2 = new Rect(0, 40, 450, 72f);
             Widgets.Label(IntroLabel2, "VGE_RenameAsteroidDesc".Translate(pawn.NameFullColored, worldObject.def.LabelCap));
-            if (Widgets.ButtonImage(new Rect(outRect.xMax - 18f - 4f, 2f, 18f, 18f), TexButton.CloseXSmall))
-            {
-                Close();
-            }
-            var SliderContainer1 = new Rect(0, 120, 450, 32f);
+           
+            Text.Font = GameFont.Small;
             GUI.SetNextControlName("RenameField");
-            string text = Widgets.TextField(SliderContainer1, curName);
-            if (!(Widgets.ButtonText(new Rect(15f, inRect.height - 35f - 10f, inRect.width - 15f - 15f, 35f), "OK") || flag))
-            {
-                return;
-            }
+            string text = Widgets.TextField(new Rect(0f, rect.height+80, inRect.width, 35f), curName);
             if (AcceptsInput && text.Length < MaxNameLength)
             {
                 curName = text;
@@ -96,6 +95,10 @@ namespace VanillaGravshipExpanded
             {
                 UI.FocusControl("RenameField", this);
                 focusedRenameField = true;
+            }
+            if (!(Widgets.ButtonText(new Rect(15f, inRect.height - 35f - 10f, inRect.width - 15f - 15f, 35f), "OK") || flag))
+            {
+                return;
             }
             AcceptanceReport acceptanceReport = NameIsValid(curName);
             if (!acceptanceReport.Accepted)
@@ -111,14 +114,15 @@ namespace VanillaGravshipExpanded
                 return;
             }
 
-            var defField = AccessTools.Field(typeof(WorldObject), "def");
-            var defObj = defField.GetValue(worldObject);
+            if (worldObject is SpaceMapParent spaceMapParent)
+            {
+                spaceMapParent.Name = text;
+            }
 
-            var labelField = AccessTools.Field(defObj.GetType(), "label");
-            labelField.SetValue(defObj, curName);
-
-            
             Find.WindowStack.TryRemove(this);
+
+
+
         }
     }
 }
