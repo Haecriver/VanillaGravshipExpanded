@@ -48,4 +48,20 @@
     </value>
   </Operation>
 
+  <!-- Update draw sizes -->
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="VacBarrier"]/graphicData/drawSize/text()</xpath>
+    <value>(2,2)</value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="VacBarrier"]/building/doorTopGraphic/drawSize/text()</xpath>
+    <value>(2,2)</value>
+  </Operation>
+
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/ThingDef[defName="VacBarrier"]/building/blueprintGraphicData/drawSize/text()</xpath>
+    <value>(2,2)</value>
+  </Operation>
+
 </Patch>

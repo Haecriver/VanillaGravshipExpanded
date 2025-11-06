@@ -56,7 +56,7 @@
     <graphicData>
       <texPath>Things/Structures/VacBarriers/VacBarrier2x1_Barrier</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(2.75,2.25)</drawSize>
+      <drawSize>(3,2)</drawSize>
     </graphicData>
     <size>(2,1)</size>
     <uiIconPath>Things/Structures/VacBarriers/VacBarrier2x1_MenuIcon_south</uiIconPath>
@@ -69,13 +69,13 @@
       <doorTopGraphic>
         <texPath>Things/Structures/VacBarriers/VacBarrier2x1_Top</texPath>
         <graphicClass>Graphic_Multi</graphicClass>
-        <drawSize>(2.75,2.25)</drawSize>
+        <drawSize>(3,2)</drawSize>
       </doorTopGraphic>
       <blueprintGraphicData>
         <texPath>Things/Structures/VacBarriers/VacBarrier2x1_MenuIcon</texPath>
         <graphicClass>Graphic_Multi</graphicClass>
         <shaderType>EdgeDetect</shaderType>
-        <drawSize>(2.75,2.25)</drawSize>
+        <drawSize>(3,2)</drawSize>
       </blueprintGraphicData>
     </building>
     <comps>
@@ -96,7 +96,7 @@
     <graphicData>
       <texPath>Things/Structures/VacBarriers/VacBarrier3x1_Barrier</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(4.0,3.0)</drawSize>
+      <drawSize>(4,2)</drawSize>
     </graphicData>
     <size>(3,1)</size>
     <uiIconPath>Things/Structures/VacBarriers/VacBarrier3x1_MenuIcon_south</uiIconPath>
@@ -109,13 +109,13 @@
       <doorTopGraphic>
         <texPath>Things/Structures/VacBarriers/VacBarrier3x1_Top</texPath>
         <graphicClass>Graphic_Multi</graphicClass>
-        <drawSize>(4.0,3.0)</drawSize>
+        <drawSize>(4,2)</drawSize>
       </doorTopGraphic>
       <blueprintGraphicData>
         <texPath>Things/Structures/VacBarriers/VacBarrier3x1_MenuIcon</texPath>
         <graphicClass>Graphic_Multi</graphicClass>
         <shaderType>EdgeDetect</shaderType>
-        <drawSize>(4.0,3.0)</drawSize>
+        <drawSize>(4,2)</drawSize>
       </blueprintGraphicData>
     </building>
     <comps>
@@ -136,7 +136,7 @@
     <graphicData>
       <texPath>Things/Structures/VacBarriers/VacBarrier5x1_Barrier</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
-      <drawSize>(6.37,4.5)</drawSize>
+      <drawSize>(6,2)</drawSize>
     </graphicData>
     <size>(5,1)</size>
     <uiIconPath>Things/Structures/VacBarriers/VacBarrier5x1_MenuIcon_south</uiIconPath>
@@ -149,13 +149,13 @@
       <doorTopGraphic>
         <texPath>Things/Structures/VacBarriers/VacBarrier5x1_Top</texPath>
         <graphicClass>Graphic_Multi</graphicClass>
-        <drawSize>(6.37,4.5)</drawSize>
+        <drawSize>(6,2)</drawSize>
       </doorTopGraphic>
       <blueprintGraphicData>
         <texPath>Things/Structures/VacBarriers/VacBarrier5x1_MenuIcon</texPath>
         <graphicClass>Graphic_Multi</graphicClass>
         <shaderType>EdgeDetect</shaderType>
-        <drawSize>(6.37,4.5)</drawSize>
+        <drawSize>(6,2)</drawSize>
       </blueprintGraphicData>
     </building>
     <comps>
