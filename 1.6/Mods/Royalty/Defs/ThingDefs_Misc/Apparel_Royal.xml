@@ -54,8 +54,7 @@
 				<li>Shell</li>
 			</layers>
 			<tags>
-				<li>SpacerMilitary</li>
-				<li>Vacsuit</li>
+			
 				<li>PrestigeCombatGear</li>
 			</tags>
 			<defaultOutfitTags>
@@ -138,8 +137,7 @@
 				<li>Overhead</li>
 			</layers>
 			<tags>
-				<li>SpacerMilitary</li>
-				<li>Vacsuit</li>
+			
 				<li>PrestigeCombatGear</li>
 			</tags>
 			<forceEyesVisibleForRotations>
