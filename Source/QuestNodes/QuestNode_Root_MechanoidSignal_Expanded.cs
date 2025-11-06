@@ -127,7 +127,7 @@ namespace VanillaGravshipExpanded
             list.Add(ThingMaker.MakeThing(ThingDefOf.ShipChunk_Mech));
            
             PawnKindDef kindDef;
-            for (int remaining = 900; remaining > 0;)
+            for (int remaining = 1000; remaining > 0;)
             {
                 if (mechTypes.TryRandomElement(out kindDef))
                 {
