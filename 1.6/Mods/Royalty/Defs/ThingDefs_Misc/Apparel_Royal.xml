@@ -54,7 +54,6 @@
 				<li>Shell</li>
 			</layers>
 			<tags>
-			
 				<li>PrestigeCombatGear</li>
 			</tags>
 			<defaultOutfitTags>
@@ -63,6 +62,7 @@
 			<useDeflectMetalEffect>true</useDeflectMetalEffect>
 			<soundWear>Wear_PowerArmor</soundWear>
 			<soundRemove>Remove_PowerArmor</soundRemove>
+      <canBeGeneratedToSatisfyVacuumResistance>false</canBeGeneratedToSatisfyVacuumResistance>
 		</apparel>
 		<thingSetMakerTags>
 			<li>RewardStandardMidFreq</li>
@@ -137,7 +137,6 @@
 				<li>Overhead</li>
 			</layers>
 			<tags>
-			
 				<li>PrestigeCombatGear</li>
 			</tags>
 			<forceEyesVisibleForRotations>
@@ -148,6 +147,7 @@
 			<defaultOutfitTags>
 				<li>Spacefarer</li>
 			</defaultOutfitTags>
+      <canBeGeneratedToSatisfyVacuumResistance>false</canBeGeneratedToSatisfyVacuumResistance>
 		</apparel>
 		<tradeTags>
 			<li>HiTechArmor</li>
