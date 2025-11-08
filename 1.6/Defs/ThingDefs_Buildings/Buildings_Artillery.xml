@@ -72,6 +72,7 @@
         <comps>
             <li Class="CompProperties_Forbiddable" />
             <li Class="CompProperties_Mannable">
+                <compClass>VanillaGravshipExpanded.CompMannableWithFailReason</compClass>
                 <manWorkType>Violent, Intellectual</manWorkType>
             </li>
         </comps>
@@ -756,7 +757,7 @@
         <defName>VGE_JavelinPod</defName>
         <label>javelin pod</label>
         <description>A compact multi-tube missile platform that launches a volley of six guided astrofuel javelins. Meant for fast, hard-hitting strikes against exposed gravships and unarmored surface forces. Requires a linked targeting terminal with an operator to function. It draws power directly from the grav engine.</description>
-        <thingClass>VanillaGravshipExpanded.Building_GravshipTurretAutoAttack</thingClass>
+        <thingClass>VanillaGravshipExpanded.Building_JavelinPod</thingClass>
         <uiIconPath>Things/Structures/Artillery/JavelinPod_MenuIcon</uiIconPath>
         <graphicData>
             <texPath>Things/Structures/Artillery/GravshipArtillery_Base_Small</texPath>
@@ -855,6 +856,12 @@
                 </targetParams>
             </li>
         </verbs>
+        <building>
+            <turretTopLoadedGraphic>
+                <texPath>Things/Structures/Artillery/JavelinPod_TurretTop_Loaded</texPath>
+                <graphicClass>Graphic_Single</graphicClass>
+            </turretTopLoadedGraphic>
+        </building>
     </ThingDef>
 
     <ThingDef ParentName="BaseBullet">
@@ -932,7 +939,7 @@
             <li Class="CompProperties_Flickable" />
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
                 <worldMapAttackRange>36</worldMapAttackRange>
-                <firingMode>GroundToSpace, GroundToGround, SpaceToSpace, SpaceToGround</firingMode>
+                <firingMode>GroundToSpace, SpaceToSpace, SpaceToGround</firingMode>
             </li>
         </comps>
         <building>

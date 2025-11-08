@@ -26,6 +26,7 @@ namespace VanillaGravshipExpanded
         private static readonly Texture2D SelectIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/SelectLinkedTerminal");
         public virtual bool CanFire => linkedTerminal?.MannedByPlayer ?? false;
 
+        public virtual bool CanAutoAttack => false;
         public Pawn ManningPawn => linkedTerminal?.MannableComp?.ManningPawn;
 
         public virtual float GravshipTargeting => linkedTerminal?.GravshipTargeting ?? 0f;
@@ -74,6 +75,7 @@ namespace VanillaGravshipExpanded
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
             base.SpawnSetup(map, respawningAfterLoad);
+
             var ext = def.GetModExtension<TurretExtension_RotationSpeed>();
             if (ext != null)
             {

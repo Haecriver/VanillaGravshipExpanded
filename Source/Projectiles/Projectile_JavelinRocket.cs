@@ -68,16 +68,19 @@ namespace VanillaGravshipExpanded
                     FleckMaker.ThrowSmoke(this.ExactPosition, this.Map, 0.6f);
                 }
             }
-            if (exhaustTicksLeft > 0)
+            if (Find.TickManager.TicksGame + 60 >= this.spawnedTick)
             {
-                exhaustTicksLeft--;
-                if (Find.TickManager.TicksGame % exhaustEmissionInterval == 0)
+                if (exhaustTicksLeft > 0)
                 {
-                    EmitExhaust();
+                    exhaustTicksLeft--;
+                    if (Find.TickManager.TicksGame % exhaustEmissionInterval == 0)
+                    {
+                        EmitExhaust();
+                    }
                 }
+                ExhaustFleckSystem.parent = this.Map.flecks;
+                ExhaustFleckSystem.Update(1);
             }
-            ExhaustFleckSystem.parent = this.Map.flecks;
-            ExhaustFleckSystem.Update(1);
         }
 
         private void EmitExhaust()

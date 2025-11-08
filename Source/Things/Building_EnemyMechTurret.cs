@@ -13,10 +13,11 @@ namespace VanillaGravshipExpanded
     public class Building_EnemyMechTurret : Building_GravshipTurret
     {
         public override bool CanFire => true;
+        public override bool CanAutoAttack => true;
         public override float GravshipTargeting => 1f;
         public override bool CanSetForcedTarget => true;
         public override bool HideForceTargetGizmo => true;
-        
+
         protected override bool ShowNoLinkedTerminalOverlay => false;
         private int GetTargetPriority(Thing t)
         {
@@ -83,7 +84,7 @@ namespace VanillaGravshipExpanded
             {
                 flags |= TargetScanFlags.NeedNotUnderThickRoof;
             }
-            
+
             Predicate<IAttackTarget> innerValidator = delegate (IAttackTarget t)
             {
                 Thing thing = t.Thing;
@@ -125,7 +126,7 @@ namespace VanillaGravshipExpanded
                 }
                 return true;
             };
-            
+
             var potentialTargets = new List<Thing>();
             foreach (IAttackTarget target in map.attackTargetsCache.GetPotentialTargetsFor(this))
             {
