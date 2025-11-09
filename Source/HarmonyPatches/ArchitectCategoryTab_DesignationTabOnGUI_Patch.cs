@@ -13,6 +13,8 @@ namespace VanillaGravshipExpanded
     [HarmonyPatch(typeof(ArchitectCategoryTab), nameof(ArchitectCategoryTab.DesignationTabOnGUI))]
     public static class ArchitectCategoryTab_DesignationTabOnGUI_Patch
     {
+        private static bool? _dubsMintMenusActive;
+        public static bool DubsMintMenusActive => _dubsMintMenusActive ??= ModsConfig.IsActive("Dubwise.DubsMintMenus");
         private static ArchitectCategoryTab currentArchitectCategoryTab;
         private static readonly Dictionary<DesignationCategoryDef, DesignationCategoryDef> selectedCategory = new Dictionary<DesignationCategoryDef, DesignationCategoryDef>();
         private static readonly Dictionary<DesignationCategoryDef, bool> categorySearchMatches = new Dictionary<DesignationCategoryDef, bool>();
