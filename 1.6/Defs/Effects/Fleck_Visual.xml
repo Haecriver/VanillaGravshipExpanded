@@ -35,7 +35,7 @@
 		<altitudeLayer>MoteOverhead</altitudeLayer>
 		<fadeInTime>0.1</fadeInTime>
 		<solidTime>0</solidTime>
-		<fadeOutTime>3.3</fadeOutTime>
+		<fadeOutTime>1.5</fadeOutTime>
 	</FleckDef>
 	<FleckDef ParentName="FleckGlowDistortBackground" Name="FleckPsycastAreaEffect">
 		<defName>VGE_GaussDistortion</defName>
