@@ -51,4 +51,11 @@
 		<canUseDeflectMetalEffect>false</canUseDeflectMetalEffect>
 		<scaleDamageToBuildingsBasedOnFlammability>true</scaleDamageToBuildingsBasedOnFlammability>
 	</DamageDef>
+
+	<DamageDef ParentName="Beam">
+   		<defName>VGE_AnticraftBeamBypassShields</defName>
+  		<ignoreShields>true</ignoreShields>
+		<buildingDamageFactorImpassable>8</buildingDamageFactorImpassable>
+  		<buildingDamageFactorPassable>4</buildingDamageFactorPassable>
+  </DamageDef>
 </Defs>
