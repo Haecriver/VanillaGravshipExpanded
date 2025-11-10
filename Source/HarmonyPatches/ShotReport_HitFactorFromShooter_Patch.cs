@@ -1,4 +1,5 @@
 using HarmonyLib;
+using RimWorld;
 using Verse;
 
 namespace VanillaGravshipExpanded
@@ -10,7 +11,7 @@ namespace VanillaGravshipExpanded
         {
             if (caster is Building_GravshipTurret turret)
             {
-                __result = turret.GravshipTargeting;
+                __result = turret.GetStatValue(StatDefOf.ShootingAccuracyTurret) * turret.GravshipTargeting;
             }
         }
     }

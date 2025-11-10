@@ -503,6 +503,7 @@
             <Flammability>0.4</Flammability>
             <WorkToBuild>18000</WorkToBuild>
             <Beauty>-25</Beauty>
+            <ShootingAccuracyTurret>1</ShootingAccuracyTurret>
         </statBases>
         <size>(3,3)</size>
         <costList>
@@ -551,11 +552,11 @@
             <drawOffset>(0,0,0.1)</drawOffset>
         </graphicData>
         <statBases>
-            <AccuracyTouch>1.0</AccuracyTouch>
-            <AccuracyShort>1.0</AccuracyShort>
-            <AccuracyMedium>1.0</AccuracyMedium>
-            <AccuracyLong>1.0</AccuracyLong>
-            <VGE_AccuracyGlobal>1.0</VGE_AccuracyGlobal>
+            <AccuracyTouch>1</AccuracyTouch>
+            <AccuracyShort>1</AccuracyShort>
+            <AccuracyMedium>1</AccuracyMedium>
+            <AccuracyLong>1</AccuracyLong>
+            <VGE_AccuracyGlobal>1</VGE_AccuracyGlobal>
         </statBases>
         <verbs>
             <li>
