@@ -8,7 +8,7 @@ using Verse;
 namespace VanillaGravshipExpanded;
 
 [HarmonyPatch]
-public static class SubstructureGrid_DrawSubstructure_Patch
+public static class ListAllGravEngines_Patch
 {
     private static List<Thing> TmpList = [];
 
@@ -16,6 +16,7 @@ public static class SubstructureGrid_DrawSubstructure_Patch
     {
         yield return typeof(SubstructureGrid).DeclaredMethod(nameof(SubstructureGrid.DrawSubstructureCountOnGUI));
         yield return typeof(SubstructureGrid).DeclaredMethod(nameof(SubstructureGrid.DrawSubstructureFootprint));
+        yield return typeof(JobGiver_BoardOrLeaveGravship).DeclaredMethod(nameof(JobGiver_BoardOrLeaveGravship.TryGiveJob));
     }
 
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr, MethodBase baseMethod)
@@ -23,7 +24,7 @@ public static class SubstructureGrid_DrawSubstructure_Patch
         var gravEngineField = typeof(ThingDefOf).DeclaredField(nameof(ThingDefOf.GravEngine));
 
         var listerThingsMethodTarget = typeof(ListerThings).DeclaredMethod(nameof(ListerThings.ThingsOfDef));
-        var listerThingsMethodReplacement = typeof(SubstructureGrid_DrawSubstructure_Patch).DeclaredMethod(nameof(ReturnAllGravEngines));
+        var listerThingsMethodReplacement = typeof(ListAllGravEngines_Patch).DeclaredMethod(nameof(ReturnAllGravEngines));
 
         var isGravEngineField = false;
         var replacedThingsOfDefCalls = 0;
@@ -58,6 +59,9 @@ public static class SubstructureGrid_DrawSubstructure_Patch
 
     private static List<Thing> ReturnAllGravEngines(ListerThings lister, ThingDef def)
     {
+        if (def != ThingDefOf.GravEngine)
+            return lister.ThingsOfDef(def);
+
         TmpList.Clear();
         TmpList.AddRange(lister.ThingsOfDef(def));
         TmpList.AddRange(lister.ThingsOfDef(VGEDefOf.VGE_GravjumperEngine));
