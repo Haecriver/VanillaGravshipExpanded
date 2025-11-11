@@ -74,4 +74,12 @@ public class Building_VacCheckpoint : Building_Door
 
         return str.ToString();
     }
+
+    public override void ExposeData()
+    {
+        base.ExposeData();
+    
+        Scribe_Values.Look(ref requiredResistance, nameof(requiredResistance));
+        Scribe_Values.Look(ref allowDrafted, nameof(allowDrafted));
+    }
 }
