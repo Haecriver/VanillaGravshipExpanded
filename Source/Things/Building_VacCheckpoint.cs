@@ -22,6 +22,10 @@ public class Building_VacCheckpoint : Building_Door
     {
         if (Map.Biome?.inVacuum != true)
             return false;
+        if (pawn.RaceProps.IsMechanoid)
+            return false;
+        if (pawn.IsMutant && !pawn.mutant.Def.breathesAir)
+            return false;
         if (allowDrafted && pawn.Drafted)
             return false;
         if (pawn.Faction != Faction)
