@@ -14,6 +14,12 @@
 			</researchPrerequisites>
 		</value>
 	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="GravcorePowerCell"]/designationCategory</xpath>
+		<value>
+			<designationCategory>Odyssey</designationCategory>
+		</value>
+	</Operation>
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[defName="GravcorePowerCell"]/statBases</xpath>
 		<value>
