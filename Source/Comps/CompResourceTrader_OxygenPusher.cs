@@ -13,12 +13,23 @@ public class CompResourceTrader_OxygenPusher : CompResourceTrader
 
     public CompPowerTrader PowerTrader => intPowerTrader ??= parent.GetComp<CompPowerTrader>();
 
+    public bool LowPowerMode
+    {
+        get => lowPowerMode;
+        set
+        {
+            lowPowerMode = value;
+            CheckUpdatePowerMode();
+        }
+    }
+
     public override void PostSpawnSetup(bool respawningAfterLoad)
     {
         base.PostSpawnSetup(respawningAfterLoad);
 
+        // If we don't use ExecuteWhenFinished here, we'll be in high power mode for the first rare tick after loading
         if (parent.Map?.Biome.inVacuum != true)
-            EnableLowPowerMode();
+            LongEventHandler.ExecuteWhenFinished(() => LowPowerMode = true);
     }
 
     public override void CompTickRare()
@@ -27,7 +38,10 @@ public class CompResourceTrader_OxygenPusher : CompResourceTrader
 
         // Never work in a non-vacuum biome
         if (parent.Map?.Biome.inVacuum != true)
+        {
+            LowPowerMode = true;
             return;
+        }
 
         // Make sure the power is on
         if (Props.requiresPower && PowerTrader.Off)
@@ -36,39 +50,39 @@ public class CompResourceTrader_OxygenPusher : CompResourceTrader
         // Don't do anything if no pipe net or turned off
         if (PipeNet == null || !ResourceOn)
         {
-            EnableLowPowerMode();
+            LowPowerMode = true;
             return;
         }
         // Don't do anything if there's not enough oxygen stored
         var available = PipeNet.TotalProductionThisTick + PipeNet.Stored - PipeNet.TotalConsumptionThisTick;
         if (available <= 0f)
         {
-            EnableLowPowerMode();
+            LowPowerMode = true;
             return;
         }
 
         var roomCell = parent.Position + Props.oxygenCellOffset.RotatedBy(parent.Rotation);
         // If disabled due to no more vacuum/exposed to vacuum, skip most other checks
-        if (lowPowerMode)
+        if (LowPowerMode)
         {
             var r = roomCell.GetRoom(parent.Map);
             if (r == null || r.ExposedToSpace || r.Vacuum <= 0)
                 return;
 
-            DisableLowPowerMode();
+            LowPowerMode = false;
         }
 
         var room = roomCell.GetRoom(parent.Map);
         if (room == null || room.ExposedToSpace)
         {
-            EnableLowPowerMode();
+            LowPowerMode = true;
             return;
         }
 
         var vacuum = room.Vacuum;
         if (vacuum <= 0)
         {
-            EnableLowPowerMode();
+            LowPowerMode = true;
             return;
         }
 
@@ -97,7 +111,7 @@ public class CompResourceTrader_OxygenPusher : CompResourceTrader
         string text;
         if (PowerTrader.Off)
             text = "PowerConsumptionOff".Translate();
-        else if (lowPowerMode)
+        else if (LowPowerMode)
             text = "PowerConsumptionLow".Translate();
         else
             text = "PowerConsumptionHigh".Translate();
@@ -105,23 +119,24 @@ public class CompResourceTrader_OxygenPusher : CompResourceTrader
         return $"{"PowerConsumptionMode".Translate()}: {text.CapitalizeFirst()}";
     }
 
-    private void EnableLowPowerMode()
+    public override void ReceiveCompSignal(string signal)
     {
-        if (lowPowerMode)
-            return;
+        base.ReceiveCompSignal(signal);
 
-        lowPowerMode = true;
-        if (Props.requiresPower)
-            PowerTrader.PowerOutput = PowerTrader.Props.PowerConsumption * Props.lowPowerConsumptionFactor;
+        if (signal == CompPowerTrader.PowerTurnedOnSignal)
+            CheckUpdatePowerMode();
     }
 
-    private void DisableLowPowerMode()
+    private void CheckUpdatePowerMode()
     {
-        if (!lowPowerMode)
+        if (!Props.requiresPower)
+            return;
+        if (PowerTrader.Off)
             return;
 
-        lowPowerMode = false;
-        if (Props.requiresPower)
+        if (LowPowerMode)
+            PowerTrader.PowerOutput = PowerTrader.Props.PowerConsumption * Props.lowPowerConsumptionFactor;
+        else
             PowerTrader.PowerOutput = PowerTrader.Props.PowerConsumption;
     }
 }
