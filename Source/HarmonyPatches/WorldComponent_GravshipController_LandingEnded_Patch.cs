@@ -5,7 +5,6 @@ using System.Linq;
 using RimWorld.Planet;
 using UnityEngine;
 using System.Collections.Generic;
-using VanillaGravshipExpanded;
 
 namespace VanillaGravshipExpanded
 {
@@ -210,11 +209,18 @@ namespace VanillaGravshipExpanded
 
         private static void ApplyCrashlanding(Gravship gravship, Map map)
         {
+            bool hasGravlift = gravship.Engine.GravshipComponents.Any(comp => comp.parent.def == VGEDefOf.VGE_Gravlift);
+
             foreach (var blocker in GravshipMapGenUtility.BlockingThings)
             {
                 if (blocker.def.destroyable)
                 {
                     float damageAmount = blocker.MaxHitPoints * 0.25f;
+                    if (hasGravlift)
+                    {
+                        damageAmount *= 0.5f;
+                    }
+
                     foreach (var cell in blocker.OccupiedRect())
                     {
                         foreach (var thing in gravship.Things.Where(t => t.Position == cell))
@@ -227,12 +233,18 @@ namespace VanillaGravshipExpanded
                             var terrain = map.terrainGrid.FoundationAt(cell);
                             if (terrain == TerrainDefOf.Substructure)
                             {
-                                map.terrainGrid.SetFoundation(cell, VGEDefOf.VGE_DamagedSubstructure);
-                                DamageWorker_ExplosionDamageTerrain_Patch.SpawnDebrisFilth(cell, map);
+                                if (!hasGravlift)
+                                {
+                                    map.terrainGrid.SetFoundation(cell, VGEDefOf.VGE_DamagedSubstructure);
+                                    DamageWorker_ExplosionDamageTerrain_Patch.SpawnDebrisFilth(cell, map);
+                                }
                             }
                             else if (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold)
                             {
-                                map.terrainGrid.RemoveFoundation(cell, false);
+                                if (!hasGravlift)
+                                {
+                                    map.terrainGrid.RemoveFoundation(cell, false);
+                                }
                             }
                         }
                     }

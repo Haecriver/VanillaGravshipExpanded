@@ -29,6 +29,7 @@ namespace VanillaGravshipExpanded
         public IntVec3 enginePos;
         public Rot4 landingRotation;
         public IntVec3 launchDirection;
+        public bool forceNullFaction;
         private static readonly int ShaderPropertyGravshipHeight = Shader.PropertyToID("_GravshipHeight");
         private static readonly int ShaderPropertyIsTakeoff = Shader.PropertyToID("_IsTakeoff");
         private static readonly int GravshipCaptureLayerMaskExclude = LayerMask.GetMask("UI", "GravshipExclude");
@@ -280,7 +281,7 @@ namespace VanillaGravshipExpanded
             CellRect cellRect = CellRect.CenteredOn(position, layoutDef.Sizes.x, layoutDef.Sizes.z);
             GenOption.GetAllMineableIn(cellRect, map);
             LayoutUtils.CleanRect(layoutDef, map, cellRect, true);
-            layoutDef.Generate(cellRect, map, Faction);
+            layoutDef.Generate(cellRect, map, Faction, forceNullFaction: forceNullFaction);
             return cellRect;
         }
 
@@ -321,6 +322,7 @@ namespace VanillaGravshipExpanded
             Scribe_Values.Look(ref launchDirection, "launchDirection");
             Scribe_Values.Look(ref ticksToImpact, "ticksToImpact");
             Scribe_Values.Look(ref ticksToImpactMax, "ticksToImpactMax");
+            Scribe_Values.Look(ref forceNullFaction, "forceNullFaction");
         }
 
         public override void DrawAt(Vector3 drawLoc, bool flip = false)
@@ -395,7 +397,6 @@ namespace VanillaGravshipExpanded
                 new Vector3(0, 0, -blurOffset),
             };
 
-            
             if (progress > 0f && !base.Map.Biome.inVacuum)
             {
                 MatGravshipDownwash.SetFloat(ShaderPropertyIDs.Progress, progress);

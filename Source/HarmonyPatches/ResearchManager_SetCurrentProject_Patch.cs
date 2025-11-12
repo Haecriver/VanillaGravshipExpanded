@@ -11,7 +11,7 @@ namespace VanillaGravshipExpanded
         {
             if (proj?.tab == VGEDefOf.VGE_Gravtech)
             {
-                World_ExposeData_Patch.currentGravtechProject = proj;
+                proj.SetGravshipResearch();
                 return false;
             }
             return true;

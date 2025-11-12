@@ -13,10 +13,16 @@ namespace VanillaGravshipExpanded
             if (projectToStart?.tab == VGEDefOf.VGE_Gravtech)
             {
                 SoundDefOf.ResearchStart.PlayOneShotOnCamera();
-                World_ExposeData_Patch.currentGravtechProject = projectToStart;
+                projectToStart.SetGravshipResearch();
                 return false;
             }
             return true;
+        }
+
+        public static void SetGravshipResearch(this ResearchProjectDef gravTech)
+        {
+            World_ExposeData_Patch.currentGravtechProject = gravTech;
+            Messages.Message("VGE_GravtechNeedsGravdata".Translate(gravTech.LabelCap), MessageTypeDefOf.NeutralEvent);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace VanillaGravshipExpanded
     public class Building_Gravlift : Building
     {
         private static readonly Texture2D LaunchToOrbitIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/Gizmo_LaunchVertically", true);
-        
+
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (var gizmo in base.GetGizmos())
@@ -21,7 +21,7 @@ namespace VanillaGravshipExpanded
             }
             bool isInOrbit = Tile.LayerDef == PlanetLayerDefOf.Orbit;
             var gravEngine = this.GetComp<CompGravshipFacility>().LinkedBuildings.OfType<Building_GravEngine>().FirstOrDefault();
-            
+
             if (gravEngine == null)
             {
                 yield break;
@@ -59,9 +59,16 @@ namespace VanillaGravshipExpanded
                     launchGizmo.Disable(reason.Reason);
                 }
             }
+            foreach (var activeRitual in Find.IdeoManager.GetActiveRituals(Map))
+            {
+                if (activeRitual.Ritual.def.IsGravshipLaunch())
+                {
+                    launchGizmo.Disable("CantStartRitualAlreadyInProgress".Translate(activeRitual.Ritual.Label).CapitalizeFirst()) ;
+                }
+            }
             yield return launchGizmo;
         }
-        
+
         private void ShowLaunchRitual(CompPilotConsole console)
         {
             var ritualDef = VGEDefOf.GravshipLaunch;

@@ -11,9 +11,7 @@ namespace VanillaGravshipExpanded
             var turret = __instance.caster as Building_GravshipTurret;
             if (turret is not null)
             {
-                Log.Message("forcedMissRadius: " + forcedMissRadius + " before");
                 forcedMissRadius /= turret.GravshipTargeting;
-                Log.Message("forcedMissRadius: " + forcedMissRadius + " now");
             }
         }
     }

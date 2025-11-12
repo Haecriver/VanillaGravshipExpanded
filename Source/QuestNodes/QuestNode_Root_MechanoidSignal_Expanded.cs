@@ -20,6 +20,7 @@ namespace VanillaGravshipExpanded
             QuestUtility.AddQuestTag(map.Parent, QuestGenUtility.HardcodedTargetQuestTagWithQuestID("gravEngine"));
 
             var landingStructure = (LandingStructure)ThingMaker.MakeThing(VGEDefOf.VGE_LandingStructure);
+            landingStructure.forceNullFaction = true;
             landingStructure.layoutDef = VGEDefOf.VGE_StartingGravjumperDamaged;
 
             var questPart_SpawnThingInteractive = new QuestPart_SpawnThingInteractive
