@@ -20,6 +20,7 @@
       <li>VGE_CopilotConsole</li>
       <li>VGE_EngineeringConsole</li>
       <li>VGE_MaintenanceHub</li>
+	  <li>VGE_FlightComputer</li>
     </value>
   </Operation>
 

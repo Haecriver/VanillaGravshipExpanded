@@ -107,7 +107,7 @@
 		<graphicData>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<texPath>Things/Structures/FlightComputer/FlightComputer</texPath>
-			<drawSize>(2,1)</drawSize>
+			<drawSize>(3,2)</drawSize>
 		</graphicData>
 		<costList>
 			<Steel>40</Steel>
