@@ -187,4 +187,8 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_RenameAsteroidDesc>Since {0} was the first to discover the {1} nearby, they get to name it.</VGE_RenameAsteroidDesc>
     <VGE_IsIncapableOfIntellectualLower>{1_labelShort} is incapable of intellectual work</VGE_IsIncapableOfIntellectualLower>
 
+    <!-- Replacements for PilotGravship key based on the console/engine -->
+    <VGE_PilotGravjumper>Launch gravjumper</VGE_PilotGravjumper>
+    <VGE_PilotGravhulk>Launch gravhulk</VGE_PilotGravhulk>
+
 </LanguageData>
