@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using HarmonyLib;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace VanillaGravshipExpanded;
@@ -17,6 +18,12 @@ public static class ListAllGravEngines_Patch
         yield return typeof(SubstructureGrid).DeclaredMethod(nameof(SubstructureGrid.DrawSubstructureCountOnGUI));
         yield return typeof(SubstructureGrid).DeclaredMethod(nameof(SubstructureGrid.DrawSubstructureFootprint));
         yield return typeof(JobGiver_BoardOrLeaveGravship).DeclaredMethod(nameof(JobGiver_BoardOrLeaveGravship.TryGiveJob));
+
+        var method = typeof(FormCaravanComp).FindIncludingInnerTypes<MethodBase>(t => t.FirstMethod(m => m.Name == "<GetGizmos>b__0"));
+        if (method != null)
+            yield return method;
+        else
+            Log.Error("[VGE] Error adding confirmation to leaving gravjumper/gravhulk engines behind - could not find one of the lambdas to FormCaravanComp:GetGizmos.");
     }
 
     private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr, MethodBase baseMethod)
