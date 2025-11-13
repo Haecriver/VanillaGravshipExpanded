@@ -10,7 +10,7 @@ namespace VanillaGravshipExpanded
     {
         public static StatDef VGE_GravshipTargeting, VGE_AccuracyGlobal, VGE_MaintenanceSensitivity, VGE_GravshipMaintenance, VGE_GravshipResearch, VGE_GravPowerAdjacency, VGE_GlobalMaintenanceSensitivity;
         public static WorldObjectDef VGE_ArtilleryProjectile, AsteroidMiningSite, VGE_GravshipGenerationSite;
-        public static ThingDef Gun_MiniTurret, VGE_PointDefenseTurret, VGE_GaussSmoke, VGE_SealantGoop, VGE_Filth_DamagedSubstructure, VGE_Astrofire, VGE_AstrofireSpark, VGE_GravtechConsole,  VGE_PilotCockpit, VGE_PilotBridge, PilotConsole, VGE_Compressed_Vacstone, VGE_OxygenCanister, VGE_MaintenanceHub, VGE_CapacitorHarmonizer, VGE_DamagedEscapePod, VGE_EscapePodSkyfaller, VGE_GravhulkEngine, VGE_GravjumperEngine, VGE_SolarPanelling, VGE_GravshipShelf, VGE_Gravlift;
+        public static ThingDef Gun_MiniTurret, VGE_PointDefenseTurret, VGE_GaussSmoke, VGE_SealantGoop, VGE_Filth_DamagedSubstructure, VGE_Astrofire, VGE_AstrofireSpark, VGE_GravtechConsole,  VGE_PilotCockpit, VGE_PilotBridge, PilotConsole, VGE_Compressed_Vacstone, VGE_OxygenCanister, VGE_MaintenanceHub, VGE_CapacitorHarmonizer, VGE_DamagedEscapePod, VGE_EscapePodSkyfaller, VGE_GravhulkEngine, VGE_GravjumperEngine, VGE_SolarPanelling, VGE_GravshipShelf, VGE_Gravlift, VGE_CommsTerminal;
         public static ThingDef VGE_AstrofuelPipe, VGE_Filth_Astrofuel, VGE_MechanoidGravEngine, VGE_GravFieldAmplifier;
         public static SoundDef VGE_GravshipTarget_Acquired, VGE_MicrometeorStorm;
         public static TerrainDef VGE_GravshipSubscaffold, VGE_DamagedSubstructure, VGE_AsteroidIce, VGE_Compressed_Vacstone_Floor, VGE_MechanoidSubstructure;
@@ -30,6 +30,7 @@ namespace VanillaGravshipExpanded
         public static ThingDef VGE_Astrofuel;
         public static ThingDef DropPodLeavingMechanoid;
         public static CustomOverlayDef VGE_NoLinkedTerminalOverlay, VGE_NoLinkedTurretOverlay, VGE_MultipleGravEnginesOverlay;
+        [MayRequireBiotech] public static BossgroupDef Diabolus;
 
         public static KCSG.StructureLayoutDef VGE_MechOrbitalDestroyer_Alpha, VGE_MechOrbitalDestroyer_Beta, VGE_MechOrbitalDestroyer_Gamma, VGE_StartingGravjumperDamaged, VGE_StartingGravjumper;
         public static DesignationCategoryDef Odyssey;
