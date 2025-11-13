@@ -3,15 +3,13 @@ using RimWorld;
 using System.Linq;
 using Verse.AI;
 using RimWorld.Planet;
+using Verse.Sound;
 
 namespace VanillaGravshipExpanded
 {
     public class CompAbilityEmergencyLaunch : CompAbilityEffect
     {
-        public new CompProperties_AbilityEmergencyLaunch Props
-        {
-            get { return (CompProperties_AbilityEmergencyLaunch)this.props; }
-        }
+        public new CompProperties_AbilityEmergencyLaunch Props => (CompProperties_AbilityEmergencyLaunch)props;
 
         public override void Apply(LocalTargetInfo target, LocalTargetInfo dest)
         {
@@ -33,12 +31,25 @@ namespace VanillaGravshipExpanded
             if (!tile.Valid)
                 return;
 
+            // Setup launch info
             comp.engine.launchInfo = new LaunchInfo
             {
+                pilot = parent.pawn,
                 quality = 0f,
                 doNegativeOutcome = true,
             };
+            // Set the launch tile to prevent errors
+            LaunchInfo_ExposeData_Patch.launchSourceTiles[comp.engine.launchInfo] = comp.engine.Map.Tile;
+            // Destroy trees around the starting grav engine
+            WorldComponent_GravshipController.DestroyTreesAroundSubstructure(comp.engine.Map, comp.engine.ValidSubstructure);
+            // Close world rendering, just in case
+            Find.World.renderer.wantedMode = WorldRenderMode.None;
+            // Consume fuel
+            comp.engine.ConsumeFuel(tile);
+            // Actually launch the gravship
             Find.GravshipController.InitiateTakeoff(comp.engine, tile);
+            // Play the launch sound
+            SoundDefOf.Gravship_Launch.PlayOneShotOnCamera();
         }
 
         public override bool CanApplyOn(LocalTargetInfo target, LocalTargetInfo dest) => base.CanApplyOn(target, dest) && Valid(target);
@@ -50,7 +61,7 @@ namespace VanillaGravshipExpanded
                 return false;
             }
 
-            Pawn pawn = parent.pawn;
+            var pawn = parent.pawn;
 
             var thing = target.Thing;
             if (target.Thing is null)
