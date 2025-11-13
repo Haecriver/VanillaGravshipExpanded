@@ -33,6 +33,7 @@ namespace VanillaGravshipExpanded
             {
                 yield return gizmo;
             }
+
             var currentProject = Find.ResearchManager.currentProj;
             bool canConvert = currentProject != null;
 
@@ -55,6 +56,35 @@ namespace VanillaGravshipExpanded
                 disabled = !canConvert,
                 disabledReason = !canConvert ? "VGE_NoNonGravtechProjectSelected".Translate() : null
             };
+
+            if (DebugSettings.ShowDevGizmos)
+            {
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEV: Set stored data to 0",
+                    action = () => storedGravdata = 0,
+                };
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEF: -1000 stored data",
+                    action = () => TakeGravdata(1000),
+                };
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEF: -10 stored data",
+                    action = () => TakeGravdata(10),
+                };
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEF: +10 stored data",
+                    action = () => AddGravdata(10),
+                };
+                yield return new Command_Action
+                {
+                    defaultLabel = "DEF: +1000 stored data",
+                    action = () => AddGravdata(1000),
+                };
+            }
         }
 
         public void AddGravdata(int amount)
