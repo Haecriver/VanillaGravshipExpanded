@@ -180,6 +180,9 @@
 		<building>
 			<ai_chillDestination>false</ai_chillDestination>
 			<allowWireConnection>false</allowWireConnection>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
 		</building>
 		<altitudeLayer>Building</altitudeLayer>
 		<passability>Standable</passability>
@@ -244,6 +247,11 @@
 			<Flammability>0.6</Flammability>
 			<VGE_MaintenanceSensitivity>1</VGE_MaintenanceSensitivity>
 		</statBases>
+		<building>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
+		</building>
 		<size>(6,3)</size>
 		<costList>
 			<Steel>500</Steel>
@@ -268,22 +276,22 @@
 					<texPath>UI/Gizmos/ExtractAstrofuel_Gizmo</texPath>
 					<labelKey>VGE_ExtractAstrofuel</labelKey>
 					<descKey>VGE_ExtractAstrofuelDesc</descKey>
-          <disabledReasonKey>VGE_ExtractAstrofuelDisabled</disabledReasonKey>
+					<disabledReasonKey>VGE_ExtractAstrofuelDisabled</disabledReasonKey>
 					<extractAmount>-1</extractAmount>
-          <extractExactAmount>false</extractExactAmount>
+					<extractExactAmount>false</extractExactAmount>
 					<thing>VGE_Astrofuel</thing>
-          <extractTime>120</extractTime>
+					<extractTime>120</extractTime>
 				</extractOptions>
 				<refillOptions>
 					<thing>VGE_Astrofuel</thing>
-          <refillTime>240</refillTime>
+					<refillTime>240</refillTime>
 				</refillOptions>
-        <destroyOptions>
-          <li>
-            <thing>VGE_Astrofuel</thing>
-            <spawnWhenDestroyed>false</spawnWhenDestroyed>
-          </li>
-        </destroyOptions>
+				<destroyOptions>
+					<li>
+						<thing>VGE_Astrofuel</thing>
+						<spawnWhenDestroyed>false</spawnWhenDestroyed>
+					</li>
+				</destroyOptions>
 			</li>
 			<li Class="PipeSystem.CompProperties_ExplosiveContent">
 				<explosiveMinRadius>1.1</explosiveMinRadius>
@@ -349,7 +357,7 @@
 			<Steel>50</Steel>
 		</costList>
 		<building>
-      <blueprintClass>Blueprint_Storage</blueprintClass>
+			<blueprintClass>Blueprint_Storage</blueprintClass>
 			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
 			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
 			<fixedStorageSettings>
@@ -369,6 +377,9 @@
 					</thingDefs>
 				</filter>
 			</defaultStorageSettings>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
 		</building>
 		<inspectorTabs>
 			<li>ITab_Storage</li>
@@ -423,7 +434,7 @@
 			<Steel>50</Steel>
 		</costList>
 		<building>
-      <blueprintClass>Blueprint_Storage</blueprintClass>
+			<blueprintClass>Blueprint_Storage</blueprintClass>
 			<preventDeteriorationOnTop>true</preventDeteriorationOnTop>
 			<ignoreStoredThingsBeauty>true</ignoreStoredThingsBeauty>
 			<fixedStorageSettings>
@@ -443,6 +454,9 @@
 					</thingDefs>
 				</filter>
 			</defaultStorageSettings>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
 		</building>
 		<inspectorTabs>
 			<li>ITab_Storage</li>
@@ -468,7 +482,7 @@
 		<description>Produces power by consuming astrofuel. Much more efficient than chemfuel generators.</description>
 		<minifiedDef IsNull="True"/>
 		<thingCategories IsNull="True"/>
-    <drawerType>MapMeshAndRealTime</drawerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
 		<graphicData>
 			<texPath>Things/Structures/Power/AstrofuelGenerator</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -534,12 +548,12 @@
 				<preExplosionSpawnChance>1</preExplosionSpawnChance>
 				<wickTicks>70~150</wickTicks>
 			</li>
-      <li Class="CompProperties_Stunnable">
-        <useLargeEMPEffecter>true</useLargeEMPEffecter>
-        <affectedDamageDefs>
-          <li>EMP</li>
-        </affectedDamageDefs>
-      </li>
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
 		</comps>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
@@ -550,6 +564,11 @@
 			<li>VGE_GravshipPower</li>
 		</researchPrerequisites>
 		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<building>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
+		</building>
 	</ThingDef>
 	<ThingDef ParentName="GravshipComponentBase">
 		<defName>VGE_IndustrialAstrofuelGenerator</defName>
@@ -557,7 +576,7 @@
 		<description>Produces a large amount of power by consuming astrofuel. Much more efficient than chemfuel generators.</description>
 		<minifiedDef IsNull="True"/>
 		<thingCategories IsNull="True"/>
-    <drawerType>MapMeshAndRealTime</drawerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
 		<graphicData>
 			<texPath>Things/Structures/Power/IndustrialAstrofuelGenerator</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
@@ -623,12 +642,12 @@
 				<preExplosionSpawnChance>1</preExplosionSpawnChance>
 				<wickTicks>70~150</wickTicks>
 			</li>
-      <li Class="CompProperties_Stunnable">
-        <useLargeEMPEffecter>true</useLargeEMPEffecter>
-        <affectedDamageDefs>
-          <li>EMP</li>
-        </affectedDamageDefs>
-      </li>
+			<li Class="CompProperties_Stunnable">
+				<useLargeEMPEffecter>true</useLargeEMPEffecter>
+				<affectedDamageDefs>
+					<li>EMP</li>
+				</affectedDamageDefs>
+			</li>
 		</comps>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
 		<designationCategory>VGE_Fuel</designationCategory>
@@ -639,6 +658,11 @@
 		</researchPrerequisites>
 		<constructionSkillPrerequisite>8</constructionSkillPrerequisite>
 		<drawPlaceWorkersWhileSelected>true</drawPlaceWorkersWhileSelected>
+		<building>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
+		</building>
 	</ThingDef>
 	<ThingDef ParentName="GravshipComponentBase">
 		<defName>VGE_AstrofuelSynthesizer</defName>
@@ -646,7 +670,7 @@
 		<description>A specialized structure that refines chemfuel into high-grade astrofuel. It must be connected to the astrofuel pipe network and linked to at least one astrofuel tank to operate. Once connected, it automatically converts inserted chemfuel into astrofuel for use in engines and systems.</description>
 		<minifiedDef IsNull="True"/>
 		<thingCategories IsNull="True"/>
-    <drawerType>MapMeshAndRealTime</drawerType>
+		<drawerType>MapMeshAndRealTime</drawerType>
 		<graphicData>
 			<texPath>Things/Structures/AstrofuelSynthesizer/AstrofuelSynthesizer</texPath>
 			<graphicClass>Graphic_Multi</graphicClass>
@@ -698,7 +722,7 @@
 				<lowPowerWhenRefuelableEmpty>true</lowPowerWhenRefuelableEmpty>
 				<soundAmbientReceivingResource>Recipe_Cremate</soundAmbientReceivingResource>
 				<pipeNet>VGE_AstrofuelNet</pipeNet>
-        <resourceOffOverlay>false</resourceOffOverlay>
+				<resourceOffOverlay>false</resourceOffOverlay>
 				<!-- 0.(6) per 100 ticks, or 0.00(6) per tick, or 1 per 150 ticks, or 400 per day. -->
 				<consumptionPerTick>-0.66666666666666666666666666666667</consumptionPerTick>
 			</li>
@@ -712,7 +736,7 @@
 					<li>VGE_Astropurifier</li>
 				</linkableFacilities>
 			</li>
-      <li Class="CompProperties_Flickable"/>
+			<li Class="CompProperties_Flickable"/>
 		</comps>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
 		<designationCategory>VGE_Fuel</designationCategory>
@@ -723,6 +747,11 @@
 			<li>VGE_AstrofuelRefining</li>
 		</researchPrerequisites>
 		<constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+		<building>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
+		</building>
 	</ThingDef>
 	<ThingDef ParentName="GravshipComponentBase">
 		<defName>VGE_Astropurifier</defName>
@@ -776,6 +805,11 @@
 		<tradeTags>
 			<li>GravshipUpgrade</li>
 		</tradeTags>
+		<building>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
+		</building>
 	</ThingDef>
 	<ThingDef ParentName="ThrusterBase">
 		<defName>VGE_GiantThruster</defName>
@@ -856,5 +890,10 @@
 			</li>
 		</comps>
 		<uiOrder>2206</uiOrder>
+		<building>
+			<relatedBuildCommands>
+				<li>VGE_AstrofuelPipe</li>
+			</relatedBuildCommands>
+		</building>
 	</ThingDef>
 </Defs>
