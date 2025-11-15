@@ -6,6 +6,8 @@ namespace VanillaGravshipExpanded;
 
 public class Alert_LowOxygen : Alert
 {
+    public const float OxygenPerPawn = 50f;
+
     public Alert_LowOxygen()
     {
         defaultLabel = "VGE_Alert_LowOxygen".Translate();
@@ -31,6 +33,29 @@ public class Alert_LowOxygen : Alert
             if (!map.mapPawns.AnyColonistSpawned)
                 continue;
 
+            pawnsNeedingOxygen = 0;
+            var neededOxygen = 0f;
+
+            foreach (var pawn in map.mapPawns.FreeColonistsAndPrisoners)
+            {
+                if (pawn.RaceProps.Humanlike)
+                {
+                    if (pawn.RaceProps.IsMechanoid)
+                        continue;
+                    if (pawn.IsMutant && !pawn.mutant.def.breathesAir)
+                        continue;
+                    var resistance = pawn.GetStatValue(StatDefOf.VacuumResistance, cacheStaleAfterTicks: 60);
+                    if (resistance >= 1)
+                        continue;
+
+                    pawnsNeedingOxygen++;
+                    neededOxygen += OxygenPerPawn * (1f - resistance);
+                }
+            }
+
+            if (neededOxygen < OxygenPerPawn * 2)
+                neededOxygen = OxygenPerPawn;
+
             storedOxygen = 0f;
             var anyStorage = false;
 
@@ -42,31 +67,11 @@ public class Alert_LowOxygen : Alert
                 {
                     anyStorage = true;
                     storedOxygen += net.Stored;
-                    if (storedOxygen > 100f)
-                        break;
                 }
             }
 
-            if (!anyStorage || storedOxygen > 100f)
-                continue;
-
-            pawnsNeedingOxygen = 0;
-            foreach (var pawn in map.mapPawns.FreeColonistsAndPrisoners)
-            {
-                if (pawn.RaceProps.Humanlike)
-                {
-                    if (pawn.RaceProps.IsMechanoid)
-                        continue;
-                    if (pawn.IsMutant && !pawn.mutant.def.breathesAir)
-                        continue;
-                    if (pawn.GetStatValue(StatDefOf.VacuumResistance, cacheStaleAfterTicks: 60) >= 1)
-                        continue;
-
-                    pawnsNeedingOxygen++;
-                }
-            }
-
-            return map;
+            if (anyStorage && storedOxygen < neededOxygen)
+                return map;
         }
 
         storedOxygen = 0;
