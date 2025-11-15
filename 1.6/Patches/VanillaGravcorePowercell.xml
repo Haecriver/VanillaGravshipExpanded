@@ -44,7 +44,6 @@
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
 					<li>GravcorePowerCell</li>
-				
 				</linkableFacilities>
 			</li>
 			<li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
@@ -61,6 +60,12 @@
 				<basePowerConsumption>-1000</basePowerConsumption>
 				<transmitsPower>true</transmitsPower>
 			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="GravcorePowerCell"]/graphicData/texPath</xpath>
+		<value>
+			<texPath>Things/Structures/Power/GravcorePowerCell</texPath>
 		</value>
 	</Operation>
 </Patch>
