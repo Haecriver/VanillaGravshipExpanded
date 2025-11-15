@@ -10,8 +10,8 @@ public class Pawn_GetInspectString_Patch
 {
     private static void Postfix(Pawn __instance, ref string __result)
     {
-        // Only display on colonists
-        if (__instance.Faction != Faction.OfPlayer)
+        // Only display on colonists or prisoners
+        if (__instance.Faction != Faction.OfPlayer && !__instance.IsPrisonerOfColony)
             return;
         // Mechanoids can't get vacuum exposure, in case a mod makes humanlike mechanoids
         if (__instance.RaceProps.IsMechanoid)
