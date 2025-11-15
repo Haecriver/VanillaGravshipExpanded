@@ -53,8 +53,13 @@
     <VGE_Refill>Reload {GEAR_labelShort} with {AMMO_label}</VGE_Refill>
     <VGE_RefillCannotCarryEnough>Cannot carry enough {AMMO_label} to refill 1 charge.</VGE_RefillCannotCarryEnough>
 
+    <!-- Low oxygen alerts -->
     <VGE_Alert_LowOxygen>Low oxygen</VGE_Alert_LowOxygen>
     <VGE_Alert_LowOxygenExplanation>You are dangerously low on oxygen.\n\n    Oxygen in storage: {0}u³\n    Colonists and prisoners breathing oxygen: {1}\n\nWhen oxygen runs out, the gravship will start filling with vacuum.</VGE_Alert_LowOxygenExplanation>
+
+    <!-- Death from vacuum exposure inspect string -->
+    <VGE_ResistantToVacuumExposure>resistant to vacuum</VGE_ResistantToVacuumExposure>
+    <VGE_TimeUntilVacuumExposureDeath>death from vacuum exposure in {0}</VGE_TimeUntilVacuumExposureDeath>
 
     <VGE_HeatsinkHeatStored>{0} / {1} heat units</VGE_HeatsinkHeatStored>
     <VGE_AbsorbGravheat>Absorb gravheat</VGE_AbsorbGravheat>
