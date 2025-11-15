@@ -53,6 +53,9 @@
     <VGE_Refill>Reload {GEAR_labelShort} with {AMMO_label}</VGE_Refill>
     <VGE_RefillCannotCarryEnough>Cannot carry enough {AMMO_label} to refill 1 charge.</VGE_RefillCannotCarryEnough>
 
+    <VGE_Alert_LowOxygen>Low oxygen</VGE_Alert_LowOxygen>
+    <VGE_Alert_LowOxygenExplanation>You are dangerously low on oxygen.\n\n    Oxygen in storage: {0}u³\n    Colonists and prisoners breathing oxygen: {1}\n\nIncrease oxygen production, purchase some oxygen canisters, or send some people to the surface.</VGE_Alert_LowOxygenExplanation>
+
     <VGE_HeatsinkHeatStored>{0} / {1} heat units</VGE_HeatsinkHeatStored>
     <VGE_AbsorbGravheat>Absorb gravheat</VGE_AbsorbGravheat>
     <VGE_AbsorbGravheatDesc>Flush any remaining structural heat from the grav engine onto this gravheat absorber, allowing for an immediate gravship launch. Gravheat absorber will enter a long cooldown period during which it can't absorb any more heat.</VGE_AbsorbGravheatDesc>
