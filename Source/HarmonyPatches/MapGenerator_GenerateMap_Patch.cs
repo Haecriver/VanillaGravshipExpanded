@@ -14,7 +14,7 @@ namespace VanillaGravshipExpanded
         {
             if (mapSize.z <= 100 && mapSize.x <= 100 && mapGenerator == MapGeneratorDefOf.Space)
             {
-                mapSize = new IntVec3(200, 1, 200);
+                mapSize = Find.World.info.initialMapSize;
             }
         }
     }
