@@ -200,4 +200,13 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_PilotGravhulk>Launch gravhulk</VGE_PilotGravhulk>
     <VGE_GravtechNeedsGravdata>{0} needs gravdata to complete. Obtain gravdata by travelling with your gravship.</VGE_GravtechNeedsGravdata>
 
+    <!-- Replace pursuing mechanoids text with same but, but use the gravship itself as an argument. -->
+    <VGE_LetterTextMechanoidThreat>The mechhive's scanning process is close to determining your location. When it locates your {GRAVSHIP}, it will send a massive mechanoid force to kill you.\n\nGather your supplies, then flee the map by selecting the {CONSOLE}, and selecting launch.</VGE_LetterTextMechanoidThreat>
+
+    <!-- Simple "gravship" style text, without the engine part. -->
+    <!-- First, it's used for the {GRAVSHIP} argument text above. Second, it's used for replacing the "gravship" name of unnamed gravship world object. -->
+    <VGE_Gravjumper>gravjumper</VGE_Gravjumper>
+    <VGE_Gravship>gravship</VGE_Gravship>
+    <VGE_Gravhulk>gravhulk</VGE_Gravhulk>
+
 </LanguageData>
