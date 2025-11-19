@@ -296,6 +296,7 @@ namespace VanillaGravshipExpanded
             }
             return DrawFlatGrid(outRect, designators);
         }
+        private static List<Gizmo> tmpAllGizmos = new List<Gizmo>();
 
         private static Designator DrawFlatGrid(Rect rect, List<Designator> designators)
         {
@@ -315,7 +316,11 @@ namespace VanillaGravshipExpanded
             HandleScrollBar(rect, viewRect, ref designatorGridScrollPosition);
             Widgets.BeginScrollView(rect, ref designatorGridScrollPosition, viewRect);
             GizmoGridDrawer.drawnHotKeys.Clear();
-
+            
+            tmpAllGizmos.Clear();
+            tmpAllGizmos.AddRange(designators);
+            tmpAllGizmos.SortStable(GizmoGridDrawer.SortByOrder);
+            
             for (int i = 0; i < designators.Count; i++)
             {
                 int row = i / gizmosPerRow;
