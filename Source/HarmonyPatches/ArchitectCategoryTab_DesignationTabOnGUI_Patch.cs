@@ -296,7 +296,7 @@ namespace VanillaGravshipExpanded
             }
             return DrawFlatGrid(outRect, designators);
         }
-        private static List<Gizmo> tmpAllGizmos = new List<Gizmo>();
+        private static List<Designator> tmpAllGizmos = new List<Designator>();
 
         private static Designator DrawFlatGrid(Rect rect, List<Designator> designators)
         {
@@ -321,11 +321,11 @@ namespace VanillaGravshipExpanded
             tmpAllGizmos.AddRange(designators);
             tmpAllGizmos.SortStable(GizmoGridDrawer.SortByOrder);
             
-            for (int i = 0; i < designators.Count; i++)
+            for (int i = 0; i < tmpAllGizmos.Count; i++)
             {
                 int row = i / gizmosPerRow;
                 int col = i % gizmosPerRow;
-                var designator = designators[i];
+                var designator = tmpAllGizmos[i];
                 var parms = new GizmoRenderParms
                 {
                     highLight = ShouldHighLightGizmo(designator),
@@ -364,14 +364,18 @@ namespace VanillaGravshipExpanded
             HandleScrollBar(outRect, viewRect, ref ordersScrollPosition);
             Widgets.BeginScrollView(outRect, ref ordersScrollPosition, viewRect);
             GizmoGridDrawer.drawnHotKeys.Clear();
-
-            for (var i = 0; i < designators.Count; i++)
+            
+            tmpAllGizmos.Clear();
+            tmpAllGizmos.AddRange(designators);
+            tmpAllGizmos.SortStable(GizmoGridDrawer.SortByOrder);
+            
+            for (var i = 0; i < tmpAllGizmos.Count; i++)
             {
                 int row = i / columns;
                 int col = i % columns;
                 var xPos = col * (gizmoSize + gizmoSpacing);
                 var yPos = row * rowHeight;
-                var designator = designators[i];
+                var designator = tmpAllGizmos[i];
                 var parms = new GizmoRenderParms
                 {
                     highLight = ShouldHighLightGizmo(designator),
