@@ -147,7 +147,7 @@ namespace VanillaGravshipExpanded
             }
 
             var buttonRect = new Rect(buttonX, 0f, buttonWidth, 30f);
-            var finalRect = GenUI.CenteredOnYIn(buttonRect, buttonArea);
+            var finalRect = buttonRect.CenteredOnYIn(buttonArea);
 
             if (Widgets.ButtonText(finalRect, VGEDefOf.VGE_Gravtech.LabelCap))
             {
@@ -174,7 +174,7 @@ namespace VanillaGravshipExpanded
             for (int i = allDefs.Count - 1; i >= 0; i--)
             {
                 var def = allDefs[i];
-                if (def.tab == VGEDefOf.VGE_Gravtech)
+                if (def.IsGravshipResearch())
                 {
                     __state.Add(def);
                     DefDatabase<ResearchProjectDef>.Remove(def);

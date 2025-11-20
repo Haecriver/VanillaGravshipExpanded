@@ -9,7 +9,7 @@ namespace VanillaGravshipExpanded
     {
         public static bool Prefix(ResearchProjectDef proj, ref bool __result)
         {
-            if (proj?.tab == VGEDefOf.VGE_Gravtech)
+            if (proj.IsGravshipResearch())
             {
                 __result = World_ExposeData_Patch.currentGravtechProject == proj;
                 return false;
