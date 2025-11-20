@@ -9,7 +9,7 @@ namespace VanillaGravshipExpanded
     {
         public static void Postfix(ResearchProjectDef __instance, ref bool __result)
         {
-            if (__instance.tab == VGEDefOf.VGE_Gravtech)
+            if (__instance.IsGravshipResearch())
             {
                 __result = true;
             }

@@ -7,14 +7,6 @@ namespace VanillaGravshipExpanded
     [HarmonyPatch(typeof(ResearchManager), nameof(ResearchManager.SetCurrentProject))]
     public static class ResearchManager_SetCurrentProject_Patch
     {
-        public static bool Prefix(ResearchProjectDef proj)
-        {
-            if (proj?.tab == VGEDefOf.VGE_Gravtech)
-            {
-                proj.SetGravshipResearch();
-                return false;
-            }
-            return true;
-        }
+        public static bool Prefix(ResearchProjectDef proj) => !proj.SetGravshipResearch(false);
     }
 }

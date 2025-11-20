@@ -51,17 +51,12 @@ namespace VanillaGravshipExpanded
 
         public static bool NextResearchProject_Prefix(ResearchProjectDef SelectedResearch)
         {
-            if (SelectedResearch?.tab == VGEDefOf.VGE_Gravtech)
-            {
-                SelectedResearch.SetGravshipResearch();
-                return false;
-            }
-            return true;
+            return !SelectedResearch.SetGravshipResearch(false);
         }
 
         public static void LockedBox_Postfix(ResearchProjectDef selectedProject, ref string __result)
         {
-            if (selectedProject?.tab == VGEDefOf.VGE_Gravtech && World_ExposeData_Patch.currentGravtechProject == selectedProject)
+            if (selectedProject.IsGravshipResearch() && World_ExposeData_Patch.currentGravtechProject == selectedProject)
             {
                 __result = "InProgress".Translate();
             }
@@ -69,7 +64,7 @@ namespace VanillaGravshipExpanded
         public static void DrawPanel_Prefix(out ResearchProjectDef __state, ResearchProjectDef ___SelectedStep)
         {
             __state = Find.ResearchManager.currentProj;
-            if (___SelectedStep != null && ___SelectedStep.tab == VGEDefOf.VGE_Gravtech && World_ExposeData_Patch.currentGravtechProject == ___SelectedStep)
+            if (___SelectedStep != null && ___SelectedStep.IsGravshipResearch() && World_ExposeData_Patch.currentGravtechProject == ___SelectedStep)
             {
                 Find.ResearchManager.currentProj = ___SelectedStep;
             }
@@ -77,7 +72,7 @@ namespace VanillaGravshipExpanded
         public static void DrawPanel_Postfix(ResearchProjectDef __state, ResearchProjectDef ___SelectedStep)
         {
             bool prefixMadeChange = ___SelectedStep != null
-                                     && ___SelectedStep.tab == VGEDefOf.VGE_Gravtech
+                                     && ___SelectedStep.IsGravshipResearch()
                                      && World_ExposeData_Patch.currentGravtechProject == ___SelectedStep;
             if (prefixMadeChange && Find.ResearchManager.currentProj == ___SelectedStep)
             {

@@ -38,7 +38,7 @@ namespace VanillaGravshipExpanded
 
                 // Warning about no gravtech project
                 bool noGravdataSource = World_ExposeData_Patch.currentGravtechProject == null && !engine.GravshipComponents.Any(x => x.parent is Building_GravshipBlackBox);
-                bool anyGravTechAvailable = DefDatabase<ResearchProjectDef>.AllDefs.Any(x => x.tab == VGEDefOf.VGE_Gravtech && x.CanStartNow);
+                bool anyGravTechAvailable = DefDatabase<ResearchProjectDef>.AllDefs.Any(x => x.IsGravshipResearch() && x.CanStartNow);
                 if (noGravdataSource && anyGravTechAvailable)
                 {
                     string warningPart = "Warning".Translate().ToString().ToUpper() + ": ";

@@ -11,13 +11,13 @@ namespace VanillaGravshipExpanded
         public static void Prefix(MainTabWindow_Research __instance, out TechLevel __state)
         {
             __state = __instance.selectedProject.techLevel;
-            if (__instance.selectedProject.tab == VGEDefOf.VGE_Gravtech)
+            if (__instance.selectedProject.IsGravshipResearch())
             {
                 __instance.selectedProject.techLevel = Faction.OfPlayer.def.techLevel;
             }
         }
-        
-        public static void Postfix(MainTabWindow_Research __instance, TechLevel __state)
+
+        public static void Finalizer(MainTabWindow_Research __instance, TechLevel __state)
         {
             __instance.selectedProject.techLevel = __state;
         }
