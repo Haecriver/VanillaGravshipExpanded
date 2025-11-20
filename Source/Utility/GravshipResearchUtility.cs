@@ -6,7 +6,9 @@ namespace VanillaGravshipExpanded;
 
 public static class GravshipResearchUtility
 {
-    public static bool IsGravshipResearch(this ResearchProjectDef project) => project != null && (project.tab?.HasModExtension<GravtechResearchExtension>() == true || project.HasModExtension<GravtechResearchExtension>());
+    public static bool IsGravshipResearch(this ResearchProjectDef project) => project != null && (project.tab.IsGravshipResearchTab() || project.HasModExtension<GravtechResearchExtension>());
+
+    public static bool IsGravshipResearchTab(this ResearchTabDef tab) => tab != null && tab.HasModExtension<GravtechResearchExtension>();
 
     public static bool SetGravshipResearch(this ResearchProjectDef project, bool playSound = true, bool sendMessage = true)
     {
