@@ -74,7 +74,7 @@
 			<Gold>12</Gold>
 		</costList>
 		<recipeMaker>
-			<researchPrerequisite>OrbitalTech</researchPrerequisite>
+			<researchPrerequisite>VGE_OxygenNetwork</researchPrerequisite>
 			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
 			<displayPriority>235</displayPriority>
 			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
@@ -162,7 +162,7 @@
 			<Gold>6</Gold>
 		</costList>
 		<recipeMaker>
-			<researchPrerequisite>OrbitalTech</researchPrerequisite>
+			<researchPrerequisite>VGE_OxygenNetwork</researchPrerequisite>
 			<unfinishedThingDef>UnfinishedTechArmor</unfinishedThingDef>
 			<displayPriority>237</displayPriority>
 			<workSpeedStat>GeneralLaborSpeed</workSpeedStat>
