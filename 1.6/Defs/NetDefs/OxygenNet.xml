@@ -614,6 +614,12 @@
 			</li>
 			<li Class="CompProperties_Flickable"/>
 			<li Class="CompProperties_Breakdownable"/>
+      <li Class="VanillaGravshipExpanded.CompProperties_ActiveResourceTraderEffecter">
+        <!-- Only MoteThrownMoveTowardsSource motes will move towards the target. -->
+        <!-- Moving towards center and offset only work when using SubEffecter_SprayerContinuous_MoveTowardsSource. -->
+        <effecterDef>VGE_OxygenHarvester</effecterDef>
+        <offset>-0.5, 0, 0.5</offset>
+      </li>
 		</comps>
 		<designationCategory>VGE_Vacuum</designationCategory>
 		<researchPrerequisites>
