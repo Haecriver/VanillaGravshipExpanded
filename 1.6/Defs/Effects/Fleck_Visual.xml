@@ -37,7 +37,7 @@
 		<solidTime>0</solidTime>
 		<fadeOutTime>1.5</fadeOutTime>
 	</FleckDef>
-	<FleckDef ParentName="FleckGlowDistortBackground" Name="FleckPsycastAreaEffect">
+	<FleckDef ParentName="FleckGlowDistortBackground">
 		<defName>VGE_GaussDistortion</defName>
 		<altitudeLayer>MoteLow</altitudeLayer>
 		<fadeInTime>0.02</fadeInTime>
