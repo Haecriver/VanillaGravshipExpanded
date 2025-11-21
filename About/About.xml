@@ -35,6 +35,14 @@
   </incompatibleWith>
 
 	<packageId>vanillaexpanded.gravship</packageId>
-	<description>Text.todo
+	<description>The aim of Vanilla Gravship Expanded - Chapter 1 is to take gravships beyond being just a convenient portable base and make them feel like true, living ships that can anchor an entire run. Instead of a tool you unlock and don’t pay much attention to, the gravship becomes a home you must manage, upgrade, and rely on.
+
+This chapter lays down the core systems: oxygen networks for survival, astrofuel refining to keep engines burning, structural heat management, compact workspaces, and proper living quarters. Upgrades like black boxes and flight computers ensure the ship grows alongside your colony, while everyday needs like power and maintenance turn it into a place worth caring about.
+
+A key part of this is progression. Your gravship isn’t handed to you fully formed, instead it develops as your colony does. Early on, it may be a fragile lifeboat barely fit for orbit, but with research, upgrades, and investment, it evolves into a self-sufficient vessel.
+
+Chapter 1 is about foundations, not flash. Before gravship battles or orbital fortresses, you’ll have a functioning, believable ship that demands attention and rewards investment. It’s the first step in turning the gravship into your home among the stars.
+
+Since it's an overhaul, it is safe to assume that any mods that alter gravships in any way will be incompatible. We're doing some pretty extensive changes to the system after all.
 </description>
 </ModMetaData>
