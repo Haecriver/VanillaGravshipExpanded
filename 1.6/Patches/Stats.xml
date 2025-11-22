@@ -32,7 +32,7 @@
       </value>
     </nomatch>
     <match Class="PatchOperationAdd">
-      <xpath>Defs/StatDef[defName="VacuumResistance"]/statFactors</xpath>
+      <xpath>Defs/StatDef[defName="VacuumResistance"]/parts</xpath>
       <value>
         <li Class="VanillaGravshipExpanded.StatPart_OxygenPack"/>
       </value>
