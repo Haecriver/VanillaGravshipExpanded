@@ -14,21 +14,24 @@ public static class MainTabWindow_Research_DrawProjectInfo_Patch
         var matcher = new CodeMatcher(instr);
 
         matcher.MatchEndForward(
+            // Search for "Find.ResearchManager.GetProject(null)" call
             CodeMatch.Calls(typeof(Find).DeclaredPropertyGetter(nameof(Find.ResearchManager))),
             new CodeMatch(OpCodes.Ldnull),
             CodeMatch.Calls(() => ((ResearchManager)null).GetProject)
         ).InsertAfter(
+            // Load "this"
+            CodeInstruction.LoadArgument(0),
+            // Call our method
             CodeInstruction.Call(() => GetProjectWrapper)
         );
 
         return matcher.Instructions();
     }
 
-    private static ResearchProjectDef GetProjectWrapper(ResearchProjectDef currentProject)
+    private static ResearchProjectDef GetProjectWrapper(ResearchProjectDef currentProject, MainTabWindow_Research instance)
     {
-        var tab = ((MainTabWindow_Research)MainButtonDefOf.Research.TabWindow).CurTab;
         // If a gravtech research tab, use the current gravtech project
-        if (tab.IsGravshipResearchTab())
+        if (instance.CurTab.IsGravshipResearchTab())
             return World_ExposeData_Patch.currentGravtechProject;
         // Return current project, as we're on a normal tab
         return currentProject;
