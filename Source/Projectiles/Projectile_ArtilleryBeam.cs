@@ -93,9 +93,11 @@ namespace VanillaGravshipExpanded
         private void SpawnMote(TargetInfo origin, LocalTargetInfo usedTarget)
         {
             Vector3 offsetA = (ExactPosition - origin.CenterVector3).Yto0().normalized * def.projectile.beamStartOffset;
-            if (launcher.Map != this.Map)
+            var originMap = equipment?.MapHeld ?? launcher?.MapHeld;
+            if (originMap is null) return;
+            if (originMap != this.Map)
             {
-                float angle = ArtilleryUtility.GetAngle(launcher.Map.Tile, this.Map.Tile);
+                float angle = ArtilleryUtility.GetAngle(originMap.Tile, this.Map.Tile);
                 offsetA -= new Vector3(2, 0, 2).RotatedBy(angle);
             }
             if (def.projectile.beamMoteDef != null)
