@@ -24,6 +24,17 @@ namespace VanillaGravshipExpanded
             var compatibilityType = AccessTools.TypeByName("CM_Semi_Random_Research.Compatibility");
             if (compatibilityType != null)
             {
+                var doCompatibilityChecksMethod = AccessTools.Method(compatibilityType, "DoCompatibilityChecks");
+                if (doCompatibilityChecksMethod != null)
+                {
+                    var postfix = new HarmonyMethod(typeof(SemiRandomResearch_Compat_Patches), nameof(DoCompatibilityChecks_Postfix));
+                    harmony.Patch(doCompatibilityChecksMethod, postfix: postfix);
+                }
+                else
+                {
+                    Log.Error("[VGE] CM_Semi_Random_Research.Compatibility.DoCompatibilityChecks method not found.");
+                }
+
                 var isAnomalyContentMethod = AccessTools.Method(compatibilityType, "IsAnomalyContent");
                 if (isAnomalyContentMethod != null)
                 {
@@ -76,6 +87,14 @@ namespace VanillaGravshipExpanded
             else
             {
                 Log.Error("[VGE] CM_Semi_Random_Research.SemiRandomResearchUtility type not found.");
+            }
+        }
+
+        public static void DoCompatibilityChecks_Postfix(ResearchProjectDef rpd, ref bool __result)
+        {
+            if (__result && rpd.IsGravshipResearch())
+            {
+                __result = false;
             }
         }
 

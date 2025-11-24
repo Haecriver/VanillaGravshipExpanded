@@ -1,14 +1,19 @@
-﻿using System.Reflection;
+using System.Reflection;
 using HarmonyLib;
 using RimWorld;
 using Verse;
 
 namespace VanillaGravshipExpanded;
 
-[HarmonyPatch("GenGridVehicles", "ImpassableForVehicles")]
+[HarmonyPatch]
 public static class VehicleFramework_GenGridVehicles_ImpassableForVehicles_Patch
 {
-    private static bool Prepare(MethodBase methodBase) => methodBase != null || ModsConfig.IsActive("SmashPhil.VehicleFramework") || ModsConfig.IsActive("SmashPhil.VehicleFramework_steam");
+    private static bool Prepare() => ModsConfig.IsActive("SmashPhil.VehicleFramework") || ModsConfig.IsActive("SmashPhil.VehicleFramework_steam");
+    
+    public static MethodBase TargetMethod()
+    {
+        return AccessTools.Method("VehicleFramework.GenGridVehicles:ImpassableForVehicles");
+    }
 
     private static void Postfix(ThingDef __0, ref bool __result)
     {
