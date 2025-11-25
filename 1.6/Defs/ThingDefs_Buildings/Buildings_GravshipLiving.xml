@@ -510,7 +510,7 @@
     <uiIconOffset>(0, -0.2)</uiIconOffset>
     <uiOrder>2341</uiOrder>
 	</ThingDef>
-	<ThingDef ParentName="FurnitureWithQualityBase">
+	<ThingDef ParentName="FurnitureBase">
 		<defName>VGE_FauxPlant</defName>
 		<label>faux plant</label>
 		<description>An artificial plant in a sturdy metal pot. It requires no light, water, or air, making it perfect for adding beauty to even the most inhospitable gravship environments.</description>
