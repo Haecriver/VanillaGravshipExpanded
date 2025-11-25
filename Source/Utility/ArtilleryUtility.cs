@@ -39,6 +39,7 @@ namespace VanillaGravshipExpanded
         public static void SpawnArtilleryProjectile(PlanetTile targetTile, PlanetTile startTile, ThingDef projectileDef, Thing launcher, IntVec3 targetCell, float missRadius, float hitChance = 1.0f)
         {
             var map = Find.Maps.Find(m => m.Tile == targetTile);
+            if (map is null) return;
             var spawnCell = FindSpawnCell(map, targetTile, startTile, targetCell);
             IntVec3 finalTargetCell;
             if (missRadius > 0f)
