@@ -64,6 +64,7 @@
 		</comps>
 		<researchPrerequisites>
 			<li>AdvancedGravtech</li>
+      <li>Hydroponics</li>
 		</researchPrerequisites>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
 		<designationCategory>Odyssey</designationCategory>

@@ -170,6 +170,9 @@
 				<preventSharingThought>True</preventSharingThought>
 			</li>
 		</comps>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
     <uiOrder>2000</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="VGE_GravshipLivingBedBase">
@@ -223,6 +226,9 @@
 				</linkableFacilities>
 			</li>
 		</comps>
+    <researchPrerequisites>
+      <li>HospitalBed</li>
+    </researchPrerequisites>
     <uiOrder>2020</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="VGE_GravshipLivingFurnitureBase">
@@ -275,6 +281,9 @@
 				<maxDistance>6</maxDistance>
 			</li>
 		</comps>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+    </researchPrerequisites>
     <uiOrder>2100</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="StorageShelfBase">
@@ -385,6 +394,9 @@
     <overrideMinifiedRot>North</overrideMinifiedRot>
     <minifiedDrawOffset>(0, 0, 0.3)</minifiedDrawOffset>
     <uiIconOffset>(0, -0.2)</uiIconOffset>
+    <researchPrerequisites>
+      <li>Firefoam</li>
+    </researchPrerequisites>
     <uiOrder>2340</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="VGE_GravshipLivingBuildingBase">
@@ -460,6 +472,9 @@
 				<delayTicks>120</delayTicks>
 			</li>
 		</comps>
+    <researchPrerequisites>
+      <li>MicroelectronicsBasics</li>
+    </researchPrerequisites>
     <uiOrder>2342</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="VGE_GravshipLivingWallMountedBase">
@@ -508,6 +523,9 @@
     <overrideMinifiedRot>North</overrideMinifiedRot>
     <minifiedDrawOffset>(0, 0, 0.3)</minifiedDrawOffset>
     <uiIconOffset>(0, -0.2)</uiIconOffset>
+    <researchPrerequisites>
+      <li>MicroelectronicsBasics</li>
+    </researchPrerequisites>
     <uiOrder>2341</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="FurnitureBase">
