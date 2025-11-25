@@ -12,7 +12,7 @@ public static class VehicleFramework_GenGridVehicles_ImpassableForVehicles_Patch
     
     public static MethodBase TargetMethod()
     {
-        return AccessTools.Method("VehicleFramework.GenGridVehicles:ImpassableForVehicles");
+        return AccessTools.Method("Vehicles.GenGridVehicles:ImpassableForVehicles");
     }
 
     private static void Postfix(ThingDef __0, ref bool __result)
