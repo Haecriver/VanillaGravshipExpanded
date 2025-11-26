@@ -1,7 +1,5 @@
 using HarmonyLib;
 using RimWorld;
-using Verse;
-using UnityEngine;
 
 namespace VanillaGravshipExpanded
 {
