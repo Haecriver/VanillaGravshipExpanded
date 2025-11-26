@@ -60,7 +60,7 @@ namespace VanillaGravshipExpanded
                 return false;
             }
 
-            if (!t.TryGetComp<CompPowerTrader>()?.PowerOn ?? true)
+            if (t.TryGetComp<CompPowerTrader>()?.PowerOn == false)
             {
                 return false;
             }

@@ -118,7 +118,7 @@ namespace VanillaGravshipExpanded
                 float progressNeeded = World_ExposeData_Patch.currentGravtechProject.Cost - Find.ResearchManager.GetProgress(World_ExposeData_Patch.currentGravtechProject);
                 int progressToAdd = Mathf.Min(remainingGravdata, (int)progressNeeded);
 
-                Find.ResearchManager.AddProgress(World_ExposeData_Patch.currentGravtechProject, progressToAdd);
+                GravshipResearchUtility.ResearchPerformed(progressToAdd);
                 remainingGravdata -= progressToAdd;
 
                 if (World_ExposeData_Patch.currentGravtechProject.IsFinished)

@@ -44,7 +44,7 @@ namespace VanillaGravshipExpanded
                 icon = ContentFinder<Texture2D>.Get("UI/Gizmos/Gizmo_ConvertGravdata"),
                 action = delegate
                 {
-                    if (storedGravdata > 0 && currentProject != null)
+                    if (storedGravdata > 0 && currentProject is { IsFinished: false })
                     {
                         float progressNeeded = currentProject.Cost - Find.ResearchManager.GetProgress(currentProject);
                         int gravdataToConvert = Math.Min(storedGravdata, (int)Math.Ceiling(progressNeeded));
