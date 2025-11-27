@@ -14,7 +14,7 @@ public static class ReplaceStuff
     {
         if (VGEDefOf.VGE_VacCheckpoint == null)
             return;
-        if (!ModsConfig.IsActive("Memegoddess.ReplaceStuff") && !ModsConfig.IsActive("Uuugggg.ReplaceStuff"))
+        if (!ModLister.AnyModActiveNoSuffix(["Memegoddess.ReplaceStuff", "Uuugggg.ReplaceStuff"]))
             return;
 
         const string newThingReplacementClassName = "Replace_Stuff.NewThing.NewThingReplacement";
@@ -63,11 +63,13 @@ public static class ReplaceStuff
             return;
         }
 
+        var replaced = 0;
+
         foreach (var replacement in replacementsList)
         {
             if (newCheckField.GetValue(replacement) is not Predicate<ThingDef> newCheck || oldCheckField.GetValue(replacement) is not Predicate<ThingDef> oldCheck)
                 continue;
-
+            
             if (newCheck(VGEDefOf.VGE_VacCheckpoint) && oldCheck(ThingDefOf.Door))
             {
                 bool ReplacedNewCheck(ThingDef def)
@@ -80,7 +82,13 @@ public static class ReplaceStuff
                 }
 
                 newCheckField.SetValue(replacement, (Predicate<ThingDef>)ReplacedNewCheck);
+                replaced++;
             }
         }
+
+        if (replaced <= 0)
+            Log.Error($"[VGE] Initializing Replace Stuff compat failed - replacing stuff with Vac Checkpoint will delete whatever you're trying to delete! {replaced} checks were updated to exclude Vac Checkpoints.");
+        else
+            Log.Message($"[VGE] Initializing replace Stuff compat finished. {replaced} checks were updated to exclude Vac Checkpoints.");
     }
 }

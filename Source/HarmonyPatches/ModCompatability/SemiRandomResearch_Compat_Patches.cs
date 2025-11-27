@@ -12,7 +12,7 @@ namespace VanillaGravshipExpanded
     {
         static SemiRandomResearch_Compat_Patches()
         {
-            if (ModsConfig.IsActive("CaptainMuscles.SemiRandomResearch.unofficial") || ModsConfig.IsActive("arodoid.semirandomprogression"))
+            if (ModLister.AnyModActiveNoSuffix(["CaptainMuscles.SemiRandomResearch.unofficial", "arodoid.semirandomprogression"]))
             {
                 var harmony = new Harmony("VanillaGravshipExpanded.SemiRandomResearchCompat");
                 ApplyPatches(harmony);

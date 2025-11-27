@@ -14,7 +14,7 @@ namespace VanillaGravshipExpanded
     public static class ArchitectCategoryTab_DesignationTabOnGUI_Patch
     {
         private static bool? _dubsMintMenusActive;
-        public static bool DubsMintMenusActive => _dubsMintMenusActive ??= ModsConfig.IsActive("Dubwise.DubsMintMenus");
+        public static bool DubsMintMenusActive => _dubsMintMenusActive ??= ModLister.AnyModActiveNoSuffix(["Dubwise.DubsMintMenus"]);
         private static ArchitectCategoryTab currentArchitectCategoryTab;
         private static readonly Dictionary<DesignationCategoryDef, DesignationCategoryDef> selectedCategory = new Dictionary<DesignationCategoryDef, DesignationCategoryDef>();
         private static readonly Dictionary<DesignationCategoryDef, bool> categorySearchMatches = new Dictionary<DesignationCategoryDef, bool>();
@@ -23,7 +23,7 @@ namespace VanillaGravshipExpanded
         private static string lastSearchText = "";
         public static bool Prepare()
         {
-            return !ModsConfig.IsActive("ferny.BetterArchitect");
+            return !ModLister.AnyModActiveNoSuffix(["ferny.BetterArchitect"]);
         }
 
         public static void Reset()

@@ -12,7 +12,7 @@ namespace VanillaGravshipExpanded
         [HarmonyPriority(int.MaxValue)]
         public static bool Prepare()
         {
-            return !ModsConfig.IsActive("ferny.BetterArchitect");
+            return !ModLister.AnyModActiveNoSuffix(["ferny.BetterArchitect"]);
         }
 
         public static void Postfix(MainTabWindow_Architect __instance)

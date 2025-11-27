@@ -11,7 +11,7 @@ namespace VanillaGravshipExpanded
     {
         static DubsMintMenus_Compat_Patches()
         {
-            if (ModsConfig.IsActive("Dubwise.DubsMintMenus"))
+            if (ArchitectCategoryTab_DesignationTabOnGUI_Patch.DubsMintMenusActive)
             {
                 var harmony = new Harmony("VanillaGravshipExpanded.DubsMintMenusCompat");
                 ApplyDubsMintMenusPatches(harmony);
