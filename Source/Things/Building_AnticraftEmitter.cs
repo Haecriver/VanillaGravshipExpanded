@@ -13,6 +13,20 @@ namespace VanillaGravshipExpanded
         private bool isFiringBurst = false;
         private Mote aimChargeMote;
 
+        public override void PostSwapMap()
+        {
+            base.PostSwapMap();
+
+            UpdatePowerOutput();
+        }
+
+        public override void PostMapInit()
+        {
+            base.PostMapInit();
+
+            UpdatePowerOutput();
+        }
+
         public override void Tick()
         {
             base.Tick();
@@ -25,7 +39,7 @@ namespace VanillaGravshipExpanded
                 UpdatePowerOutput();
             }
 
-            if (isFiringBurst && !(PowerComp as CompPowerTrader).PowerOn)
+            if (isFiringBurst && PowerComp is not CompPowerTrader { PowerOn: true })
             {
                 ResetCurrentTarget();
                 isFiringBurst = false;
