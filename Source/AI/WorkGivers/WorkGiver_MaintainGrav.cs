@@ -65,7 +65,7 @@ namespace VanillaGravshipExpanded
                 return false;
             }
 
-            if (comp.maintenance > World_ExposeData_Patch.maintenanceThreshold)
+            if (comp.maintenance > World_ExposeData_Patch.maintenanceThreshold && !forced)
             {
 
                 return false;
