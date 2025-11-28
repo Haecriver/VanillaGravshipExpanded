@@ -55,6 +55,7 @@
     <defName>VGE_ToxicDustCloud</defName>
     <label>toxic dust cloud</label>
     <description>A drifting cloud of highly toxic cosmic dust has enveloped your gravship. Microscopic particulates are seeping into every exposed space, corroding surfaces and poisoning the crew.</description>
+	 <canOccurAsRandomForcedEvent>false</canOccurAsRandomForcedEvent>
     <overlayClasses>
       <li>VanillaGravshipExpanded.WeatherOverlay_ToxicDustCloud</li>
     </overlayClasses>
