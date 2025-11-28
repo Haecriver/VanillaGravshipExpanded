@@ -1,4 +1,4 @@
-﻿using HarmonyLib;
+using HarmonyLib;
 using RimWorld;
 using System.Reflection;
 using Verse;
@@ -101,12 +101,10 @@ namespace VanillaGravshipExpanded
         {
             return __0.CheckSpaceTerrain(___map, ref __result);
         }
-    }
-    public static class DropCellValidatorExtensions
-    {
+
         public static bool CheckSpaceTerrain(this IntVec3 c, Map map, ref bool __result)
         {
-            if (c.GetTerrain(map) == TerrainDefOf.Space)
+            if (map != null && c.InBounds(map) && c.GetTerrain(map) == TerrainDefOf.Space)
             {
                 __result = false;
                 return false;

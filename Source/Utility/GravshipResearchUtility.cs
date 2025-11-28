@@ -24,4 +24,15 @@ public static class GravshipResearchUtility
 
         return true;
     }
+
+    public static void ResearchPerformed(float amount, Pawn actor = null)
+    {
+        if (World_ExposeData_Patch.currentGravtechProject == null)
+            return;
+
+        if (World_ExposeData_Patch.currentGravtechProject.PrerequisitesCompleted || World_ExposeData_Patch.currentGravtechProject.IsFinished)
+            Find.ResearchManager.AddProgress(World_ExposeData_Patch.currentGravtechProject, amount, actor);
+        else
+            World_ExposeData_Patch.currentGravtechProject = null;
+    }
 }

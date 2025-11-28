@@ -104,10 +104,7 @@ namespace VanillaGravshipExpanded
             longTickCounter++;
             if (longTickCounter >= 2000)
             {
-                if (World_ExposeData_Patch.currentGravtechProject != null)
-                {
-                    Find.ResearchManager.AddProgress(World_ExposeData_Patch.currentGravtechProject, 1);
-                }
+                GravshipResearchUtility.ResearchPerformed(1);
                 longTickCounter = 0;
             }
             

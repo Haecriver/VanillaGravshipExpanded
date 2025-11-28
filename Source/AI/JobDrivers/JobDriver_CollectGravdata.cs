@@ -8,7 +8,7 @@ namespace VanillaGravshipExpanded
 {
     public class JobDriver_CollectGravdata : JobDriver
     {
-        private Building GravtechConsole => (Building)base.TargetThingA;
+        private Building GravtechConsole => (Building)TargetThingA;
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
@@ -28,16 +28,19 @@ namespace VanillaGravshipExpanded
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.InteractionCell);
 
-            Toil collectGravdata = ToilMaker.MakeToil("MakeNewToils");
+            Toil collectGravdata = ToilMaker.MakeToil();
             collectGravdata.tickIntervalAction = delegate (int delta)
             {
                 Pawn actor = collectGravdata.actor;
                 float gravshipResearchSpeed = actor.GetStatValue(VGEDefOf.VGE_GravshipResearch);
                 float effectiveSpeed = gravshipResearchSpeed / 10f;
-                effectiveSpeed *= base.TargetThingA.GetStatValue(StatDefOf.ResearchSpeedFactor);
-                float progressToAdd = effectiveSpeed * (float)delta;
-                Find.ResearchManager.ResearchPerformed(progressToAdd, actor);
-                actor.skills.Learn(SkillDefOf.Intellectual, 0.1f * (float)delta);
+                effectiveSpeed *= GravtechConsole.GetStatValue(StatDefOf.ResearchSpeedFactor);
+                float progressToAdd = effectiveSpeed * delta * 0.00825f;
+                // Find.ResearchManager.ResearchPerformed adds progress to the current vanilla research project.
+                // It also scales it by the tech level of the faction.
+                // However, it does multiply the progress by 0.00825 (done above) and storyteller's research speed factor.
+                GravshipResearchUtility.ResearchPerformed(progressToAdd, actor);
+                actor.skills.Learn(SkillDefOf.Intellectual, 0.1f * delta);
                 actor.GainComfortFromCellIfPossible(delta, chairsOnly: true);
             };
             collectGravdata.FailOn(() => !WorkGiver_CollectGravdata.CanResearchAt(pawn, TargetA.Thing));

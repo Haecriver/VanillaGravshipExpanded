@@ -8,11 +8,11 @@ namespace VanillaGravshipExpanded;
 [HarmonyPatch]
 public static class VehicleFramework_GenGridVehicles_ImpassableForVehicles_Patch
 {
-    private static bool Prepare() => ModsConfig.IsActive("SmashPhil.VehicleFramework") || ModsConfig.IsActive("SmashPhil.VehicleFramework_steam");
+    private static bool Prepare() => ModLister.AnyModActiveNoSuffix(["SmashPhil.VehicleFramework"]);
     
     public static MethodBase TargetMethod()
     {
-        return AccessTools.Method("VehicleFramework.GenGridVehicles:ImpassableForVehicles");
+        return AccessTools.Method("Vehicles.GenGridVehicles:ImpassableForVehicles");
     }
 
     private static void Postfix(ThingDef __0, ref bool __result)

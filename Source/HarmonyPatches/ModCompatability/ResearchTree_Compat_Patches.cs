@@ -18,11 +18,11 @@ namespace VanillaGravshipExpanded
         static ResearchTree_Compat_Patches()
         {
             var harmony = new Harmony("VanillaGravshipExpanded.ResearchTreeCompat");
-            if (ModsConfig.IsActive("Owlchemist.ResearchPowl"))
+            if (ModLister.AnyModActiveNoSuffix(["Owlchemist.ResearchPowl"]))
             {
                 ApplyPowlPatches(harmony);
             }
-            if (ModsConfig.IsActive("Mlie.ResearchTree"))
+            if (ModLister.AnyModActiveNoSuffix(["Mlie.ResearchTree"]))
             {
                 ApplyMliePatches(harmony);
             }

@@ -163,6 +163,7 @@
 		</placeWorkers>
 		<researchPrerequisites>
 			<li>VGE_CompactWorkspaces</li>
+      <li>DrugProduction</li>
 		</researchPrerequisites>
 		<modExtensions>
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
@@ -246,6 +247,7 @@
 		</placeWorkers>
 		<researchPrerequisites>
 			<li>VGE_CompactWorkspaces</li>
+      <li>Machining</li>
 		</researchPrerequisites>
 		<modExtensions>
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
@@ -329,6 +331,7 @@
 		</placeWorkers>
 		<researchPrerequisites>
 			<li>VGE_CompactWorkspaces</li>
+      <li>Smithing</li>
 		</researchPrerequisites>
 		<modExtensions>
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
@@ -409,6 +412,7 @@
 		</placeWorkers>
 		<researchPrerequisites>
 			<li>VGE_CompactWorkspaces</li>
+      <li>ComplexClothing</li>
 		</researchPrerequisites>
 		<modExtensions>
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
@@ -488,6 +492,7 @@
 		</placeWorkers>
 		<researchPrerequisites>
 			<li>VGE_CompactWorkspaces</li>
+      <li>BiofuelRefining</li>
 		</researchPrerequisites>
 		<modExtensions>
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
@@ -568,6 +573,7 @@
 		</placeWorkers>
 		<researchPrerequisites>
 			<li>VGE_CompactWorkspaces</li>
+      <li>Fabrication</li>
 		</researchPrerequisites>
 		<modExtensions>
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">

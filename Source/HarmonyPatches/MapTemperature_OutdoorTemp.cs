@@ -12,7 +12,7 @@ public static class VanillaGravshipExpanded_MapTemperature_OutdoorTemp_Patch
     {
         if (__instance.map.gameConditionManager.ConditionIsActive(VGEDefOf.VGE_SpaceSolarFlare))
         {
-            __result = 340;
+            __result = 120;
         }
     }
 }

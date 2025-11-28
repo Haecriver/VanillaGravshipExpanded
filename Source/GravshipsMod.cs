@@ -9,9 +9,14 @@ namespace VanillaGravshipExpanded;
 
 public class GravshipsMod : Mod
 {
+    public const string HarmonyLatePatchCategory = "LatePatch";
+
     public GravshipsMod(ModContentPack content) : base(content)
     {
-        new Harmony("vanillaexpanded.gravship").PatchAll();
+        var harmony = new Harmony("vanillaexpanded.gravship");
+        harmony.PatchAllUncategorized();
+        // Some patches may need to be loaded later to avoid initializing resources on main thread.
+        LongEventHandler.ExecuteWhenFinished(() => harmony.PatchCategory(HarmonyLatePatchCategory));
         settings = GetSettings<GravshipsMod_Settings>();
     }
 
