@@ -120,12 +120,6 @@ namespace VanillaGravshipExpanded
 
                 GravshipResearchUtility.ResearchPerformed(progressToAdd);
                 remainingGravdata -= progressToAdd;
-
-                if (World_ExposeData_Patch.currentGravtechProject.IsFinished)
-                {
-                    Log.Message($"[VGE] Project completed: {World_ExposeData_Patch.currentGravtechProject.defName}");
-                    World_ExposeData_Patch.currentGravtechProject = null;
-                }
             }
             if (blackBox != null && remainingGravdata > 0)
             {

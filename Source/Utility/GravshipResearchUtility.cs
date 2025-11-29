@@ -30,7 +30,8 @@ public static class GravshipResearchUtility
         if (World_ExposeData_Patch.currentGravtechProject == null)
             return;
 
-        if (World_ExposeData_Patch.currentGravtechProject.PrerequisitesCompleted || World_ExposeData_Patch.currentGravtechProject.IsFinished)
+        // Check if prerequisites are completed and research isn't finished
+        if (World_ExposeData_Patch.currentGravtechProject.PrerequisitesCompleted && !World_ExposeData_Patch.currentGravtechProject.IsFinished)
             Find.ResearchManager.AddProgress(World_ExposeData_Patch.currentGravtechProject, amount, actor);
         else
             World_ExposeData_Patch.currentGravtechProject = null;
