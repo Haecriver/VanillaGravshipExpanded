@@ -12,7 +12,7 @@ namespace VanillaGravshipExpanded
     {
         public static void Prefix(ref IntVec3 mapSize, MapParent parent, MapGeneratorDef mapGenerator)
         {
-            if (mapGenerator == MapGeneratorDefOf.Space && mapSize.z <= Find.World.info.initialMapSize.z && mapSize.x <= Find.World.info.initialMapSize.x)
+            if (mapGenerator == MapGeneratorDefOf.Space && mapSize.z < Find.World.info.initialMapSize.z && mapSize.x < Find.World.info.initialMapSize.x)
             {
                 mapSize = Find.World.info.initialMapSize;
             }
