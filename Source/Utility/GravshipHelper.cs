@@ -23,6 +23,8 @@ namespace VanillaGravshipExpanded
         public static readonly Texture2D GravshipTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravship_WorldIcon");
         public static readonly Texture2D GravhulkTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravhulk_WorldIcon");
 
+        public static readonly List<ThingDef> GravEngineDefs = [ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine];
+
         public static void AddScaffoldQuad(LayerSubMesh subMesh, IntVec3 cell, float y)
         {
             int count = subMesh.verts.Count;
@@ -130,8 +132,8 @@ namespace VanillaGravshipExpanded
 
         public static bool PlayerHasGravEngineUnderConstruction(Map map)
         {
-            return ListerThingsUtility.AnyThingWithBuildBlueprintDefs(map, ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine) ||
-                   ListerThingsUtility.AnyThingWithFrameDefs(map, ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine);
+            return ListerThingsUtility.AnyThingWithBuildBlueprintDefs(map, GravEngineDefs) ||
+                   ListerThingsUtility.AnyThingWithFrameDefs(map, GravEngineDefs);
         }
 
         public static Texture2D GetExpandingTextureForEngine(ThingDef engineDef)
