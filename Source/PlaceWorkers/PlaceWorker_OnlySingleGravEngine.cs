@@ -41,6 +41,7 @@ public class PlaceWorker_OnlySingleGravEngine : PlaceWorker
             return;
 
         var list = SimplePool<List<Thing>>.Get();
+        list.Clear();
 
         foreach (var gravEngineDef in GravshipHelper.GravEngineDefs)
         {

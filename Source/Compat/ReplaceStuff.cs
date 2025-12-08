@@ -5,7 +5,7 @@ using HarmonyLib;
 using RimWorld;
 using Verse;
 
-namespace VanillaGravshipExpanded.Compat;
+namespace VanillaGravshipExpanded;
 
 [StaticConstructorOnStartup]
 public static class ReplaceStuff
