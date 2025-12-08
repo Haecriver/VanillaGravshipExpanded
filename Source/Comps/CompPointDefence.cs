@@ -10,6 +10,8 @@ namespace VanillaGravshipExpanded
     public class CompProperties_PointDefence : CompProperties
     {
         public float interceptionRadius;
+        // 15 is technically the minimum if we want to keep using CompTickInterval (unless we mess with VTR).
+        public int interceptionAttemptInterval = 15;
 
         public CompProperties_PointDefence()
         {
@@ -30,6 +32,7 @@ namespace VanillaGravshipExpanded
             refuelableComp = parent.GetComp<CompRefuelable>();
         }
 
+        // If we want to support intervals lower than 15 ticks, we'll need to move this code to CompTick.
         public override void CompTickInterval(int delta)
         {
             var turret = parent as Building_TurretGun;
@@ -45,7 +48,7 @@ namespace VanillaGravshipExpanded
 
             if (ticksUntilNextShot <= 0)
             {
-                ticksUntilNextShot = 20;
+                ticksUntilNextShot += Props.interceptionAttemptInterval;
                 if (refuelableComp.HasFuel)
                 {
                     var target = FindTarget();
@@ -64,18 +67,21 @@ namespace VanillaGravshipExpanded
 
         private Thing FindTarget()
         {
-            var allThings = parent.Map.listerThings.AllThings.Where(t =>
-                IsValidTarget(t) && t.DrawPos.ToIntVec3().DistanceTo(parent.Position) <= Props.interceptionRadius);
-            return allThings.OrderBy(t => t.DrawPos.ToIntVec3().DistanceTo(parent.Position)).FirstOrDefault();
+            var allThings = parent.Map.listerThings.ThingsInGroup(ThingRequestGroup.Projectile).Where(IsValidProjectile)
+                .Concat(parent.Map.listerThings.ThingsInGroup(ThingRequestGroup.ActiveTransporter).Where(IsValidTransporter));
+            var thing = allThings.OrderBy(t => t.DrawPos.ToIntVec3().DistanceToSquared(parent.Position)).FirstOrDefault();
+            if (thing != null && thing.DrawPos.ToIntVec3().DistanceToSquared(parent.Position) <= Props.interceptionRadius * Props.interceptionRadius)
+                return thing;
+            return null;
         }
 
-        private bool IsValidTarget(Thing t)
+        private bool IsValidProjectile(Thing t)
         {
-            if (t is Projectile_Space || t is Projectile projectile && projectile.def.projectile.explosionRadius > 0 && projectile.launcher.HostileTo(parent.Faction))
-            {
-                return true;
-            }
+            return t is Projectile_Space || t is Projectile projectile && projectile.def.projectile.explosionRadius > 0 && projectile.launcher.HostileTo(parent.Faction);
+        }
 
+        private bool IsValidTransporter(Thing t)
+        {
             if (t is DropPodIncoming dropPod)
             {
                 var allPawns = dropPod.innerContainer.Where(thing => thing is Pawn).Cast<Pawn>().ToList();
@@ -124,7 +130,7 @@ namespace VanillaGravshipExpanded
                     success = true;
                 }
             }
-            else if (target is DropPodIncoming)
+            else if (target is IActiveTransporter)
             {
                 float chance = 0.25f;
                 if (Rand.Chance(chance))
