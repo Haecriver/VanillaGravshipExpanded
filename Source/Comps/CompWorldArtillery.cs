@@ -287,7 +287,13 @@ namespace VanillaGravshipExpanded
                 return false;
             }
             bool sourceIsOnGround = sourceMap.Tile.Valid && !sourceMap.Tile.LayerDef.isSpace;
-            bool targetIsOnGround = Find.WorldObjects.MapParentAt(target.Tile) is MapParent mapParent && mapParent.Map != null && mapParent.Map.Tile.Valid && !mapParent.Map.Tile.LayerDef.isSpace;
+            var mapParent = Find.WorldObjects.MapParentAt(target.Tile);
+            if (mapParent == null || mapParent.Map == null)
+            {
+                failReason = "VGE_GravshipArtilleryNeedsVisibleMap".Translate();
+                return false;
+            }
+            bool targetIsOnGround = mapParent.Map.Tile.Valid && !mapParent.Map.Tile.LayerDef.isSpace;
 
             ArtilleryFiringMode requiredMode;
             string invalidModeKey;
