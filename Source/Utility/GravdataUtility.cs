@@ -40,7 +40,7 @@ namespace VanillaGravshipExpanded
             float yieldMultiplier = CalculateYieldMultiplier(engine);
             var gravdataYield = CalculateGravdataYield(distanceTravelled, gravshipResearchStat, launchRitualQuality, yieldMultiplier);
             //Log.Message($"[VGE] CalculateGravdataYield called with Distance: {distanceTravelled}, Quality: {launchRitualQuality}, Researcher: {researcherPawn?.Name}, ResearchStat: {gravshipResearchStat}, YieldMultiplier: {yieldMultiplier} - Result: {gravdataYield}");
-            Log.ResetMessageCount();
+            //Log.ResetMessageCount();
             return gravdataYield;
         }
 

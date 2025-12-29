@@ -115,7 +115,7 @@
     <letterDef>ThreatBig</letterDef>
     <baseChance>1.0</baseChance>
     <minRefireDays>15</minRefireDays>
-    <durationDays>0.3~0.6</durationDays>
+    <durationDays>0.3~0.45</durationDays>
     <layerWhitelist>
       <li>Orbit</li>
     </layerWhitelist>

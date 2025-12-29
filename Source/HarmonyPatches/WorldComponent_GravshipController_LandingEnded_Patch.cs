@@ -83,7 +83,7 @@ namespace VanillaGravshipExpanded
             }
             var landingTile = gravship.Engine.Tile;
             float quality = launchInfo.quality;
-            int gravdataYield;
+            float gravdataYield;
 
             Log.Message($"[VGE] Landing at tile: {landingTile}");
             Log.Message($"[VGE] Quality: {quality}");
@@ -104,7 +104,7 @@ namespace VanillaGravshipExpanded
                 Log.Message($"[VGE] Calculated gravdata yield: {gravdataYield}");
             }
 
-            int remainingGravdata = gravdataYield;
+            float remainingGravdata = gravdataYield;
             var blackBox = gravship.Engine.GravshipComponents.Select(comp => comp.parent).OfType<Building_GravshipBlackBox>().FirstOrDefault();
             if (blackBox != null)
             {
@@ -116,7 +116,7 @@ namespace VanillaGravshipExpanded
             {
                 Log.Message($"[VGE] Adding {remainingGravdata} to project: {World_ExposeData_Patch.currentGravtechProject.defName}");
                 float progressNeeded = World_ExposeData_Patch.currentGravtechProject.Cost - Find.ResearchManager.GetProgress(World_ExposeData_Patch.currentGravtechProject);
-                int progressToAdd = Mathf.Min(remainingGravdata, (int)progressNeeded);
+                float progressToAdd = Mathf.Min(remainingGravdata, progressNeeded);
 
                 GravshipResearchUtility.ResearchPerformed(progressToAdd);
                 remainingGravdata -= progressToAdd;

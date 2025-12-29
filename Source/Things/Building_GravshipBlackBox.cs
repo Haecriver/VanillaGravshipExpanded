@@ -10,7 +10,7 @@ namespace VanillaGravshipExpanded
     [HotSwappable]
     public class Building_GravshipBlackBox : Building
     {
-        private int storedGravdata = 0;
+        private float storedGravdata = 0f;
 
         public override void ExposeData()
         {
@@ -47,7 +47,7 @@ namespace VanillaGravshipExpanded
                     if (storedGravdata > 0 && currentProject is { IsFinished: false })
                     {
                         float progressNeeded = currentProject.Cost - Find.ResearchManager.GetProgress(currentProject);
-                        int gravdataToConvert = Math.Min(storedGravdata, (int)Math.Ceiling(progressNeeded));
+                        float gravdataToConvert = Math.Min(storedGravdata, progressNeeded);
                         Find.ResearchManager.AddProgress(currentProject, gravdataToConvert);
                         storedGravdata -= gravdataToConvert;
                         Messages.Message("VGE_ConvertedGravdataToResearch".Translate(gravdataToConvert, currentProject.LabelCap), MessageTypeDefOf.TaskCompletion);
@@ -87,18 +87,18 @@ namespace VanillaGravshipExpanded
             }
         }
 
-        public void AddGravdata(int amount)
+        public void AddGravdata(float amount)
         {
             storedGravdata += amount;
         }
 
-        public int TakeGravdata(int amount)
+        public float TakeGravdata(float amount)
         {
-            int taken = Math.Min(amount, storedGravdata);
+            float taken = Math.Min(amount, storedGravdata);
             storedGravdata -= taken;
             return taken;
         }
 
-        public int StoredGravdata => storedGravdata;
+        public float StoredGravdata => storedGravdata;
     }
 }
