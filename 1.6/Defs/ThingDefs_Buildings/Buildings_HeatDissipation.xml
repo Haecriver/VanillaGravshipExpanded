@@ -20,6 +20,13 @@
         <researchPrerequisites>
             <li>VGE_HeatDissipation</li>
         </researchPrerequisites>
+        <comps>
+            <li Class="CompProperties_Power">
+                <compClass>CompPowerTrader</compClass>
+                <basePowerConsumption>0</basePowerConsumption>
+                <transmitsPower>true</transmitsPower>
+            </li>
+        </comps>
         <resourcesFractionWhenDeconstructed>0.5</resourcesFractionWhenDeconstructed>
     </ThingDef>
 
@@ -46,10 +53,6 @@
         </costList>
         <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
         <comps>
-            <li Class="CompProperties_Power">
-                <compClass>CompPowerTrader</compClass>
-                <basePowerConsumption>0</basePowerConsumption>
-            </li>
             <li Class="VanillaGravshipExpanded.CompProperties_Glower_Gravheat">
                 <glowRadius>7.17</glowRadius>
                 <glowColor>(226,118,52,0)</glowColor>
@@ -98,10 +101,6 @@
         </costList>
         <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
         <comps>
-            <li Class="CompProperties_Power">
-                <compClass>CompPowerTrader</compClass>
-                <basePowerConsumption>0</basePowerConsumption>
-            </li>
             <li Class="VanillaGravshipExpanded.CompProperties_Glower_Gravheat">
                 <glowRadius>9.17</glowRadius>
                 <glowColor>(226,118,52,0)</glowColor>
