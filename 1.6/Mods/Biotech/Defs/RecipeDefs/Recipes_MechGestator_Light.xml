@@ -4,11 +4,11 @@
 		<defName>VGE_AstronautRecipe</defName>
 		<label>gestate astronaut</label>
 		<description>Gestate an astronaut mechanoid.</description>
-		<gestationCycles>1</gestationCycles>
+		<gestationCycles>2</gestationCycles>
 		<recipeUsers>
 			<li>MechGestator</li>
 		</recipeUsers>
-		<researchPrerequisite>BasicMechtech</researchPrerequisite>
+		<researchPrerequisite>HighMechtech</researchPrerequisite>
 		<ingredients Inherit="False">
 			<li>
 				<filter>
@@ -21,7 +21,7 @@
 			<li>
 				<filter>
 					<thingDefs>
-						<li>SubcoreBasic</li>
+						<li>SubcoreRegular</li>
 					</thingDefs>
 				</filter>
 				<count>1</count>
