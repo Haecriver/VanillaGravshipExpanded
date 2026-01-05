@@ -42,5 +42,8 @@ namespace VanillaGravshipExpanded
         public static WorldObjectDef OrbitalItemStash, AsteroidBasic, VGE_IceAsteroid, VGE_AsteroidCluster, VGE_AsteroidField, VGE_PorousAsteroid, VGE_GiantAsteroid, 
             VGE_ShatteredAsteroid, VGE_DenseAsteroid, VGE_SmallAsteroid, VGE_AsteroidWithRuins, VGE_DerelictStation;
         public static ThingDef Telescope, MineablePlasteel, MineableUranium;
+
+        [MayRequireBiotech]
+        public static ThingDef VGE_Astronaut;
     }
 }

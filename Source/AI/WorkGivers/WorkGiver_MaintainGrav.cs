@@ -42,6 +42,11 @@ namespace VanillaGravshipExpanded
                 return false;
             }
 
+            if (pawn.IsColonyMech && pawn.def != VGEDefOf.VGE_Astronaut)
+            {
+                return false;
+            }
+
             if (t.Faction != pawn.Faction)
             {
                 return false;
