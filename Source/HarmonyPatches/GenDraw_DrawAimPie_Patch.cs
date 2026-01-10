@@ -9,7 +9,7 @@ namespace VanillaGravshipExpanded
     {
         public static void Prefix(Thing shooter, ref float offsetDist)
         {
-            if (shooter is Building_AnticraftCaster)
+            if (shooter is Building_GravshipTurret)
             {
                 offsetDist += 5f;
             }
