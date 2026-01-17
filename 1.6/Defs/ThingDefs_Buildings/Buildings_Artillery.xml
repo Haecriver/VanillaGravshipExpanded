@@ -134,6 +134,11 @@
                 <!-- With the current implementation (using VTR), 15 is the current minimum that won't cause issues. -->
                 <!-- Using a lower value will end up with the turret still shooting roughly once every 15 ticks if you're not looking at it. -->
                 <interceptionAttemptInterval>15</interceptionAttemptInterval>
+                <blacklistedProjectileDefs>
+                  <li>Bullet_HellsphereCannonGun</li>
+                  <li>Bullet_InfernoCannon</li>
+                  <li>Bullet_Heatspike</li>
+                </blacklistedProjectileDefs>
             </li>
         </comps>
         <building>

@@ -1,5 +1,6 @@
 using RimWorld;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
@@ -12,6 +13,7 @@ namespace VanillaGravshipExpanded
         public float interceptionRadius;
         // 15 is technically the minimum if we want to keep using CompTickInterval (unless we mess with VTR).
         public int interceptionAttemptInterval = 15;
+        public List<string> blacklistedProjectileDefs = new List<string>();
 
         public CompProperties_PointDefence()
         {
@@ -77,7 +79,19 @@ namespace VanillaGravshipExpanded
 
         private bool IsValidProjectile(Thing t)
         {
-            return t is Projectile_Space || t is Projectile projectile && projectile.def.projectile.explosionRadius > 0 && projectile.launcher.HostileTo(parent.Faction);
+            if (t is Projectile_Space)
+            {
+                return true;
+            }
+            if (!(t is Projectile projectile))
+            {
+                return false;
+            }
+            if (Props.blacklistedProjectileDefs.Contains(projectile.def.defName))
+            {
+                return false;
+            }
+            return projectile.def?.projectile?.explosionRadius > 0 && projectile.launcher != null && projectile.launcher.HostileTo(parent.Faction);
         }
 
         private bool IsValidTransporter(Thing t)
