@@ -85,15 +85,8 @@ namespace VanillaGravshipExpanded
             float quality = launchInfo.quality;
             float gravdataYield;
 
-            Log.Message($"[VGE] Landing at tile: {landingTile}");
-            Log.Message($"[VGE] Quality: {quality}");
-
             LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.TryGetValue(launchInfo, out var researcherPawn);
-            Log.Message($"[VGE] Researcher pawn: {researcherPawn?.Name}");
-
             distanceTravelled = GravshipHelper.GetDistance(launchSourceTile, landingTile);
-            Log.Message($"[VGE] Distance travelled: {distanceTravelled} - from {launchSourceTile} to {landingTile}");
-
             if (gravdataCorruptionOccurred.TryGetValue(gravship.Engine, out bool corruptionOccurred) && corruptionOccurred)
             {
                 gravdataYield = 0;
@@ -101,7 +94,6 @@ namespace VanillaGravshipExpanded
             else
             {
                 gravdataYield = GravdataUtility.CalculateGravdataYield(distanceTravelled, quality, gravship.Engine, researcherPawn);
-                Log.Message($"[VGE] Calculated gravdata yield: {gravdataYield}");
             }
 
             float remainingGravdata = gravdataYield;
@@ -109,12 +101,10 @@ namespace VanillaGravshipExpanded
             if (blackBox != null)
             {
                 var toAdd = blackBox.TakeGravdata(blackBox.StoredGravdata);
-                Log.Message($"[VGE] Fetching {toAdd} gravdata from black box");
                 remainingGravdata += toAdd;
             }
             if (World_ExposeData_Patch.currentGravtechProject != null)
             {
-                Log.Message($"[VGE] Adding {remainingGravdata} to project: {World_ExposeData_Patch.currentGravtechProject.defName}");
                 float progressNeeded = World_ExposeData_Patch.currentGravtechProject.Cost - Find.ResearchManager.GetProgress(World_ExposeData_Patch.currentGravtechProject);
                 float progressToAdd = Mathf.Min(remainingGravdata, progressNeeded);
 
@@ -123,12 +113,7 @@ namespace VanillaGravshipExpanded
             }
             if (blackBox != null && remainingGravdata > 0)
             {
-                Log.Message($"[VGE] Storing {remainingGravdata} gravdata in black box");
                 blackBox.AddGravdata(remainingGravdata);
-            }
-            else if (remainingGravdata > 0)
-            {
-                Log.Message($"[VGE] No black box, {remainingGravdata} gravdata lost");
             }
 
             LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.Remove(launchInfo);
