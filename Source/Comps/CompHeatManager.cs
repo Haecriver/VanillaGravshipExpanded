@@ -3,6 +3,7 @@ using Verse;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using LudeonTK;
 
 namespace VanillaGravshipExpanded
 {
@@ -25,6 +26,7 @@ namespace VanillaGravshipExpanded
         private bool shouldApplyHeat;
         public float HeatUnits => heatUnits;
         public Building_GravEngine Engine => parent as Building_GravEngine;
+
         public override void PostExposeData()
         {
             base.PostExposeData();
@@ -32,10 +34,14 @@ namespace VanillaGravshipExpanded
             Scribe_Values.Look(ref shouldApplyHeat, "shouldApplyHeat");
         }
 
+        [TweakValue("0GravshipHeatMultiplier", 1f, 500f)]
+        public static float HeatMultiplier = 100f;
+        [TweakValue("0GravshipHeatsinkCapacityMultiplier", 1f, 100f)]
+        public static float HeatsinkCapacityMultiplier = 5f;
         public void AddHeat(float amount)
         {
+            amount *= HeatMultiplier;
             heatUnits += amount;
-            Log.Message("[VGE] Added " + amount + " heat units to grav engine. Total: " + heatUnits);
             if (heatUnits > 0)
             {
                 DistributeHeat();
@@ -50,22 +56,24 @@ namespace VanillaGravshipExpanded
 
             if (heatsinks.Count > 0 && heatUnits > 0)
             {
-                var sortedHeatsinks = heatsinks.OrderBy(h => h.Props.maxHeat - h.StoredHeat).ToList();
+                var sortedHeatsinks = heatsinks.OrderBy(h => h.EffectiveMaxHeat - h.StoredHeat).ToList();
 
-                while (heatUnits > 0 && sortedHeatsinks.Any(h => h.Props.maxHeat > h.StoredHeat))
+                while (heatUnits > 0 && sortedHeatsinks.Any(h => h.StoredHeat < h.EffectiveMaxHeat))
                 {
                     float remainingHeat = heatUnits;
-                    int activeHeatsinks = sortedHeatsinks.Count(h => h.Props.maxHeat > h.StoredHeat);
+                    int activeHeatsinks = sortedHeatsinks.Count(h => h.StoredHeat < h.EffectiveMaxHeat);
 
                     if (activeHeatsinks == 0)
+                    {
                         break;
+                    }
 
                     float heatPerActiveHeatsink = remainingHeat / activeHeatsinks;
                     float totalTransferredThisRound = 0;
 
                     foreach (var heatsink in sortedHeatsinks)
                     {
-                        float spaceInHeatsink = heatsink.Props.maxHeat - heatsink.StoredHeat;
+                        float spaceInHeatsink = heatsink.EffectiveMaxHeat - heatsink.StoredHeat;
                         if (spaceInHeatsink > 0)
                         {
                             float heatToTransfer = Mathf.Min(heatPerActiveHeatsink, spaceInHeatsink);
@@ -76,13 +84,19 @@ namespace VanillaGravshipExpanded
                     }
 
                     if (totalTransferredThisRound == 0)
+                    {
                         break;
+                    }
                 }
             }
 
-            if (heatUnits > 0 && TryApplyHeatToShip(heatUnits) is false)
+            if (heatUnits > 0)
             {
-                shouldApplyHeat = true;
+                bool result = TryApplyHeatToShip(heatUnits);
+                if (result is false)
+                {
+                    shouldApplyHeat = true;
+                }
             }
         }
 
@@ -114,16 +128,13 @@ namespace VanillaGravshipExpanded
             int totalCells = cachedShipRooms.Sum(room => room.CellCount);
             if (totalCells == 0)
                 return false;
-                
+
             float heatPerCell = heatAmount / totalCells;
             heatUnits -= heatAmount;
             foreach (var room in cachedShipRooms)
             {
                 float roomHeat = heatPerCell * room.CellCount;
-                Log.Message("[VGE] about to push  " + roomHeat + " heat to room " + room.ID
-                 + " - room temperature is " + room.Temperature + " room cells: " + room.CellCount);
                 room.PushHeat(roomHeat);
-                Log.Message("[VGE] Pushed " + roomHeat + " heat to room " + room.ID + " - room temperature is " + room.Temperature + " room cells: " + room.CellCount);
             }
             return true;
         }
@@ -135,7 +146,7 @@ namespace VanillaGravshipExpanded
             {
                 if (comp.parent.Position.UsesOutdoorTemperature(parent.Map))
                     continue;
-                    
+
                 var room = comp.parent.Position.GetRoom(parent.Map);
                 if (room != null)
                 {

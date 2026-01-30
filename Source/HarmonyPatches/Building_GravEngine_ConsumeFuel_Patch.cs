@@ -24,13 +24,12 @@ public static class Building_GravEngine_ConsumeFuel_Patch
         if (LaunchInfo_ExposeData_Patch.isGravliftLaunch.TryGetValue(__instance.launchInfo, out bool isLiftLaunch) && isLiftLaunch)
         {
             cost = 20f;
-            Log.Message("[VGE] Overriding fuel cost for gravlift launch. Using cost: " + cost);
         }
 
         // Divide cost by total fuel (cached before vanilla code started lowering it) to get a ratio of fuel we'll need to set each fuel tank to
         LaunchInfo_ExposeData_Patch.lastCost[__instance.launchInfo] = cost;
         var ratio = cost / __state;
-        
+
         // Create the fuel spent data directly
         var fuelSpentData = new FuelSpentData();
         foreach (var comp in __instance.GravshipComponents)
@@ -45,7 +44,7 @@ public static class Building_GravEngine_ConsumeFuel_Patch
                 storage.DrawResource(toSpend);
             }
         }
-        
+
         LaunchInfo_ExposeData_Patch.fuelSpentPerTank[__instance.launchInfo] = fuelSpentData;
 
         var heatManager = __instance.GetComp<CompHeatManager>();

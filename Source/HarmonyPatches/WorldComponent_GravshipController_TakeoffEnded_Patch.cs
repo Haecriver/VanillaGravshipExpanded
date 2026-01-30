@@ -14,7 +14,6 @@ namespace VanillaGravshipExpanded
         {
             if (__instance.mapHasGravAnchor || __instance.map?.info?.parent == null || !__instance.map.Parent.CanEverKeepThisMap())
             {
-                Log.Message($"[VGE] Map has grav anchor: {__instance.map}, parent into null: {__instance.map?.info?.parent == null}, can ever keep: {__instance.map?.Parent.CanEverKeepThisMap()}.");
                 return;
             }
 
@@ -63,7 +62,6 @@ namespace VanillaGravshipExpanded
             else
             {
                 // If the map cannot be settled, just abandon it. Gracefully if needed.
-                Log.Message("[VGE] Map cannot be kept.");
                 __instance.mapHasGravAnchor = true;
                 AbandonTile();
             }
@@ -109,7 +107,6 @@ namespace VanillaGravshipExpanded
 
             if (map.mapPawns.AnyPawnBlockingMapRemoval || map.AnyBuildingBlockingMapRemoval || TransporterUtility.IncomingTransporterPreventingMapRemoval(map))
             {
-                Log.Message("[VGE] ShouldAlwaysKeepThisMap map has pawns, buildings, or incoming drop pods blocking removal.");
                 return true;
             }
 
@@ -122,7 +119,6 @@ namespace VanillaGravshipExpanded
                 // Also check for any buildings blocking map removal, as courtesy for mods that may want that.
                 if (pocketMap.sourceMap == map && (pocketMap.Map.mapPawns.AnyPawnBlockingMapRemoval || pocketMap.Map.AnyBuildingBlockingMapRemoval))
                 {
-                    Log.Message("[VGE] ShouldAlwaysKeepThisMap pocket map has pawns or buildings blocking removal.");
                     return true;
                 }
             }
@@ -138,7 +134,6 @@ namespace VanillaGravshipExpanded
             var hasAbandonComp = mapParent.GetComponent<AbandonComp>() != null && mapParent.HasMap && mapParent.Faction == Faction.OfPlayer;
             var canBeSettled = mapParent.CanBeSettled;
             var ownedByPlayer = mapParent.Faction == Faction.OfPlayer;
-            Log.Message($"[VGE] ShouldHaveKeepMapUI check for {mapParent.LabelCap}: canBeSettled={canBeSettled.Reason} - {canBeSettled == true}, hasAbandonComp={hasAbandonComp}, owner faction: {mapParent.Faction}, owned by player: {ownedByPlayer}, mapParent.def {mapParent.def}, mapParent.GetType() {mapParent.GetType()}");
             // Display the UI for maps that can either be settled or has an active abadon comp, but only if either there's no hostiles or the map is a player settlement.
             return (canBeSettled || hasAbandonComp) && (ownedByPlayer || !AnyHostilesOnMap(map));
         }

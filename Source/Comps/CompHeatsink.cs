@@ -28,7 +28,8 @@ namespace VanillaGravshipExpanded
         private CompPowerTrader powerComp;
 
         public float StoredHeat => storedHeat;
-        public bool IsActive => StoredHeat < Props.maxHeat && (powerComp?.PowerOn ?? false) && CanBeOn(out _);
+        public float EffectiveMaxHeat => Props.maxHeat * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier;
+        public bool IsActive => StoredHeat < EffectiveMaxHeat && (powerComp?.PowerOn ?? false) && CanBeOn(out _);
         private Graphic overlayGraphic;
         public Graphic OverlayGraphic => overlayGraphic ??= GraphicDatabase.Get<Graphic_Multi>(parent.Graphic.path + "_Overlay", parent.Graphic.Shader, parent.Graphic.drawSize, parent.Graphic.color);
 
@@ -49,7 +50,7 @@ namespace VanillaGravshipExpanded
 
         public void AddHeat(float amount)
         {
-            storedHeat = Mathf.Min(storedHeat + amount, Props.maxHeat);
+            storedHeat = Mathf.Min(storedHeat + amount, Props.maxHeat * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier);
             UpdateLit();
         }
 
@@ -58,6 +59,8 @@ namespace VanillaGravshipExpanded
             storedHeat = 0;
             UpdateLit();
         }
+
+        public float ActualStoredHeat => storedHeat / (CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier);
 
         private void UpdateLit()
         {
@@ -80,7 +83,7 @@ namespace VanillaGravshipExpanded
 
             if (powerComp.PowerOn)
             {
-                float heatToConsume = Props.heatConsumptionPerHour / 2500f;
+                float heatToConsume = (Props.heatConsumptionPerHour * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier) / 2500f;
                 if (storedHeat >= heatToConsume)
                 {
                     storedHeat -= heatToConsume;
@@ -112,7 +115,7 @@ namespace VanillaGravshipExpanded
 
             var drawPos = parent.TrueCenter();
             drawPos.y += 0.1f;
-            var transparency = 1f - (storedHeat / Props.maxHeat);
+            var transparency = 1f - (ActualStoredHeat / Props.maxHeat);
             var overlayColor = new Color(1f, 1f, 1f, transparency);
             OverlayGraphic.color = overlayColor;
             OverlayGraphic.Draw(parent.DrawPos + new Vector3(0f, 0.1f, 0f), parent.Rotation, parent);
@@ -120,7 +123,7 @@ namespace VanillaGravshipExpanded
 
         public override string CompInspectStringExtra()
         {
-            return "VGE_HeatsinkHeatStored".Translate(storedHeat.ToString("F1"), Props.maxHeat.ToString("F1"));
+            return "VGE_HeatsinkHeatStored".Translate(ActualStoredHeat.ToString("F1"), Props.maxHeat.ToString("F1"));
         }
 
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
@@ -143,7 +146,7 @@ namespace VanillaGravshipExpanded
                 {
                     defaultLabel = "DEV: Add max heat",
                     defaultDesc = "Set heat to maximum",
-                    action = () => AddHeat(Props.maxHeat - storedHeat)
+                    action = () => AddHeat(EffectiveMaxHeat - storedHeat)
                 };
 
                 yield return new Command_Action
