@@ -33,26 +33,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="PipeSystem">
-      <HintPath>..\..\VanillaExpandedFramework\1.6\Assemblies\PipeSystem.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="VEF">
-      <HintPath>..\..\VanillaExpandedFramework\1.6\Assemblies\VEF.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="KCSG">
-      <HintPath>..\..\VanillaExpandedFramework\1.6\Assemblies\KCSG.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove=".editorconfig" />
     <None Remove="mono_crash.*.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Publicize Include="Assembly-CSharp" IncludeCompilerGeneratedMembers="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="KCSG">
+      <HintPath>..\..\..\..\..\..\..\..\Users\Haecr\Workspace\rimworld\Mods\VanillaExpandedFramework\1.6\Assemblies\KCSG.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PipeSystem">
+      <HintPath>..\..\..\..\..\..\..\..\Users\Haecr\Workspace\rimworld\Mods\VanillaExpandedFramework\1.6\Assemblies\PipeSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VEF">
+      <HintPath>..\..\..\..\..\..\..\..\Users\Haecr\Workspace\rimworld\Mods\VanillaExpandedFramework\1.6\Assemblies\VEF.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
 </Project>
