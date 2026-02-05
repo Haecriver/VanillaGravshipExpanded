@@ -32,6 +32,7 @@ namespace VanillaGravshipExpanded
         public static CustomOverlayDef VGE_NoLinkedTerminalOverlay, VGE_NoLinkedTurretOverlay, VGE_MultipleGravEnginesOverlay;
         [MayRequireBiotech] public static BossgroupDef Diabolus;
         public static TerrainAffordanceDef Substructure;
+        public static QuestScriptDef SurveySite;
 
         public static KCSG.StructureLayoutDef VGE_MechOrbitalDestroyer_Alpha, VGE_MechOrbitalDestroyer_Beta, VGE_MechOrbitalDestroyer_Gamma, VGE_StartingGravjumperDamaged, VGE_StartingGravjumper;
         public static DesignationCategoryDef Odyssey;

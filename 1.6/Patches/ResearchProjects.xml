@@ -92,7 +92,7 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ResearchProjectDef[defName="StandardGravtech"]/baseCost</xpath>
 		<value>
-			<baseCost>150</baseCost>
+			<baseCost>200</baseCost>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
@@ -131,7 +131,7 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ResearchProjectDef[defName="AdvancedGravtech"]/baseCost</xpath>
 		<value>
-			<baseCost>250</baseCost>
+			<baseCost>800</baseCost>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">

@@ -8,7 +8,7 @@
 		<defName>VGE_GravshipWeaponry</defName>
 		<label>gravship weaponry</label>
 		<description>Construct gravship artillery and point defense turrets to fight other ships in orbit or provide bombardments from the sky.</description>
-		<baseCost>200</baseCost>
+		<baseCost>400</baseCost>
 		<prerequisites>
 			<li>StandardGravtech</li>
 		</prerequisites>
@@ -19,7 +19,7 @@
 		<defName>VGE_CompactWorkspaces</defName>
 		<label>compact workspaces</label>
 		<description>Unlock smaller variants of workbenches designed for gravships. Compact enough to fit into tight quarters without sacrificing essential functions.</description>
-		<baseCost>200</baseCost>
+		<baseCost>400</baseCost>
 		<prerequisites>
 			<li>StandardGravtech</li>
 		</prerequisites>
@@ -41,7 +41,7 @@
 		<defName>VGE_AstrofuelRefining</defName>
 		<label>astrofuel refining</label>
 		<description>Construct astrofuel synthesizers that automatically convert chemfuel into astrofuel for gravship use.</description>
-		<baseCost>200</baseCost>
+		<baseCost>400</baseCost>
 		<prerequisites>
 			<li>StandardGravtech</li>
 		</prerequisites>
@@ -63,7 +63,7 @@
 		<defName>VGE_HeatDissipation</defName>
 		<label>heat dissipation</label>
 		<description>Harvest structural heat generated during gravship launches and dissipate it safely. Excess heat can be converted into usable power.</description>
-		<baseCost>200</baseCost>
+		<baseCost>400</baseCost>
 		<prerequisites>
 			<li>StandardGravtech</li>
 		</prerequisites>
