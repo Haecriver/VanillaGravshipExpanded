@@ -146,6 +146,7 @@ namespace VanillaGravshipExpanded
             if (engine is null) return;
             var launchInfo = engine.launchInfo;
             LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo] = engine.Map.Tile;
+            Log.Message($"[VGE] Launch source tile set to: {engine.Map.Tile}");
             if (Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsGravliftLaunch)
             {
                 LaunchInfo_ExposeData_Patch.isGravliftLaunch[launchInfo] = true;
@@ -154,6 +155,7 @@ namespace VanillaGravshipExpanded
             RememberResearcher(jobRitual);
         }
 
+
         private static void RememberResearcher(LordJob_Ritual lordJob)
         {
             Pawn pawn = GravdataUtility.GetResearcher(lordJob?.assignments);
@@ -161,6 +163,14 @@ namespace VanillaGravshipExpanded
             {
                 var engine = lordJob!.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;
                 LaunchInfo_ExposeData_Patch.gravtechResearcherPawns[engine.launchInfo] = pawn;
+            }
+            if (pawn != null)
+            {
+                Log.Message($"[VGE] Gravship launch ritual successful with pawn: {pawn.Name}");
+            }
+            else
+            {
+                Log.Message($"[VGE] Gravship launch ritual successful, but no pawn found");
             }
         }
     }
