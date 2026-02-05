@@ -95,7 +95,8 @@
           <li>VGE_GravshipBlackBox</li>
           <li>VGE_EngineeringConsole</li>
           <li>VGE_MaintenanceHub</li>
-		  <li>VGE_FlightComputer</li>
+          <li>VGE_FlightComputer</li>
+          <li>VGE_GravshipStructuralBeam</li>
         </linkableFacilities>
       </li>
       <li>
@@ -212,7 +213,8 @@
           <li>VGE_CopilotConsole</li>
           <li>VGE_EngineeringConsole</li>
           <li>VGE_MaintenanceHub</li>
-		  <li>VGE_FlightComputer</li>
+          <li>VGE_FlightComputer</li>
+          <li>VGE_GravshipStructuralBeam</li>
         </linkableFacilities>
       </li>
       <li>
