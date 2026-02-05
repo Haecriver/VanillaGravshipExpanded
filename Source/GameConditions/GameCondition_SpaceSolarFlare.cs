@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -40,5 +41,20 @@ namespace VanillaGravshipExpanded
             }
         }
 
+        public override void GameConditionTick()
+        {
+            base.GameConditionTick();
+            foreach (var map in AffectedMaps)
+            {
+                var heatsinks = map.listerBuildings.AllBuildingsColonistOfClass<Building>()
+                    .Select(b => b.GetComp<CompHeatsink>())
+                    .Where(h => h != null && h.StoredHeat < h.EffectiveMaxHeat)
+                    .ToList();
+                foreach (var heatsink in heatsinks)
+                {
+                    heatsink.AddHeat(1f);
+                }
+            }
+        }
     }
 }
