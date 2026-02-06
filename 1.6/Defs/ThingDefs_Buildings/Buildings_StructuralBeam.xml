@@ -34,9 +34,6 @@
     </researchPrerequisites>
     <comps>
       <li Class="CompProperties_Facility">
-        <statOffsets>
-          <SubstructureSupport>25</SubstructureSupport>
-        </statOffsets>
         <maxSimultaneous>9999</maxSimultaneous>
         <showMaxSimultaneous>false</showMaxSimultaneous>
         <requiresLOS>False</requiresLOS>
