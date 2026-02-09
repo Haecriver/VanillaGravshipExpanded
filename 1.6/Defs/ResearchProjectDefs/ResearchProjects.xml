@@ -3,6 +3,11 @@
 	<ResearchProjectDef Name="VGE_GravtechResearchBase" Abstract="True">
 		<tab>VGE_Gravtech</tab>
 		<techLevel>Spacer</techLevel>
+    <modExtensions>
+      <!-- The extension can be applied to the tab, or the ResearchProjectDef itself. -->
+      <!-- As a precaution to mods moving this research to a different tab, we're adding the extension to the researches themselves as well. -->
+      <li Class="VanillaGravshipExpanded.GravtechResearchExtension" />
+    </modExtensions>
 	</ResearchProjectDef>
 	<ResearchProjectDef ParentName="VGE_GravtechResearchBase">
 		<defName>VGE_GravshipWeaponry</defName>
