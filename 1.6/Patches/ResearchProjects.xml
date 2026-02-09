@@ -185,4 +185,30 @@
 			<researchPrerequisite>VGE_OxygenNetwork</researchPrerequisite>
 		</value>
 	</Operation>
+
+  <!-- Give the 4 vanilla researches the GravtechResearchExtension so they'll require gravdata research, even if some mod moves it to a different tab. -->
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/ResearchProjectDef[defName="BasicGravtech"]</xpath>
+    <value>
+      <li Class="VanillaGravshipExpanded.GravtechResearchExtension" />
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/ResearchProjectDef[defName="StandardGravtech"]</xpath>
+    <value>
+      <li Class="VanillaGravshipExpanded.GravtechResearchExtension" />
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/ResearchProjectDef[defName="OrbitalTech"]</xpath>
+    <value>
+      <li Class="VanillaGravshipExpanded.GravtechResearchExtension" />
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/ResearchProjectDef[defName="AdvancedGravtech"]</xpath>
+    <value>
+      <li Class="VanillaGravshipExpanded.GravtechResearchExtension" />
+    </value>
+  </Operation>
 </Patch>
