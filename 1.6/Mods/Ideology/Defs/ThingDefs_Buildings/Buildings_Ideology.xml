@@ -82,8 +82,8 @@
     </building>
     <resourcesFractionWhenDeconstructed>0.25</resourcesFractionWhenDeconstructed>
     <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
-    <designationCategory>Ideology</designationCategory>
-    <uiOrder>2500</uiOrder>
+    <designationCategory>Odyssey</designationCategory>
+    <uiOrder>2550</uiOrder>
     <minifiedDef>MinifiedThing</minifiedDef>
     <thingCategories>
       <li>BuildingsMisc</li>
