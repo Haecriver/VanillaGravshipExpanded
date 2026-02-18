@@ -104,12 +104,15 @@
         <!-- Copy all biosculpter cycles from vanill BiosculpterPod def that we don't already have here (as in - no duplicate keys) -->
         <copyCyclesFrom>BiosculpterPod</copyCyclesFrom>
         <!-- In vanilla, (0.8 * drawSizeX, 1, 0.8 * drawSizeZ) -->
-        <backgroundSize>(0.4, 1, 2.4)</backgroundSize>
+        <backgroundSize>(0.8, 1, 1.5)</backgroundSize>
+        <backgroundOffsetNorth>(0, 0, 0.4)</backgroundOffsetNorth>
+        <backgroundOffsetEast>(0.45, 0, 0.2)</backgroundOffsetEast>
+        <backgroundOffsetWest>(-0.45, 0, 0.2)</backgroundOffsetWest>
         <!-- Offset of the pawn in the biosculpter pod -->
         <pawnOffsetNorth>(0, 0, 0.5)</pawnOffsetNorth>
-        <pawnOffsetSouth>(0, 0, 0.2)</pawnOffsetSouth>
-        <pawnOffsetEast>(0.4, 0, 0.2)</pawnOffsetEast>
-        <pawnOffsetWest>(-0.2, 0, 0.2)</pawnOffsetWest>
+        <pawnOffsetSouth>(0, 0, -0.2)</pawnOffsetSouth>
+        <pawnOffsetEast>(0.5, 0, 0.1)</pawnOffsetEast>
+        <pawnOffsetWest>(-0.4, 0, 0.1)</pawnOffsetWest>
       </li>
       <!-- Make it link to the nutrient paste net -->
       <li Class="PipeSystem.CompProperties_Resource" MayRequire="VanillaExpanded.VNutrientE">
