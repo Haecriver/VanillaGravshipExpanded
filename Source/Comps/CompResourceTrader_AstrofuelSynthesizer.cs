@@ -29,6 +29,14 @@ public class CompResourceTrader_AstrofuelSynthesizer : CompResourceTrader
         BaseConsumption = Props.consumptionPerTick;
     }
 
+    protected override void HandleRefuelableTicking(float baseFuelConsumptionRate)
+    {
+        if (astropurifier != null)
+            baseFuelConsumptionRate /= 4f;
+
+        base.HandleRefuelableTicking(baseFuelConsumptionRate);
+    }
+
     public override void PostPostMake()
     {
         base.PostPostMake();
