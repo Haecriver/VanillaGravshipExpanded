@@ -9,9 +9,15 @@ using Verse;
 namespace VanillaGravshipExpanded
 {
     [HotSwappable]
-    [HarmonyPatch(typeof(GenConstruct), nameof(GenConstruct.CanPlaceBlueprintAt))]
+    [HarmonyPatch]
     public static class GenConstruct_CanPlaceBlueprintAt_Patch
     {
+        public static MethodBase TargetMethod()
+        {
+            return typeof(GenConstruct).DeclaredMethod(nameof(GenConstruct.CanPlaceBlueprintAt_NewTemp))
+                   ?? typeof(GenConstruct).DeclaredMethod(nameof(GenConstruct.CanPlaceBlueprintAt));
+        }
+
         public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
         {
             MethodInfo foundationAtMethod = AccessTools.Method(
