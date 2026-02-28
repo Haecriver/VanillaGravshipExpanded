@@ -100,7 +100,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>VGE_HiddenAstrofuelPipe</defName>
 		<label>hidden astrofuel pipe</label>
-		<description>A hidden, reinforced tube for moving oxygen around. While it’s not visible, it is much more expensive to construct.</description>
+		<description>A hidden, reinforced tube for transporting high-grade astrofuel around. While it’s not visible, it is much more expensive to construct.</description>
 		<thingClass>PipeSystem.Building_Pipe</thingClass>
 		<category>Building</category>
 		<tickerType>Rare</tickerType>
@@ -722,6 +722,7 @@
 				</fuelFilter>
 				<showAllowAutoRefuelToggle>true</showAllowAutoRefuelToggle>
 				<canEjectFuel>true</canEjectFuel>
+        <externalTicking>true</externalTicking>
 			</li>
 			<li Class="PipeSystem.CompProperties_ResourceTrader">
 				<compClass>VanillaGravshipExpanded.CompResourceTrader_AstrofuelSynthesizer</compClass>
@@ -730,6 +731,8 @@
 				<soundAmbientReceivingResource>Recipe_Cremate</soundAmbientReceivingResource>
 				<pipeNet>VGE_AstrofuelNet</pipeNet>
 				<resourceOffOverlay>false</resourceOffOverlay>
+        <handleCompRefuelableTicking>true</handleCompRefuelableTicking>
+        <disableRefuelableConsumptionInLowPowerMode>true</disableRefuelableConsumptionInLowPowerMode>
 				<!-- 0.(6) per 100 ticks, or 0.00(6) per tick, or 1 per 150 ticks, or 400 per day. -->
 				<consumptionPerTick>-0.66666666666666666666666666666667</consumptionPerTick>
 			</li>
