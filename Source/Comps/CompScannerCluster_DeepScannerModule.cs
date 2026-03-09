@@ -34,14 +34,6 @@ public class CompScannerCluster_DeepScannerModule : CompScannerCluster_BaseModul
 
     public new CompProperties_ScannerCluster_DeepScannerModule Props => (CompProperties_ScannerCluster_DeepScannerModule)props;
 
-    public override void PostDrawExtraSelectionOverlays()
-    {
-        if (ShouldShowDeepResourceOverlay())
-            parent.Map.deepResourceGrid.MarkForDraw();
-    }
-
-    public bool ShouldShowDeepResourceOverlay() => ScannerCluster.ActiveModule == this && ScannerCluster.powerComp is { PowerOn: true };
-
     public override void PostExposeData()
     {
         base.PostExposeData();

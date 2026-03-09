@@ -190,6 +190,17 @@ public class CompScannerCluster : CompScanner
 
     public bool IsPassiveModuleActive(IScannerClusterModule module) => PassiveModule == module && lastScanTick + 20 < Find.TickManager.TicksGame;
 
+    public override void PostDrawExtraSelectionOverlays()
+    {
+        if (ShouldShowDeepResourceOverlay())
+            parent.Map.deepResourceGrid.MarkForDraw();
+    }
+
+    public bool ShouldShowDeepResourceOverlay()
+    {
+        return powerComp is { PowerOn: true } && VGEDefOf.GroundPenetratingScanner.IsFinished;
+    }
+
     public interface IScannerClusterModule
     {
         CompScannerCluster ScannerCluster { set; }

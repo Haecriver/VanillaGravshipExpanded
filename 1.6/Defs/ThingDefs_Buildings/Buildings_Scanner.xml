@@ -81,6 +81,7 @@
     <defaultPlacingRot>South</defaultPlacingRot>
     <placeWorkers>
       <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+      <li>PlaceWorker_ShowDeepResources</li>
     </placeWorkers>
     <uiOrder>2505</uiOrder>
   </ThingDef>

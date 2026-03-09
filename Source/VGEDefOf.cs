@@ -20,6 +20,7 @@ namespace VanillaGravshipExpanded
         public static JobDef VGE_BeatAstrofire, VGE_ExtinguishAstrofiresNearby, VGE_ExtinguishSelfAstrofire, VGE_MaintainGrav, VGE_CollectGravdata, VGE_ReplenishOxygenPack, VGE_InspectMechanoidGravEngine;
         public static FleckDef VGE_MaintenanceSmoke, VGE_JavelinGlow, Fleck_HeatWaveDistortion, VGE_GaussImpact, VGE_GaussDistortion;
         public static ResearchTabDef VGE_Gravtech;
+        public static ResearchProjectDef GroundPenetratingScanner;
         public static PreceptDef GravshipLaunch, VGE_GravjumperLaunch, VGE_GravhulkLaunch;
         public static GameConditionDef VGE_SpaceSolarFlare, VGE_GravitationalAnomaly, VGE_DustCloud;
         public static ThingDef VGE_SmallDebris, VGE_MediumDebris, VGE_LargeDebris, VGE_SmallAsteroid_Projectile, VGE_MediumAsteroid, VGE_LargeAsteroid;
