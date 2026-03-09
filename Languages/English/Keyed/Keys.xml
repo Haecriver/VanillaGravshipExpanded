@@ -209,4 +209,11 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_Gravship>gravship</VGE_Gravship>
     <VGE_Gravhulk>gravhulk</VGE_Gravhulk>
 
+    <!-- Scanner cluster -->
+    <VGE_ScannerCluster_TunedToNothing>Nothing</VGE_ScannerCluster_TunedToNothing>
+    <VGE_ScannerCluster_RandomResource>Random resource</VGE_ScannerCluster_RandomResource>
+    <VGE_ScannerCluster_TunedToOrbitalScanning>Passive orbital scanning</VGE_ScannerCluster_TunedToOrbitalScanning>
+    <VGE_ScannerCluster_UndergroundResource>{RESOURCE} (underground)</VGE_ScannerCluster_UndergroundResource>
+    <VGE_ScannerCluster_LongRangeResource>{RESOURCE} (above-ground)</VGE_ScannerCluster_LongRangeResource>
+
 </LanguageData>

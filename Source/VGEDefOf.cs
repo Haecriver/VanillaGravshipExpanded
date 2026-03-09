@@ -1,6 +1,7 @@
 using PipeSystem;
 using RimWorld;
 using VEF.Graphics;
+using VEF.OptionalFeatures;
 using Verse;
 
 namespace VanillaGravshipExpanded
@@ -46,5 +47,7 @@ namespace VanillaGravshipExpanded
 
         [MayRequireBiotech]
         public static ThingDef VGE_Astronaut;
+
+        public static OptionalFeaturesDef VFE_TileMutatorMechanics;
     }
 }
