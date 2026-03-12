@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
+
 	<ThingDef ParentName="GravshipComponentBase">
 		<defName>VGE_GravtechConsole</defName>
 		<label>gravtech console</label>
@@ -57,6 +58,7 @@
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
 		<uiOrder>2350</uiOrder>
 	</ThingDef>
+
 	<ThingDef ParentName="GravshipComponentBase">
 		<defName>VGE_GravshipBlackBox</defName>
 		<label>gravship black box</label>
@@ -100,6 +102,7 @@
 			<li>GravshipUpgrade</li>
 		</tradeTags>
 	</ThingDef>
+
 	<ThingDef ParentName="GravshipComponentBase">
 		<defName>VGE_FlightComputer</defName>
 		<label>flight computer</label>
@@ -146,4 +149,137 @@
 			<li>GravshipUpgrade</li>
 		</tradeTags>
 	</ThingDef>
+
+  <ThingDef ParentName="BenchBase">
+    <defName>VGE_CompactResearchBench</defName>
+    <label>compact research bench</label>
+    <description>A miniaturized version of the high-tech research bench, designed to fit within the confined spaces of a gravship. Despite its compact size, it features the same computers and electronic equipment, providing the same research capabilities and unlocking advanced projects as its larger counterpart. It draws power directly from the grav engine.</description>
+    <thingClass>Building_ResearchBench</thingClass>
+    <size>(3,1)</size>
+    <stuffCategories>
+      <li>Metallic</li>
+    </stuffCategories>
+    <costStuffCount>150</costStuffCount>
+    <costList>
+      <GravlitePanel>20</GravlitePanel>
+      <Steel>200</Steel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+    <graphicData>
+      <texPath>Things/Structures/GravshipFurniture/GravshipHiTechResearchBench/GravshipHiTechResearchBench</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(3,1)</drawSize>
+      <damageData>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+        <cornerBL>Damage/Corner</cornerBL>
+        <cornerBR>Damage/Corner</cornerBR>
+      </damageData>
+    </graphicData>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.20</staticSunShadowHeight>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>5000</WorkToBuild>
+      <Flammability>1.0</Flammability>
+      <ResearchSpeedFactor>1.0</ResearchSpeedFactor>
+    </statBases>
+    <comps Inherit="False">
+      <li Class="CompProperties_ReportWorkSpeed">
+        <workSpeedStat>ResearchSpeedFactor</workSpeedStat>
+      </li>
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>MultiAnalyzer</li>
+          <li>VGE_CompactMultiAnalyzer</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+    <fillPercent>0.5</fillPercent>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
+    <designationCategory>Odyssey</designationCategory>
+    <uiOrder>2348</uiOrder>
+    <surfaceType>Item</surfaceType>
+    <designationHotKey>Misc4</designationHotKey>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+      <li>PlaceWorker_DrawLinesToBookcasesInRoom</li>
+    </placeWorkers>
+    <researchPrerequisites>
+      <li>MicroelectronicsBasics</li>
+      <li>VGE_CompactWorkspaces</li>
+    </researchPrerequisites>
+    <building>
+      <paintable>true</paintable>
+      <workTableRoomRole>Laboratory</workTableRoomRole>
+      <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
+    </building>
+  </ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>VGE_CompactMultiAnalyzer</defName>
+    <label>compact multi-analyzer</label>
+    <description>A miniaturized version of the multi-analyzer, designed to work aboard a gravship. While taking up less space, it performs the same essential function: increasing research speed when placed near a high-tech research bench and unlocking advanced projects. Each bench can only benefit from one multi-analyzer. It draws power directly from the grav engine.</description>
+    <graphicData>
+      <texPath>Things/Structures/GravshipFurniture/GravshipMultianalyzer/GravshipMultianalyzer</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <uiIconScale>0.85</uiIconScale>
+    <researchPrerequisites>
+      <li>MultiAnalyzer</li>
+      <li>VGE_CompactWorkspaces</li>
+    </researchPrerequisites>
+    <size>(1,1)</size>
+    <rotatable>false</rotatable>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <fillPercent>0.5</fillPercent>
+    <designationHotKey>Misc4</designationHotKey>
+    <designationCategory>Odyssey</designationCategory>
+    <uiOrder>2349</uiOrder>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <canOverlapZones>false</canOverlapZones>
+    <terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <WorkToBuild>7500</WorkToBuild>
+      <Mass>30</Mass>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <costList>
+      <GravlitePanel>10</GravlitePanel>
+      <Plasteel>40</Plasteel>
+      <Gold>10</Gold>
+      <ComponentIndustrial>6</ComponentIndustrial>
+    </costList>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <comps>
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <ResearchSpeedFactor>0.1</ResearchSpeedFactor>
+        </statOffsets>
+        <maxSimultaneous>1</maxSimultaneous>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+  </ThingDef>
+
 </Defs>

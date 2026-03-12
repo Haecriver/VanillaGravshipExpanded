@@ -1,0 +1,23 @@
+<Patch>
+
+  <!-- Make compact research bench an equivalent building to a hi-tech research bench -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="HiTechResearchBench"]</xpath>
+		<value>
+      <li Class="VEF.Buildings.ResearchBuildingExtension">
+        <equivalentBenches>
+          <li>VGE_CompactResearchBench</li>
+        </equivalentBenches>
+      </li>
+		</value>
+	</Operation>
+
+  <!-- Add compact multi-analyzer linking to hi-tech research bench -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="HiTechResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
+    <value>
+      <li>VGE_CompactMultiAnalyzer</li>
+    </value>
+  </Operation>
+
+</Patch>
