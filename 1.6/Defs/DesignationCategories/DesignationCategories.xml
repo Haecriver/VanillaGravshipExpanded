@@ -30,6 +30,8 @@
       <li>Designator_Deconstruct</li>
       <li>Designator_RemoveFoundation</li>
       <li>VanillaGravshipExpanded.Designator_RemoveSubstructure</li>
+      <li>VanillaGravshipExpanded.Designator_AreaBuildVacBarrierRoof</li>
+      <li>VanillaGravshipExpanded.Designator_AreaNoVacBarrierRoof</li>
     </specialDesignatorClasses>
     <modExtensions>
       <li Class="VanillaGravshipExpanded.NestedCategoryExtension">

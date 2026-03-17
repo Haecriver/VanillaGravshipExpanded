@@ -178,6 +178,11 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_ColorPickerValue>brightness</VGE_ColorPickerValue>
     <VGE_ColorPickerValueTooltip>Choose a color by setting the color brightness.\n\nBrightness refers to "value" from HSV color model - hue, saturation, and value/brightness.</VGE_ColorPickerValueTooltip>
     <VGE_MustBePlacedInRangeOfGravSource>Must be placed in range of a grav engine or grav field amplifier.</VGE_MustBePlacedInRangeOfGravSource>
+    <!-- Vac barrier roof -->
+    <VGE_DesignatorAreaBuildVacBarrierRoofExpand>Build vac barrier roof area</VGE_DesignatorAreaBuildVacBarrierRoofExpand>
+    <VGE_DesignatorAreaBuildVacBarrierRoofExpandDesc>Colonists will build vac barrier roofs in this area.</VGE_DesignatorAreaBuildVacBarrierRoofExpandDesc>
+    <VGE_DesignatorAreaNoVacBarrierRoofExpand>Remove vac barrier roof area</VGE_DesignatorAreaNoVacBarrierRoofExpand>
+    <VGE_DesignatorAreaNoVacBarrierRoofExpandDesc>Colonists will remove vac barrier roofs in this area.</VGE_DesignatorAreaNoVacBarrierRoofExpandDesc>
 
     <!-- Grav engine inspection replacement text (overwrites Odyssey's) -->
 

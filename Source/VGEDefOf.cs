@@ -17,7 +17,7 @@ namespace VanillaGravshipExpanded
         public static TerrainDef VGE_GravshipSubscaffold, VGE_DamagedSubstructure, VGE_AsteroidIce, VGE_Compressed_Vacstone_Floor, VGE_MechanoidSubstructure;
         public static OrbitalDebrisDef VGE_IceAsteroidDebris, VGE_AsteroidClusterDebris, VGE_MixedDebris;
         public static DamageDef VGE_ExtinguishAstrofire, VGE_AstrofireDamage;
-        public static JobDef VGE_BeatAstrofire, VGE_ExtinguishAstrofiresNearby, VGE_ExtinguishSelfAstrofire, VGE_MaintainGrav, VGE_CollectGravdata, VGE_ReplenishOxygenPack, VGE_InspectMechanoidGravEngine;
+        public static JobDef VGE_BeatAstrofire, VGE_ExtinguishAstrofiresNearby, VGE_ExtinguishSelfAstrofire, VGE_MaintainGrav, VGE_CollectGravdata, VGE_ReplenishOxygenPack, VGE_InspectMechanoidGravEngine, VGE_BuildVacBarrierRoofs, VGE_RemoveVacBarrierRoofs;
         public static FleckDef VGE_MaintenanceSmoke, VGE_JavelinGlow, Fleck_HeatWaveDistortion, VGE_GaussImpact, VGE_GaussDistortion;
         public static ResearchTabDef VGE_Gravtech;
         public static ResearchProjectDef GroundPenetratingScanner;
@@ -35,6 +35,7 @@ namespace VanillaGravshipExpanded
         [MayRequireBiotech] public static BossgroupDef Diabolus;
         public static TerrainAffordanceDef Substructure;
         public static QuestScriptDef SurveySite;
+        public static RoofDef VGE_VacBarrierRoof;
 
         public static KCSG.StructureLayoutDef VGE_MechOrbitalDestroyer_Alpha, VGE_MechOrbitalDestroyer_Beta, VGE_MechOrbitalDestroyer_Gamma, VGE_StartingGravjumperDamaged, VGE_StartingGravjumper;
         public static DesignationCategoryDef Odyssey;

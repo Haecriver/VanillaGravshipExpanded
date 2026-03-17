@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using RimWorld;
 using Verse;
@@ -36,7 +35,7 @@ namespace VanillaGravshipExpanded
                 }
             }
         }
-        
+
         private void ProcessSpaceDeterioration()
         {
             var allThings = map.listerThings.AllThings;
@@ -206,6 +205,16 @@ namespace VanillaGravshipExpanded
 
             }
 
+        }
+
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
+
+            if (map.areaManager.BuildVacBarrierRoof() == null)
+                map.areaManager.areas.Add(new Area_BuildVacBarrierRoof(map.areaManager));
+            if (map.areaManager.NoVacBarrierRoof() == null)
+                map.areaManager.areas.Add(new Area_NoVacBarrierRoof(map.areaManager));
         }
     }
 }

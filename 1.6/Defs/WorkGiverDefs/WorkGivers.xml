@@ -167,4 +167,32 @@
     </requiredCapacities>
     <canBeDoneByMechs>false</canBeDoneByMechs>
   </WorkGiverDef>
+  <WorkGiverDef>
+    <defName>VGE_BuildVacBarrierRoofs</defName>
+    <label>build vac barrier roofs</label>
+    <giverClass>VanillaGravshipExpanded.WorkGiver_BuildVacBarrierRoof</giverClass>
+    <workType>Construction</workType>
+    <priorityInType>100</priorityInType>
+    <verb>build vac barrier roof</verb>
+    <gerund>building vac barrier roof</gerund>
+    <scanThings>false</scanThings>
+    <scanCells>true</scanCells>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
+  <WorkGiverDef>
+    <defName>VGE_RemoveVacBarrierRoofs</defName>
+    <label>remove vac barrier roofs</label>
+    <giverClass>VanillaGravshipExpanded.WorkGiver_RemoveVacBarrierRoof</giverClass>
+    <workType>Construction</workType>
+    <priorityInType>90</priorityInType>
+    <verb>remove vac barrier roof</verb>
+    <gerund>removing vac barrier roof</gerund>
+    <scanThings>false</scanThings>
+    <scanCells>true</scanCells>
+    <requiredCapacities>
+      <li>Manipulation</li>
+    </requiredCapacities>
+  </WorkGiverDef>
 </Defs>
