@@ -7,6 +7,21 @@
     <isNatural>false</isNatural>
     <isThickRoof>false</isThickRoof>
     <canCollapse>true</canCollapse>
+    <modExtensions>
+      <li Class="VEF.Maps.RoofExtension">
+        <dealDamageOnCollapsed>false</dealDamageOnCollapsed>
+        <drawRoofShadow>false</drawRoofShadow>
+        <roofOverlayTint>(1, 0, 1)</roofOverlayTint>
+        <customRoofGraphic>
+          <!-- Draw data -->
+          <offset>(0, 0, 0.5)</offset>
+          <!-- Material data -->
+          <customRoofGraphicPath>Things/Structures/RoofVacBarrier</customRoofGraphicPath>
+          <customRoofGraphicShader>TransparentPostLight</customRoofGraphicShader>
+<!--          <customRoofGraphicColor>(1, 1, 1, 0.5)</customRoofGraphicColor>-->
+        </customRoofGraphic>
+      </li>
+    </modExtensions>
   </RoofDef>
 
 </Defs>
