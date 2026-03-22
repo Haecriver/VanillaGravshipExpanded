@@ -21,7 +21,6 @@ public class JobDriver_RemoveVacBarrierRoof : JobDriver_AffectRoof
 
     public override void DoEffect()
     {
-        RemovedRoofs.Clear();
         // If an area has a build roof area, replace vac barrier roof
         if (Map.areaManager.BuildRoof[Cell])
         {
@@ -31,11 +30,12 @@ public class JobDriver_RemoveVacBarrierRoof : JobDriver_AffectRoof
         // If there's no build roof area, remove vac barrier roof
         else
         {
+            RemovedRoofs.Clear();
             Map.roofGrid.SetRoof(Cell, null);
+            RemovedRoofs.Add(Cell);
+            RoofCollapseCellsFinder.CheckCollapseFlyingRoofs(RemovedRoofs, Map, true);
+            RemovedRoofs.Clear();
         }
-        RemovedRoofs.Add(Cell);
-        RoofCollapseCellsFinder.CheckCollapseFlyingRoofs(JobDriver_RemoveRoof.removedRoofs, Map, true);
-        RemovedRoofs.Clear();
     }
 
     public override bool DoWorkFailOn()
