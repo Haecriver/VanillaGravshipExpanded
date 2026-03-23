@@ -11,7 +11,7 @@
       <li Class="VEF.Maps.RoofExtension">
         <dealDamageOnCollapsed>false</dealDamageOnCollapsed>
         <drawRoofShadow>false</drawRoofShadow>
-        <roofOverlayTint>(1, 0, 1)</roofOverlayTint>
+        <roofOverlayColor>(0.3, 0, 0.4)</roofOverlayColor>
         <customRoofGraphic>
           <!-- Draw data -->
           <offset>(0, 0, 0.5)</offset>
