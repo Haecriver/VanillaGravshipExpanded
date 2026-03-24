@@ -12,13 +12,15 @@
         <dealDamageOnCollapsed>false</dealDamageOnCollapsed>
         <drawRoofShadow>false</drawRoofShadow>
         <roofOverlayColor>(0.3, 0, 0.4)</roofOverlayColor>
-        <customRoofGraphic>
+        <customRoofGraphic Class="VanillaGravshipExpanded.ColorableVacBarrierRoofGraphic">
           <!-- Draw data -->
           <offset>(0, 0, 0.5)</offset>
           <!-- Material data -->
           <customRoofGraphicPath>Things/Structures/RoofVacBarrier</customRoofGraphicPath>
           <customRoofGraphicShader>TransparentPostLight</customRoofGraphicShader>
 <!--          <customRoofGraphicColor>(1, 1, 1, 0.5)</customRoofGraphicColor>-->
+          <!-- Normally used as the singular color for material, here we use it as a base/default color. -->
+          <customRoofGraphicColor>(146,76,237)</customRoofGraphicColor>
         </customRoofGraphic>
       </li>
     </modExtensions>

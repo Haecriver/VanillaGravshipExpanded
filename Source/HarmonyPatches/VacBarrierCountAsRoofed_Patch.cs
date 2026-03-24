@@ -32,6 +32,10 @@ public static class VacBarrierCountAsRoofed_Patch
             yield return method;
         yield return typeof(RoofCollapseUtility).DeclaredMethod(nameof(RoofCollapseUtility.ConnectedToRoofHolder));
         yield return typeof(RoofCollapseUtility).DeclaredMethod(nameof(RoofCollapseUtility.WithinRangeOfRoofHolder));
+        // Allow vanilla remove roof work and job giver to detect vac barrier roofs
+        yield return typeof(JobDriver_RemoveRoof).DeclaredMethod(nameof(JobDriver_RemoveRoof.DoWorkFailOn));
+        yield return typeof(WorkGiver_RemoveRoof).DeclaredMethod(nameof(WorkGiver_RemoveRoof.HasJobOnCell));
+        yield return typeof(WorkGiver_RemoveRoof).DeclaredMethod(nameof(WorkGiver_RemoveRoof.GetPriority));
     }
 
     private static void Prefix(out bool __state)

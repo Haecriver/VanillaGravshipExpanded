@@ -46,10 +46,4 @@
     <reportString>building vac barrier roof.</reportString>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>
-  <JobDef>
-    <defName>VGE_RemoveVacBarrierRoofs</defName>
-    <driverClass>VanillaGravshipExpanded.JobDriver_RemoveVacBarrierRoof</driverClass>
-    <reportString>removing vac barrier roof.</reportString>
-    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
-  </JobDef>
 </Defs>

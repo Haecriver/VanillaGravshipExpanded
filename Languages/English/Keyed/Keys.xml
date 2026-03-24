@@ -183,6 +183,11 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_DesignatorAreaBuildVacBarrierRoofExpandDesc>Colonists will build vac barrier roofs in this area.</VGE_DesignatorAreaBuildVacBarrierRoofExpandDesc>
     <VGE_DesignatorAreaNoVacBarrierRoofExpand>Remove vac barrier roof area</VGE_DesignatorAreaNoVacBarrierRoofExpand>
     <VGE_DesignatorAreaNoVacBarrierRoofExpandDesc>Colonists will remove vac barrier roofs in this area.</VGE_DesignatorAreaNoVacBarrierRoofExpandDesc>
+    <!-- Vac barrier roof recoloring designator -->
+    <VGE_DesignatorRecolorVacBarrierRoof>Recolor vac barrier roofs...</VGE_DesignatorRecolorVacBarrierRoof>
+    <VGE_DesignatorRecolorVacBarrierRoofDesc>Immediately recolor any vac barrier roofs.</VGE_DesignatorRecolorVacBarrierRoofDesc>
+    <VGE_ColorPickerMenu>Select any color using a color picker menu.</VGE_ColorPickerMenu>
+    <VGE_DesignatorEyeDropperDesc_Universal>Grab a color from an existing vac barrier roof, building, or a floor.</VGE_DesignatorEyeDropperDesc_Universal>
 
     <!-- Grav engine inspection replacement text (overwrites Odyssey's) -->
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using RimWorld;
 using Verse;
@@ -19,12 +20,16 @@ namespace VanillaGravshipExpanded
 
         public HashSet<Thing> maintainables_InMap = new HashSet<Thing>();
 
+        public Color[] vacBarrierColorGrid;
+
         public MaintenanceAndDeterioration_MapComponent(Map map) : base(map)
         {
+            vacBarrierColorGrid = new Color[map.cellIndices.NumGridCells];
+            Array.Fill(vacBarrierColorGrid, VacBarrierRoofUtility.BaseColor);
         }
-        
+
         public override void MapComponentTick()
-        {            
+        {
             if (map.Tile.LayerDef.isSpace)
             {
                 tickCounter++;
@@ -213,8 +218,6 @@ namespace VanillaGravshipExpanded
 
             if (map.areaManager.BuildVacBarrierRoof() == null)
                 map.areaManager.areas.Add(new Area_BuildVacBarrierRoof(map.areaManager));
-            if (map.areaManager.NoVacBarrierRoof() == null)
-                map.areaManager.areas.Add(new Area_NoVacBarrierRoof(map.areaManager));
         }
     }
 }

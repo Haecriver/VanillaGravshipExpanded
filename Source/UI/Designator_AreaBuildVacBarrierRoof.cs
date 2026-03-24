@@ -10,6 +10,8 @@ public class Designator_AreaBuildVacBarrierRoof : Designator_Cells
 
     public override DrawStyleCategoryDef DrawStyleCategory => DrawStyleCategoryDefOf.Areas;
 
+    public override bool Visible => VacBarrierRoofUtility.IsGravBarrierRoofAccessible();
+
     public Designator_AreaBuildVacBarrierRoof()
     {
         defaultLabel = "VGE_DesignatorAreaBuildVacBarrierRoofExpand".Translate();
@@ -34,7 +36,8 @@ public class Designator_AreaBuildVacBarrierRoof : Designator_Cells
     public override void DesignateSingleCell(IntVec3 c)
     {
         Map.areaManager.BuildVacBarrierRoof()[c] = true;
-        Map.areaManager.NoVacBarrierRoof()[c] = false;
+        Map.areaManager.NoRoof[c] = false;
+        Map.areaManager.BuildRoof[c] = false;
     }
 
     // public override bool ShowWarningForCell(IntVec3 c)
@@ -61,7 +64,8 @@ public class Designator_AreaBuildVacBarrierRoof : Designator_Cells
     public override void SelectedUpdate()
     {
         GenUI.RenderMouseoverBracket();
-        Map.areaManager.NoVacBarrierRoof().MarkForDraw();
+        Map.areaManager.NoRoof.MarkForDraw();
+        Map.areaManager.BuildRoof.MarkForDraw();
         Map.areaManager.BuildVacBarrierRoof().MarkForDraw();
     }
 }
