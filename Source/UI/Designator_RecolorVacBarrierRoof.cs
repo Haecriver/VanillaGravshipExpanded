@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
-using VEF.Maps;
 using Verse;
 
 namespace VanillaGravshipExpanded;
@@ -28,7 +27,12 @@ public class Designator_RecolorVacBarrierRoof : DesignatorWithEyedropper
         soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
         useMouseIcon = true;
         soundSucceeded = SoundDefOf.Designate_Paint;
-        eyedropper = new Designator_Eyedropper(def => { color = def.color; }, "SelectAPaintedBuilding".Translate(), "DesignatorEyeDropperDesc_Paint".Translate());
+        eyedropper = new Designator_VacBarrierRoofEyedropper(c =>
+        {
+            color = c;
+            if (!eyedropMode)
+                Find.DesignatorManager.Select(this);
+        }, "SelectAPaintedBuilding".Translate(), "DesignatorEyeDropperDesc_Paint".Translate());
 
         defaultLabel = "VGE_DesignatorRecolorVacBarrierRoof".Translate();
         defaultDesc = "VGE_DesignatorRecolorVacBarrierRoofDesc".Translate();
@@ -98,15 +102,24 @@ public class Designator_RecolorVacBarrierRoof : DesignatorWithEyedropper
 
     public override AcceptanceReport CanDesignateCell(IntVec3 c)
     {
-        return c.InBounds(Map)
-               && !c.Fogged(Map)
-               && c.GetRoof(Map)?.GetModExtension<RoofExtension>()?.customRoofGraphic is ColorableVacBarrierRoofGraphic
-               && c.VacBarrierRoofColor(Map) != color;
+        if (eyedropMode)
+            return eyedropper.CanDesignateCell(c);
+
+        if (!c.InBounds(Map) || c.Fogged(Map))
+            return false;
+        var roofColor = Map.VacBarrierRoofColorAt(c);
+        return roofColor != null && roofColor != color;
     }
 
     public override void DesignateSingleCell(IntVec3 c)
     {
-        c.VacBarrierRoofColor(Map) = color;
+        if (eyedropMode)
+        {
+            eyedropper.DesignateSingleCell(c);
+            return;
+        }
+
+        Map.SetVacBarrierRoofColorAt(c, color);
         Map.mapDrawer.MapMeshDirty(c, MapMeshFlagDefOf.Roofs);
     }
 }

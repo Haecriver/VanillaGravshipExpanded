@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using VEF.Maps;
 using Verse;
@@ -13,7 +12,7 @@ public class ColorableVacBarrierRoofGraphic : RoofExtension.CustomRoofGraphic
 
     public override RoofDrawData DrawDataAt(Map map, IntVec3 cell, RoofDef roof)
     {
-        var color = cell.VacBarrierRoofColor(map);
+        var color = map.VacBarrierRoofColorAt(cell) ?? customRoofGraphicColor;
         // If close enough to original, just use that
         if (color.IndistinguishableFromFast(customRoofGraphicColor))
             return base.DrawDataAt(map, cell, roof);

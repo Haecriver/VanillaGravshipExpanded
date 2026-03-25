@@ -188,6 +188,10 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_DesignatorRecolorVacBarrierRoofDesc>Immediately recolor any vac barrier roofs.</VGE_DesignatorRecolorVacBarrierRoofDesc>
     <VGE_ColorPickerMenu>Select any color using a color picker menu.</VGE_ColorPickerMenu>
     <VGE_DesignatorEyeDropperDesc_Universal>Grab a color from an existing vac barrier roof, building, or a floor.</VGE_DesignatorEyeDropperDesc_Universal>
+    <VGE_GrabVacBarrierRoofColor>Grab vac barrier roof color</VGE_GrabVacBarrierRoofColor>
+    <VGE_GrabBuildingColor>Grab {BUILDING} color: {COLOR}</VGE_GrabBuildingColor>
+    <VGE_GrabFloorColor>Grab floor color: {COLOR}</VGE_GrabFloorColor>
+    <VGE_SelectColorFromTile>Select specific color from tile</VGE_SelectColorFromTile>
 
     <!-- Grav engine inspection replacement text (overwrites Odyssey's) -->
 

@@ -15,11 +15,32 @@ public static class VacBarrierRoofUtility
 
     public static bool CanReplaceWithVacBarrier(this RoofDef roof) => roof == null || ReplaceableRoofDefs.Contains(roof);
 
-    public static ref Color VacBarrierRoofColor(this IntVec3 pos, Map map)
+    public static Color? VacBarrierRoofColorAt(this Map map, IntVec3 pos)
     {
-        return ref map.GetComponent<MaintenanceAndDeterioration_MapComponent>().vacBarrierColorGrid[map.cellIndices.CellToIndex(pos)];
+        if (map.roofGrid.RoofAt(pos)?.GetModExtension<RoofExtension>()?.customRoofGraphic is ColorableVacBarrierRoofGraphic)
+            return map.GetComponent<MaintenanceAndDeterioration_MapComponent>().vacBarrierColorGrid[map.cellIndices.CellToIndex(pos)];
+        return null;
     }
 
+    public static Color? VacBarrierRoofColorAtSafe(this Map map, IntVec3 pos)
+    {
+        if (pos.InBounds(map))
+            return map.VacBarrierRoofColorAt(pos);
+        return null;
+    }
+
+    public static void SetVacBarrierRoofColorAt(this Map map, IntVec3 pos, Color color)
+    {
+        if (map.roofGrid.RoofAt(pos)?.GetModExtension<RoofExtension>()?.customRoofGraphic is ColorableVacBarrierRoofGraphic)
+            map.GetComponent<MaintenanceAndDeterioration_MapComponent>().vacBarrierColorGrid[map.cellIndices.CellToIndex(pos)] = color;
+    }
+
+    public static void SetVacBarrierRoofColorAtSafe(this Map map, IntVec3 pos, Color color)
+    {
+        if (pos.InBounds(map))
+            map.SetVacBarrierRoofColorAt(pos, color);
+    }
+    
     public static bool IsGravBarrierRoofAccessible()
     {
         // Always accessible if dev mode gizmos visible
