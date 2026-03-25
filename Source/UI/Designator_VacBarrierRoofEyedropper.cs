@@ -53,9 +53,9 @@ public class Designator_VacBarrierRoofEyedropper : Designator_Eyedropper
             {
                 vacBarrierRoofSelectAction?.Invoke(vacBarrierRoofColor.Value);
                 Messages.Message("GrabbedColor".Translate(), null, MessageTypeDefOf.NeutralEvent, false);
-            }, extraPartOnGUI: rect =>
+            }, extraPartWidth: FloatMenuOption.ExtraPartHeight, extraPartOnGUI: rect =>
             {
-                Widgets.DrawRectFast(rect, vacBarrierRoofColor.Value);
+                Widgets.DrawRectFast(rect.ScaledBy(0.75f), vacBarrierRoofColor.Value);
                 return false;
             });
         }
@@ -66,9 +66,9 @@ public class Designator_VacBarrierRoofEyedropper : Designator_Eyedropper
             {
                 selectAction?.Invoke(building.PaintColorDef);
                 Messages.Message($"{"GrabbedColor".Translate()}: {building.PaintColorDef.LabelCap}", null, MessageTypeDefOf.NeutralEvent, false);
-            }, extraPartOnGUI: rect =>
+            }, extraPartWidth: FloatMenuOption.ExtraPartHeight, extraPartOnGUI: rect =>
             {
-                Widgets.DrawRectFast(rect, building.PaintColorDef.color);
+                Widgets.DrawRectFast(rect.ScaledBy(0.75f), building.PaintColorDef.color);
                 return false;
             });
         }
@@ -80,9 +80,9 @@ public class Designator_VacBarrierRoofEyedropper : Designator_Eyedropper
             {
                 selectAction?.Invoke(floorColor);
                 Messages.Message($"{"GrabbedColor".Translate()}: {floorColor.LabelCap}", null, MessageTypeDefOf.NeutralEvent, false);
-            }, extraPartOnGUI: rect =>
+            }, extraPartWidth: FloatMenuOption.ExtraPartHeight, extraPartOnGUI: rect =>
             {
-                Widgets.DrawRectFast(rect, floorColor.color);
+                Widgets.DrawRectFast(rect.ScaledBy(0.75f), floorColor.color);
                 return false;
             });
         }
