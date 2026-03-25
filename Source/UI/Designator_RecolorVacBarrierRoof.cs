@@ -17,7 +17,7 @@ public class Designator_RecolorVacBarrierRoof : DesignatorWithEyedropper
 
     public override Color IconDrawColor => color;
 
-    protected Texture2D IconTopTex => field ??= ContentFinder<Texture2D>.Get("UI/Designators/PaintFloor_Top");
+    protected Texture2D IconTopTex => field ??= ContentFinder<Texture2D>.Get("UI/Designators/Paint_Top");
 
     public override bool Visible => VacBarrierRoofUtility.IsGravBarrierRoofAccessible();
 
@@ -36,7 +36,7 @@ public class Designator_RecolorVacBarrierRoof : DesignatorWithEyedropper
 
         defaultLabel = "VGE_DesignatorRecolorVacBarrierRoof".Translate();
         defaultDesc = "VGE_DesignatorRecolorVacBarrierRoofDesc".Translate();
-        icon = ContentFinder<Texture2D>.Get("UI/Designators/PaintFloor_Bottom");
+        icon = ContentFinder<Texture2D>.Get("UI/Designators/Paint_Bottom");
     }
 
     public override void ProcessInput(Event ev)
