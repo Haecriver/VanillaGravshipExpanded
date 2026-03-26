@@ -17,12 +17,6 @@ public static class VacBarrierCountAsRoofed_Patch
 
         // Needed so the rooms don't leak oxygen
         yield return typeof(District).DeclaredMethod(nameof(District.OpenRoofCountStopAt));
-        // Make sure roofs won't be built over vac barriers (including on surrounding tiles)
-        yield return typeof(JobDriver_BuildRoof).DeclaredMethod(nameof(JobDriver_BuildRoof.DoEffect));
-        // Make sure the pawns don't try to build over vac barriers in the first place (excluding surrounding tiles)
-        yield return typeof(JobDriver_BuildRoof).DeclaredMethod(nameof(JobDriver_BuildRoof.DoWorkFailOn));
-        // Pawns can't attempt to build on top of vac barrier, should fix the prioritizing float menu option
-        yield return typeof(WorkGiver_BuildRoof).DeclaredMethod(nameof(WorkGiver_BuildRoof.HasJobOnCell));
         // Vac barrier can hold other roofs up, can collapse, etc.
         yield return typeof(RoofCollapseCellsFinder).DeclaredMethod(nameof(RoofCollapseCellsFinder.CheckAndRemoveCollpsingRoofs));
         yield return typeof(RoofCollapseCellsFinder).DeclaredMethod(nameof(RoofCollapseCellsFinder.ProcessRoofHolderDespawned), [typeof(CellRect), typeof(IntVec3), typeof(Map), typeof(bool), typeof(bool)]);
@@ -36,6 +30,11 @@ public static class VacBarrierCountAsRoofed_Patch
         yield return typeof(JobDriver_RemoveRoof).DeclaredMethod(nameof(JobDriver_RemoveRoof.DoWorkFailOn));
         yield return typeof(WorkGiver_RemoveRoof).DeclaredMethod(nameof(WorkGiver_RemoveRoof.HasJobOnCell));
         yield return typeof(WorkGiver_RemoveRoof).DeclaredMethod(nameof(WorkGiver_RemoveRoof.GetPriority));
+
+        // Skipped, as they are handled by their own patches (they have special handling)
+        // JobDriver_BuildRoof.DoEffect
+        // JobDriver_BuildRoof.DoWorkFailOn
+        // WorkGiver_BuildRoof.HasJobOnCell
     }
 
     private static void Prefix(out bool __state)

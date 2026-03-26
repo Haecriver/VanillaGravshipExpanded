@@ -24,7 +24,6 @@ public class JobDriver_BuildVacBarrierRoof : JobDriver_AffectRoof
         for (var i = 0; i < 9; i++)
         {
             var pos = Cell + GenAdj.AdjacentCellsAndInside[i];
-            // TODO: Removed  && RoofUtility.FirstBlockingThing(pos, Map) == null, make sure intended
             if (pos.InBounds(Map) && Map.areaManager.BuildVacBarrierRoof()[pos] && pos.GetRoof(Map).CanReplaceWithVacBarrier() && RoofCollapseUtility.WithinRangeOfRoofHolder(pos, Map))
             {
                 Map.roofGrid.SetRoof(pos, VGEDefOf.VGE_VacBarrierRoof);
@@ -42,9 +41,5 @@ public class JobDriver_BuildVacBarrierRoof : JobDriver_AffectRoof
         }
     }
 
-    public override bool DoWorkFailOn()
-    {
-        var roof = Cell.GetRoof(Map);
-        return roof != null && !VacBarrierRoofUtility.ReplaceableRoofDefs.Contains(roof);
-    }
+    public override bool DoWorkFailOn() => !Cell.GetRoof(Map).CanReplaceWithVacBarrier();
 }
