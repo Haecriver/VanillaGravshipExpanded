@@ -64,6 +64,9 @@
 <!--        <soundWorking>ScannerGroundPenetrating_Ambience</soundWorking>-->
         <allowForResourceSelection>true</allowForResourceSelection>
         <randomResourceGizmoIconPath>UI/Commands/ViewQuest</randomResourceGizmoIconPath>
+        <scanningResearchPrerequisites>
+          <li>GroundPenetratingScanner</li>
+        </scanningResearchPrerequisites>
       </li>
       <li Class="VanillaGravshipExpanded.CompProperties_ScannerCluster_ModuleBase">
         <compClass>VanillaGravshipExpanded.CompScannerCluster_LongRangeMineralScannerModule</compClass>
@@ -71,6 +74,9 @@
         <scanFindMtbDaysOverride>4</scanFindMtbDaysOverride>
         <scanFindGuaranteedDaysOverride>8</scanFindGuaranteedDaysOverride>
 <!--        <soundWorking>ScannerLongRangeMineral_Ambience</soundWorking>-->
+        <scanningResearchPrerequisites>
+          <li>LongRangeMineralScanner</li>
+        </scanningResearchPrerequisites>
       </li>
       <li Class="VanillaGravshipExpanded.CompProperties_ScannerCluster_ModuleBase">
         <compClass>VanillaGravshipExpanded.CompScannerCluster_OrbitalScannerModule</compClass>

@@ -11,7 +11,7 @@ public class CompProperties_ScannerCluster_ModuleBase : CompProperties
     public string clusterModuleKey;
 
     public string noActiveScanningMessage;
-    public string missingResearchPrerequisiteMessageKey = "VGE.ScannerCluster.MissingResearchPrerequisite";
+    public string missingResearchPrerequisiteMessageKey = "VGE_ScannerCluster_MissingResearchPrerequisite";
     public List<ResearchProjectDef> scanningResearchPrerequisites;
 
     public float? scanFindMtbDaysOverride = null;
