@@ -280,6 +280,11 @@
       <li>PlaceWorker_ShowFacilitiesConnections</li>
     </placeWorkers>
     <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <modExtensions>
+      <li Class="VEF.Buildings.FacilityExtension">
+        <equivalentToFacility>MultiAnalyzer</equivalentToFacility>
+      </li>
+    </modExtensions>
   </ThingDef>
 
 </Defs>
