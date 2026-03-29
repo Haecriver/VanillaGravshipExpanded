@@ -52,6 +52,9 @@
             <ComponentIndustrial>3</ComponentIndustrial>
         </costList>
         <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+        <researchPrerequisites Inherit="False">
+          <li>BasicGravtech</li>
+        </researchPrerequisites>
         <comps>
             <li Class="VanillaGravshipExpanded.CompProperties_Glower_Gravheat">
                 <glowRadius>7.17</glowRadius>
