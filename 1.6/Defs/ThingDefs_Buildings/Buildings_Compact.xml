@@ -584,4 +584,79 @@
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>VGE_WallToolCabinet</defName>
+    <label>wall tool cabinet</label>
+    <description>A wall-mounted version of a tool cabinet. Increases work speed when placed near a workbench. One workbench can use up to two tool cabinets.</description>
+    <graphicData>
+      <texPath>Things/Structures/GravshipFurniture/WallMountedToolCabinet/WallMountedToolCabinet</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+      <drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+      <drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+      <drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+      <color>(96,114,95)</color>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Things/Structures/GravshipFurniture/WallMountedToolCabinet/WallMountedToolCabinet_MenuIcon</uiIconPath>
+    <uiIconColor>(96,114,95)</uiIconColor>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>Standable</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.35</staticSunShadowHeight>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>0</pathCost>
+    <statBases>
+      <MaxHitPoints>70</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Mass>10</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <costList>
+      <Steel>150</Steel>
+    </costList>
+    <overrideMinifiedRot>North</overrideMinifiedRot>
+    <minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+      <isEdifice>false</isEdifice>
+      <isAttachment>true</isAttachment>
+    </building>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+      <li>VGE_CompactWorkspaces</li>
+    </researchPrerequisites>
+    <designationCategory>Odyssey</designationCategory>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <WorkTableWorkSpeedFactor>0.06</WorkTableWorkSpeedFactor>
+        </statOffsets>
+        <maxSimultaneous>2</maxSimultaneous>
+      </li>
+    </comps>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>Placeworker_AttachedToWall</li>
+    </placeWorkers>
+    <modExtensions>
+      <li Class="VEF.Buildings.FacilityExtension">
+        <equivalentToFacility>ToolCabinet</equivalentToFacility>
+        <copyLinksFrom>
+          <li>ToolCabinet</li>
+        </copyLinksFrom>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
 </Defs>
