@@ -25,6 +25,12 @@
                 <compClass>CompPowerTrader</compClass>
                 <basePowerConsumption>0</basePowerConsumption>
                 <transmitsPower>true</transmitsPower>
+                <powerUpgrades>
+                    <li>
+                        <researchProject>VGE_HeatDissipation</researchProject>
+                        <factor>2</factor>
+                    </li>
+                </powerUpgrades>
             </li>
         </comps>
         <resourcesFractionWhenDeconstructed>0.5</resourcesFractionWhenDeconstructed>
@@ -61,11 +67,20 @@
                 <glowColor>(226,118,52,0)</glowColor>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_Heatsink">
-                <maxHeat>10</maxHeat>
+                <maxHeat>5</maxHeat>
                 <heatConsumptionPerHour>1</heatConsumptionPerHour>
-                <powerGenerated>100</powerGenerated>
+                <powerGenerated>50</powerGenerated>
                 <cooldownReductionPercent>0.02</cooldownReductionPercent>
                 <heatPushedPerSecond>21</heatPushedPerSecond>
+                <upgrades>
+                    <li>
+                        <researchProject>VGE_HeatDissipation</researchProject>
+                        <maxHeatFactor>2</maxHeatFactor>
+                        <heatConsumptionPerHourFactor>1</heatConsumptionPerHourFactor>
+                        <cooldownReductionPercentFactor>1</cooldownReductionPercentFactor>
+                        <heatPushedPerSecondFactor>1</heatPushedPerSecondFactor>
+                    </li>
+                </upgrades> 
             </li>
             <li Class="CompProperties_GravshipFacility">
                 <componentTypeDef>VGE_Heatsink</componentTypeDef>
@@ -109,11 +124,21 @@
                 <glowColor>(226,118,52,0)</glowColor>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_Heatsink">
-                <maxHeat>50</maxHeat>
+                <maxHeat>25</maxHeat>
                 <heatConsumptionPerHour>2</heatConsumptionPerHour>
-                <powerGenerated>200</powerGenerated>
+                <powerGenerated>100</powerGenerated>
                 <cooldownReductionPercent>0.05</cooldownReductionPercent>
                 <heatPushedPerSecond>21</heatPushedPerSecond>
+                <!-- In case it's acquired early -->
+                <upgrades>
+                    <li>
+                        <researchProject>VGE_HeatDissipation</researchProject>
+                        <maxHeatFactor>2</maxHeatFactor>
+                        <heatConsumptionPerHourFactor>1</heatConsumptionPerHourFactor>
+                        <cooldownReductionPercentFactor>1</cooldownReductionPercentFactor>
+                        <heatPushedPerSecondFactor>1</heatPushedPerSecondFactor>
+                    </li>
+                </upgrades>
             </li>
             <li Class="CompProperties_GravshipFacility">
                 <componentTypeDef>VGE_Heatsink</componentTypeDef>

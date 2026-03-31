@@ -71,7 +71,7 @@ public static class Building_GravEngine_ConsumeFuel_Patch
             var heatsink = comp.parent.GetComp<CompHeatsink>();
             if (heatsink != null && heatsink.IsActive)
             {
-                totalReduction += heatsink.Props.cooldownReductionPercent;
+                totalReduction += heatsink.CachedStats.cooldownReductionPercent;
             }
         }
         totalReduction = Mathf.Min(totalReduction, 0.5f);
