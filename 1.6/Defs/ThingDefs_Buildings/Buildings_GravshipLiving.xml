@@ -81,6 +81,7 @@
 			<Comfort>0.80</Comfort>
 			<SurgerySuccessChanceFactor>0.8</SurgerySuccessChanceFactor>
 			<ImmunityGainSpeedFactor>1.09</ImmunityGainSpeedFactor>
+      <Flammability>1</Flammability>
 		</statBases>
 		<stuffCategories>
 			<li>Metallic</li>
