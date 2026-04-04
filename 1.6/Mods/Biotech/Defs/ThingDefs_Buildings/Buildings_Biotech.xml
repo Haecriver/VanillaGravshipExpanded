@@ -72,7 +72,7 @@
     <ThingDef ParentName="VGE_GravshipBaseMechCharger">
         <defName>VGE_GravshipBasicRecharger</defName>
         <label>compact mech recharger</label>
-        <description>A miniaturized version of the mech recharger, designed to fit within the confined spaces of a gravship. Lightweight mechanoids can recharge here. During recharge, this recharger produces toxic wastepacks and stores them internally. Haulers must remove the wastepacks from time to time. It draws power directly from the grav engine.</description>
+        <description>A miniaturized version of the mech recharger, designed to fit within the confined spaces of a gravship. Lightweight mechanoids can recharge here. During recharge, this recharger produces toxic wastepacks and stores them internally. Haulers must remove the wastepacks from time to time. It draws most of the power directly from the grav engine.</description>
         <graphicData>
             <texPath>Things/Structures/GravshipMechRechargers/GravshipBasicMechRecharger/GravshipBasicMechRecharger</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
@@ -131,7 +131,7 @@
             </li>
             <li Class="CompProperties_Power">
                 <compClass>CompPowerTrader</compClass>
-                <basePowerConsumption>40</basePowerConsumption>
+                <basePowerConsumption>20</basePowerConsumption>
             </li>
         </comps>
     </ThingDef>
@@ -139,7 +139,7 @@
     <ThingDef ParentName="VGE_GravshipBaseMechCharger">
         <defName>VGE_GravshipStandardRecharger</defName>
         <label>compact large mech recharger</label>
-        <description>A miniaturized version of the large mech recharger, designed to fit within the confined spaces of a gravship. Medium, heavy, and ultraheavy mechanoids can recharge here. During recharge, this recharger produces toxic wastepacks and stores them internally. Haulers must remove the wastepacks from time to time. It draws power directly from the grav engine.</description>
+        <description>A miniaturized version of the large mech recharger, designed to fit within the confined spaces of a gravship. Medium, heavy, and ultraheavy mechanoids can recharge here. During recharge, this recharger produces toxic wastepacks and stores them internally. Haulers must remove the wastepacks from time to time. It draws most of the power directly from the grav engine.</description>
         <graphicData>
             <texPath>Things/Structures/GravshipMechRechargers/GravshipLargeMechRecharger/GravshipLargeMechRecharger</texPath>
             <graphicClass>Graphic_Multi</graphicClass>
