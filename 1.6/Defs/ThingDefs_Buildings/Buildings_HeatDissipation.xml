@@ -67,7 +67,7 @@
                 <glowColor>(226,118,52,0)</glowColor>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_Heatsink">
-                <maxHeat>5</maxHeat>
+                <maxHeat>10</maxHeat>
                 <heatConsumptionPerHour>1</heatConsumptionPerHour>
                 <powerGenerated>50</powerGenerated>
                 <cooldownReductionPercent>0.02</cooldownReductionPercent>
@@ -124,7 +124,7 @@
                 <glowColor>(226,118,52,0)</glowColor>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_Heatsink">
-                <maxHeat>25</maxHeat>
+                <maxHeat>50</maxHeat>
                 <heatConsumptionPerHour>2</heatConsumptionPerHour>
                 <powerGenerated>100</powerGenerated>
                 <cooldownReductionPercent>0.05</cooldownReductionPercent>
