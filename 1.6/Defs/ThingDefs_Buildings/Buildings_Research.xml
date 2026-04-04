@@ -195,7 +195,7 @@
       <li Class="CompProperties_AffectedByFacilities">
         <linkableFacilities>
           <li>MultiAnalyzer</li>
-          <li>VGE_CompactMultiAnalyzer</li>
+          <!-- Compact multi-analyzer will just get its link copied from multi-analyzer. -->
         </linkableFacilities>
       </li>
     </comps>
@@ -283,6 +283,9 @@
     <modExtensions>
       <li Class="VEF.Buildings.FacilityExtension">
         <equivalentToFacility>MultiAnalyzer</equivalentToFacility>
+        <copyLinksFrom>
+          <li>MultiAnalyzer</li>
+        </copyLinksFrom>
       </li>
     </modExtensions>
   </ThingDef>

@@ -264,6 +264,13 @@
             </li>
         </comps>
         <designationCategory>Odyssey</designationCategory>
+        <modExtensions>
+            <li Class="VEF.Buildings.FacilityExtension">
+                <copyLinksFrom>
+                    <li>GeneBank</li>
+                </copyLinksFrom>
+            </li>
+        </modExtensions>
     </ThingDef>
 
 </Defs>

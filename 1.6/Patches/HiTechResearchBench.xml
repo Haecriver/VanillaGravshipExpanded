@@ -12,12 +12,4 @@
 		</value>
 	</Operation>
 
-  <!-- Add compact multi-analyzer linking to hi-tech research bench -->
-  <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[defName="HiTechResearchBench"]/comps/li[@Class="CompProperties_AffectedByFacilities"]/linkableFacilities</xpath>
-    <value>
-      <li>VGE_CompactMultiAnalyzer</li>
-    </value>
-  </Operation>
-
 </Patch>
