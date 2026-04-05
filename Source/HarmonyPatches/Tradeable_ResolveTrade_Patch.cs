@@ -1,7 +1,6 @@
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
-using Verse;
 
 namespace VanillaGravshipExpanded
 {
@@ -12,8 +11,7 @@ namespace VanillaGravshipExpanded
         {
             if (__instance.IsGravcoreTradeable())
             {
-                World_ExposeData_Patch.gravcoresPurchasedCount += Mathf.Abs(__instance.CountToTransferToDestination);
-                Log.Message($"Gravcore purchased. Total purchased: {World_ExposeData_Patch.gravcoresPurchasedCount}");
+                World_ExposeData_Patch.gravcoresPurchasedCount += Mathf.Abs(__instance.CountToTransfer);
             }
         }
 
