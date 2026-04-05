@@ -14,16 +14,21 @@ namespace VanillaGravshipExpanded
 
         public static float maintenanceThreshold = 0.7f;
 
+        public static int gravcoresPurchasedCount = 0;
+
         public static void Reset()
         {
             currentGravtechProject = null;
+            gravcoresPurchasedCount = 0;
+            countDownSinceElectricityTickCounter = 0;
         }
-        
+
         public static void Postfix()
         {
             Scribe_Defs.Look(ref currentGravtechProject, "currentGravtechProject");
             Scribe_Values.Look(ref countDownSinceElectricityTickCounter, "countDownSinceElectricityTickCounter");
             Scribe_Values.Look(ref maintenanceThreshold, "maintenanceThreshold", 0.7f, false);
+            Scribe_Values.Look(ref gravcoresPurchasedCount, "gravcoresPurchasedCount", 0, false);
         }
     }
 }

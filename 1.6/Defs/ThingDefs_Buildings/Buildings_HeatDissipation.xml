@@ -15,7 +15,7 @@
         <tickerType>Normal</tickerType>
         <designationCategory>VGE_Platform</designationCategory>
         <statBases>
-            <Flammability>1.0</Flammability>
+            <Flammability>1</Flammability>
         </statBases>
         <researchPrerequisites>
             <li>VGE_HeatDissipation</li>
@@ -59,7 +59,7 @@
         </costList>
         <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
         <researchPrerequisites Inherit="False">
-          <li>BasicGravtech</li>
+            <li>BasicGravtech</li>
         </researchPrerequisites>
         <comps>
             <li Class="VanillaGravshipExpanded.CompProperties_Glower_Gravheat">
@@ -80,7 +80,7 @@
                         <cooldownReductionPercentFactor>1</cooldownReductionPercentFactor>
                         <heatPushedPerSecondFactor>1</heatPushedPerSecondFactor>
                     </li>
-                </upgrades> 
+                </upgrades>
             </li>
             <li Class="CompProperties_GravshipFacility">
                 <componentTypeDef>VGE_Heatsink</componentTypeDef>
@@ -157,7 +157,7 @@
     <ThingDef ParentName="VGE_BaseHeatsink">
         <defName>VGE_GravheatAbsorber</defName>
         <label>gravheat absorber</label>
-        <description>A specialized thermal sink that draws all residual heat from the grav engine, instantly clearing its cooldown. The absorbed heat leaves the gravheat absorber inoperable for an extended period while it safely dissipates the stored energy.</description>
+        <description>A specialized thermal sink that draws all residual heat from the grav engine, instantly clearing its cooldown. The absorbed heat leaves the gravheat absorber inoperable for an extended period while it safely dissipates the stored energy. Furthermore, the specialized design provides protection from the heat of solar flares encountered in space, preventing excessive heat from bleeding into the gravship's interior.</description>
         <graphicData>
             <texPath>Things/Structures/Heatsinks/GravheatAbsorber</texPath>
             <graphicClass>Graphic_Single</graphicClass>
