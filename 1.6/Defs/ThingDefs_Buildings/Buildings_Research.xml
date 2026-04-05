@@ -194,8 +194,7 @@
       </li>
       <li Class="CompProperties_AffectedByFacilities">
         <linkableFacilities>
-          <li>MultiAnalyzer</li>
-          <!-- Compact multi-analyzer will just get its link copied from multi-analyzer. -->
+          <!-- We're copying all facilities from hi-tech research bench. -->
         </linkableFacilities>
       </li>
     </comps>
@@ -222,6 +221,13 @@
       <workTableRoomRole>Laboratory</workTableRoomRole>
       <workTableNotInRoomRoleFactor>0.8</workTableNotInRoomRoleFactor>
     </building>
+    <modExtensions>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>HiTechResearchBench</li>
+        </copyLinksFrom>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <ThingDef ParentName="BuildingBase">

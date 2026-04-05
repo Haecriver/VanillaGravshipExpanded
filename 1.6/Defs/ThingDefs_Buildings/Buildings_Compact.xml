@@ -59,7 +59,7 @@
 			</li>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-       
+          <!-- We automatically copy all butcher table and electric stove facilities using AffectedByFacilitiesExtension. -->
         </linkableFacilities>
 			</li>
 		</comps>
@@ -90,6 +90,12 @@
 					<li>TableButcher</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>ElectricStove</li>
+          <li>TableButcher</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -143,7 +149,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all drug lab facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 		</comps>
@@ -171,6 +177,11 @@
 					<li>DrugLab</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>DrugLab</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -224,7 +235,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all machining table facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 			<li Class="CompProperties_Glower">
@@ -255,6 +266,11 @@
 					<li>TableMachining</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>TableMachining</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -308,7 +324,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all smithy facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 			<li Class="CompProperties_HeatPusher">
@@ -339,6 +355,11 @@
 					<li>ElectricSmithy</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>ElectricSmithy</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -392,7 +413,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all tailor bench facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 		</comps>
@@ -420,6 +441,11 @@
 					<li>HandTailoringBench</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>HandTailoringBench</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -473,7 +499,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all biofuel refinery facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 		</comps>
@@ -500,6 +526,11 @@
 					<li>BiofuelRefinery</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>BiofuelRefinery</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -554,7 +585,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all fabrication bench facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 		</comps>
@@ -581,6 +612,11 @@
 					<li>FabricationBench</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>FabricationBench</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
