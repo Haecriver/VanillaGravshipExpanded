@@ -16,6 +16,8 @@ public static class VacBarrierCountAsRoofed_Patch
         // However, there's some that need patching so they do count as roofed.
 
         // Needed so the rooms don't leak oxygen
+        yield return typeof(District).DeclaredMethod(nameof(District.ExposedVacuumCount));
+        // Don't display the room as having unroofed cells
         yield return typeof(District).DeclaredMethod(nameof(District.OpenRoofCountStopAt));
         // Vac barrier can hold other roofs up, can collapse, etc.
         yield return typeof(RoofCollapseCellsFinder).DeclaredMethod(nameof(RoofCollapseCellsFinder.CheckAndRemoveCollpsingRoofs));
