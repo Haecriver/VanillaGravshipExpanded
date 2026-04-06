@@ -81,7 +81,7 @@
 			<li>PlaceWorker_ReportWorkSpeedPenalties</li>
 		</placeWorkers>
 		<researchPrerequisites>
-			<li>VGE_CompactWorkspaces</li>
+			<li>VGE_GravshipLiving</li>
 		</researchPrerequisites>
 		<modExtensions>
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
@@ -277,7 +277,7 @@
 	<ThingDef ParentName="BenchBase">
 		<defName>VGE_CompactSmithy</defName>
 		<label>compact smithy</label>
-		<description>A space-efficient, gravship-powered smithy designed for use aboard gravships. Despite its smaller frame, it can be used to smith non-mechanical weapons and tools. It draws power directly from the grav engine.</description>
+		<description>A space-efficient, gravship-powered smithy designed for use aboard gravships. Despite its smaller frame, it can be used to smith non-mechanical weapons and tools, as well as extract usable metal from slag chunks. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<graphicData>
 			<texPath>Things/Structures/Production/GravshipSmithy</texPath>
@@ -353,6 +353,7 @@
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
 				<inheritRecipesFrom>
 					<li>ElectricSmithy</li>
+					<li>ElectricSmelter</li>
 				</inheritRecipesFrom>
 			</li>
       <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
