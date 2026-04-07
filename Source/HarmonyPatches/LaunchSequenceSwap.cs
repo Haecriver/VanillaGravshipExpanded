@@ -147,10 +147,7 @@ namespace VanillaGravshipExpanded
             var launchInfo = engine.launchInfo;
             LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo] = engine.Map.Tile;
             if (Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsGravliftLaunch)
-            {
                 LaunchInfo_ExposeData_Patch.isGravliftLaunch[launchInfo] = true;
-                Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsGravliftLaunch = false;
-            }
             RememberResearcher(jobRitual);
         }
 
@@ -181,13 +178,18 @@ namespace VanillaGravshipExpanded
     public static class Dialog_BeginRitual_ShowRitualBeginWindow_Patch
     {
         public static GravshipLaunchState state;
+        // Set to true before opening a ritual dialog. Sets the next opened launch ritual to gravlift.
+        public static bool IsNextLaunchGravlift = false;
+        // If the currently active (if any) launch is gravlift launch.
         public static bool IsGravliftLaunch = false;
         public static bool Prefix(Precept_Ritual __instance, TargetInfo targetInfo, RitualObligation forObligation = null, Pawn selectedPawn = null, Dictionary<string, Pawn> forcedForRole = null)
         {
             if (__instance.def.IsGravshipLaunch())
             {
-                if (IsGravliftLaunch)
+                if (IsNextLaunchGravlift)
                 {
+                    IsNextLaunchGravlift = false;
+                    IsGravliftLaunch = true;
                     int currentTileId = targetInfo.Map.Tile;
                     PlanetLayer orbitLayer = Find.WorldGrid.Orbit;
                     PlanetTile orbitTile = orbitLayer.GetClosestTile_NewTemp(currentTileId);
@@ -196,6 +198,7 @@ namespace VanillaGravshipExpanded
                 }
                 else if (state is null)
                 {
+                    IsGravliftLaunch = false;
                     var comp = targetInfo.Thing.TryGetComp<CompPilotConsole>();
                     state = new(__instance, targetInfo, forObligation, selectedPawn, forcedForRole, PlanetTile.Invalid);
                     comp.StartChoosingDestination_NewTemp();
