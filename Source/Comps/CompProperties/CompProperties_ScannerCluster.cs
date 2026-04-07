@@ -11,12 +11,14 @@ public class CompProperties_ScannerCluster : CompProperties_Scanner
 
     public string defaultGizmoIconPath;
 
+    [Unsaved] private Texture2D defaultGizmoIconInt;
+    
     public Texture2D DefaultGizmoIcon
     {
         get
         {
-            field ??= ContentFinder<Texture2D>.Get(defaultGizmoIconPath);
-            return field;
+            defaultGizmoIconInt ??= ContentFinder<Texture2D>.Get(defaultGizmoIconPath);
+            return defaultGizmoIconInt;
         }
     }
 

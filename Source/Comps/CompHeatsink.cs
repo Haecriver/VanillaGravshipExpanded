@@ -142,7 +142,8 @@ namespace VanillaGravshipExpanded
 
             if (storedHeat <= 0 || !CanBeOn(out _))
             {
-                powerComp?.PowerOutput = powerComp.Props.basePowerConsumption;
+                if (powerComp != null)
+                    powerComp.PowerOutput = powerComp.Props.basePowerConsumption;
                 return;
             }
 
@@ -152,7 +153,8 @@ namespace VanillaGravshipExpanded
                 if (storedHeat >= heatToConsume)
                 {
                     storedHeat -= heatToConsume;
-                    powerComp?.PowerOutput = CachedStats.powerGenerated;
+                    if (powerComp != null)
+                        powerComp.PowerOutput = CachedStats.powerGenerated;
                     var room = parent.Position.GetRoom(parent.Map);
                     if (room != null)
                     {
@@ -162,7 +164,8 @@ namespace VanillaGravshipExpanded
                 else
                 {
                     storedHeat = 0;
-                    powerComp?.PowerOutput = powerComp.Props.basePowerConsumption;
+                    if (powerComp != null)
+                        powerComp.PowerOutput = powerComp.Props.basePowerConsumption;
                     UpdateLit();
                 }
             }

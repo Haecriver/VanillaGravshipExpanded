@@ -8,12 +8,14 @@ public class CompProperties_ScannerCluster_DeepScannerModule : CompProperties_Sc
     public string randomResourceGizmoIconPath;
     public bool allowForResourceSelection = false;
 
+    [Unsaved] private Texture2D randomResourceGizmoIconInt;
+    
     public Texture2D RandomResourceGizmoIcon
     {
         get
         {
-            field ??= ContentFinder<Texture2D>.Get(randomResourceGizmoIconPath);
-            return field;
+            randomResourceGizmoIconInt ??= ContentFinder<Texture2D>.Get(randomResourceGizmoIconPath);
+            return randomResourceGizmoIconInt;
         }
     }
 

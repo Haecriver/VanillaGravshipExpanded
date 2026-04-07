@@ -10,6 +10,7 @@ public class Designator_RecolorVacBarrierRoof : DesignatorWithEyedropper
 {
     private static readonly Texture2D ColorWheel = ContentFinder<Texture2D>.Get("UI/MenuIcons/ColorWheel");
     private Color color = VacBarrierRoofUtility.BaseColor;
+    private Texture2D iconTopTexInt;
 
     public override bool DragDrawMeasurements => true;
 
@@ -17,7 +18,7 @@ public class Designator_RecolorVacBarrierRoof : DesignatorWithEyedropper
 
     public override Color IconDrawColor => color;
 
-    protected Texture2D IconTopTex => field ??= ContentFinder<Texture2D>.Get("UI/Designators/Paint_Top");
+    protected Texture2D IconTopTex => iconTopTexInt ??= ContentFinder<Texture2D>.Get("UI/Designators/Paint_Top");
 
     public override bool Visible => VacBarrierRoofUtility.IsGravBarrierRoofAccessible();
 

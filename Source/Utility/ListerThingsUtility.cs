@@ -5,7 +5,7 @@ namespace VanillaGravshipExpanded;
 
 public static class ListerThingsUtility
 {
-    public static bool AnyThingWithDefs(Map map, params IList<ThingDef> defs)
+    public static bool AnyThingWithDefs(Map map, IList<ThingDef> defs)
     {
         if (map == null || defs == null)
             return false;
@@ -20,7 +20,7 @@ public static class ListerThingsUtility
         return false;
     }
 
-    public static bool AnyThingWithInstallBlueprintDefs(Map map, params IList<ThingDef> defs)
+    public static bool AnyThingWithInstallBlueprintDefs(Map map, IList<ThingDef> defs)
     {
         if (map == null || defs == null)
             return false;
@@ -35,7 +35,7 @@ public static class ListerThingsUtility
         return false;
     }
 
-    public static bool AnyThingWithBuildBlueprintDefs(Map map, params IList<ThingDef> defs)
+    public static bool AnyThingWithBuildBlueprintDefs(Map map, IList<ThingDef> defs)
     {
         if (map == null || defs == null)
             return false;
@@ -50,7 +50,7 @@ public static class ListerThingsUtility
         return false;
     }
 
-    public static bool AnyThingWithFrameDefs(Map map, params IList<ThingDef> defs)
+    public static bool AnyThingWithFrameDefs(Map map, IList<ThingDef> defs)
     {
         if (map == null || defs == null)
             return false;
