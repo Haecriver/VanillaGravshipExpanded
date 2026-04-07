@@ -83,7 +83,7 @@ public class CompScannerCluster_OrbitalScannerModule : CompOrbitalScanner, CompS
         // Unused
     }
 
-    public void SetAsInactivePassiveScannerClusterComponent()
+    public void Notify_SetAsInactivePassiveScannerClusterComponent()
     {
         // Unused
     }

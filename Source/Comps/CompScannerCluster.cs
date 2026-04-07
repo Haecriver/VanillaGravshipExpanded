@@ -9,20 +9,23 @@ namespace VanillaGravshipExpanded;
 
 public class CompScannerCluster : CompScanner
 {
+    protected IScannerClusterModule activeModule = null;
+    protected IScannerClusterModule passiveModule = null;
+
     public IScannerClusterModule ActiveModule
     {
-        get;
+        get => activeModule;
         set
         {
-            field?.Notify_SetAsInactiveScannerClusterComponent();
-            field = value;
+            activeModule?.Notify_SetAsInactiveScannerClusterComponent();
+            activeModule = value;
             value?.Notify_SetAsActiveScannerClusterComponent();
         }
-    } = null;
+    }
 
     public IScannerClusterModule PassiveModule
     {
-        get;
+        get => passiveModule;
         set
         {
             if (value is { IsPassiveScannerModule: false })
@@ -31,11 +34,11 @@ public class CompScannerCluster : CompScanner
                 return;
             }
 
-            value?.SetAsInactivePassiveScannerClusterComponent();
-            field = value;
+            passiveModule?.Notify_SetAsInactivePassiveScannerClusterComponent();
+            passiveModule = value;
             value?.Notify_SetAsActivePassiveScannerClusterComponent();
         }
-    } = null;
+    }
 
     public List<IScannerClusterModule> Components { get; protected set; }
 
@@ -216,7 +219,7 @@ public class CompScannerCluster : CompScanner
         void Notify_SetAsActiveScannerClusterComponent();
         void Notify_SetAsInactiveScannerClusterComponent();
 
-        void SetAsInactivePassiveScannerClusterComponent();
+        void Notify_SetAsInactivePassiveScannerClusterComponent();
         void Notify_SetAsActivePassiveScannerClusterComponent();
 
         IEnumerable<FloatMenuOption> ScannerClusterActiveModulesFloatMenuOptions();

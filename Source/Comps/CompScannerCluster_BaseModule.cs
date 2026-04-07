@@ -82,7 +82,7 @@ public abstract class CompScannerCluster_BaseModule : ThingComp, CompScannerClus
 
     public virtual float ScanFindGuaranteedDaysOverride(float baseScanFindGuaranteedDays) => Props.scanFindGuaranteedDaysOverride ?? baseScanFindGuaranteedDays;
 
-    public virtual void SetAsInactivePassiveScannerClusterComponent()
+    public virtual void Notify_SetAsInactivePassiveScannerClusterComponent()
     {
         // Unused, not a passive module (most likely)
     }
