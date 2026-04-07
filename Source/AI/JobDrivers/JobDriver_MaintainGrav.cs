@@ -41,7 +41,7 @@ namespace VanillaGravshipExpanded
                 statValuePawn = repair.actor.GetStatValue(VGEDefOf.VGE_GravshipMaintenance);
                 statValueObject = building.GetStatValue(VGEDefOf.VGE_MaintenanceSensitivity);
             };
-            repair.tickAction = delegate
+            repair.tickIntervalAction = delegate (int delta)
             {
                 Pawn actor = repair.actor;
                
@@ -55,6 +55,10 @@ namespace VanillaGravshipExpanded
                     comp.maintenance = 1;
                     actor.records.Increment(RecordDefOf.ThingsRepaired);
                     actor.jobs.EndCurrentJob(JobCondition.Succeeded);
+                }
+                if (actor.skills != null)
+                {
+                    actor.skills.Learn(SkillDefOf.Construction, 0.05f * (float)delta);
                 }
 
 
