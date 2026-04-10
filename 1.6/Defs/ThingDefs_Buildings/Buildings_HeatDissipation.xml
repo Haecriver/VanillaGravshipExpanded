@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-    <ThingDef Name="VGE_BaseHeatsink" ParentName="BuildingBase" Abstract="True">
+    <ThingDef Name="VGE_BaseGravheatBuilding" ParentName="BuildingBase" Abstract="True">
         <drawerType>MapMeshAndRealTime</drawerType>
         <uiIconScale>0.8</uiIconScale>
         <graphicData>
@@ -20,6 +20,10 @@
         <researchPrerequisites>
             <li>VGE_HeatDissipation</li>
         </researchPrerequisites>
+        <resourcesFractionWhenDeconstructed>0.5</resourcesFractionWhenDeconstructed>
+    </ThingDef>
+
+    <ThingDef Name="VGE_BaseHeatsink" ParentName="VGE_BaseGravheatBuilding" Abstract="True">
         <comps>
             <li Class="CompProperties_Power">
                 <compClass>CompPowerTrader</compClass>
@@ -33,7 +37,6 @@
                 </powerUpgrades>
             </li>
         </comps>
-        <resourcesFractionWhenDeconstructed>0.5</resourcesFractionWhenDeconstructed>
     </ThingDef>
 
     <ThingDef ParentName="VGE_BaseHeatsink">
@@ -62,7 +65,7 @@
             <li>BasicGravtech</li>
         </researchPrerequisites>
         <comps>
-            <li Class="VanillaGravshipExpanded.CompProperties_Glower_Gravheat">
+            <li Class="CompProperties_Glower">
                 <glowRadius>7.17</glowRadius>
                 <glowColor>(226,118,52,0)</glowColor>
             </li>
@@ -119,7 +122,7 @@
         </costList>
         <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
         <comps>
-            <li Class="VanillaGravshipExpanded.CompProperties_Glower_Gravheat">
+            <li Class="CompProperties_Glower">
                 <glowRadius>9.17</glowRadius>
                 <glowColor>(226,118,52,0)</glowColor>
             </li>
@@ -154,7 +157,7 @@
         <uiOrder>2405</uiOrder>
     </ThingDef>
 
-    <ThingDef ParentName="VGE_BaseHeatsink">
+    <ThingDef ParentName="VGE_BaseGravheatBuilding">
         <defName>VGE_GravheatAbsorber</defName>
         <label>gravheat absorber</label>
         <description>A specialized thermal sink that draws all residual heat from the grav engine, instantly clearing its cooldown. The absorbed heat leaves the gravheat absorber inoperable for an extended period while it safely dissipates the stored energy. Furthermore, the specialized design provides protection from the heat of solar flares encountered in space, preventing excessive heat from bleeding into the gravship's interior.</description>
@@ -179,7 +182,7 @@
         </costList>
         <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
         <comps>
-            <li Class="VanillaGravshipExpanded.CompProperties_Glower_Gravheat">
+            <li Class="CompProperties_Glower">
                 <glowRadius>9.17</glowRadius>
                 <glowColor>(255,100,100,0)</glowColor>
             </li>

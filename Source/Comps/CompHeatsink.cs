@@ -84,7 +84,7 @@ namespace VanillaGravshipExpanded
 
     [HotSwappable]
     [StaticConstructorOnStartup]
-    public class CompHeatsink : CompFacilityConnected
+    public class CompHeatsink : CompFacilityConnected, IThingGlower
     {
         public CompProperties_Heatsink Props => props as CompProperties_Heatsink;
 
@@ -99,17 +99,20 @@ namespace VanillaGravshipExpanded
         public Graphic OverlayGraphic => overlayGraphic ??= GraphicDatabase.Get<Graphic_Multi>(parent.Graphic.path + "_Overlay", parent.Graphic.Shader, parent.Graphic.drawSize, parent.Graphic.color);
         public CompGlower glower;
 
-        public override void PostSpawnSetup(bool respawningAfterLoad)
+        public bool ShouldBeLitNow() => StoredHeat > 0;
+
+        public override void PostPostMake()
         {
-            base.PostSpawnSetup(respawningAfterLoad);
-            powerComp = parent.GetComp<CompPowerTrader>();
-            glower = parent.GetComp<CompGlower>();
+            base.PostPostMake();
+            InitializeComps();
         }
 
         public override void PostExposeData()
         {
             base.PostExposeData();
             Scribe_Values.Look(ref storedHeat, "storedHeat");
+            if (Scribe.mode == LoadSaveMode.LoadingVars)
+                InitializeComps();
         }
 
 
@@ -129,7 +132,7 @@ namespace VanillaGravshipExpanded
 
         private void UpdateLit()
         {
-            if (parent.Map != null)
+            if (parent.Spawned)
             {
                 glower.UpdateLit(parent.Map);
             }
@@ -224,6 +227,13 @@ namespace VanillaGravshipExpanded
                     action = ClearHeat
                 };
             }
+        }
+
+        private new void InitializeComps()
+        {
+            // Called from PostPostMake and PostExposeData, as PostSpawnSetup won't be called for something that never
+            // spawned yet. And it would get called each time it's spawned, and we don't need to initialize comps each time.
+            glower = parent.GetComp<CompGlower>();
         }
     }
 }
