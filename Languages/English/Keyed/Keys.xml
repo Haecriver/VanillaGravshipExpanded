@@ -178,6 +178,20 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_ColorPickerValue>brightness</VGE_ColorPickerValue>
     <VGE_ColorPickerValueTooltip>Choose a color by setting the color brightness.\n\nBrightness refers to "value" from HSV color model - hue, saturation, and value/brightness.</VGE_ColorPickerValueTooltip>
     <VGE_MustBePlacedInRangeOfGravSource>Must be placed in range of a grav engine or grav field amplifier.</VGE_MustBePlacedInRangeOfGravSource>
+    <!-- Vac barrier roof -->
+    <VGE_DesignatorAreaBuildVacBarrierRoofExpand>Build vac barrier roof area</VGE_DesignatorAreaBuildVacBarrierRoofExpand>
+    <VGE_DesignatorAreaBuildVacBarrierRoofExpandDesc>Colonists will build vac barrier roofs in this area.</VGE_DesignatorAreaBuildVacBarrierRoofExpandDesc>
+    <VGE_DesignatorAreaNoVacBarrierRoofExpand>Remove vac barrier roof area</VGE_DesignatorAreaNoVacBarrierRoofExpand>
+    <VGE_DesignatorAreaNoVacBarrierRoofExpandDesc>Colonists will remove vac barrier roofs in this area.</VGE_DesignatorAreaNoVacBarrierRoofExpandDesc>
+    <!-- Vac barrier roof recoloring designator -->
+    <VGE_DesignatorRecolorVacBarrierRoof>Recolor vac barrier roofs...</VGE_DesignatorRecolorVacBarrierRoof>
+    <VGE_DesignatorRecolorVacBarrierRoofDesc>Immediately recolor any vac barrier roofs.</VGE_DesignatorRecolorVacBarrierRoofDesc>
+    <VGE_ColorPickerMenu>Select any color using a color picker menu.</VGE_ColorPickerMenu>
+    <VGE_DesignatorEyeDropperDesc_Universal>Grab a color from an existing vac barrier roof, building, or a floor.</VGE_DesignatorEyeDropperDesc_Universal>
+    <VGE_GrabVacBarrierRoofColor>Grab vac barrier roof color</VGE_GrabVacBarrierRoofColor>
+    <VGE_GrabBuildingColor>Grab {BUILDING_labelNoParenthesis} color: {COLOR}</VGE_GrabBuildingColor>
+    <VGE_GrabFloorColor>Grab floor color: {COLOR}</VGE_GrabFloorColor>
+    <VGE_SelectColorFromTile>Select specific color from tile</VGE_SelectColorFromTile>
 
     <!-- Grav engine inspection replacement text (overwrites Odyssey's) -->
 
@@ -209,4 +223,13 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_Gravship>gravship</VGE_Gravship>
     <VGE_Gravhulk>gravhulk</VGE_Gravhulk>
 
+    <!-- Scanner cluster -->
+    <VGE_ScannerCluster_TunedToNothing>Nothing</VGE_ScannerCluster_TunedToNothing>
+    <VGE_ScannerCluster_RandomResource>Random deep resource</VGE_ScannerCluster_RandomResource>
+    <VGE_ScannerCluster_TunedToOrbitalScanning>Passive orbital scanning</VGE_ScannerCluster_TunedToOrbitalScanning>
+    <VGE_ScannerCluster_UndergroundResource>Deep {RESOURCE}</VGE_ScannerCluster_UndergroundResource>
+    <VGE_ScannerCluster_LongRangeResource>Long-range {RESOURCE}</VGE_ScannerCluster_LongRangeResource>
+    <VGE_ScannerCluster_MissingResearchPrerequisite>Missing {RESEARCH_label} research</VGE_ScannerCluster_MissingResearchPrerequisite>
+    <VGE_ProtectingFromSpaceSolarFlare>Protecting from space solar flare</VGE_ProtectingFromSpaceSolarFlare>
+    <VGE_GravcoreTax>gravcore tax</VGE_GravcoreTax>
 </LanguageData>

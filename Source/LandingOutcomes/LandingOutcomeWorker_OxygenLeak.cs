@@ -18,7 +18,7 @@ namespace VanillaGravshipExpanded
             return gravship.Things.Any(t =>
             {
                 var storageComp = t.TryGetComp<CompResourceStorage>();
-                return storageComp != null && storageComp.Props.pipeNet == VGEDefOf.VGE_OxygenNet;
+                return storageComp != null && storageComp.Props.pipeNet == VGEDefOf.VGE_OxygenNet && t.HasComp<CompBreakdownable>();
             });
         }
 
@@ -28,7 +28,7 @@ namespace VanillaGravshipExpanded
                 .Where(t =>
                 {
                     var storageComp = t.TryGetComp<CompResourceStorage>();
-                    return storageComp != null && storageComp.Props.pipeNet == VGEDefOf.VGE_OxygenNet;
+                    return storageComp != null && storageComp.Props.pipeNet == VGEDefOf.VGE_OxygenNet && t.HasComp<CompBreakdownable>();
                 }).ToList();
 
             if (oxygenTanks.Count == 0)

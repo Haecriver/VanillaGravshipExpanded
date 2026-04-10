@@ -15,7 +15,7 @@
         <tickerType>Normal</tickerType>
         <designationCategory>VGE_Platform</designationCategory>
         <statBases>
-            <Flammability>1.0</Flammability>
+            <Flammability>1</Flammability>
         </statBases>
         <researchPrerequisites>
             <li>VGE_HeatDissipation</li>
@@ -25,6 +25,12 @@
                 <compClass>CompPowerTrader</compClass>
                 <basePowerConsumption>0</basePowerConsumption>
                 <transmitsPower>true</transmitsPower>
+                <powerUpgrades>
+                    <li>
+                        <researchProject>VGE_HeatDissipation</researchProject>
+                        <factor>2</factor>
+                    </li>
+                </powerUpgrades>
             </li>
         </comps>
         <resourcesFractionWhenDeconstructed>0.5</resourcesFractionWhenDeconstructed>
@@ -52,17 +58,29 @@
             <ComponentIndustrial>3</ComponentIndustrial>
         </costList>
         <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+        <researchPrerequisites Inherit="False">
+            <li>BasicGravtech</li>
+        </researchPrerequisites>
         <comps>
             <li Class="VanillaGravshipExpanded.CompProperties_Glower_Gravheat">
                 <glowRadius>7.17</glowRadius>
                 <glowColor>(226,118,52,0)</glowColor>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_Heatsink">
-                <maxHeat>10</maxHeat>
+                <maxHeat>20</maxHeat>
                 <heatConsumptionPerHour>1</heatConsumptionPerHour>
-                <powerGenerated>100</powerGenerated>
+                <powerGenerated>50</powerGenerated>
                 <cooldownReductionPercent>0.02</cooldownReductionPercent>
                 <heatPushedPerSecond>21</heatPushedPerSecond>
+                <upgrades>
+                    <li>
+                        <researchProject>VGE_HeatDissipation</researchProject>
+                        <maxHeatFactor>2</maxHeatFactor>
+                        <heatConsumptionPerHourFactor>1</heatConsumptionPerHourFactor>
+                        <cooldownReductionPercentFactor>1</cooldownReductionPercentFactor>
+                        <heatPushedPerSecondFactor>1</heatPushedPerSecondFactor>
+                    </li>
+                </upgrades>
             </li>
             <li Class="CompProperties_GravshipFacility">
                 <componentTypeDef>VGE_Heatsink</componentTypeDef>
@@ -106,11 +124,21 @@
                 <glowColor>(226,118,52,0)</glowColor>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_Heatsink">
-                <maxHeat>50</maxHeat>
+                <maxHeat>100</maxHeat>
                 <heatConsumptionPerHour>2</heatConsumptionPerHour>
-                <powerGenerated>200</powerGenerated>
+                <powerGenerated>100</powerGenerated>
                 <cooldownReductionPercent>0.05</cooldownReductionPercent>
                 <heatPushedPerSecond>21</heatPushedPerSecond>
+                <!-- In case it's acquired early -->
+                <upgrades>
+                    <li>
+                        <researchProject>VGE_HeatDissipation</researchProject>
+                        <maxHeatFactor>2</maxHeatFactor>
+                        <heatConsumptionPerHourFactor>1</heatConsumptionPerHourFactor>
+                        <cooldownReductionPercentFactor>1</cooldownReductionPercentFactor>
+                        <heatPushedPerSecondFactor>1</heatPushedPerSecondFactor>
+                    </li>
+                </upgrades>
             </li>
             <li Class="CompProperties_GravshipFacility">
                 <componentTypeDef>VGE_Heatsink</componentTypeDef>
@@ -129,7 +157,7 @@
     <ThingDef ParentName="VGE_BaseHeatsink">
         <defName>VGE_GravheatAbsorber</defName>
         <label>gravheat absorber</label>
-        <description>A specialized thermal sink that draws all residual heat from the grav engine, instantly clearing its cooldown. The absorbed heat leaves the gravheat absorber inoperable for an extended period while it safely dissipates the stored energy.</description>
+        <description>A specialized thermal sink that draws all residual heat from the grav engine, instantly clearing its cooldown. The absorbed heat leaves the gravheat absorber inoperable for an extended period while it safely dissipates the stored energy. Furthermore, the specialized design provides protection from the heat of solar flares encountered in space, preventing excessive heat from bleeding into the gravship's interior.</description>
         <graphicData>
             <texPath>Things/Structures/Heatsinks/GravheatAbsorber</texPath>
             <graphicClass>Graphic_Single</graphicClass>

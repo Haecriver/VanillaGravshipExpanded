@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using HarmonyLib;
 using RimWorld;
 using UnityEngine;
@@ -14,25 +13,14 @@ namespace VanillaGravshipExpanded
 
         public static bool Prefix(ref Vector3 __result, Thing thing)
         {
-            List<Thing> thingList = thing.Position.GetThingList(thing.Map);
-            bool onTargetShelf = false;
-            foreach (Thing t in thingList)
-            {
-                if (t.def == VGEDefOf.VGE_GravshipShelf)
-                {
-                    onTargetShelf = true;
-                    break;
-                }
-            }
-            if (!onTargetShelf)
-            {
+            if (thing.Position.GetEdifice(thing.Map)?.def != VGEDefOf.VGE_GravshipShelf)
                 return true;
-            }
             int num = 0;
             int itemsWithLowerID = 0;
             bool allSameDef = true;
             ThingDef firstItemDef = null;
 
+            var thingList = thing.Position.GetThingList(thing.Map);
             for (int i = 0; i < thingList.Count; i++)
             {
                 Thing thing2 = thingList[i];

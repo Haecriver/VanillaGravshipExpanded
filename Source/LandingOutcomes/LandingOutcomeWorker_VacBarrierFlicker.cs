@@ -14,14 +14,14 @@ namespace VanillaGravshipExpanded
 
         public override bool CanTrigger(Gravship gravship)
         {
-            return gravship.Things.Any(t => t is Building_VacBarrier);
+            return gravship.Things.Any(t => t is Building_VacBarrier && t.HasComp<CompBreakdownable>());
         }
 
         public override void ApplyOutcome(Gravship gravship)
         {
             var vacBarriers = gravship.Things
-                .Where(t => t is Building_VacBarrier)
-                .Cast<Building_VacBarrier>()
+                .OfType<Building_VacBarrier>()
+                .Where(x => x.HasComp<CompBreakdownable>())
                 .ToList();
             if (vacBarriers.Count == 0)
             {

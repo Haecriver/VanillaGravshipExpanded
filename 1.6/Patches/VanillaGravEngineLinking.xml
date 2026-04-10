@@ -20,7 +20,8 @@
       <li>VGE_CopilotConsole</li>
       <li>VGE_EngineeringConsole</li>
       <li>VGE_MaintenanceHub</li>
-	  <li>VGE_FlightComputer</li>
+      <li>VGE_FlightComputer</li>
+      <li>VGE_GravshipStructuralBeam</li>
     </value>
   </Operation>
 
@@ -206,7 +207,7 @@
       </value>
     </match>
   </Operation>
-  
+
   <!-- Change UI order -->
   <Operation Class="PatchOperationConditional">
     <xpath>Defs/ThingDef[defName="GravEngine"]/uiOrder</xpath>

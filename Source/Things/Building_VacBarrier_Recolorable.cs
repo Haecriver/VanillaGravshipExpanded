@@ -8,8 +8,6 @@ namespace VanillaGravshipExpanded;
 
 public class Building_VacBarrier_Recolorable : Building_VacBarrier
 {
-    private const Widgets.ColorComponents EditableRgb = Widgets.ColorComponents.Red | Widgets.ColorComponents.Green | Widgets.ColorComponents.Blue;
-
     private static readonly List<Building_VacBarrier_Recolorable> TmpExtraBarriers = new(64);
     private static int LastBarrierGizmoUpdateFrameCount = 0;
     private static Color? ColorClipboard;
@@ -143,7 +141,7 @@ public class Building_VacBarrier_Recolorable : Building_VacBarrier
             defaultDesc = "GlowerChangeColorDescription".Translate(),
             icon = ContentFinder<Texture2D>.Get("UI/Commands/ChangeColor"),
             color = color,
-            action = () => Find.WindowStack.Add(new Dialog_VacBarrierColorPicker(this, extraBarriers, EditableRgb, EditableRgb)),
+            action = () => Find.WindowStack.Add(new Dialog_VacBarrierColorPicker(this, extraBarriers, Dialog_NoLimitColorPicker.EditableRgb, Dialog_NoLimitColorPicker.EditableRgb)),
         };
 
         yield return new Command_ColorIcon

@@ -2,8 +2,7 @@ using RimWorld;
 using Verse;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using VanillaGravshipExpanded;
+using System.Text;
 
 namespace VanillaGravshipExpanded
 {
@@ -24,7 +23,7 @@ namespace VanillaGravshipExpanded
         private int cooldownEndTick = -1;
         private bool isAbsorbing = false;
         private static readonly Texture2D GizmoIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/GravheatAbsorber");
-        
+
         private Graphic cooldownGraphic;
         public Graphic CooldownGraphic => cooldownGraphic ??= GraphicDatabase.Get<Graphic_Multi>(parent.Graphic.path + "_Cooldown", parent.Graphic.Shader, parent.Graphic.drawSize, parent.Graphic.color);
         public bool IsOnCooldown => Find.TickManager.TicksGame < cooldownEndTick;
@@ -110,7 +109,7 @@ namespace VanillaGravshipExpanded
             var heatManager = FindHeatManager();
             if (heatManager == null)
                 return;
-                
+
             heatManager.ClearGravEngineHeat();
             ResetGravshipCooldown();
             cooldownEndTick = Find.TickManager.TicksGame + Props.cooldownTicks;
@@ -149,12 +148,17 @@ namespace VanillaGravshipExpanded
 
         public override string CompInspectStringExtra()
         {
+            var sb = new StringBuilder();
+            if (parent.Map.gameConditionManager.ConditionIsActive(VGEDefOf.VGE_SpaceSolarFlare))
+            {
+                sb.AppendLine("VGE_ProtectingFromSpaceSolarFlare".Translate());
+            }
             if (IsOnCooldown)
             {
                 int ticksRemaining = cooldownEndTick - Find.TickManager.TicksGame;
-                return "VGE_GravheatAbsorberCoolingDown".Translate(ticksRemaining.ToStringTicksToDays());
+                sb.AppendLine("VGE_GravheatAbsorberCoolingDown".Translate(ticksRemaining.ToStringTicksToDays()));
             }
-            return null;
+            return sb.ToString().TrimEndNewlines();
         }
     }
 }

@@ -92,7 +92,7 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ResearchProjectDef[defName="StandardGravtech"]/baseCost</xpath>
 		<value>
-			<baseCost>150</baseCost>
+			<baseCost>200</baseCost>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
@@ -131,7 +131,7 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>/Defs/ResearchProjectDef[defName="AdvancedGravtech"]/baseCost</xpath>
 		<value>
-			<baseCost>250</baseCost>
+			<baseCost>800</baseCost>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
@@ -211,4 +211,27 @@
       <li Class="VanillaGravshipExpanded.GravtechResearchExtension" />
     </value>
   </Operation>
+
+  <!-- Add custom text to orbital tech so it mentions properly that it unlocks vac barrier roofs -->
+  <Operation Class="PatchOperationConditional">
+    <!-- Check if the research project has the "customUnlockTexts" node present -->
+    <xpath>Defs/ResearchProjectDef[defName="OrbitalTech"]/customUnlockTexts</xpath>
+    <!-- If it does have the node, just add another value in. -->
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="OrbitalTech"]/customUnlockTexts</xpath>
+      <value>
+        <li>Vac barrier roof</li>
+      </value>
+    </match>
+    <!-- If it doesn't have the node, add it along with the value. -->
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ResearchProjectDef[defName="OrbitalTech"]</xpath>
+      <value>
+        <customUnlockTexts>
+          <li>Vac barrier roof</li>
+        </customUnlockTexts>
+      </value>
+    </nomatch>
+  </Operation>
+
 </Patch>

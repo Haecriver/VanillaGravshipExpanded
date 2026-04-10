@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using Verse;
 using UnityEngine;
@@ -20,12 +20,15 @@ namespace VanillaGravshipExpanded
 
         public HashSet<Thing> maintainables_InMap = new HashSet<Thing>();
 
+        public List<Color> vacBarrierColorGrid;
+
         public MaintenanceAndDeterioration_MapComponent(Map map) : base(map)
         {
+            vacBarrierColorGrid = GetDefaultList();
         }
-        
+
         public override void MapComponentTick()
-        {            
+        {
             if (map.Tile.LayerDef.isSpace)
             {
                 tickCounter++;
@@ -36,7 +39,7 @@ namespace VanillaGravshipExpanded
                 }
             }
         }
-        
+
         private void ProcessSpaceDeterioration()
         {
             var allThings = map.listerThings.AllThings;
@@ -206,6 +209,32 @@ namespace VanillaGravshipExpanded
 
             }
 
+        }
+
+        public override void FinalizeInit()
+        {
+            base.FinalizeInit();
+
+            if (map.areaManager.BuildVacBarrierRoof() == null)
+                map.areaManager.areas.Add(new Area_BuildVacBarrierRoof(map.areaManager));
+        }
+    
+        public override void ExposeData()
+        {
+            base.ExposeData();
+
+            Scribe_Collections.Look(ref vacBarrierColorGrid, nameof(vacBarrierColorGrid), LookMode.Value);
+            if (vacBarrierColorGrid == null || vacBarrierColorGrid.Count != map.cellIndices.NumGridCells)
+                vacBarrierColorGrid = GetDefaultList();
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+                vacBarrierColorGrid.Capacity = map.cellIndices.NumGridCells;
+        }
+
+        private List<Color> GetDefaultList()
+        {
+            var list = Enumerable.Repeat(VacBarrierRoofUtility.BaseColor, map.cellIndices.NumGridCells).ToList();
+            list.Capacity = map.cellIndices.NumGridCells;
+            return list;
         }
     }
 }

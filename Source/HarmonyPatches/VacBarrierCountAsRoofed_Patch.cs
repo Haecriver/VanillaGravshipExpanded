@@ -1,0 +1,62 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using HarmonyLib;
+using RimWorld;
+using Verse;
+
+namespace VanillaGravshipExpanded;
+
+[HarmonyPatch]
+public static class VacBarrierCountAsRoofed_Patch
+{
+    private static IEnumerable<MethodBase> TargetMethods()
+    {
+        // We treat the vac barrier as unroofed, and it works fine for the majority of situations.
+        // However, there's some that need patching so they do count as roofed.
+
+        // Needed so the rooms don't leak oxygen
+        yield return typeof(District).DeclaredMethod(nameof(District.ExposedVacuumCount));
+        // Don't display the room as having unroofed cells
+        yield return typeof(District).DeclaredMethod(nameof(District.OpenRoofCountStopAt));
+        // Vac barrier can hold other roofs up, can collapse, etc.
+        yield return typeof(RoofCollapseCellsFinder).DeclaredMethod(nameof(RoofCollapseCellsFinder.CheckAndRemoveCollpsingRoofs));
+        yield return typeof(RoofCollapseCellsFinder).DeclaredMethod(nameof(RoofCollapseCellsFinder.ProcessRoofHolderDespawned), [typeof(CellRect), typeof(IntVec3), typeof(Map), typeof(bool), typeof(bool)]);
+        yield return typeof(RoofCollapseCellsFinder).DeclaredMethod(nameof(RoofCollapseCellsFinder.CheckCollapseFlyingRoofAtAndAdjInternal));
+        yield return typeof(RoofCollapseCellsFinder).DeclaredMethod(nameof(RoofCollapseCellsFinder.ConnectsToRoofHolder));
+        foreach (var method in typeof(RoofCollapserImmediate).GetDeclaredMethods().Where(method => method.Name == nameof(RoofCollapserImmediate.DropRoofInCells)))
+            yield return method;
+        yield return typeof(RoofCollapseUtility).DeclaredMethod(nameof(RoofCollapseUtility.ConnectedToRoofHolder));
+        yield return typeof(RoofCollapseUtility).DeclaredMethod(nameof(RoofCollapseUtility.WithinRangeOfRoofHolder));
+        // Allow vanilla remove roof work and job giver to detect vac barrier roofs
+        yield return typeof(JobDriver_RemoveRoof).DeclaredMethod(nameof(JobDriver_RemoveRoof.DoWorkFailOn));
+        yield return typeof(WorkGiver_RemoveRoof).DeclaredMethod(nameof(WorkGiver_RemoveRoof.HasJobOnCell));
+        yield return typeof(WorkGiver_RemoveRoof).DeclaredMethod(nameof(WorkGiver_RemoveRoof.GetPriority));
+
+        // Skipped, as they are handled by their own patches (they have special handling)
+        // JobDriver_BuildRoof.DoEffect
+        // JobDriver_BuildRoof.DoWorkFailOn
+        // WorkGiver_BuildRoof.HasJobOnCell
+    }
+
+    private static void Prefix(out bool __state)
+    {
+        // Only modify the temp variable if it's not set already
+        if (!RoofGrid_Roofed_Patch.countVacBarrierAsRoofed)
+        {
+            __state = true;
+            RoofGrid_Roofed_Patch.countVacBarrierAsRoofed = true;
+        }
+        else
+        {
+            __state = false;
+        }
+    }
+
+    private static void Finalizer(bool __state)
+    {
+        // Only restore the temporary variable if we set it to true, and not something else
+        if (__state)
+            RoofGrid_Roofed_Patch.countVacBarrierAsRoofed = false;
+    }
+}

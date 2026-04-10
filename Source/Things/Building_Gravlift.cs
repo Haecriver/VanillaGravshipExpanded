@@ -44,7 +44,7 @@ namespace VanillaGravshipExpanded
                     }
                     else
                     {
-                        Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsGravliftLaunch = true;
+                        Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsNextLaunchGravlift = true;
                         ShowLaunchRitual(comp);
                     }
                 },

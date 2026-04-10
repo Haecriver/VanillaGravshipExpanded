@@ -59,7 +59,7 @@
 			</li>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-       
+          <!-- We automatically copy all butcher table and electric stove facilities using AffectedByFacilitiesExtension. -->
         </linkableFacilities>
 			</li>
 		</comps>
@@ -81,7 +81,7 @@
 			<li>PlaceWorker_ReportWorkSpeedPenalties</li>
 		</placeWorkers>
 		<researchPrerequisites>
-			<li>VGE_CompactWorkspaces</li>
+			<li>VGE_GravshipLiving</li>
 		</researchPrerequisites>
 		<modExtensions>
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
@@ -90,6 +90,12 @@
 					<li>TableButcher</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>ElectricStove</li>
+          <li>TableButcher</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -143,7 +149,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all drug lab facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 		</comps>
@@ -171,6 +177,11 @@
 					<li>DrugLab</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>DrugLab</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -224,7 +235,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all machining table facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 			<li Class="CompProperties_Glower">
@@ -255,13 +266,18 @@
 					<li>TableMachining</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>TableMachining</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="BenchBase">
 		<defName>VGE_CompactSmithy</defName>
 		<label>compact smithy</label>
-		<description>A space-efficient, gravship-powered smithy designed for use aboard gravships. Despite its smaller frame, it can be used to smith non-mechanical weapons and tools. It draws power directly from the grav engine.</description>
+		<description>A space-efficient, gravship-powered smithy designed for use aboard gravships. Despite its smaller frame, it can be used to smith non-mechanical weapons and tools, as well as extract usable metal from slag chunks. It draws power directly from the grav engine.</description>
 		<thingClass>Building_WorkTable</thingClass>
 		<graphicData>
 			<texPath>Things/Structures/Production/GravshipSmithy</texPath>
@@ -308,7 +324,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all smithy facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 			<li Class="CompProperties_HeatPusher">
@@ -337,8 +353,14 @@
 			<li Class="VEF.Buildings.RecipeInheritanceExtension">
 				<inheritRecipesFrom>
 					<li>ElectricSmithy</li>
+					<li>ElectricSmelter</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>ElectricSmithy</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -392,7 +414,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all tailor bench facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 		</comps>
@@ -420,6 +442,11 @@
 					<li>HandTailoringBench</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>HandTailoringBench</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -473,7 +500,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all biofuel refinery facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 		</comps>
@@ -500,6 +527,11 @@
 					<li>BiofuelRefinery</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>BiofuelRefinery</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
@@ -554,7 +586,7 @@
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="CompProperties_AffectedByFacilities">
 				<linkableFacilities>
-					<li>ToolCabinet</li>
+          <!-- We automatically copy all fabrication bench facilities using AffectedByFacilitiesExtension. -->
 				</linkableFacilities>
 			</li>
 		</comps>
@@ -581,7 +613,87 @@
 					<li>FabricationBench</li>
 				</inheritRecipesFrom>
 			</li>
+      <li Class="VEF.Buildings.AffectedByFacilitiesExtension">
+        <copyLinksFrom>
+          <li>FabricationBench</li>
+        </copyLinksFrom>
+      </li>
 		</modExtensions>
     <uiOrder>2380</uiOrder>
 	</ThingDef>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>VGE_WallToolCabinet</defName>
+    <label>wall tool cabinet</label>
+    <description>A wall-mounted version of a tool cabinet. Increases work speed when placed near a workbench. One workbench can use up to two tool cabinets.</description>
+    <graphicData>
+      <texPath>Things/Structures/GravshipFurniture/WallMountedToolCabinet/WallMountedToolCabinet</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawOffsetNorth>(0,0,0.9)</drawOffsetNorth>
+      <drawOffsetSouth>(0,0,-0.9)</drawOffsetSouth>
+      <drawOffsetWest>(-0.9,0,0)</drawOffsetWest>
+      <drawOffsetEast>(0.9,0,0)</drawOffsetEast>
+      <color>(96,114,95)</color>
+      <damageData>
+        <enabled>false</enabled>
+      </damageData>
+    </graphicData>
+    <uiIconPath>Things/Structures/GravshipFurniture/WallMountedToolCabinet/WallMountedToolCabinet_MenuIcon</uiIconPath>
+    <uiIconColor>(96,114,95)</uiIconColor>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
+    <passability>Standable</passability>
+    <castEdgeShadows>true</castEdgeShadows>
+    <staticSunShadowHeight>0.35</staticSunShadowHeight>
+    <fillPercent>0.5</fillPercent>
+    <pathCost>0</pathCost>
+    <statBases>
+      <MaxHitPoints>70</MaxHitPoints>
+      <WorkToBuild>2000</WorkToBuild>
+      <Mass>10</Mass>
+      <Flammability>0.5</Flammability>
+    </statBases>
+    <size>(1,1)</size>
+    <costList>
+      <Steel>150</Steel>
+    </costList>
+    <overrideMinifiedRot>North</overrideMinifiedRot>
+    <minifiedDrawOffset>(0, 0, 0.2)</minifiedDrawOffset>
+    <building>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+      <isEdifice>false</isEdifice>
+      <isAttachment>true</isAttachment>
+    </building>
+    <researchPrerequisites>
+      <li>ComplexFurniture</li>
+      <li>VGE_CompactWorkspaces</li>
+    </researchPrerequisites>
+    <designationCategory>Odyssey</designationCategory>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <comps>
+      <li Class="CompProperties_Facility">
+        <statOffsets>
+          <WorkTableWorkSpeedFactor>0.06</WorkTableWorkSpeedFactor>
+        </statOffsets>
+        <maxSimultaneous>2</maxSimultaneous>
+      </li>
+    </comps>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+      <li>Placeworker_AttachedToWall</li>
+    </placeWorkers>
+    <modExtensions>
+      <li Class="VEF.Buildings.FacilityExtension">
+        <equivalentToFacility>ToolCabinet</equivalentToFacility>
+        <copyLinksFrom>
+          <li>ToolCabinet</li>
+        </copyLinksFrom>
+      </li>
+    </modExtensions>
+  </ThingDef>
+
 </Defs>

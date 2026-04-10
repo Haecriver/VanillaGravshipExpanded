@@ -267,7 +267,8 @@
 					<labelKey>VGE_ExtractOxygen</labelKey>
 					<descKey>VGE_ExtractOxygenDesc</descKey>
 					<disabledReasonKey>VGE_ExtractOxygenDisabled</disabledReasonKey>
-					<extractAmount>10</extractAmount>
+<!--          <extractAmount>10</extractAmount>-->
+          <extractAmount>-1</extractAmount>
 					<thing>VGE_OxygenCanister</thing>
 					<extractTime>120</extractTime>
 					<extractExactAmount>false</extractExactAmount>
