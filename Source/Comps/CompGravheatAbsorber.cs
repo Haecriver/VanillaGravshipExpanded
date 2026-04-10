@@ -48,15 +48,15 @@ namespace VanillaGravshipExpanded
                 InitializeComps();
         }
 
-        public override void CompTick()
+        public override void CompTickInterval(int delta)
         {
-            base.CompTick();
+            base.CompTickInterval(delta);
             if (isAbsorbing && parent.Spawned)
             {
                 var room = parent.Position.GetRoom(parent.Map);
                 if (room != null)
                 {
-                    room.PushHeat(Props.heatPushedPerSecond / 60f);
+                    room.PushHeat(Props.heatPushedPerSecond * delta / 60f);
                 }
                 if (Find.TickManager.TicksGame >= cooldownEndTick)
                 {
