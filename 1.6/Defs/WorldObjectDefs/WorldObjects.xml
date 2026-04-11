@@ -107,6 +107,11 @@
     <description>A temporary site used for generating gravship textures.</description>
     <worldObjectClass>VanillaGravshipExpanded.GravshipGenerationSite</worldObjectClass>
     <canHaveMap>true</canHaveMap>
+    <modExtensions>
+      <li Class="VEF.Maps.WorldObjectExtension">
+        <disableObjectSpawnDefs>true</disableObjectSpawnDefs>
+      </li>
+    </modExtensions>
   </WorldObjectDef>
 
   <MapGeneratorDef>
