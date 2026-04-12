@@ -23,7 +23,7 @@ public static class ResearchManager_FinishProject_Patch
 
     private static void Postfix(ResearchProjectDef proj)
     {
-        // Unselect the gravship research once 
+        // Unselect the gravship research once we finish it
         if (World_ExposeData_Patch.currentGravtechProject == proj)
             World_ExposeData_Patch.currentGravtechProject = null;
 
