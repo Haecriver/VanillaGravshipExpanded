@@ -233,6 +233,7 @@ namespace VanillaGravshipExpanded
         {
             // Called from PostPostMake and PostExposeData, as PostSpawnSetup won't be called for something that never
             // spawned yet. And it would get called each time it's spawned, and we don't need to initialize comps each time.
+            powerComp = parent.GetComp<CompPowerTrader>();
             glower = parent.GetComp<CompGlower>();
         }
     }
