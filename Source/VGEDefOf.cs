@@ -49,6 +49,8 @@ namespace VanillaGravshipExpanded
 
         [MayRequireBiotech]
         public static ThingDef VGE_Astronaut;
+        [MayRequireIdeology]
+        public static ThingDef VGE_CompactBiosculpterPod;
 
         public static OptionalFeaturesDef VFE_TileMutatorMechanics;
     }
