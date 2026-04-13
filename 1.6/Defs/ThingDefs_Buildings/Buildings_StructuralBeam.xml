@@ -9,6 +9,7 @@
       <texPath>Things/Structures/Linked/GravshipStructuralBeam_Atlas</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
+    <uiOrder>1850</uiOrder>
     <designationCategory>VGE_Platform</designationCategory>
     <designationHotKey>Misc1</designationHotKey>
     <statBases>
