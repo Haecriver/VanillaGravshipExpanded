@@ -37,7 +37,7 @@ namespace VanillaGravshipExpanded
         {
             if (__instance is Dialog_BeginGravshipLaunch)
             {
-                Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
+                Dialog_BeginRitual_ShowRitualBeginWindow_Patch.ClearLaunchState();
             }
         }
     }
@@ -50,7 +50,7 @@ namespace VanillaGravshipExpanded
         {
             if (__instance.active && __instance.noTileChosen != null)
             {
-                Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
+                Dialog_BeginRitual_ShowRitualBeginWindow_Patch.ClearLaunchState();
             }
         }
     }
@@ -64,16 +64,18 @@ namespace VanillaGravshipExpanded
             var lordJob = engine.Map.lordManager.lords.Select(x => x.LordJob).OfType<LordJob_Ritual>().FirstOrDefault(lordJob => lordJob.ritual.def.IsGravshipLaunch());
             if (lordJob is not null && LordJob_Ritual_ExposeData_Patch.targetTile.TryGetValue(lordJob, out var tile))
             {
-                launchAction = delegate
-                {
-                    WorldComponent_GravshipController.DestroyTreesAroundSubstructure(engine.Map, engine.ValidSubstructure);
-                    Find.World.renderer.wantedMode = WorldRenderMode.None;
-                    engine.ConsumeFuel(tile);
-                    Find.GravshipController.InitiateTakeoff(engine, tile);
-                    SoundDefOf.Gravship_Launch.PlayOneShotOnCamera();
-                    Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
-                };
+                launchAction = () => ExecuteGravshipLaunch(engine, tile);
             }
+        }
+
+        public static void ExecuteGravshipLaunch(Building_GravEngine engine, PlanetTile tile)
+        {
+            WorldComponent_GravshipController.DestroyTreesAroundSubstructure(engine.Map, engine.ValidSubstructure);
+            Find.World.renderer.wantedMode = WorldRenderMode.None;
+            engine.ConsumeFuel(tile);
+            Find.GravshipController.InitiateTakeoff(engine, tile);
+            SoundDefOf.Gravship_Launch.PlayOneShotOnCamera();
+            Dialog_BeginRitual_ShowRitualBeginWindow_Patch.ClearLaunchState();
         }
     }
 
@@ -82,7 +84,7 @@ namespace VanillaGravshipExpanded
     {
         public static void Postfix(LordJob_Ritual __instance)
         {
-            Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state = null;
+            Dialog_BeginRitual_ShowRitualBeginWindow_Patch.ClearLaunchState();
         }
     }
 
@@ -96,16 +98,18 @@ namespace VanillaGravshipExpanded
             var state = Dialog_BeginRitual_ShowRitualBeginWindow_Patch.state;
             if (gravEngine != null && state is not null)
             {
-                settleAction = delegate
-                {
-                    CameraJumper.TryHideWorld();
-                    Current.Game.CurrentMap = gravEngine.Map;
-                    Find.CameraDriver.JumpToCurrentMapLoc(gravEngine.Position);
-                    state.instance.ShowRitualBeginWindow(state.targetInfo, state.forObligation, state.selectedPawn, state.forcedForRole);
-                    targetTile = tile;
-                    state.targetTile = tile;
-                };
+                settleAction = () => OnGravshipTileSelected(gravEngine, tile, state);
             }
+        }
+
+        public static void OnGravshipTileSelected(Building_GravEngine engine, PlanetTile tile, GravshipLaunchState state)
+        {
+            CameraJumper.TryHideWorld();
+            Current.Game.CurrentMap = engine.Map;
+            Find.CameraDriver.JumpToCurrentMapLoc(engine.Position);
+            state.instance.ShowRitualBeginWindow(state.targetInfo, state.forObligation, state.selectedPawn, state.forcedForRole);
+            targetTile = tile;
+            state.targetTile = tile;
         }
     }
 
@@ -178,6 +182,12 @@ namespace VanillaGravshipExpanded
     public static class Dialog_BeginRitual_ShowRitualBeginWindow_Patch
     {
         public static GravshipLaunchState state;
+
+        public static void ClearLaunchState()
+        {
+            state = null;
+        }
+
         // Set to true before opening a ritual dialog. Sets the next opened launch ritual to gravlift.
         public static bool IsNextLaunchGravlift = false;
         // If the currently active (if any) launch is gravlift launch.
