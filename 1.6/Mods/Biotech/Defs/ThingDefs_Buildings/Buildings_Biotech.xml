@@ -40,7 +40,7 @@
         <comps>
             <li Class="CompProperties_GravshipFacility">
                 <requiresLOS>false</requiresLOS>
-                <maxSimultaneous>1</maxSimultaneous>
+                <maxSimultaneous>16</maxSimultaneous>
                 <maxDistance>500</maxDistance>
             </li>
             <li Class="CompProperties_Power">
