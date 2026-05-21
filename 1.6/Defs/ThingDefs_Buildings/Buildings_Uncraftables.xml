@@ -24,6 +24,11 @@
 		<pathCost>20</pathCost>
 		<canOverlapZones>false</canOverlapZones>
 		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
+		<costList>
+			<Steel>50</Steel>
+			<ComponentSpacer>4</ComponentSpacer>
+			<GravlitePanel>20</GravlitePanel>
+		</costList>
 		<comps>
 			<li Class="CompProperties_GravshipFacility">
 				<requiresLOS>false</requiresLOS>
