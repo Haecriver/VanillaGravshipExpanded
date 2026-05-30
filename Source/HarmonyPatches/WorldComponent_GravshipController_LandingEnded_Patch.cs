@@ -131,7 +131,8 @@ namespace VanillaGravshipExpanded
 
             if (comp != null)
             {
-                gravship.Engine.Map.GetComponent<MaintenanceAndDeterioration_MapComponent>().ChangeGlobalMaintenance(-0.001f * distanceTravelled, chance);
+                gravship.Engine.Map.GetComponent<MaintenanceAndDeterioration_MapComponent>().ChangeGlobalMaintenance(-0.001f * distanceTravelled
+                    * GravshipsMod_Settings.maintenanceLossMultiplier, chance);
 
             }
             else

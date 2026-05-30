@@ -18,6 +18,9 @@ namespace VanillaGravshipExpanded
         public const float orbitalObjectsMultiplierBase = 2;
         public static float orbitalObjectsMultiplier = orbitalObjectsMultiplierBase;
 
+        public const float maintenanceLossMultiplierBase = 1;
+        public static float maintenanceLossMultiplier = maintenanceLossMultiplierBase;
+
         private static Vector2 scrollPosition = Vector2.zero;
 
 
@@ -27,6 +30,7 @@ namespace VanillaGravshipExpanded
             base.ExposeData();
 
             Scribe_Values.Look<float>(ref orbitalObjectsMultiplier, "orbitalObjectsMultiplier", orbitalObjectsMultiplierBase, true);
+            Scribe_Values.Look<float>(ref maintenanceLossMultiplier, "maintenanceLossMultiplier", maintenanceLossMultiplierBase, true);
 
         }
 
@@ -46,7 +50,7 @@ namespace VanillaGravshipExpanded
             var contentRect = frameRect;
             contentRect.x = 0;
             contentRect.y = 0;
-            contentRect.width -= 20;      
+            contentRect.width -= 20;
             contentRect.height = 500;
 
             Listing_Standard ls2 = new Listing_Standard();
@@ -62,7 +66,15 @@ namespace VanillaGravshipExpanded
             {
                 orbitalObjectsMultiplier = orbitalObjectsMultiplierBase;
             }
-           
+
+            var maintenanceLabel = ls2.LabelPlusButton("VGE_MaintenanceMultiplier".Translate() + ": x" + maintenanceLossMultiplier, "VGE_MaintenanceMultiplierDesc".Translate());
+            maintenanceLossMultiplier = (float)Math.Round(ls2.Slider(maintenanceLossMultiplier, 0f, 3f), 2);
+
+            if (ls2.Settings_Button("VGE_Reset".Translate(), new Rect(0f, maintenanceLabel.position.y + 35, 250f, 29f)))
+            {
+                maintenanceLossMultiplier = maintenanceLossMultiplierBase;
+            }
+
             ls2.End();
             Widgets.EndScrollView();
             Write();

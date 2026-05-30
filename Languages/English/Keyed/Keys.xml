@@ -112,8 +112,10 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
 
     <!-- Mod options -->
 
-    <VGE_OrbitObjectsMultiplier>Orbital objects multiplier</VGE_OrbitObjectsMultiplier>
+     <VGE_OrbitObjectsMultiplier>Orbital objects multiplier</VGE_OrbitObjectsMultiplier>
     <VGE_OrbitObjectsMultiplierDesc>By default the game will try to keep 3,8,12 or 20 locations in orbit (depending on globe coverage of the planet). With this slider you can apply a multiplier to this number, making your planet orbits super sparse or very cluttered!</VGE_OrbitObjectsMultiplierDesc>
+	<VGE_MaintenanceMultiplier>Maintenance loss multiplier (higher is faster maintennace loss)</VGE_MaintenanceMultiplier>
+	<VGE_MaintenanceMultiplierDesc>The amount of maintenance lost both over time and when travelling with the gravship will be multiplied by this number. So 2 means you'll lose maintenance twice as fast. Added due to Sam Streamer being an insufferable crybaby.</VGE_MaintenanceMultiplierDesc>
     <VGE_Reset>Reset</VGE_Reset>
     <VGE_More>More</VGE_More>
 
