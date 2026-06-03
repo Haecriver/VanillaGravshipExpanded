@@ -26,7 +26,11 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
 
     public string LabelRemaining => $"{RemainingChargesExactString} / {MaxCharges}";
 
-    public float RemainingChargesExact => remainingCharges;
+    public float RemainingChargesExact
+    {
+        get => remainingCharges;
+        set => remainingCharges = value;
+    }
 
     public string RemainingChargesExactString => $"{RemainingChargesExact:0.00}";
 
