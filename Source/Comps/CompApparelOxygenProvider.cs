@@ -29,7 +29,7 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
     public float RemainingChargesExact
     {
         get => remainingCharges;
-        set => remainingCharges = value;
+        set => remainingCharges = Mathf.Max(value, 0f);
     }
 
     public string RemainingChargesExactString => $"{RemainingChargesExact:0.00}";
@@ -116,7 +116,7 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
         if (baseVacuumResistance >= 1)
             return;
 
-        remainingCharges -= Props.consumptionPerTick * 60;
+        RemainingChargesExact -= Props.consumptionPerTick * 60;
     }
 
     public bool NeedsReload(bool allowForceReload)
@@ -199,17 +199,17 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
         yield return new Command_Action
         {
             defaultLabel = "DEV: Set oxygen to empty",
-            action = () => remainingCharges = 0,
+            action = () => RemainingChargesExact = 0,
         };
         yield return new Command_Action
         {
             defaultLabel = "DEV: Oxygen -20%",
-            action = () => remainingCharges = Mathf.Max(0, remainingCharges - Props.maxCharges * 0.2f)
+            action = () => RemainingChargesExact = remainingCharges - Props.maxCharges * 0.2f
         };
         yield return new Command_Action
         {
             defaultLabel = "DEV: Set oxygen to full",
-            action = () => remainingCharges = MaxCharges,
+            action = () => RemainingChargesExact = MaxCharges,
         };
     }
 
