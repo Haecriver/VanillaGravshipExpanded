@@ -1,28 +1,30 @@
 using RimWorld;
 using System.Collections.Generic;
-using UnityEngine;
 using VEF.Graphics;
 using Verse;
-using Verse.Sound;
 
 namespace VanillaGravshipExpanded
 {
-    [StaticConstructorOnStartup]
-    public class Building_TargetingTerminal : Building
+    public class Building_TargetingTerminal : Building, ITurretLinker
     {
         public Building_GravshipTurret linkedTurret;
-        
+        public List<Building_GravshipTurret> linkedTurrets = new List<Building_GravshipTurret>();
         public virtual bool MannedByPlayer => MannableComp?.MannedNow ?? false;
-        
         public virtual float GravshipTargeting => MannableComp?.ManningPawn?.GetStatValue(VGEDefOf.VGE_GravshipTargeting) ?? 0f;
 
+        public Thing LinkerThing => this;
+        public IntVec3 LinkerPosition => Position;
+        public Pawn ManningPawn => MannableComp?.ManningPawn;
+
+        public virtual IEnumerable<Building_GravshipTurret> LinkedTurrets => linkedTurrets;
+        public virtual int MaxLinkedTurrets => 1;
+        public virtual float LinkRange => 36f;
+        public virtual string OnlyArtilleryErrorKey => "VGE_TargetingTerminalCanOnlyLinkWithGravshipArtillery";
+        public virtual string LinkGizmoDesc => "VGE_LinkWithTurretDesc".Translate();
+        public virtual string UnlinkGizmoDesc => "VGE_UnlinkWithTurretDesc".Translate();
+        public virtual string SelectGizmoDesc => "VGE_SelectLinkedTurretDesc".Translate();
         private CompMannable mannableComp;
         private CustomOverlayDrawer overlayDrawer;
-
-        private static readonly Texture2D LinkIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/LinkWithTurret");
-        private static readonly Texture2D UnlinkIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/UnlinkWithTurret");
-        private static readonly Texture2D SelectIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/SelectLinkedTurret");
-
         public CompMannable MannableComp
         {
             get
@@ -39,6 +41,17 @@ namespace VanillaGravshipExpanded
         {
             base.ExposeData();
             Scribe_References.Look(ref linkedTurret, "linkedTurret");
+            Scribe_Collections.Look(ref linkedTurrets, "linkedTurrets", LookMode.Reference);
+            if (Scribe.mode == LoadSaveMode.PostLoadInit)
+            {
+                linkedTurrets ??= new List<Building_GravshipTurret>();
+                if (linkedTurret != null && !linkedTurrets.Contains(linkedTurret))
+                {
+                    linkedTurrets.Add(linkedTurret);
+                }
+                linkedTurrets.RemoveAll(x => x == null);
+                linkedTurret = null;
+            }
         }
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
@@ -46,7 +59,7 @@ namespace VanillaGravshipExpanded
             base.SpawnSetup(map, respawningAfterLoad);
 
             overlayDrawer = map.GetComponent<CustomOverlayDrawer>();
-            if (linkedTurret == null)
+            if (linkedTurrets.Count == 0)
                 EnableOverlay();
         }
 
@@ -61,18 +74,22 @@ namespace VanillaGravshipExpanded
         {
             base.Tick();
 
-            if (linkedTurret != null && (linkedTurret.Destroyed || !linkedTurret.Spawned))
+            for (int i = linkedTurrets.Count - 1; i >= 0; i--)
             {
-                Unlink();
+                var turret = linkedTurrets[i];
+                if (turret.Destroyed || !turret.Spawned)
+                {
+                    Unlink(turret);
+                }
             }
         }
 
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
-            if (linkedTurret != null)
+            foreach (var turret in linkedTurrets)
             {
-                GenDraw.DrawLineBetween(this.TrueCenter(), linkedTurret.TrueCenter(), SimpleColor.White);
+                GenDraw.DrawLineBetween(this.TrueCenter(), turret.TrueCenter(), SimpleColor.White);
             }
         }
 
@@ -83,77 +100,41 @@ namespace VanillaGravshipExpanded
                 yield return gizmo;
             }
 
-            if (linkedTurret == null)
+            foreach (var gizmo in this.GetLinkerGizmos(LinkRange))
             {
-                yield return new Command_Action
-                {
-                    defaultLabel = "VGE_LinkWithTurret".Translate(),
-                    defaultDesc = "VGE_LinkWithTurretDesc".Translate(),
-                    icon = LinkIcon,
-                    action = delegate { StartLinking(); }
-                };
-            }
-            else
-            {
-                yield return new Command_Action
-                {
-                    defaultLabel = "VGE_UnlinkWithTurret".Translate(),
-                    defaultDesc = "VGE_UnlinkWithTurretDesc".Translate(),
-                    icon = UnlinkIcon,
-                    action = delegate { Unlink(); }
-                };
-                yield return new Command_Action
-                {
-                    defaultLabel = "VGE_SelectLinkedTurret".Translate(),
-                    defaultDesc = "VGE_SelectLinkedTurretDesc".Translate(),
-                    icon = SelectIcon,
-                    action = delegate { SelectLinkedTurret(); }
-                };
+                yield return gizmo;
             }
         }
 
-        private void StartLinking()
+        public virtual void LinkTo(Building_GravshipTurret turret)
         {
-            var targetingParameters = new TargetingParameters
+            if (linkedTurrets.Count >= MaxLinkedTurrets)
             {
-                canTargetPawns = false,
-                canTargetBuildings = true,
-                mapObjectTargetsMustBeAutoAttackable = false,
-                validator = (TargetInfo t) => t.Thing is Building_GravshipTurret && t.Thing.Position.InHorDistOf(this.Position, 36)
-            };
-            Find.Targeter.BeginTargeting(targetingParameters, delegate (LocalTargetInfo t)
-            {
-                var turret = t.Thing as Building_GravshipTurret;
-                LinkTo(turret);
-            }, onGuiAction: delegate { GenDraw.DrawRadiusRing(this.Position, 36f); });
-        }
-
-        public void LinkTo(Building_GravshipTurret turret)
-        {
-            if (turret.linkedTerminal != null)
-            {
-                turret.linkedTerminal?.Unlink();
+                Unlink(linkedTurrets[0]);
             }
-            linkedTurret = turret;
+            linkedTurrets.Add(turret);
             turret.LinkTo(this);
-            SoundDefOf.Tick_High.PlayOneShotOnCamera();
-            DisableOverlay();
+        }
+
+        public virtual void Unlink(Building_GravshipTurret turret)
+        {
+            if (linkedTurrets.Remove(turret))
+            {
+                turret.unlinking = true;
+                turret.Unlink();
+                turret.unlinking = false;
+                if (linkedTurrets.Count == 0 && !Destroyed && Spawned)
+                {
+                    EnableOverlay();
+                }
+            }
         }
 
         public void Unlink()
         {
-            linkedTurret?.Unlink();
-            linkedTurret = null;
-            SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-            EnableOverlay();
-        }
-
-        private void SelectLinkedTurret()
-        {
-            if (linkedTurret != null)
+            for (int i = linkedTurrets.Count - 1; i >= 0; i--)
             {
-                Find.Selector.ClearSelection();
-                Find.Selector.Select(linkedTurret);
+                Unlink(linkedTurrets[i]);
             }
         }
 

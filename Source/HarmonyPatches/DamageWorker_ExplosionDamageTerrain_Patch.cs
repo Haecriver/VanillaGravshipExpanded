@@ -31,7 +31,7 @@ namespace VanillaGravshipExpanded
                 SpawnDebrisFilth(cell, map);
                 ThingUtility.CheckAutoRebuildTerrainOnDestroyed(TerrainDefOf.Substructure, c, map);
             }
-            else if (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold)
+            else if (terrain.HasTag("DestroyableByArtillery"))
             {
                 map.terrainGrid.RemoveFoundation(cell, false);
             }

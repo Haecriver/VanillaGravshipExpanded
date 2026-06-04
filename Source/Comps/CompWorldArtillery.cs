@@ -140,7 +140,11 @@ namespace VanillaGravshipExpanded
                 action = delegate { StartWorldTargeting(); }
             };
 
-            if (!Turret.CanFire)
+            if (Turret.linkedTerminal is Apparel)
+            {
+                worldTargetGizmo.Disable("VGE_MustBeAimedViaEquippedTargeter".Translate());
+            }
+            else if (!Turret.CanFire)
             {
                 worldTargetGizmo.Disable("VGE_NeedsMannedTargetingTerminal".Translate());
             }
@@ -331,7 +335,7 @@ namespace VanillaGravshipExpanded
         {
             var distance = GravshipHelper.GetDistance(parent.Map.Tile, target.Tile);
             bool isWithinRange = distance <= Props.worldMapAttackRange;
-            failReason = isWithinRange ? null : "VGE_GravshipArtilleryOutOfRange".Translate();
+            failReason = isWithinRange ? null : "VGE_TargetOutOfRange".Translate();
             return isWithinRange;
         }
 

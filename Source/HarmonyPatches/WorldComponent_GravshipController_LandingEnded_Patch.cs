@@ -196,6 +196,12 @@ namespace VanillaGravshipExpanded
 
                     foreach (var cell in blocker.OccupiedRect())
                     {
+                        var foundation = map.terrainGrid.FoundationAt(cell);
+                        if (foundation != null && foundation.HasTag("VGE_Subarmor"))
+                        {
+                            continue;
+                        }
+
                         foreach (var thing in gravship.Things.Where(t => t.Position == cell))
                         {
                             thing.TakeDamage(new DamageInfo(DamageDefOf.Blunt, damageAmount));
@@ -235,6 +241,12 @@ namespace VanillaGravshipExpanded
                 {
                     foreach (var cell in blocker.OccupiedRect())
                     {
+                        var foundation = map.terrainGrid.FoundationAt(cell);
+                        if (foundation != null && foundation.HasTag("VGE_Subarmor"))
+                        {
+                            continue;
+                        }
+
                         foreach (var thing in gravship.Things.Where(t => t.def.destroyable && t.Position == cell).ToList())
                         {
                             if (thing.Destroyed is false)

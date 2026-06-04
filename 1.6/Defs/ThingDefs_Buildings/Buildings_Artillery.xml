@@ -256,6 +256,7 @@
             <relatedBuildCommands>
                 <li>VGE_AmmoBox_GaussShell</li>
                 <li>VGE_TargetingTerminal</li>
+                <li MayRequire="vanillaexpanded.gravship2">VGE_TargetingConsole</li>
             </relatedBuildCommands>
         </building>
         <comps>
@@ -384,6 +385,7 @@
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
                 <li>VGE_TargetingTerminal</li>
+                <li MayRequire="vanillaexpanded.gravship2">VGE_TargetingConsole</li>
             </relatedBuildCommands>
         </building>
         <comps>
@@ -552,6 +554,7 @@
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
                 <li>VGE_TargetingTerminal</li>
+                <li MayRequire="vanillaexpanded.gravship2">VGE_TargetingConsole</li>
             </relatedBuildCommands>
         </building>
         <modExtensions>

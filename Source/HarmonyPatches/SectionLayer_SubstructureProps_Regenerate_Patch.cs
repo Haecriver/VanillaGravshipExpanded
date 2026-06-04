@@ -133,7 +133,9 @@ namespace VanillaGravshipExpanded
 
             foreach (IntVec3 item in cellRect)
             {
-                if (terrainGrid.FoundationAt(item) == VGEDefOf.VGE_GravshipSubscaffold)
+                TerrainDef foundationDef = terrainGrid.FoundationAt(item);
+                TerrainDef topDef = terrainGrid.TerrainAt(item);
+                if (foundationDef == VGEDefOf.VGE_GravshipSubscaffold)
                 {
                     LayerSubMesh subMesh = instance.GetSubMesh(CustomBottom.Material);
                     SectionLayer_SubstructureProps_ShouldDrawPropsOn_Patch.doVanilla = true;
@@ -150,18 +152,45 @@ namespace VanillaGravshipExpanded
                     }
                     SectionLayer_SubstructureProps_ShouldDrawPropsOn_Patch.doVanilla = false;
                 }
-                if (terrainGrid.TerrainAt(item) == VGEDefOf.VGE_MechanoidSubstructure)
+
+                TerrainDef terrainToDraw = null;
+                if (foundationDef != null && (foundationDef.HasModExtension<SubstructureEdgeGraphicsExtension>() || foundationDef == VGEDefOf.VGE_MechanoidSubstructure) && foundationDef != VGEDefOf.VGE_GravshipSubscaffold)
                 {
-                    LayerSubMesh subMesh = instance.GetSubMesh(CustomBottomMech.Material);
-                    if (ShouldDrawPropsOn(instance, item, terrainGrid, out var edgeEdgeDirections, out var cornerDirections))
+                    terrainToDraw = foundationDef;
+                }
+                else if (topDef != null && (topDef.HasModExtension<SubstructureEdgeGraphicsExtension>() || topDef == VGEDefOf.VGE_MechanoidSubstructure))
+                {
+                    terrainToDraw = topDef;
+                }
+
+                if (terrainToDraw != null)
+                {
+                    if (ShouldDrawGenericProps(instance, item, terrainGrid, terrainToDraw, out var edgeEdgeDirections, out var cornerDirections))
                     {
-                        DrawEdges(instance, TerrainDefOf.MechanoidPlatform, item, edgeEdgeDirections, altitude);
-                        DrawCorners(instance, TerrainDefOf.MechanoidPlatform, item, edgeEdgeDirections, cornerDirections, altitude);
-                        SectionLayer_GravshipHull.ShouldDrawCornerPiece(item + IntVec3.South, map, terrainGrid, out var cornerType, out var _);
-                        bool flag = cornerType == SectionLayer_GravshipHull.CornerType.Corner_NW || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NW || cornerType == SectionLayer_GravshipHull.CornerType.Corner_NE || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NE;
-                        if (edgeEdgeDirections.HasFlag(EdgeDirections.South) && !flag)
+                        TerrainDef edgeTerrain = terrainToDraw == VGEDefOf.VGE_MechanoidSubstructure ? TerrainDefOf.MechanoidPlatform : terrainToDraw;
+
+                        DrawEdges(instance, edgeTerrain, item, edgeEdgeDirections, altitude);
+                        DrawCorners(instance, edgeTerrain, item, edgeEdgeDirections, cornerDirections, altitude);
+
+                        Material bottomMat = null;
+                        if (terrainToDraw == VGEDefOf.VGE_MechanoidSubstructure)
                         {
-                            instance.AddQuad(subMesh, item + IntVec3.South, altitude, Rot4.North, true);
+                            bottomMat = CustomBottomMech.Material;
+                        }
+                        else if (edgeTerrain.spaceEdgeGraphicData != null && !edgeTerrain.spaceEdgeGraphicData.LoopTexPaths.NullOrEmpty())
+                        {
+                            bottomMat = MaterialPool.MatFrom(edgeTerrain.spaceEdgeGraphicData.LoopTexPaths[0], ShaderDatabase.Transparent);
+                        }
+
+                        if (bottomMat != null)
+                        {
+                            LayerSubMesh subMesh = instance.GetSubMesh(bottomMat);
+                            SectionLayer_GravshipHull.ShouldDrawCornerPiece(item + IntVec3.South, map, terrainGrid, out var cornerType, out var _);
+                            bool flag = cornerType == SectionLayer_GravshipHull.CornerType.Corner_NW || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NW || cornerType == SectionLayer_GravshipHull.CornerType.Corner_NE || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NE;
+                            if (edgeEdgeDirections.HasFlag(EdgeDirections.South) && !flag)
+                            {
+                                instance.AddQuad(subMesh, item + IntVec3.South, altitude, Rot4.North, true);
+                            }
                         }
                     }
                 }
@@ -202,6 +231,7 @@ namespace VanillaGravshipExpanded
 
         private static void AddQuad(SectionLayer_SubstructureProps instance, TerrainDef terrain, EdgeType edgeType, IntVec3 c, float altitude, Rot4 rotation, int listIndexOffset = 0)
         {
+            if (terrain?.spaceEdgeGraphicData == null) return;
             Material material = terrain.spaceEdgeGraphicData.GetMaterial(terrain, (RimWorld.SectionLayer_TerrainEdges.EdgeType)edgeType, listIndexOffset);
             if (material == null) return;
             LayerSubMesh subMesh = instance.GetSubMesh(material);
@@ -222,12 +252,15 @@ namespace VanillaGravshipExpanded
             subMesh.tris.Add(count + 3);
         }
 
-        private static bool ShouldDrawPropsOn(SectionLayer_SubstructureProps instance, IntVec3 c, TerrainGrid terrGrid, out EdgeDirections edgeEdgeDirections, out CornerDirections cornerDirections)
+        private static bool ShouldDrawGenericProps(SectionLayer_SubstructureProps instance, IntVec3 c, TerrainGrid terrGrid, TerrainDef targetDef, out EdgeDirections edgeEdgeDirections, out CornerDirections cornerDirections)
         {
             edgeEdgeDirections = EdgeDirections.None;
             cornerDirections = CornerDirections.None;
-            TerrainDef terrainDef = terrGrid.TerrainAt(c);
-            if (terrainDef == null || terrainDef != VGEDefOf.VGE_MechanoidSubstructure || terrainDef.IsSubstructure)
+            TerrainDef terrainDef = terrGrid.FoundationAt(c);
+            if (terrainDef == null && targetDef == VGEDefOf.VGE_MechanoidSubstructure)
+                terrainDef = terrGrid.TerrainAt(c);
+
+            if (terrainDef == null || terrainDef != targetDef)
             {
                 return false;
             }
@@ -239,15 +272,13 @@ namespace VanillaGravshipExpanded
                     edgeEdgeDirections |= (EdgeDirections)(1 << i);
                     continue;
                 }
-                TerrainDef terrainDef2 = terrGrid.TerrainAt(c2);
+                TerrainDef terrainDef2 = terrGrid.FoundationAt(c2);
+                if (terrainDef2 == null && targetDef == VGEDefOf.VGE_MechanoidSubstructure)
+                    terrainDef2 = terrGrid.TerrainAt(c2);
 
-                if (terrainDef2 == null || terrainDef2 != VGEDefOf.VGE_MechanoidSubstructure)
+                if (terrainDef2 == null || terrainDef2 != targetDef)
                 {
                     edgeEdgeDirections |= (EdgeDirections)(1 << i);
-                }
-                if (terrainDef2.IsSubstructure)
-                {
-                    return false;
                 }
             }
             for (int j = 0; j < GenAdj.DiagonalDirections.Length; j++)
@@ -258,14 +289,13 @@ namespace VanillaGravshipExpanded
                     cornerDirections |= (CornerDirections)(1 << j);
                     continue;
                 }
-                TerrainDef terrainDef3 = terrGrid.TerrainAt(c3);
-                if (terrainDef3 == null || terrainDef3 != VGEDefOf.VGE_MechanoidSubstructure)
+                TerrainDef terrainDef3 = terrGrid.FoundationAt(c3);
+                if (terrainDef3 == null && targetDef == VGEDefOf.VGE_MechanoidSubstructure)
+                    terrainDef3 = terrGrid.TerrainAt(c3);
+
+                if (terrainDef3 == null || terrainDef3 != targetDef)
                 {
                     cornerDirections |= (CornerDirections)(1 << j);
-                }
-                if (terrainDef3.IsSubstructure)
-                {
-                    return false;
                 }
             }
             if (edgeEdgeDirections == EdgeDirections.None)

@@ -26,6 +26,7 @@
 		<terrainAffordanceNeeded>Walkable</terrainAffordanceNeeded>
 		<tags>
 			<li>Substructure</li>
+			<li>DestroyableByArtillery</li>
 		</tags>
 		<placeWorkers>
 			<li>PlaceWorker_InSubstructureFootprint</li>
@@ -107,6 +108,7 @@
 		</placeWorkers>
 		<tags>
 			<li>Substructure</li>
+			<li>DestroyableByArtillery</li>
 		</tags>
 	</TerrainDef>
 	<TerrainDef ParentName="PlatformBase">

@@ -1,6 +1,7 @@
 using RimWorld;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VEF.Graphics;
 using Verse;
@@ -17,8 +18,9 @@ namespace VanillaGravshipExpanded
         private float rotationVelocity;
         private int barrelIndex = -1;
         private List<Vector3> barrels;
-        public Building_TargetingTerminal linkedTerminal;
+        public ITurretLinker linkedTerminal;
         private CustomOverlayDrawer overlayDrawer;
+        public bool unlinking;
         private static readonly Texture2D ForceTargetIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/GravshipArtilleryForceTarget");
         private static readonly Texture2D HoldFireIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/GravshipArtilleryHoldFire");
         private static readonly Texture2D LinkIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/LinkWithTerminal");
@@ -27,7 +29,7 @@ namespace VanillaGravshipExpanded
         public virtual bool CanFire => linkedTerminal?.MannedByPlayer ?? false;
 
         public virtual bool CanAutoAttack => false;
-        public Pawn ManningPawn => linkedTerminal?.MannableComp?.ManningPawn;
+        public Pawn ManningPawn => linkedTerminal?.ManningPawn;
 
         public virtual float GravshipTargeting => linkedTerminal?.GravshipTargeting ?? 0f;
 
@@ -60,17 +62,7 @@ namespace VanillaGravshipExpanded
             }
         }
 
-        public override bool CanSetForcedTarget
-        {
-            get
-            {
-                if (linkedTerminal != null && linkedTerminal.MannedByPlayer)
-                {
-                    return true;
-                }
-                return false;
-            }
-        }
+        public override bool CanSetForcedTarget => linkedTerminal != null && linkedTerminal.MannedByPlayer;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -106,9 +98,13 @@ namespace VanillaGravshipExpanded
         public override void Tick()
         {
             base.Tick();
-            if (linkedTerminal != null && (linkedTerminal.Destroyed || !linkedTerminal.Spawned))
+            if (linkedTerminal != null)
             {
-                Unlink();
+                var linkerThing = linkedTerminal.LinkerThing;
+                if (linkerThing is null || linkerThing.Destroyed || !linkedTerminal.LinkerThing.Spawned && linkedTerminal is not Apparel)
+                {       
+                    Unlink();
+                }
             }
 
             if (rotationSpeed > 0)
@@ -165,11 +161,23 @@ namespace VanillaGravshipExpanded
             return text;
         }
 
-        public void LinkTo(Building_TargetingTerminal terminal)
+        public void LinkTo(ITurretLinker terminal)
         {
-            terminal.linkedTurret?.Unlink();
+            if (linkedTerminal == terminal)
+            {
+                return;
+            }
+            if (linkedTerminal != null && linkedTerminal != terminal)
+            {
+                linkedTerminal.Unlink(this);
+            }
             linkedTerminal = terminal;
-            terminal.linkedTurret = this;
+
+            if (terminal != null && !terminal.LinkedTurrets.Contains(this))
+            {
+                terminal.LinkTo(this);
+            }
+
             SoundDefOf.Tick_High.PlayOneShotOnCamera();
             DisableOverlay();
             linkedTerminal.DisableOverlay();
@@ -177,25 +185,33 @@ namespace VanillaGravshipExpanded
 
         public void Unlink()
         {
-            if (linkedTerminal != null)
-            {
-                linkedTerminal.EnableOverlay();
-                linkedTerminal.linkedTurret = null;
-            }
+            var prevTerminal = linkedTerminal;
             linkedTerminal = null;
-            SoundDefOf.Tick_Low.PlayOneShotOnCamera();
-            if (ShowNoLinkedTerminalOverlay)
+            if (prevTerminal != null && !unlinking)
             {
-                EnableOverlay();
+                prevTerminal.Unlink(this);
+            }
+            else
+            {
+                SoundDefOf.Tick_Low.PlayOneShotOnCamera();
+                if (ShowNoLinkedTerminalOverlay)
+                {
+                    EnableOverlay();
+                }
             }
         }
 
         private void SelectLinkedTerminal()
         {
-            if (linkedTerminal != null)
+            if (linkedTerminal != null && linkedTerminal.LinkerThing != null)
             {
                 Find.Selector.ClearSelection();
-                Find.Selector.Select(linkedTerminal);
+                Find.Selector.Select(linkedTerminal.LinkerThing);
+            }
+            else if (linkedTerminal != null)
+            {
+                Find.Selector.ClearSelection();
+                Find.Selector.Select((Thing)linkedTerminal);
             }
         }
         private void StartLinking()
@@ -213,6 +229,15 @@ namespace VanillaGravshipExpanded
                 LinkTo(terminal);
             }, onGuiAction: delegate { GenDraw.DrawRadiusRing(this.Position, 36f); });
         }
+        public override void DrawExtraSelectionOverlays()
+        {
+            base.DrawExtraSelectionOverlays();
+            if (linkedTerminal != null && linkedTerminal.LinkerThing != null && linkedTerminal.LinkerThing.Spawned)
+            {
+                GenDraw.DrawLineBetween(this.TrueCenter(), linkedTerminal.LinkerThing.DrawPos, SimpleColor.White);
+            }
+        }
+
         public override IEnumerable<Gizmo> GetGizmos()
         {
             foreach (var gizmo in base.GetGizmos())
@@ -220,7 +245,11 @@ namespace VanillaGravshipExpanded
                 if (gizmo is Command_VerbTarget command && command.defaultLabel == "CommandSetForceAttackTarget".Translate())
                 {
                     command.icon = ForceTargetIcon;
-                    if (!CanFire)
+                    if (linkedTerminal is Apparel)
+                    {
+                        command.Disable("VGE_MustBeAimedViaEquippedTargeter".Translate());
+                    }
+                    else if (!CanFire)
                     {
                         command.Disable("VGE_NeedsMannedTargetingTerminal".Translate());
                     }

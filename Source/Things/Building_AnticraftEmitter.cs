@@ -42,6 +42,7 @@ namespace VanillaGravshipExpanded
             if (isFiringBurst && PowerComp is not CompPowerTrader { PowerOn: true })
             {
                 ResetCurrentTarget();
+                AttackVerb?.Reset();
                 isFiringBurst = false;
                 UpdatePowerOutput();
             }
