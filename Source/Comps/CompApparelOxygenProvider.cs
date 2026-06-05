@@ -165,12 +165,20 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
     {
         base.PostExposeData();
 
-        Scribe_Values.Look(ref remainingCharges, nameof(remainingCharges), -999);
+        Scribe_Values.Look(ref remainingCharges, "remainingOxygen", -999);
         Scribe_Values.Look(ref rechargeAtCharges, nameof(rechargeAtCharges));
         Scribe_Values.Look(ref automaticRechargeEnabled, nameof(automaticRechargeEnabled), true);
-        Scribe_Values.Look(ref replenishInTicks, nameof(replenishInTicks), -1);
+        Scribe_Values.Look(ref replenishInTicks, "replenishOxygenInTicks", -1);
 
-        if (Scribe.mode == LoadSaveMode.PostLoadInit && Mathf.Approximately(remainingCharges, -999))
+        // Temporary fallback due to change of expose data label changes
+        if (Scribe.mode == LoadSaveMode.LoadingVars)
+        {
+            if (Mathf.Approximately(remainingCharges, -999) && !parent.HasComp<CompApparelVerbOwner_Charged>())
+                Scribe_Values.Look(ref remainingCharges, nameof(remainingCharges));
+            if (replenishInTicks == -1 && !parent.HasComp<CompApparelReloadable>())
+                Scribe_Values.Look(ref replenishInTicks, nameof(replenishInTicks));
+        }
+        else if (Scribe.mode == LoadSaveMode.PostLoadInit && Mathf.Approximately(remainingCharges, -999))
             remainingCharges = remainingCharges = MaxCharges;
     }
 
