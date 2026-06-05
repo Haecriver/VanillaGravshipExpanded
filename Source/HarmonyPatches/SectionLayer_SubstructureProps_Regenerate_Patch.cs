@@ -153,12 +153,15 @@ namespace VanillaGravshipExpanded
                     SectionLayer_SubstructureProps_ShouldDrawPropsOn_Patch.doVanilla = false;
                 }
 
+                var useCustomEdgesFoundation = foundationDef != null && foundationDef.GetModExtension<SubstructureEdgeGraphicsExtension>() is { } foundationExt && !foundationExt.renderAsSubstructure;
+                var useCustomEdgesTop = topDef != null && topDef.GetModExtension<SubstructureEdgeGraphicsExtension>() is { } topExt && !topExt.renderAsSubstructure;
+
                 TerrainDef terrainToDraw = null;
-                if (foundationDef != null && (foundationDef.HasModExtension<SubstructureEdgeGraphicsExtension>() || foundationDef == VGEDefOf.VGE_MechanoidSubstructure) && foundationDef != VGEDefOf.VGE_GravshipSubscaffold)
+                if (foundationDef != null && (useCustomEdgesFoundation || foundationDef == VGEDefOf.VGE_MechanoidSubstructure) && foundationDef != VGEDefOf.VGE_GravshipSubscaffold)
                 {
                     terrainToDraw = foundationDef;
                 }
-                else if (topDef != null && (topDef.HasModExtension<SubstructureEdgeGraphicsExtension>() || topDef == VGEDefOf.VGE_MechanoidSubstructure))
+                else if (topDef != null && (useCustomEdgesTop || topDef == VGEDefOf.VGE_MechanoidSubstructure))
                 {
                     terrainToDraw = topDef;
                 }
