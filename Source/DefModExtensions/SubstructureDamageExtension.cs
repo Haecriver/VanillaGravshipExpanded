@@ -3,7 +3,7 @@ using Verse;
 
 namespace VanillaGravshipExpanded
 {
-    public class TurretExtension_SubstructureDamage : DefModExtension
+    public class SubstructureDamageExtension : DefModExtension
     {
         public float substructureDamageRadius;
     }

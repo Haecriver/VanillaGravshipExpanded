@@ -9,7 +9,7 @@ namespace VanillaGravshipExpanded
     {
         public static void Postfix(DamageWorker __instance, Explosion explosion, IntVec3 c)
         {
-            var modExtension = explosion.weapon?.GetModExtension<TurretExtension_SubstructureDamage>();
+            var modExtension = explosion.weapon?.GetModExtension<SubstructureDamageExtension>();
             if (modExtension == null)
             {
                 return;
@@ -33,7 +33,18 @@ namespace VanillaGravshipExpanded
             }
             else if (terrain.HasTag("DestroyableByArtillery"))
             {
-                map.terrainGrid.RemoveFoundation(cell, false);
+                if (terrain.isFoundation)
+                {
+                    map.terrainGrid.RemoveFoundation(cell, false);
+                }
+                else
+                {
+                    var top = map.terrainGrid.TopTerrainAt(cell);
+                    if (top == terrain)
+                    {
+                        map.terrainGrid.RemoveTopLayer(cell, false);
+                    }
+                }
             }
         }
 
