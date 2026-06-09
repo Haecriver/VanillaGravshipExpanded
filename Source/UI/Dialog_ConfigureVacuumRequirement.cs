@@ -72,11 +72,11 @@ public class Dialog_ConfigureVacuumRequirement : Window
 
         foreach (var selected in Find.Selector.SelectedObjects)
         {
-            if (selected is Building_VacCheckpoint checkpoint && checkpoint.Faction == Faction.OfPlayer)
+            if (selected is Building_Door door && door.Faction == Faction.OfPlayer && door.GetComp<CompVacCheckpoint>() is { } checkpoint)
             {
                 checkpoint.requiredResistance = resistance;
                 checkpoint.allowDrafted = allowDrafted;
-                map ??= checkpoint.Map;
+                map ??= door.Map;
             }
         }
 

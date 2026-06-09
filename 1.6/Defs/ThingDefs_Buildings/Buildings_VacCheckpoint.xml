@@ -5,6 +5,7 @@
     <defName>VGE_VacCheckpoint</defName>
     <label>vac checkpoint</label>
     <description>A safety checkpoint indicating the entrance to vacuum environment. Colonists will not cross it without required vacuum resistance.</description>
+    <!-- Class for always open doors that don't rotate to walls and have no moving parts. -->
     <thingClass>VanillaGravshipExpanded.Building_VacCheckpoint</thingClass>
     <graphicData>
       <texPath>Things/Structures/VacCheckpoint/VacCheckpoint</texPath>
@@ -48,6 +49,22 @@
       <artificialForMeditationPurposes>false</artificialForMeditationPurposes>
       <canPlaceOverWall>false</canPlaceOverWall>
     </building>
+    <comps>
+      <!-- The comp handles actual blocking part, gizmo, etc. -->
+      <!-- Originally handled by the building, had to be changes somewhat to allow for different door types to be supported. -->
+      <!-- Now, this can be applied to any doors. -->
+      <li Class="VanillaGravshipExpanded.CompProperties_VacCheckpoint">
+        <!-- Starting values after placing -->
+        <requiredResistanceByDefault>0.7</requiredResistanceByDefault>
+        <allowDraftedByDefault>true</allowDraftedByDefault>
+        <!-- Generally, vac checkpoints only apply to same faction pawns. -->
+        <!-- If true, this will always apply to player pawns (could be useful in dungeons and stuff like that). -->
+        <alwaysApplyToPlayer>false</alwaysApplyToPlayer>
+        <!-- To prevent abuse, vac checkpoints don't apply to pawns in a mental state. -->
+        <!-- For example, this prevents placing vac checkpoints around a berserk pawn to stop them from being a threat. -->
+        <applyToPawnsWithMentalState>false</applyToPawnsWithMentalState>
+      </li>
+    </comps>
     <replaceTags IsNull="True" />
     <placeWorkers IsNull="True" />
   </ThingDef>
