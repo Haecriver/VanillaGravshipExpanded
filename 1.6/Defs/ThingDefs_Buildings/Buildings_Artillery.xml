@@ -19,7 +19,7 @@
             <graphicClass>Graphic_Single</graphicClass>
             <texPath>Things/Structures/Artillery/GravshipArtillery_Base_Normal</texPath>
         </graphicData>
-        <passability>Impassable</passability>
+        <passability>PassThroughOnly</passability>
         <fillPercent>1</fillPercent>
         <tickerType>Normal</tickerType>
         <stealable>false</stealable>
@@ -94,7 +94,7 @@
             <drawSize>(3,3)</drawSize>
         </graphicData>
         <altitudeLayer>Building</altitudeLayer>
-        <passability>Impassable</passability>
+        <passability>PassThroughOnly</passability>
         <fillPercent>1</fillPercent>
         <tickerType>Normal</tickerType>
         <statBases>

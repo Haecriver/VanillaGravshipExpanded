@@ -61,7 +61,7 @@
             <Beauty>-40</Beauty>
         </statBases>
         <size>(5,5)</size>
-        <passability>Impassable</passability>
+        <passability>PassThroughOnly</passability>
         <building>
             <turretGunDef>VGE_Gun_MassDriver</turretGunDef>
             <turretBurstCooldownTime>60</turretBurstCooldownTime>
