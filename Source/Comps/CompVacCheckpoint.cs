@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using RimWorld;
 using UnityEngine;
@@ -58,16 +59,26 @@ public class CompVacCheckpoint : ThingComp
         foreach (var gizmo in base.CompGetGizmosExtra())
             yield return gizmo;
 
-        if (parent.Faction == Faction.OfPlayer)
+        var resistanceGizmo = GetVacuumResistanceGizmo();
+        if (resistanceGizmo != null)
+            yield return resistanceGizmo;
+    }
+
+    protected virtual Gizmo GetVacuumResistanceGizmo()
+    {
+        if (parent.Faction != Faction.OfPlayer)
+            return null;
+
+        if (Props.onlyShowGizmoWhenRelevant && parent.Spawned && parent.Map.Biome?.inVacuum != true && parent.OccupiedRect().All(cell => !cell.GetAffordances(parent.Map).Contains(VGEDefOf.Substructure)))
+            return null;
+
+        return new Command_Action
         {
-            yield return new Command_Action
-            {
-                defaultLabel = "VGE_VacCheckpoint_SetVacuumResistance".Translate(),
-                defaultDesc = "VGE_VacCheckpoint_SetVacuumResistanceDesc".Translate(),
-                icon = VacuumResistanceGizmo,
-                action = () => Find.WindowStack.Add(new Dialog_ConfigureVacuumRequirement(requiredResistance, allowDrafted)),
-            };
-        }
+            defaultLabel = "VGE_VacCheckpoint_SetVacuumResistance".Translate(),
+            defaultDesc = "VGE_VacCheckpoint_SetVacuumResistanceDesc".Translate(),
+            icon = VacuumResistanceGizmo,
+            action = () => Find.WindowStack.Add(new Dialog_ConfigureVacuumRequirement(requiredResistance, allowDrafted)),
+        };
     }
 
     public override string CompInspectStringExtra()

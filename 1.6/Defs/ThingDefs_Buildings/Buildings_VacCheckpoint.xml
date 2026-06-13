@@ -63,6 +63,8 @@
         <!-- To prevent abuse, vac checkpoints don't apply to pawns in a mental state. -->
         <!-- For example, this prevents placing vac checkpoints around a berserk pawn to stop them from being a threat. -->
         <applyToPawnsWithMentalState>false</applyToPawnsWithMentalState>
+        <!-- Determines if the gizmo only shows up in space (or other biomes with vacuum) or if the building is on top of substructure (so may end up in space at some point) -->
+        <onlyShowGizmoWhenRelevant>false</onlyShowGizmoWhenRelevant>
       </li>
     </comps>
     <replaceTags IsNull="True" />
