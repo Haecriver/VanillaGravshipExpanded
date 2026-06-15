@@ -682,6 +682,7 @@
       </li>
     </comps>
     <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <uiOrder>2382</uiOrder>
     <placeWorkers>
       <li>PlaceWorker_ShowFacilitiesConnections</li>
       <li>Placeworker_AttachedToWall</li>
