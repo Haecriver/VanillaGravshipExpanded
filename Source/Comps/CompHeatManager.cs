@@ -34,22 +34,40 @@ namespace VanillaGravshipExpanded
             Scribe_Values.Look(ref shouldApplyHeat, "shouldApplyHeat");
         }
 
+        public const float BaseHeatMultiplier = 100f;
+        public const float BaseHeatsinkCapacityMultiplier = 5f;
+
         [TweakValue("0GravshipHeatMultiplier", 1f, 500f)]
-        public static float HeatMultiplier = 100f;
+        public static float HeatMultiplier = BaseHeatMultiplier;
         [TweakValue("0GravshipHeatsinkCapacityMultiplier", 1f, 100f)]
-        public static float HeatsinkCapacityMultiplier = 5f;
-        public void AddHeat(float amount)
+        public static float HeatsinkCapacityMultiplier = BaseHeatsinkCapacityMultiplier;
+
+        // Keeping the old method for mod compatibility purposes, may remove in the future
+        public void AddHeat(float amount) => AddHeat(amount, true);
+
+        public float AddHeat(float amount, bool applyHeatMultiplier = true, bool applyToShip = true, bool storeExcess = true)
         {
-            amount *= HeatMultiplier;
-            heatUnits += amount;
-            if (heatUnits > 0)
+            if (applyHeatMultiplier)
+                amount *= HeatMultiplier;
+            amount = DistributeHeat(amount, applyToShip);
+            // If we don't store the excess in this comp, remove it from the heat units so whatever tried to add the heat will handle it itself
+            if (!storeExcess)
             {
-                DistributeHeat();
+                heatUnits -= amount;
+                if (heatUnits <= 0f)
+                    shouldApplyHeat = false;
             }
+
+            return amount;
         }
 
-        private void DistributeHeat()
+        private float DistributeHeat(float amount, bool applyToShip)
         {
+            // Temporarily store old heat amount
+            var oldStoredHeat = heatUnits;
+            // Add the amount we're supposed to add to heat units
+            heatUnits += amount;
+
             var heatsinks = Engine.GravshipComponents
                 .Select(comp => comp.parent.GetComp<CompHeatsink>()).Where(h => h != null)
                 .ToList();
@@ -90,7 +108,7 @@ namespace VanillaGravshipExpanded
                 }
             }
 
-            if (heatUnits > 0)
+            if (heatUnits > 0 && applyToShip)
             {
                 bool result = TryApplyHeatToShip(heatUnits);
                 if (result is false)
@@ -98,6 +116,12 @@ namespace VanillaGravshipExpanded
                     shouldApplyHeat = true;
                 }
             }
+
+            // If we have less heat than when we started with, return 0 (no excess)
+            if (heatUnits <= oldStoredHeat)
+                return 0f;
+            // If we have more heat units that when we started with, return the difference so we know how much heat we weren't able to store
+            return heatUnits - oldStoredHeat;
         }
 
         public override void CompTick()
@@ -142,6 +166,18 @@ namespace VanillaGravshipExpanded
         private List<Room> GetShipRooms()
         {
             var shipRooms = new HashSet<Room>();
+            // foreach (var pos in Engine.ValidSubstructure)
+            // {
+            //     if (pos.UsesOutdoorTemperature(parent.Map))
+            //         continue;
+            //
+            //     var room = pos.GetRoom(parent.Map);
+            //     if (room != null)
+            //     {
+            //         shipRooms.Add(room);
+            //     }
+            // }
+
             foreach (var comp in Engine.GravshipComponents)
             {
                 if (comp.parent.Position.UsesOutdoorTemperature(parent.Map))
