@@ -26,7 +26,17 @@ namespace VanillaGravshipExpanded
         private static readonly Texture2D LinkIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/LinkWithTerminal");
         private static readonly Texture2D UnlinkIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/UnlinkWithTerminal");
         private static readonly Texture2D SelectIcon = ContentFinder<Texture2D>.Get("UI/Gizmos/SelectLinkedTerminal");
-        public virtual bool CanFire => linkedTerminal?.MannedByPlayer ?? false;
+        
+        public bool permanentlyDisabled;
+        public void DisablePermanently()
+        {
+            permanentlyDisabled = true;
+            currentTargetInt = LocalTargetInfo.Invalid;
+            forcedTarget = LocalTargetInfo.Invalid;
+            burstWarmupTicksLeft = 0;
+        }
+
+        public virtual bool CanFire => !permanentlyDisabled && (linkedTerminal?.MannedByPlayer ?? false);
 
         public virtual bool CanAutoAttack => false;
         public Pawn ManningPawn => linkedTerminal?.ManningPawn;
@@ -62,7 +72,7 @@ namespace VanillaGravshipExpanded
             }
         }
 
-        public override bool CanSetForcedTarget => linkedTerminal != null && linkedTerminal.MannedByPlayer;
+        public override bool CanSetForcedTarget => !permanentlyDisabled && linkedTerminal != null && linkedTerminal.MannedByPlayer;
 
         public override void SpawnSetup(Map map, bool respawningAfterLoad)
         {
@@ -145,12 +155,21 @@ namespace VanillaGravshipExpanded
             Scribe_Values.Look(ref barrelIndex, "barrelIndex", -1);
             Scribe_References.Look(ref linkedTerminal, "linkedTerminal");
             Scribe_Values.Look(ref curAngle, "curAngle");
+            Scribe_Values.Look(ref permanentlyDisabled, "permanentlyDisabled");
         }
 
         public override string GetInspectString()
         {
             string text = base.GetInspectString();
-            if (Faction == Faction.OfPlayer && linkedTerminal == null)
+            if (permanentlyDisabled)
+            {
+                if (!text.NullOrEmpty())
+                {
+                    text += "\n";
+                }
+                text += "VGE_PermanentlyDisabled".Translate();
+            }
+            else if (Faction == Faction.OfPlayer && linkedTerminal == null)
             {
                 if (!text.NullOrEmpty())
                 {
@@ -229,6 +248,19 @@ namespace VanillaGravshipExpanded
                 LinkTo(terminal);
             }, onGuiAction: delegate { GenDraw.DrawRadiusRing(this.Position, 36f); });
         }
+
+        public override LocalTargetInfo TryFindNewTarget()
+        {
+            if (permanentlyDisabled) return LocalTargetInfo.Invalid;
+            return base.TryFindNewTarget();
+        }
+
+        public override void OrderAttack(LocalTargetInfo targ)
+        {
+            if (permanentlyDisabled) return;
+            base.OrderAttack(targ);
+        }
+
         public override void DrawExtraSelectionOverlays()
         {
             base.DrawExtraSelectionOverlays();
@@ -261,7 +293,7 @@ namespace VanillaGravshipExpanded
                 yield return gizmo;
             }
 
-            if (Faction != Faction.OfPlayer)
+            if (Faction != Faction.OfPlayer || permanentlyDisabled)
             {
                 yield break;
             }
