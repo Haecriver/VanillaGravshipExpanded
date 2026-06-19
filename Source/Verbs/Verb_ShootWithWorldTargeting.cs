@@ -30,7 +30,12 @@ namespace VanillaGravshipExpanded
             {
                 var turret = caster as Building_GravshipTurret;
                 var comp = caster.TryGetComp<CompWorldArtillery>();
-                if (comp.worldTarget.IsValid is false || comp.worldTarget.WorldObject == null || comp.worldTarget.WorldObject.Destroyed || comp.worldTarget.WorldObject is not MapParent mapParent || mapParent.HasMap is false)
+                bool invalid = false;
+                if (comp.worldTarget.IsValid is false) invalid = true;
+                if (comp.worldTarget.Map == null) invalid = true;
+                if (Find.Maps.IndexOf(comp.worldTarget.Map) < 0) invalid = true;
+                if (comp.worldTarget.WorldObject != null && comp.worldTarget.WorldObject.Destroyed) invalid = true;
+                if (invalid)
                 {
                     turret.ResetForcedTarget();
                     return false;
