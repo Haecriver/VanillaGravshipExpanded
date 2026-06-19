@@ -251,6 +251,7 @@
             <turretGunDef>VGE_Gun_GaussGun</turretGunDef>
             <turretBurstCooldownTime>8</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
+            <turretTopOffset>(0, 0.5)</turretTopOffset>
             <turretBurstWarmupTime>4</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
@@ -307,7 +308,6 @@
         <graphicData>
             <texPath>Things/Structures/Artillery/GaussGun_TurretTop</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawOffset>(0,0,0.1)</drawOffset>
         </graphicData>
         <verbs>
             <li>
@@ -381,6 +381,7 @@
             <turretGunDef>VGE_Gun_JavelinPod</turretGunDef>
             <turretBurstCooldownTime>30</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
+            <turretTopOffset>(0, 0.5)</turretTopOffset>
             <turretBurstWarmupTime>5</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
@@ -432,7 +433,6 @@
         <graphicData>
             <texPath>Things/Structures/Artillery/JavelinPod_TurretTop</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawOffset>(0,0,0.1)</drawOffset>
         </graphicData>
         <building>
             <turretTopLoadedGraphic>
@@ -550,6 +550,7 @@
             <turretGunDef>VGE_Gun_AnticraftCaster</turretGunDef>
             <turretBurstCooldownTime>8</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
+            <turretTopOffset>(0, 0.5)</turretTopOffset>
             <turretBurstWarmupTime>6.66</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
@@ -574,7 +575,6 @@
         <graphicData>
             <texPath>Things/Structures/Artillery/AnticraftCaster_TurretTop</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawOffset>(0,0,0.1)</drawOffset>
         </graphicData>
         <statBases>
             <AccuracyTouch>0.86</AccuracyTouch>
