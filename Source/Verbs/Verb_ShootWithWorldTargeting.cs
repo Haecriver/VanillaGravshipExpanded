@@ -45,7 +45,7 @@ namespace VanillaGravshipExpanded
                 TryFindShootLineFromTo(caster.Position, currentTarget, out resultingLine);
                 Projectile projectile2 = (Projectile)GenSpawn.Spawn(projectile, resultingLine.Source, caster.Map);
                 ProjectileHitFlags projectileHitFlags4 = ProjectileHitFlags.IntendedTarget;
-                Vector3 drawPos = caster.DrawPos;
+                Vector3 drawPos = Building_GravshipTurret.GetCastSource(caster);
                 Thing equipmentSource = base.EquipmentSource;
                 projectile2.Launch(turret, drawPos, resultingLine.Dest, currentTarget, projectileHitFlags4, preventFriendlyFire, equipmentSource, null);
                 return true;
