@@ -411,7 +411,7 @@
         </comps>
         <modExtensions>
             <li Class="VanillaGravshipExpanded.TurretExtension_RotationSpeed">
-                <rotationSpeed>45</rotationSpeed>
+                <rotationSpeed>80</rotationSpeed>
             </li>
             <li Class="VanillaGravshipExpanded.TurretExtension_Barrels">
                 <barrels>
