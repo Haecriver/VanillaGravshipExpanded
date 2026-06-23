@@ -251,7 +251,7 @@
             <turretGunDef>VGE_Gun_GaussGun</turretGunDef>
             <turretBurstCooldownTime>8</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
-            <turretTopOffset>(0, 0.5)</turretTopOffset>
+            <turretTopOffset>(0, 0.25)</turretTopOffset>
             <turretBurstWarmupTime>4</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
@@ -381,7 +381,7 @@
             <turretGunDef>VGE_Gun_JavelinPod</turretGunDef>
             <turretBurstCooldownTime>30</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
-            <turretTopOffset>(0, 0.5)</turretTopOffset>
+            <turretTopOffset>(0, 0.25)</turretTopOffset>
             <turretBurstWarmupTime>5</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
@@ -550,7 +550,7 @@
             <turretGunDef>VGE_Gun_AnticraftCaster</turretGunDef>
             <turretBurstCooldownTime>8</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
-            <turretTopOffset>(0, 0.5)</turretTopOffset>
+            <turretTopOffset>(0, 0.25)</turretTopOffset>
             <turretBurstWarmupTime>6.66</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
