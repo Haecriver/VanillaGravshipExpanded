@@ -181,7 +181,7 @@
     </costList>
     <comps>
       <li Class="CompProperties_SubstructureFootprint">
-        <radius>19.9</radius>
+        <radius>23.9</radius>
       </li>
       <li Class="CompProperties_Glower">
         <glowRadius>12</glowRadius>
