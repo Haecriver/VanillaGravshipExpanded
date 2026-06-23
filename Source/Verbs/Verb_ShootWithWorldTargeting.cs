@@ -2,6 +2,7 @@ using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
+using System.Linq;
 
 namespace VanillaGravshipExpanded
 {
@@ -10,6 +11,33 @@ namespace VanillaGravshipExpanded
     {
         public override int ShotsPerBurst => base.BurstShotCount;
         public Building_GravshipTurret Turret => (Building_GravshipTurret)caster;
+
+        public override bool CanHitTarget(LocalTargetInfo targ)
+        {
+            if (caster == null || !caster.Spawned)
+            {
+                return false;
+            }
+            if (targ == caster)
+            {
+                return true;
+            }
+            var comp = caster.TryGetComp<CompWorldArtillery>();
+            if (comp != null && comp.worldTarget.IsValid)
+            {
+                var targetMap = GetTargetMap(comp.worldTarget);
+                if (targetMap != null && targetMap != caster.Map)
+                {
+                    return true;
+                }
+            }
+            if (targ.HasThing && targ.Thing.Map != null && targ.Thing.Map != caster.Map)
+            {
+                return true;
+            }
+            return base.CanHitTarget(targ);
+        }
+
         public override void WarmupComplete()
         {
             base.WarmupComplete();
@@ -26,14 +54,30 @@ namespace VanillaGravshipExpanded
         public override bool TryCastShot()
         {
             var target = CurrentTarget;
-            if (target.Cell.InBounds(caster.Map) is false)
+            var comp = caster.TryGetComp<CompWorldArtillery>();
+
+            bool isCrossMap = false;
+            if (comp != null && comp.worldTarget.IsValid)
+            {
+                var targetMap = GetTargetMap(comp.worldTarget);
+                if (targetMap != null && targetMap != caster.Map)
+                {
+                    isCrossMap = true;
+                }
+            }
+            if (target.HasThing && target.Thing.Map != null && target.Thing.Map != caster.Map)
+            {
+                isCrossMap = true;
+            }
+
+            if (isCrossMap)
             {
                 var turret = caster as Building_GravshipTurret;
-                var comp = caster.TryGetComp<CompWorldArtillery>();
+                var targetMap = GetTargetMap(comp.worldTarget);
                 bool invalid = false;
                 if (comp.worldTarget.IsValid is false) invalid = true;
-                if (comp.worldTarget.Map == null) invalid = true;
-                if (Find.Maps.IndexOf(comp.worldTarget.Map) < 0) invalid = true;
+                if (targetMap == null) invalid = true;
+                if (targetMap != null && Find.Maps.IndexOf(targetMap) < 0) invalid = true;
                 if (comp.worldTarget.WorldObject != null && comp.worldTarget.WorldObject.Destroyed) invalid = true;
                 if (invalid)
                 {
@@ -41,8 +85,7 @@ namespace VanillaGravshipExpanded
                     return false;
                 }
                 ThingDef projectile = Projectile;
-                ShootLine resultingLine;
-                TryFindShootLineFromTo(caster.Position, currentTarget, out resultingLine);
+                ShootLine resultingLine = new ShootLine(caster.Position, currentTarget.Cell);
                 Projectile projectile2 = (Projectile)GenSpawn.Spawn(projectile, resultingLine.Source, caster.Map);
                 ProjectileHitFlags projectileHitFlags4 = ProjectileHitFlags.IntendedTarget;
                 Vector3 drawPos = Building_GravshipTurret.GetCastSource(caster);
@@ -59,6 +102,14 @@ namespace VanillaGravshipExpanded
                 }
                 return num;
             }
+        }
+
+        public Map GetTargetMap(GlobalTargetInfo target)
+        {
+            if (target.HasThing) return target.Thing.Map;
+            if (target.HasWorldObject && target.WorldObject is MapParent mp) return mp.Map;
+            if (target.Tile >= 0) return Find.Maps.FirstOrDefault(m => m.Tile == target.Tile);
+            return null;
         }
     }
 }

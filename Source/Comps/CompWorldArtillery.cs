@@ -112,7 +112,15 @@ namespace VanillaGravshipExpanded
 
             var targetingStat = launcher.GravshipTargeting;
             var forcedMiss = (baseMissRadius * worldMultiplier * mapMultiplier) / GetTargetingMultiplier(targetingStat);
-            return forcedMiss;
+
+            foreach (var b in launcher.Map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (b.Faction == launcher.Faction && b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                {
+                    forcedMiss -= terminal.Props.forcedMissRadiusOffset;
+                }
+            }
+            return Mathf.Max(forcedMiss, 1.9f);
         }
 
         public override void PostExposeData()

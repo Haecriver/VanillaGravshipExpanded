@@ -46,8 +46,8 @@ namespace VanillaGravshipExpanded
 
         public static bool IsSustructureOrScaffold(this TerrainDef terrainDef)
         {
-            return terrainDef.HasTag("Substructure") || terrainDef == VGEDefOf.VGE_DamagedSubstructure
-            || terrainDef == VGEDefOf.VGE_GravshipSubscaffold;
+            return terrainDef.HasTag("Substructure") || terrainDef == VGEDefOf.VGE_DamagedSubstructure || terrainDef == VGEDefOf.VGE_GravshipSubscaffold
+            || terrainDef.HasModExtension<SubstructureEdgeGraphicsExtension>();
         }
 
         public static bool IsScaffold(this TerrainDef terrainDef)

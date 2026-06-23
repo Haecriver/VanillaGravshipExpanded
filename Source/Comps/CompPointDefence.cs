@@ -13,6 +13,8 @@ namespace VanillaGravshipExpanded
         public float interceptionRadius;
         // 15 is technically the minimum if we want to keep using CompTickInterval (unless we mess with VTR).
         public int interceptionAttemptInterval = 15;
+        public bool isEnemyPointDefense;
+        public float falloffScale = 60f;
         public List<string> blacklistedProjectileDefs = new List<string>();
 
         public CompProperties_PointDefence()
@@ -20,7 +22,7 @@ namespace VanillaGravshipExpanded
             compClass = typeof(CompPointDefence);
         }
     }
-    
+
     [HotSwappable]
     public class CompPointDefence : ThingComp
     {
@@ -51,7 +53,7 @@ namespace VanillaGravshipExpanded
             if (ticksUntilNextShot <= 0)
             {
                 ticksUntilNextShot += Props.interceptionAttemptInterval;
-                if (refuelableComp.HasFuel)
+                if (Props.isEnemyPointDefense || refuelableComp.HasFuel)
                 {
                     var target = FindTarget();
                     if (target == null)
@@ -59,7 +61,10 @@ namespace VanillaGravshipExpanded
                         return;
                     }
                     VGEDefOf.Gun_MiniTurret.verbs[0].soundCast.PlayOneShot(new TargetInfo(parent.Position, parent.Map));
-                    refuelableComp.ConsumeFuel(1);
+                    if (Props.isEnemyPointDefense is false)
+                    {
+                        refuelableComp.ConsumeFuel(1);
+                    }
                     FleckMaker.Static(parent.Position, parent.Map, FleckDefOf.ShotFlash, 9);
                     TryIntercept(target);
                     turret.Top.CurRotation = (target.DrawPos - parent.DrawPos).AngleFlat();
@@ -96,6 +101,10 @@ namespace VanillaGravshipExpanded
 
         private bool IsValidTransporter(Thing t)
         {
+            if (Props.isEnemyPointDefense)
+            {
+                return false;
+            }
             if (t is DropPodIncoming dropPod)
             {
                 var allPawns = dropPod.innerContainer.Where(thing => thing is Pawn).Cast<Pawn>().ToList();
@@ -137,7 +146,15 @@ namespace VanillaGravshipExpanded
             if (target is Projectile projectile)
             {
                 float velocity = projectile.def.projectile.speed;
-                float chance = 0.98f * (float)Math.Exp(-Math.Max(0, velocity - 30) / 60f);
+                float chance;
+                if (Props.isEnemyPointDefense)
+                {
+                    chance = 0.735f * (float)Math.Exp(-Math.Max(0, velocity - 30) / Props.falloffScale);
+                }
+                else
+                {
+                    chance = 0.98f * (float)Math.Exp(-Math.Max(0, velocity - 30) / 60f);
+                }
                 chance = Mathf.Clamp(chance, 0.05f, 0.98f);
                 if (Rand.Chance(chance))
                 {

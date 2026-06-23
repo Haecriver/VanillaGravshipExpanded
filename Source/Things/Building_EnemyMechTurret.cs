@@ -19,6 +19,22 @@ namespace VanillaGravshipExpanded
         public override bool HideForceTargetGizmo => true;
 
         protected override bool ShowNoLinkedTerminalOverlay => false;
+
+        public override float BurstCooldownTime()
+        {
+            float cooldown = base.BurstCooldownTime();
+            float factor = 1f;
+            float flat = 0f;
+            foreach (var b in Map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (b.Faction == Faction && b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                {
+                    factor *= terminal.Props.cooldownFactor;
+                    flat += terminal.Props.cooldownFlatOffset;
+                }
+            }
+            return Mathf.Max(6.33f, (cooldown * factor) - (flat / 60f));
+        }
         private int GetTargetPriority(Thing t)
         {
             if (t is Building_GravshipTurret)
@@ -140,7 +156,17 @@ namespace VanillaGravshipExpanded
             potentialTargets.SortBy(t => GetTargetPriority(t));
             foreach (Thing target in potentialTargets)
             {
-                return target;
+                if (map == Map)
+                {
+                    if (verb.CanHitTarget(target))
+                    {
+                        return target;
+                    }
+                }
+                else
+                {
+                    return target;
+                }
             }
             return LocalTargetInfo.Invalid;
         }

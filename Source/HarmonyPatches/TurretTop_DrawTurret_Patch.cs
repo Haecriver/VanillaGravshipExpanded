@@ -12,7 +12,7 @@ namespace VanillaGravshipExpanded
     {
         public static bool Prefix(TurretTop __instance, Vector3 drawLoc, Vector3 recoilDrawOffset, float recoilAngleOffset)
         {
-            if (__instance.parentTurret is Building_GravshipTurret || __instance.parentTurret.def == VGEDefOf.VGE_PointDefenseTurret)
+            if (__instance.parentTurret is Building_GravshipTurret || __instance.parentTurret.def.IsPointDefenseTurret())
             {
                 Building_Turret parentTurret = __instance.parentTurret;
                 Vector3 v = new Vector3(parentTurret.def.building.turretTopOffset.x, 0f, parentTurret.def.building.turretTopOffset.y).RotatedBy(__instance.CurRotation);
