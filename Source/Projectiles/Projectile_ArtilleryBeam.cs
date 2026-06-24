@@ -67,7 +67,12 @@ namespace VanillaGravshipExpanded
 
         public override void Impact(Thing hitThing, bool blockedByShield = false)
         {
-            var verbProps = GravshipTurret.AttackVerb.verbProps;
+            var verbProps = GravshipTurret?.AttackVerb?.verbProps;
+            if (verbProps is null)
+            {
+                Destroy();
+                return;
+            }
             if (hitThing != null)
             {
                 if (hitThing.CanEverAttachFire())
@@ -106,7 +111,7 @@ namespace VanillaGravshipExpanded
             }
         }
 
-        public void SpawnWorldProjectile()
+        public virtual void SpawnWorldProjectile()
         {
             var turret = GravshipTurret;
             Map targetMap = Find.Maps.Find(m => m.Tile == targetTile);

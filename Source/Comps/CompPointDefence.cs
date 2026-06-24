@@ -161,7 +161,7 @@ namespace VanillaGravshipExpanded
                     success = true;
                 }
             }
-            else if (target is IActiveTransporter)
+            else if (target is IActiveTransporter && Props.isEnemyPointDefense is false)
             {
                 float chance = 0.25f;
                 if (Rand.Chance(chance))
