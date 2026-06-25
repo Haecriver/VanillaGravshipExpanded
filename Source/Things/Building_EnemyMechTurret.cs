@@ -25,12 +25,25 @@ namespace VanillaGravshipExpanded
             float cooldown = base.BurstCooldownTime();
             float factor = 1f;
             float flat = 0f;
+            int bufferLinks = 0;
             foreach (var b in Map.listerBuildings.allBuildingsNonColonist)
             {
-                if (b.Faction == Faction && b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                if (b.Faction == Faction)
                 {
-                    factor *= terminal.Props.cooldownFactor;
-                    flat += terminal.Props.cooldownFlatOffset;
+                    if (b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                    {
+                        factor *= terminal.Props.cooldownFactor;
+                        flat += terminal.Props.cooldownFlatOffset;
+                    }
+                    if (b.TryGetComp<CompEnemyTurretBuffer>() is CompEnemyTurretBuffer buffer && buffer.Active && buffer.Props.validTurrets.Contains(this.def) && b.Position.DistanceTo(this.Position) <= buffer.Props.radius)
+                    {
+                        if (buffer.Props.cooldownReductionTicks > 0)
+                        {
+                            flat += buffer.Props.cooldownReductionTicks;
+                            bufferLinks++;
+                            if (bufferLinks >= buffer.Props.maxLinks) break;
+                        }
+                    }
                 }
             }
             return Mathf.Max(6.33f, (cooldown * factor) - (flat / 60f));

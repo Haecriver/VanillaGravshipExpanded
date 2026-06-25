@@ -115,9 +115,19 @@ namespace VanillaGravshipExpanded
 
             foreach (var b in launcher.Map.listerBuildings.allBuildingsNonColonist)
             {
-                if (b.Faction == launcher.Faction && b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                if (b.Faction == launcher.Faction)
                 {
-                    forcedMiss -= terminal.Props.forcedMissRadiusOffset;
+                    if (b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                    {
+                        forcedMiss -= terminal.Props.forcedMissRadiusOffset;
+                    }
+                    if (b.TryGetComp<CompEnemyTurretBuffer>() is CompEnemyTurretBuffer buffer && buffer.Active && buffer.Props.validTurrets.Contains(launcher.def) && b.Position.DistanceTo(launcher.Position) <= buffer.Props.radius)
+                    {
+                        if (buffer.Props.maxForcedMissRadius > 0f)
+                        {
+                            forcedMiss = Mathf.Min(forcedMiss, buffer.Props.maxForcedMissRadius);
+                        }
+                    }
                 }
             }
             return Mathf.Max(forcedMiss, 1.9f);
