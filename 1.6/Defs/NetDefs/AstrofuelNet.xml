@@ -837,7 +837,7 @@
 		<statBases>
 			<MaxHitPoints>800</MaxHitPoints>
 			<Flammability>0</Flammability>
-			<Beauty>-10</Beauty>
+			<Beauty>-20</Beauty>
 			<WorkToBuild>18000</WorkToBuild>
 			<Mass>45</Mass>
 			<VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
