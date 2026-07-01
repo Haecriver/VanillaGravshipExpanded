@@ -84,53 +84,25 @@ namespace VanillaGravshipExpanded
             float hitChance = hitFactor * targetingMultiplier;
             return hitChance;
         }
-
         public virtual float FinalForcedMissRadius(GlobalTargetInfo target)
         {
-            var launcher = parent as Building_GravshipTurret;
-            var verb = launcher.AttackVerb;
-            var baseMissRadius = verb.verbProps.ForcedMissRadius;
-            var distance = GravshipHelper.GetDistance(launcher.Map.Tile, target.Tile);
-            var worldMultiplier = 1f;
-            if (distance > 49)
-            {
-                worldMultiplier = 2.0f;
-            }
-            else if (distance > 25)
-            {
-                worldMultiplier = 1.6f;
-            }
-            else if (distance > 9)
-            {
-                worldMultiplier = 1.2f;
-            }
-            var mapMultiplier = 1f;
-            if (launcher.Map.gameConditionManager.ConditionIsActive(VGEDefOf.VGE_DustCloud))
-            {
-                mapMultiplier = 3f;
-            }
-
-            var targetingStat = launcher.GravshipTargeting;
-            var forcedMiss = (baseMissRadius * worldMultiplier * mapMultiplier) / GetTargetingMultiplier(targetingStat);
-
-            foreach (var b in launcher.Map.listerBuildings.allBuildingsNonColonist)
-            {
-                if (b.Faction == launcher.Faction)
-                {
-                    if (b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
-                    {
-                        forcedMiss -= terminal.Props.forcedMissRadiusOffset;
-                    }
-                    if (b.TryGetComp<CompEnemyTurretBuffer>() is CompEnemyTurretBuffer buffer && buffer.Active && buffer.Props.validTurrets.Contains(launcher.def) && b.Position.DistanceTo(launcher.Position) <= buffer.Props.radius)
-                    {
-                        if (buffer.Props.maxForcedMissRadius > 0f)
-                        {
-                            forcedMiss = Mathf.Min(forcedMiss, buffer.Props.maxForcedMissRadius);
-                        }
-                    }
-                }
-            }
-            return Mathf.Max(forcedMiss, 1.9f);
+        	var launcher = parent as Building_GravshipTurret;
+        	var baseMissRadius = launcher.AttackVerb.verbProps.ForcedMissRadius;
+        	var distance = GravshipHelper.GetDistance(launcher.Map.Tile, target.Tile);
+        	var worldMultiplier = 1f;
+        	if (distance > 49)
+        	{
+        		worldMultiplier = 2.0f;
+        	}
+        	else if (distance > 25)
+        	{
+        		worldMultiplier = 1.6f;
+        	}
+        	else if (distance > 9)
+        	{
+        		worldMultiplier = 1.2f;
+        	}
+        	return GravshipHelper.CalculateAdjustedForcedMissRadius(baseMissRadius * worldMultiplier, launcher.Map, launcher.def, launcher.Position, launcher.Faction, launcher.GravshipTargeting, useMapMultiplier: true);
         }
 
         public override void PostExposeData()

@@ -23,13 +23,24 @@ namespace VanillaGravshipExpanded
             {
                 return;
             }
+            DamageTerrain(cell, map);
+        }
 
+        public static void DamageTerrain(IntVec3 cell, Map map)
+        {
             var terrain = cell.GetTerrain(map);
-            if (terrain == TerrainDefOf.Substructure)
+            var ext = terrain.GetModExtension<DamagedTerrainReplacementExtension>();
+            if (ext != null && ext.damagedTerrain != null)
+            {
+                map.terrainGrid.SetTerrain(cell, ext.damagedTerrain);
+                SpawnDebrisFilth(cell, map);
+                ThingUtility.CheckAutoRebuildTerrainOnDestroyed(terrain, cell, map);
+            }
+            else if (terrain == TerrainDefOf.Substructure)
             {
                 map.terrainGrid.SetTerrain(cell, VGEDefOf.VGE_DamagedSubstructure);
                 SpawnDebrisFilth(cell, map);
-                ThingUtility.CheckAutoRebuildTerrainOnDestroyed(TerrainDefOf.Substructure, c, map);
+                ThingUtility.CheckAutoRebuildTerrainOnDestroyed(TerrainDefOf.Substructure, cell, map);
             }
             else if (terrain.HasTag("DestroyableByArtillery"))
             {

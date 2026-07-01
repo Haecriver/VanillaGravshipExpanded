@@ -210,7 +210,16 @@ namespace VanillaGravshipExpanded
                         if (blocker.MaxHitPoints >= 300 && Rand.Chance(GetSubstructureDamageChance(blocker.MaxHitPoints)))
                         {
                             var terrain = map.terrainGrid.FoundationAt(cell);
-                            if (terrain == TerrainDefOf.Substructure)
+                            var ext = terrain?.GetModExtension<DamagedTerrainReplacementExtension>();
+                            if (ext != null && ext.damagedTerrain != null)
+                            {
+                                if (!hasGravlift)
+                                {
+                                    map.terrainGrid.SetFoundation(cell, ext.damagedTerrain);
+                                    DamageWorker_ExplosionDamageTerrain_Patch.SpawnDebrisFilth(cell, map);
+                                }
+                            }
+                            else if (terrain == TerrainDefOf.Substructure)
                             {
                                 if (!hasGravlift)
                                 {
@@ -218,7 +227,7 @@ namespace VanillaGravshipExpanded
                                     DamageWorker_ExplosionDamageTerrain_Patch.SpawnDebrisFilth(cell, map);
                                 }
                             }
-                            else if (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold)
+                            else if (terrain != null && (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold || terrain.HasTag("VGE_DamagedSubstructure")))
                             {
                                 if (!hasGravlift)
                                 {
@@ -255,7 +264,7 @@ namespace VanillaGravshipExpanded
                             }
                         }
                         var terrain = map.terrainGrid.FoundationAt(cell);
-                        if (terrain == TerrainDefOf.Substructure || terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold)
+                        if (terrain != null && (terrain == TerrainDefOf.Substructure || terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold || terrain.HasTag("VGE_DamagedSubstructure") || terrain.HasModExtension<DamagedTerrainReplacementExtension>()))
                         {
                             map.terrainGrid.RemoveFoundation(cell, false);
                         }

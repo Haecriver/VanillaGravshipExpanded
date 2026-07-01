@@ -169,7 +169,7 @@ namespace VanillaGravshipExpanded
                 }
                 text += "VGE_PermanentlyDisabled".Translate();
             }
-            else if (Faction == Faction.OfPlayer && linkedTerminal == null)
+            else if (ShowNoLinkedTerminalOverlay && Faction == Faction.OfPlayer && linkedTerminal == null)
             {
                 if (!text.NullOrEmpty())
                 {
@@ -178,6 +178,11 @@ namespace VanillaGravshipExpanded
                 text += "VGE_NeedsLinkedTargetingTerminal".Translate();
             }
             return text;
+        }
+
+        public float GetLocalForcedMissRadius(float baseMissRadius)
+        {
+        	return GravshipHelper.CalculateAdjustedForcedMissRadius(baseMissRadius, this.Map, this.def, this.Position, this.Faction, this.GravshipTargeting, useMapMultiplier: true);
         }
 
         public void LinkTo(ITurretLinker terminal)

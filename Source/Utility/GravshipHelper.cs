@@ -199,5 +199,35 @@ namespace VanillaGravshipExpanded
                 Find.WindowStack.Add(dialog_NodeTree);
             }
         }
+
+        public static float CalculateAdjustedForcedMissRadius(float baseMissRadius, Map map, ThingDef turretDef, IntVec3 turretPosition, Faction turretFaction, float targetingStat, bool useMapMultiplier)
+        {
+            var mapMultiplier = useMapMultiplier ? GetMapMultiplier(map) : 1f;
+            var targetingMultiplier = 0.5f + (targetingStat * 0.5f);
+            var forcedMiss = (baseMissRadius * mapMultiplier) / targetingMultiplier;
+            foreach (var b in map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (b.Faction == turretFaction)
+                {
+                    if (b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                    {
+                        forcedMiss -= terminal.Props.forcedMissRadiusOffset;
+                    }
+                    if (b.TryGetComp<CompEnemyTurretBuffer>() is CompEnemyTurretBuffer buffer && buffer.Active && buffer.Props.validTurrets.Contains(turretDef) && b.Position.DistanceTo(turretPosition) <= buffer.Props.radius)
+                    {
+                        if (buffer.Props.maxForcedMissRadius > 0f)
+                        {
+                            forcedMiss = Mathf.Min(forcedMiss, buffer.Props.maxForcedMissRadius);
+                        }
+                    }
+                }
+            }
+            return Mathf.Max(forcedMiss, 1.9f);
+        }
+
+        private static float GetMapMultiplier(Map map)
+        {
+            return map != null && map.gameConditionManager.ConditionIsActive(VGEDefOf.VGE_DustCloud) ? 3f : 1f;
+        }
     }
 }

@@ -3,12 +3,14 @@ using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 using System.Linq;
+using System;
 
 namespace VanillaGravshipExpanded
 {
     [HotSwappable]
     public class Verb_ShootWithWorldTargeting : Verb_LaunchProjectile
     {
+        public static Action<Building_GravshipTurret> OnCrossMapShotFired;
         public override int ShotsPerBurst => base.BurstShotCount;
         public Building_GravshipTurret Turret => (Building_GravshipTurret)caster;
 
@@ -87,6 +89,7 @@ namespace VanillaGravshipExpanded
                 Vector3 drawPos = Building_GravshipTurret.GetCastSource(caster);
                 Thing equipmentSource = base.EquipmentSource;
                 projectile2.Launch(turret, drawPos, GetProjectileDest(resultingLine.Dest), currentTarget, projectileHitFlags4, preventFriendlyFire, equipmentSource, null);
+                OnCrossMapShotFired?.Invoke(turret);
                 return true;
             }
             else if (target.IsValid && target.Cell.IsValid && target.ThingDestroyed is false)
