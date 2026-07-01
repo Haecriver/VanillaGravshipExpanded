@@ -211,7 +211,7 @@ namespace VanillaGravshipExpanded
                         {
                             var terrain = map.terrainGrid.FoundationAt(cell);
                             var ext = terrain?.GetModExtension<DamagedTerrainReplacementExtension>();
-                            if (ext != null && ext.damagedTerrain != null)
+                            if (ext?.damagedTerrain != null)
                             {
                                 if (!hasGravlift)
                                 {
@@ -227,7 +227,7 @@ namespace VanillaGravshipExpanded
                                     DamageWorker_ExplosionDamageTerrain_Patch.SpawnDebrisFilth(cell, map);
                                 }
                             }
-                            else if (terrain != null && (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold || terrain.HasTag("VGE_DamagedSubstructure")))
+                            else if (terrain != null && (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold))
                             {
                                 if (!hasGravlift)
                                 {
@@ -264,7 +264,7 @@ namespace VanillaGravshipExpanded
                             }
                         }
                         var terrain = map.terrainGrid.FoundationAt(cell);
-                        if (terrain != null && (terrain == TerrainDefOf.Substructure || terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold || terrain.HasTag("VGE_DamagedSubstructure") || terrain.HasModExtension<DamagedTerrainReplacementExtension>()))
+                        if (terrain != null && (terrain == TerrainDefOf.Substructure || terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold || terrain.HasModExtension<DamagedTerrainReplacementExtension>()))
                         {
                             map.terrainGrid.RemoveFoundation(cell, false);
                         }

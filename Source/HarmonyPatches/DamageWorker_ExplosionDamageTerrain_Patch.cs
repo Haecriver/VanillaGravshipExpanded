@@ -7,9 +7,9 @@ namespace VanillaGravshipExpanded
     [HarmonyPatch(typeof(DamageWorker), nameof(DamageWorker.ExplosionDamageTerrain))]
     public static class DamageWorker_ExplosionDamageTerrain_Patch
     {
-        public static void Postfix(DamageWorker __instance, Explosion explosion, IntVec3 c)
+        public static void Postfix(Explosion explosion, IntVec3 c)
         {
-            var modExtension = explosion.weapon?.GetModExtension<SubstructureDamageExtension>();
+            var modExtension = explosion.weapon?.GetModExtension<SubstructureDamageExtension>() ?? explosion.projectile?.GetModExtension<SubstructureDamageExtension>();
             if (modExtension == null)
             {
                 return;
@@ -30,7 +30,7 @@ namespace VanillaGravshipExpanded
         {
             var terrain = cell.GetTerrain(map);
             var ext = terrain.GetModExtension<DamagedTerrainReplacementExtension>();
-            if (ext != null && ext.damagedTerrain != null)
+            if (ext?.damagedTerrain != null)
             {
                 map.terrainGrid.SetTerrain(cell, ext.damagedTerrain);
                 SpawnDebrisFilth(cell, map);
