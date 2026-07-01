@@ -118,7 +118,7 @@ namespace VanillaGravshipExpanded
 
         public void AddHeat(float amount)
         {
-            storedHeat = Mathf.Min(storedHeat + amount, CachedStats.maxHeat * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier);
+            storedHeat = Mathf.Min(storedHeat + amount, EffectiveMaxHeat);
             UpdateLit();
         }
 
