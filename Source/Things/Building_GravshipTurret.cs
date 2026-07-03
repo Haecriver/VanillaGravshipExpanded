@@ -34,6 +34,10 @@ namespace VanillaGravshipExpanded
             currentTargetInt = LocalTargetInfo.Invalid;
             forcedTarget = LocalTargetInfo.Invalid;
             burstWarmupTicksLeft = 0;
+            if (Faction is not null)
+            {
+                SetFaction(null);
+            }
         }
 
         public virtual bool CanFire => !permanentlyDisabled && (linkedTerminal?.MannedByPlayer ?? false);
