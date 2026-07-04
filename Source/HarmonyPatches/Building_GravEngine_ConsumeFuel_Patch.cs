@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using HarmonyLib;
 using PipeSystem;
 using RimWorld;
@@ -21,10 +22,7 @@ public static class Building_GravEngine_ConsumeFuel_Patch
         if (!GravshipUtility.TryGetPathFuelCost(__instance.Map.Tile, tile, out var cost, out _))
             return;
 
-        if (LaunchInfo_ExposeData_Patch.isGravliftLaunch.TryGetValue(__instance.launchInfo, out bool isLiftLaunch) && isLiftLaunch)
-        {
-            cost = 20f;
-        }
+        OverrideFuelCostIfGravlift(__instance, ref cost);
 
         // Divide cost by total fuel (cached before vanilla code started lowering it) to get a ratio of fuel we'll need to set each fuel tank to
         LaunchInfo_ExposeData_Patch.lastCost[__instance.launchInfo] = cost;
@@ -32,8 +30,9 @@ public static class Building_GravEngine_ConsumeFuel_Patch
 
         // Create the fuel spent data directly
         var fuelSpentData = new FuelSpentData();
-        foreach (var comp in __instance.GravshipComponents)
+        for (var i = 0; i < __instance.GravshipComponents.Count; i++)
         {
+            var comp = __instance.GravshipComponents[i];
             if (comp.Props.providesFuel && comp.CanBeActive)
             {
                 var storage = comp.parent.GetComp<CompResourceStorage>();
@@ -50,6 +49,29 @@ public static class Building_GravEngine_ConsumeFuel_Patch
         var heatManager = __instance.GetComp<CompHeatManager>();
         heatManager.AddHeat(cost);
         ApplyCooldownReduction(__instance);
+    }
+
+    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr)
+    {
+        var matcher = new CodeMatcher(instr);
+
+        // Find the first return statement and insert after (let it return early if it can't find path)
+        matcher.MatchEndForward(new CodeMatch(OpCodes.Ret));
+        if (matcher.IsInvalid)
+            Log.Error("[VGE] Failed patching Building_GravEngine.ConsumeFuel - gravlift launch may consume too much fuel when using Odyssey-style fuel tanks.");
+
+        // Advance forward 1 so we can operate on the first instruction after return
+        matcher.Advance();
+        matcher.Insert(
+            // Load "this" (Building_GravEngine)
+            CodeInstruction.LoadArgument(0).MoveLabelsFrom(matcher.Instruction),
+            // Load the first local (fuel cost) by address
+            CodeInstruction.LoadLocal(0, true),
+            // Call our method to override the fuel if it's gravlift launch
+            CodeInstruction.Call(() => OverrideFuelCostIfGravlift)
+        );
+
+        return matcher.InstructionEnumeration();
     }
 
     private static void ApplyCooldownReduction(Building_GravEngine gravEngine)
@@ -76,5 +98,11 @@ public static class Building_GravEngine_ConsumeFuel_Patch
         }
         totalReduction = Mathf.Min(totalReduction, 0.5f);
         return totalReduction;
+    }
+
+    private static void OverrideFuelCostIfGravlift(Building_GravEngine engine, ref float fuel)
+    {
+        if (LaunchInfo_ExposeData_Patch.isGravliftLaunch.TryGetValue(engine.launchInfo, out var isLiftLaunch) && isLiftLaunch)
+            fuel = 20f;
     }
 }
