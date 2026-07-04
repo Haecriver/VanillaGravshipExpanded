@@ -12,6 +12,7 @@ namespace VanillaGravshipExpanded
     [HotSwappable]
     public class Building_EnemyMechTurret : Building_GravshipTurret
     {
+        private List<Map> cachedMapsInRange;
         public override bool CanFire => true;
         public override bool CanAutoAttack => true;
         public override float GravshipTargeting => 1f;
@@ -19,6 +20,14 @@ namespace VanillaGravshipExpanded
         public override bool HideForceTargetGizmo => true;
 
         protected override bool ShowNoLinkedTerminalOverlay => false;
+
+        private CompWorldArtillery compWorldArtillery;
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            compWorldArtillery = GetComp<CompWorldArtillery>();
+        }
 
         public override float BurstCooldownTime()
         {
@@ -73,18 +82,37 @@ namespace VanillaGravshipExpanded
 
         public override LocalTargetInfo TryFindNewTarget()
         {
-            var comp = this.GetComp<CompWorldArtillery>();
-            if (comp != null)
+            if (compWorldArtillery != null)
             {
-                var maps = Find.Maps.Where(x => GravshipHelper.GetDistance(Map.Tile, x.Tile) <= comp.Props.worldMapAttackRange).OrderBy(x => GravshipHelper.GetDistance(Map.Tile, x.Tile)).ToList();
-                foreach (var map in maps)
+                if (cachedMapsInRange == null || this.IsHashIntervalTick(250))
                 {
+                    var mapsWithDist = new List<(Map map, float distance)>();
+                    foreach (var map in Find.Maps)
+                    {
+                        if (map.IsPocketMap is false)
+                        {
+                            float dist = GravshipHelper.GetDistance(Map.Tile, map.Tile);
+                            if (dist <= compWorldArtillery.Props.worldMapAttackRange)
+                            {
+                                mapsWithDist.Add((map, dist));
+                            }
+                        }
+                    }
+                    mapsWithDist.Sort((a, b) => a.distance.CompareTo(b.distance));
+                    cachedMapsInRange = mapsWithDist.Select(x => x.map).ToList();
+                }
+                foreach (var map in cachedMapsInRange)
+                {
+                    if (map == null || map.Disposed)
+                    {
+                        continue;
+                    }
                     var target = GetTargetForMap(map);
                     if (target.IsValid)
                     {
                         if (target.Thing.Map != Map)
                         {
-                            comp.StartAttack(new GlobalTargetInfo(target.Thing), target, this);
+                            compWorldArtillery.StartAttack(new GlobalTargetInfo(target.Thing), target, this);
                             return LocalTargetInfo.Invalid;
                         }
                         return target;
@@ -156,17 +184,26 @@ namespace VanillaGravshipExpanded
                 return true;
             };
 
-            var potentialTargets = new List<Thing>();
+            var seenTargets = new Dictionary<Thing, int>();
             foreach (IAttackTarget target in map.attackTargetsCache.GetPotentialTargetsFor(this))
             {
                 if (innerValidator(target))
                 {
-                    potentialTargets.Add(target.Thing);
+                    seenTargets.TryAdd(target.Thing, GetTargetPriority(target.Thing));
                 }
             }
-            potentialTargets.AddRange(map.listerBuildings.allBuildingsColonist.Where(x => GetTargetPriority(x) < 10));
-            potentialTargets = potentialTargets.Distinct().ToList();
-            potentialTargets.SortBy(t => GetTargetPriority(t));
+            foreach (var building in map.listerBuildings.allBuildingsColonist)
+            {
+                if (!seenTargets.ContainsKey(building))
+                {
+                    int priority = GetTargetPriority(building);
+                    if (priority < 10)
+                    {
+                        seenTargets[building] = priority;
+                    }
+                }
+            }
+            var potentialTargets = seenTargets.OrderBy(x => x.Value).Select(x => x.Key).ToList();
             foreach (Thing target in potentialTargets)
             {
                 if (map == Map)
