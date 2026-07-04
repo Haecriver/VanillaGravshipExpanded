@@ -237,7 +237,7 @@ namespace VanillaGravshipExpanded
         public override void CompTickInterval(int delta)
         {
             base.CompTickInterval(delta);
-            if (target.IsValid && target.ThingDestroyed)
+            if (target.IsValid && target.ThingDestroyed || worldTarget.WorldObject != null && worldTarget.WorldObject.Destroyed)
             {
                 var parent = this.parent as Building_TurretGun;
                 parent.ResetForcedTarget();

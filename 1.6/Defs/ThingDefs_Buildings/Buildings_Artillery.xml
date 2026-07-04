@@ -135,9 +135,9 @@
                 <!-- Using a lower value will end up with the turret still shooting roughly once every 15 ticks if you're not looking at it. -->
                 <interceptionAttemptInterval>15</interceptionAttemptInterval>
                 <blacklistedProjectileDefs>
-                  <li>Bullet_HellsphereCannonGun</li>
-                  <li>Bullet_InfernoCannon</li>
-                  <li>Bullet_Heatspike</li>
+                    <li>Bullet_HellsphereCannonGun</li>
+                    <li>Bullet_InfernoCannon</li>
+                    <li>Bullet_Heatspike</li>
                 </blacklistedProjectileDefs>
             </li>
         </comps>
@@ -282,7 +282,7 @@
                 <mustUseBoxes>true</mustUseBoxes>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
-                <worldMapAttackRange>16</worldMapAttackRange>
+                <worldMapAttackRange>20</worldMapAttackRange>
                 <firingMode>GroundToSpace, GroundToGround, SpaceToSpace, SpaceToGround</firingMode>
             </li>
         </comps>
@@ -405,7 +405,7 @@
                 <outOfFuelMessage>Missing rockets</outOfFuelMessage>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
-                <worldMapAttackRange>16</worldMapAttackRange>
+                <worldMapAttackRange>20</worldMapAttackRange>
                 <firingMode>GroundToSpace, GroundToGround, SpaceToSpace, SpaceToGround</firingMode>
             </li>
         </comps>

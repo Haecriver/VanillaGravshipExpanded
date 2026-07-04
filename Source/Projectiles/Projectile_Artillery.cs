@@ -75,7 +75,7 @@ namespace VanillaGravshipExpanded
             this.equipment = equipment;
             var turret = GravshipTurret;
             var comp = turret.TryGetComp<CompWorldArtillery>();
-            if (comp?.worldTarget.IsValid == true && comp.worldTarget.Tile != this.Tile)
+            if (comp?.worldTarget.IsValid == true && comp.worldTarget.Tile.Valid && comp.worldTarget.Tile != this.Tile)
             {
                 var edgeCell = comp.FindEdgeCell(launcher.Map, comp.worldTarget);
                 this.targetTile = comp.worldTarget.Tile;
