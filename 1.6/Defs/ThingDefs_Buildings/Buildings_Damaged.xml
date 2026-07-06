@@ -8,13 +8,13 @@
 		<fillPercent>0.6</fillPercent>
 		<rotatable>true</rotatable>
 		<pathCost>20</pathCost>
-		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<terrainAffordanceNeeded>Substructure</terrainAffordanceNeeded>
 		<building>
 			<paintable>false</paintable>
 			<claimable>false</claimable>
 			<neverBuildable>true</neverBuildable>
 			<deconstructible>true</deconstructible>
-      <alwaysDeconstructible>true</alwaysDeconstructible>
+			<alwaysDeconstructible>true</alwaysDeconstructible>
 			<alwaysShowRelatedBuildCommands>false</alwaysShowRelatedBuildCommands>
 		</building>
 	</ThingDef>
