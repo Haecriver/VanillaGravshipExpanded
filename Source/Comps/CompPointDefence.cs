@@ -29,7 +29,7 @@ namespace VanillaGravshipExpanded
         private CompRefuelable refuelableComp;
         private int ticksUntilNextShot;
         public CompProperties_PointDefence Props => (CompProperties_PointDefence)props;
-
+        public float InterceptionRadius => Props.interceptionRadius;
         public override void PostSpawnSetup(bool respawningAfterLoad)
         {
             base.PostSpawnSetup(respawningAfterLoad);
@@ -77,7 +77,7 @@ namespace VanillaGravshipExpanded
             var allThings = parent.Map.listerThings.ThingsInGroup(ThingRequestGroup.Projectile).Where(IsValidProjectile)
                 .Concat(parent.Map.listerThings.ThingsInGroup(ThingRequestGroup.ActiveTransporter).Where(IsValidTransporter));
             var thing = allThings.OrderBy(t => t.DrawPos.ToIntVec3().DistanceToSquared(parent.Position)).FirstOrDefault();
-            if (thing != null && thing.DrawPos.ToIntVec3().DistanceToSquared(parent.Position) <= Props.interceptionRadius * Props.interceptionRadius)
+            if (thing != null && thing.DrawPos.ToIntVec3().DistanceToSquared(parent.Position) <= InterceptionRadius * InterceptionRadius)
                 return thing;
             return null;
         }
@@ -175,7 +175,7 @@ namespace VanillaGravshipExpanded
         public override void PostDrawExtraSelectionOverlays()
         {
             base.PostDrawExtraSelectionOverlays();
-            GenDraw.DrawRadiusRing(parent.Position, Props.interceptionRadius);
+            GenDraw.DrawRadiusRing(parent.Position, InterceptionRadius);
         }
     }
 }
