@@ -175,7 +175,12 @@ namespace VanillaGravshipExpanded
         public override void PostDrawExtraSelectionOverlays()
         {
             base.PostDrawExtraSelectionOverlays();
-            GenDraw.DrawRadiusRing(parent.Position, InterceptionRadius);
+            var turret = parent as Building_TurretGun;
+
+            if (InterceptionRadius != turret.AttackVerb.verbProps.range)
+            {
+                GenDraw.DrawRadiusRing(parent.Position, InterceptionRadius, Color.green);
+            }
         }
     }
 }
