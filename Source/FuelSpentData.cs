@@ -10,6 +10,8 @@ namespace VanillaGravshipExpanded
 
         public void ExposeData()
         {
+            if (Scribe.mode == LoadSaveMode.Saving)
+                fuelData.RemoveAll(kvp => kvp.Key == null || kvp.Key.Destroyed);
             Scribe_Collections.Look(ref fuelData, "fuelData", LookMode.Reference, LookMode.Value, ref tmpThings, ref tmpAmounts);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -17,7 +19,7 @@ namespace VanillaGravshipExpanded
                 fuelData.RemoveAll(kvp => kvp.Key == null);
             }
         }
-        
+
         private List<Thing> tmpThings = new List<Thing>();
         private List<float> tmpAmounts = new List<float>();
     }
