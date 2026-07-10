@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Patch>
 
-  <!-- Shared -->
-
-  <!-- Give thrusters pipe net comp -->
-  <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[defName="SmallThruster" or defName="LargeThruster"]/comps</xpath>
-    <value>
-      <li Class="VanillaGravshipExpanded.CompProperties_ResourceThruster">
-        <pipeNet>VGE_AstrofuelNet</pipeNet>
-        <outOfFuelOverlay>VGE_NoAstrofuel</outOfFuelOverlay>
-      </li>
-    </value>
-  </Operation>
-
   <!-- Small thruster -->
 
   <!-- Change description -->
@@ -28,14 +15,21 @@
     <value>6</value>
   </Operation>
 
-  <!-- Add substructure support multiplier stat -->
+  <!-- Add comps -->
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="SmallThruster"]/comps</xpath>
     <value>
+      <li Class="VanillaGravshipExpanded.CompProperties_ResourceThruster">
+        <pipeNet>VGE_AstrofuelNet</pipeNet>
+        <outOfFuelOverlay>VGE_NoAstrofuel</outOfFuelOverlay>
+      </li>
       <li Class="VanillaGravshipExpanded.CompProperties_ConstantGravshipFacilityBonus">
         <statOffsets>
           <VGE_SubstructureSupportMultiplier>0.01</VGE_SubstructureSupportMultiplier>
         </statOffsets>
+      </li>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+        <fleckEmissionRate>1</fleckEmissionRate>
       </li>
     </value>
   </Operation>
@@ -56,16 +50,6 @@
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="SmallThruster"]/graphicData/drawSize/text()</xpath>
     <value>(2, 3)</value>
-  </Operation>
-
-
-  <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[defName="SmallThruster"]/comps</xpath>
-    <value>
-      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-        <fleckEmissionRate>1</fleckEmissionRate>
-      </li>
-    </value>
   </Operation>
 
   <Operation Class="PatchOperationAdd">
@@ -93,10 +77,17 @@
   <Operation Class="PatchOperationAdd">
     <xpath>Defs/ThingDef[defName="LargeThruster"]/comps</xpath>
     <value>
+      <li Class="VanillaGravshipExpanded.CompProperties_ResourceThruster">
+        <pipeNet>VGE_AstrofuelNet</pipeNet>
+        <outOfFuelOverlay>VGE_NoAstrofuel</outOfFuelOverlay>
+      </li>
       <li Class="VanillaGravshipExpanded.CompProperties_ConstantGravshipFacilityBonus">
         <statOffsets>
           <VGE_SubstructureSupportMultiplier>0.05</VGE_SubstructureSupportMultiplier>
         </statOffsets>
+      </li>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
+        <fleckEmissionRate>1</fleckEmissionRate>
       </li>
     </value>
   </Operation>
@@ -111,15 +102,6 @@
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/ThingDef[defName="LargeThruster"]/graphicData/drawSize/text()</xpath>
     <value>(3, 4)</value>
-  </Operation>
-
-  <Operation Class="PatchOperationAdd">
-    <xpath>Defs/ThingDef[defName="LargeThruster"]/comps</xpath>
-    <value>
-      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-        <fleckEmissionRate>1</fleckEmissionRate>
-      </li>
-    </value>
   </Operation>
 
   <Operation Class="PatchOperationAdd">

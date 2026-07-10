@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection.Emit;
 using HarmonyLib;
-using PipeSystem;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
@@ -30,20 +28,7 @@ public static class Building_GravEngine_ConsumeFuel_Patch
 
         // Create the fuel spent data directly
         var fuelSpentData = new FuelSpentData();
-        for (var i = 0; i < __instance.GravshipComponents.Count; i++)
-        {
-            var comp = __instance.GravshipComponents[i];
-            if (comp.Props.providesFuel && comp.CanBeActive)
-            {
-                var storage = comp.parent.GetComp<CompResourceStorage>();
-                if (storage == null)
-                    continue;
-                var toSpend = storage.AmountStored * ratio;
-                fuelSpentData.fuelData[storage.parent] = toSpend;
-                storage.DrawResource(toSpend);
-            }
-        }
-
+        GravshipFuelProviderUtility.ConsumeFuelRatioForAllProviders(__instance, ratio, fuelSpentData);
         LaunchInfo_ExposeData_Patch.fuelSpentPerTank[__instance.launchInfo] = fuelSpentData;
 
         var heatManager = __instance.GetComp<CompHeatManager>();
