@@ -14,47 +14,49 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
 
     private float remainingCharges;
     public float rechargeAtCharges;
-    private bool automaticRechargeEnabled = true;
+    private bool automaticRechargeEnabled;
     private int replenishInTicks = -1;
-    [Unsaved] private Gizmo_OxygenProvider oxygenConfigurationGizmo;
 
     public CompProperties_ApparelOxygenProvider Props => (CompProperties_ApparelOxygenProvider)props;
 
-    public int RemainingCharges => Mathf.CeilToInt(remainingCharges);
+    public virtual int RemainingCharges => Mathf.CeilToInt(remainingCharges);
 
-    public int MaxCharges => Props.maxCharges;
+    public virtual int MaxCharges => Props.maxCharges;
 
-    public string LabelRemaining => $"{RemainingChargesExactString} / {MaxCharges}";
+    public virtual string LabelRemaining => $"{RemainingChargesExactString} / {MaxCharges}";
 
-    public float RemainingChargesExact
+    public virtual float RemainingChargesExact
     {
         get => remainingCharges;
         set => remainingCharges = Mathf.Max(value, 0f);
     }
 
-    public string RemainingChargesExactString => $"{RemainingChargesExact:0.00}";
+    public virtual string RemainingChargesExactString => $"{RemainingChargesExact:0.00}";
 
-    public float ValuePercent => Mathf.Clamp01(remainingCharges / Props.maxCharges);
+    public virtual float ValuePercent => Mathf.Clamp01(remainingCharges / Props.maxCharges);
 
-    public ThingDef AmmoDef => Props.fuelDef;
+    public virtual ThingDef AmmoDef => Props.fuelDef;
 
-    public Thing ReloadableThing => parent;
+    public virtual Thing ReloadableThing => parent;
 
-    public int BaseReloadTicks => Props.baseRefillTicks;
+    public virtual int BaseReloadTicks => Props.baseRefillTicks;
 
-    public bool AutomaticRechargeEnabled
+    public virtual bool AutomaticRechargeEnabled
     {
         get => automaticRechargeEnabled;
         set => automaticRechargeEnabled = value;
     }
 
-    public Pawn Wearer => (ParentHolder as Pawn_ApparelTracker)?.pawn;
+    public virtual Pawn Wearer => (ParentHolder as Pawn_ApparelTracker)?.pawn;
+
+    public virtual bool IsGizmoConfigurable => Props.automaticRechargeConfigurable && AmmoDef != null && (Wearer == null || Wearer.IsColonistPlayerControlled || Wearer.IsPrisonerOfColony);
 
     public override void PostPostMake()
     {
         base.PostPostMake();
         remainingCharges = MaxCharges;
         rechargeAtCharges = Mathf.Clamp(GenMath.RoundTo(MaxCharges * Props.percentageToAutoRefill, MaxCharges / 20f), 0, MaxCharges);
+        automaticRechargeEnabled = Props.automaticRechargeByDefault;
     }
 
     public override void CompTickInterval(int delta)
@@ -119,7 +121,7 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
         RemainingChargesExact -= Props.consumptionPerTick * 60;
     }
 
-    public bool NeedsReload(bool allowForceReload)
+    public virtual bool NeedsReload(bool allowForceReload)
     {
         // Just in case
         if (AmmoDef == null)
@@ -134,7 +136,7 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
         return RemainingCharges != MaxCharges && (allowForceReload || RemainingCharges <= rechargeAtCharges);
     }
 
-    public void ReloadFrom(Thing ammo)
+    public virtual void ReloadFrom(Thing ammo)
     {
         if (!NeedsReload(true))
             return;
@@ -189,7 +191,11 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
 
         // Only show gizmo if wearer/parent is the only selected thing
         if (Find.Selector.SingleSelectedObject == parent)
-            yield return oxygenConfigurationGizmo ??= new Gizmo_OxygenProvider(this);
+        {
+            var gizmo = GetConfigurationGizmo();
+            if (gizmo != null)
+                yield return gizmo;
+        }
     }
 
     public override IEnumerable<Gizmo> CompGetWornGizmosExtra()
@@ -199,7 +205,11 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
 
         // Only show gizmo if wearer/parent is the only selected thing
         if (Find.Selector.SingleSelectedObject == Wearer)
-            yield return oxygenConfigurationGizmo ??= new Gizmo_OxygenProvider(this);
+        {
+            var gizmo = GetConfigurationGizmo();
+            if (gizmo != null)
+                yield return gizmo;
+        }
 
         if (!DebugSettings.ShowDevGizmos)
             yield break;
@@ -221,11 +231,11 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
         };
     }
 
-    public void SetRechargeValuePct(float val) => rechargeAtCharges = val * MaxCharges;
+    public virtual void SetRechargeValuePct(float val) => rechargeAtCharges = val * MaxCharges;
 
-    public string DisabledReason(int minNeeded, int maxNeeded) => null;
+    public virtual string DisabledReason(int minNeeded, int maxNeeded) => null;
 
-    public int MinAmmoNeeded(bool allowForcedReload)
+    public virtual int MinAmmoNeeded(bool allowForcedReload)
     {
         if (!NeedsReload(allowForcedReload))
             return 0;
@@ -234,7 +244,7 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
         return Props.fuelCountPerCharge;
     }
 
-    public int MaxAmmoNeeded(bool allowForcedReload)
+    public virtual int MaxAmmoNeeded(bool allowForcedReload)
     {
         if (!NeedsReload(allowForcedReload))
             return 0;
@@ -243,7 +253,7 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
         return Props.fuelCountPerCharge * (MaxCharges - RemainingCharges);
     }
 
-    public int MaxAmmoAmount()
+    public virtual int MaxAmmoAmount()
     {
         if (AmmoDef == null)
             return 0;
@@ -252,7 +262,7 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
         return Props.fuelCountToRefill;
     }
 
-    public bool CanBeUsed(out string reason)
+    public virtual bool CanBeUsed(out string reason)
     {
         reason = null;
         return true;
@@ -266,4 +276,6 @@ public class CompApparelOxygenProvider : ThingComp, IReloadableComp
     }
 
     public override string CompTipStringExtra() => $"\n\n{"Stat_Thing_ReloadChargesRemaining_Name".Translate(Props.ChargeNounArgument).CapitalizeFirst()}: {RemainingChargesExactString} / {MaxCharges}";
+
+    protected virtual Gizmo GetConfigurationGizmo() => new Gizmo_OxygenProvider(this);
 }
