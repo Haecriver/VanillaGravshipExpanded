@@ -81,7 +81,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
             if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
                 return false;
 
-            maxRange += other.storage.Props.storageCapacity / Props.resourceToRangeRatio;
+            maxRange += other.storage.Props.storageCapacity / other.Props.resourceToRangeRatio;
             return true;
         });
 
@@ -89,19 +89,6 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         // Grab either the range provided by thrusters or max range of all thrusters
         return Mathf.Min(maxRange, GetMaxRangeForThrusters(activeThrusters));
     }
-
-    // private void ProcessAllProviders(List<IGravshipFuelProvider> otherProviders, Action<CompPipeNetGravshipFuelProvider> action)
-    // {
-    //     action(this);
-    //     otherProviders?.RemoveAll(x =>
-    //     {
-    //         if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
-    //             return false;
-    //
-    //         action(other);
-    //         return true;
-    //     });
-    // }
 
     private float GetMaxRangeForThrusters(List<CompGravshipThruster> activeThrusters)
     {
@@ -186,5 +173,55 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
 
         storage.AddResource(canAccept);
         return canAccept;
+    }
+
+    public FuelTabEntry GetFuelTabEntry(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
+    {
+        if (Props.pipeNet == null)
+            return null;
+
+        var entry = new SimpleMultiLineTextEntry(engine)
+        {
+            title = "VGE_FuelTab_ThrustersTitle".Translate(Props.pipeNet.resource.name.UncapitalizeFirst().Named("RESOURCE")).CapitalizeFirst(),
+        };
+        var currentFuel = CurrentFuel(engine);
+        var maxFuel = MaxFuel(engine);
+        var range = storage.AmountStored / Props.resourceToRangeRatio;
+        var maxRange = storage.Props.storageCapacity / Props.resourceToRangeRatio;
+        entry.fuelProviders.Add(ParentThing);
+
+        otherProviders?.RemoveAll(x =>
+        {
+            if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
+                return false;
+
+            entry.fuelProviders.Add(other.ParentThing);
+            currentFuel += other.CurrentFuel(engine);
+            maxFuel += other.MaxFuel(engine);
+            range += other.storage.AmountStored / other.Props.resourceToRangeRatio;
+            maxRange += other.storage.Props.storageCapacity / other.Props.resourceToRangeRatio;
+
+            return true;
+        });
+
+        for (var i = 0; i < activeThrusters.Count; i++)
+        {
+            var thruster = activeThrusters[i];
+            if (thruster.parent.GetComp<CompResource>() is { } comp && comp.Props.pipeNet == Props.pipeNet)
+                entry.thrusters.Add(thruster.parent);
+        }
+
+        var maxRangeForThrusters = GetMaxRangeForThrusters(activeThrusters);
+        if (range > maxRangeForThrusters)
+            range = maxRangeForThrusters;
+        if (maxRange > maxRangeForThrusters)
+            maxRange = maxRangeForThrusters;
+
+        entry.text.Add($"{"VGE_FuelTab_Thrusters".Translate().CapitalizeFirst()}: {entry.thrusters.Count}");
+        entry.text.Add($"{Props.pipeNet.resource.name.CapitalizeFirst()}: {currentFuel} / {maxFuel}");
+        entry.text.Add($"{"VGE_FuelTab_Range".Translate().CapitalizeFirst()}: {range} / {maxRange}");
+        entry.text.Add("VGE_FuelTab_UsagePerTile".Translate((Props.resourceToRangeRatio * engine.FuelUseageFactor).Named("COST"), Props.pipeNet.resource.name.UncapitalizeFirst().Named("RESOURCE")).CapitalizeFirst());
+
+        return entry;
     }
 }

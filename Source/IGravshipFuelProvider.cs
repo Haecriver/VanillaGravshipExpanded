@@ -77,4 +77,6 @@ public interface IGravshipFuelProvider
     /// <param name="amount">Amount of fuel to be added.</param>
     /// <returns>Actual amount of fuel added.</returns>
     public float AddFuelAmount(Building_GravEngine engine, float amount);
+    
+    public FuelTabEntry GetFuelTabEntry(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders);
 }

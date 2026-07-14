@@ -233,6 +233,17 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_ScannerCluster_UndergroundResource>Deep {RESOURCE}</VGE_ScannerCluster_UndergroundResource>
     <VGE_ScannerCluster_LongRangeResource>Long-range {RESOURCE}</VGE_ScannerCluster_LongRangeResource>
     <VGE_ScannerCluster_MissingResearchPrerequisite>Missing {RESEARCH_label} research</VGE_ScannerCluster_MissingResearchPrerequisite>
+
+    <!-- Fuel providers -->
+    <VGE_GravshipFuelTab>Fuel</VGE_GravshipFuelTab>
+    <VGE_FuelTab_ThrustersTitle>{RESOURCE} thrusters</VGE_FuelTab_ThrustersTitle> <!-- Used for category title, like "astrofuel thrusters", or "chemfuel thrusters". -->
+    <VGE_FuelTab_Thrusters>connected thrusters</VGE_FuelTab_Thrusters>
+    <VGE_FuelTab_OtherFuelTitle>other fuel</VGE_FuelTab_OtherFuelTitle> <!-- Used for generic fuels (any vanilla refuelable), specifically the tab title -->
+    <VGE_FuelTab_OtherFuel>fuel</VGE_FuelTab_OtherFuel> <!-- Used for generic fuels "Fuel: 123 / 456" -->
+    <VGE_FuelTab_Range>range</VGE_FuelTab_Range>
+    <VGE_FuelTab_UsagePerTile>fuel consumption: {COST} {RESOURCE} per tile</VGE_FuelTab_UsagePerTile>
+    <!-- Pipe net providers uses the pipe net resource name. Electric thruster translation in Chapter 2. -->
+
     <VGE_ProtectingFromSpaceSolarFlare>Protecting from space solar flare</VGE_ProtectingFromSpaceSolarFlare>
     <VGE_GravcoreTax>gravcore tax</VGE_GravcoreTax>
     <VGE_PermanentlyDisabled>Permanently disabled (warcomputer destroyed)</VGE_PermanentlyDisabled>
