@@ -16,9 +16,15 @@ public static class GravshipFuelProviderUtility
 
         void ConsumeFuel(IGravshipFuelProvider provider, Building_GravEngine gravEngine, List<CompGravshipThruster> thrusters, List<IGravshipFuelProvider> otherProviders)
         {
-            var amount = provider.ConsumeFuelRatio(gravEngine, ratio, thrusters, otherProviders);
-            if (fuelSpentData != null && provider.ParentThing is { } thing)
-                fuelSpentData.fuelData[thing] = amount;
+            var consumptionList = provider.ConsumeFuelRatio(gravEngine, ratio, thrusters, otherProviders);
+            if (fuelSpentData != null)
+            {
+                foreach (var (p, amount) in consumptionList)
+                {
+                    if (p.ParentThing is { } thing)
+                        fuelSpentData.fuelData[thing] = amount;
+                }
+            }
         }
     }
 

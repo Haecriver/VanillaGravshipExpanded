@@ -120,13 +120,16 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         return amountStored;
     }
 
-    public float ConsumeFuelRatio(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
+    public List<(IGravshipFuelProvider, float)> ConsumeFuelRatio(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
     {
+        var list = new List<(IGravshipFuelProvider, float)>();
+
         if (Props.pipeNet == null)
         {
             var amountToConsume = storage.AmountStored * fuelConsumedRatio;
             storage.DrawResource(amountToConsume);
-            return amountToConsume;
+            list.Add((this, amountToConsume));
+            return list;
         }
 
         var totalFuel = CurrentFuel(engine);
@@ -149,17 +152,21 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         var toConsume = range * fuelConsumedRatio * Props.resourceToRangeRatio;
         var toConsumeRatio = toConsume / totalFuel;
 
+        var amount = storage.AmountStored * toConsumeRatio;
         storage.DrawResource(storage.AmountStored * toConsumeRatio);
+        list.Add((this, amount));
         otherProviders?.RemoveAll(x =>
         {
             if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
                 return false;
 
-            other.storage.DrawResource(other.storage.AmountStored * toConsumeRatio);
+            var amount = other.storage.AmountStored * toConsumeRatio;
+            other.storage.DrawResource(amount);
+            list.Add((x, amount));
             return true;
         });
 
-        return toConsume;
+        return list;
     }
 
     public float AddFuelAmount(Building_GravEngine engine, float amount)

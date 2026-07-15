@@ -6,7 +6,7 @@ using Verse;
 
 namespace VanillaGravshipExpanded;
 
-[HarmonyPatch]
+// [HarmonyPatch]
 public static class CompPilotConsole_StartChoosingDestination_Lambda_Patch
 {
     private static bool Prepare(MethodBase method)
