@@ -6,8 +6,6 @@ namespace VanillaGravshipExpanded;
 
 public class ITab_GravshipFuel : ITab
 {
-    private const float MinHeight = 450f;
-
     private Vector2 scrollPosition;
     private float viewHeight = 1000f;
 
@@ -29,7 +27,7 @@ public class ITab_GravshipFuel : ITab
 
     public ITab_GravshipFuel()
     {
-        size = new Vector2(420f, MinHeight);
+        size = new Vector2(420f, 500f);
         labelKey = "VGE_GravshipFuelTab";
     }
 
@@ -45,10 +43,7 @@ public class ITab_GravshipFuel : ITab
         var entries = GravshipFuelProviderUtility.GetFuelTabEntriesForAllProviders(gravEngine);
         // TODO: Special text?
         if (entries.NullOrEmpty())
-        {
-            size.y = MinHeight;
             return;
-        }
 
         entries.SortBy(x => x.SortingOrder, x => x.Title);
 
@@ -66,10 +61,7 @@ public class ITab_GravshipFuel : ITab
         }
 
         if (Event.current.type == EventType.Layout)
-        {
             viewHeight = y + 60f;
-            size.y = Mathf.Clamp(viewHeight, MinHeight, UI.screenHeight - InspectPaneUtility.PaneHeight - InspectPaneUtility.TabHeight - 90f);
-        }
 
         Widgets.EndScrollView();
     }
