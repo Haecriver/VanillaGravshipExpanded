@@ -126,6 +126,9 @@
     <researchPrerequisites>
       <li>BasicGravtech</li>
     </researchPrerequisites>
+    <inspectorTabs>
+      <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+    </inspectorTabs>
     <notifyMapRemoved>true</notifyMapRemoved>
     <uiOrder>2000</uiOrder>
   </ThingDef>
@@ -247,6 +250,9 @@
     <researchPrerequisites>
       <li>AdvancedGravtech</li>
     </researchPrerequisites>
+    <inspectorTabs>
+      <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+    </inspectorTabs>
     <notifyMapRemoved>true</notifyMapRemoved>
     <uiOrder>2002</uiOrder>
   </ThingDef>

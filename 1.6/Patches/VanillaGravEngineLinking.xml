@@ -224,4 +224,23 @@
     </match>
   </Operation>
 
+  <!-- Add our ITab to the grav engine console -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/inspectorTabs</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GravEngine"]</xpath>
+      <value>
+        <inspectorTabs>
+          <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+        </inspectorTabs>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GravEngine"]/inspectorTabs</xpath>
+      <value>
+        <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+      </value>
+    </match>
+  </Operation>
+
 </Patch>
