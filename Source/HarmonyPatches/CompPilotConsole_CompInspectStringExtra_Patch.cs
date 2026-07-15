@@ -9,35 +9,41 @@ namespace VanillaGravshipExpanded;
 [HarmonyPatch(typeof(CompPilotConsole), nameof(CompPilotConsole.CompInspectStringExtra))]
 public static class CompPilotConsole_CompInspectStringExtra_Patch
 {
-    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr)
+    private static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instr, ILGenerator generator)
     {
-        var replacements = 0;
+        var removals = 0;
 
-        foreach (var ci in instr)
+        var matcher = new CodeMatcher(instr, generator);
+        while (true)
         {
-            if (ci.opcode == OpCodes.Ldstr && ci.operand is string s)
-            {
-                switch (s)
-                {
-                    // Replace the "Stored chemfuel" with "Stored astrofuel" text
-                    case "StoredChemfuel":
-                        ci.operand = "VGE_StoredAstrofuel";
-                        replacements++;
-                        break;
-                    // Replace the "{0} chemfuel per tile" with "{0} astrofuel per tile" text
-                    case "FuelPerTile":
-                        ci.operand = "VGE_AstrofuelPerTile";
-                        replacements++;
-                        break;
-                }
-            }
+            matcher.MatchStartForward(
+                CodeMatch.IsLdloc(),
+                new CodeMatch(ci => ci.opcode == OpCodes.Ldstr && ci.operand is string and ("StoredChemfuel" or "FuelConsumption"))
+            );
 
-            yield return ci;
+            if (matcher.IsInvalid)
+                break;
+
+            matcher.DefineLabel(out var label);
+            matcher.Insert(new CodeInstruction(OpCodes.Br_S, label).MoveLabelsFrom(matcher.Instruction));
+
+            matcher.MatchStartForward(new CodeMatch(OpCodes.Pop));
+            matcher.Advance();
+            matcher.AddLabels([label]);
+            removals++;
+
+            if (removals >= 10)
+            {
+                Log.Error($"Too many attempts patching {nameof(CompPilotConsole)}:{nameof(CompPilotConsole.CompInspectStringExtra)}");
+                break;
+            }
         }
 
         const int expectedPatches = 2;
 
-        if (replacements != expectedPatches)
-            Log.Error($"Patching CompPilotConsole:CompInspectStringExtra - unexpected amount of patches. Expected patches: {expectedPatches}, actual patch amount: {replacements}. Pilot consoles may incorrectly refer to astrofuel as chemfuel.");
+        if (removals != expectedPatches)
+            Log.Error($"Patching CompPilotConsole:CompInspectStringExtra - unexpected amount of patches. Expected patches: {expectedPatches}, actual patch amount: {removals}. Pilot consoles will display chemfuel costs despite having a separate fuel tab.");
+
+        return matcher.Instructions();
     }
 }
