@@ -239,6 +239,7 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_FuelTab_Range>range</VGE_FuelTab_Range>
     <VGE_FuelTab_UsagePerTile>fuel consumption: {COST} {RESOURCE} per tile</VGE_FuelTab_UsagePerTile>
     <!-- Pipe net providers uses the pipe net resource name. Electric thruster translation in Chapter 2. -->
+    <VGE_OtherFuel>other fuel</VGE_OtherFuel> <!-- Used for generic fuels in a full fuel report, like: "Cost:\n50 astrofuel\n100 other fuel" (separate key in case it's translated differently) -->
 
     <VGE_ProtectingFromSpaceSolarFlare>Protecting from space solar flare</VGE_ProtectingFromSpaceSolarFlare>
     <VGE_GravcoreTax>gravcore tax</VGE_GravcoreTax>

@@ -68,7 +68,7 @@ public interface IGravshipFuelProvider
     /// <param name="activeThrusters">List of thrusters linked to this gravship.</param>
     /// <param name="otherProviders">All the other providers that are currently active (excluding this one), or null. A single provider is allowed to handle other, related providers, to avoid recalculating the same shared data for every single provider. Removing other providers from the list prevents them from calling this method themselves.</param>
     /// <returns>Actual amount of fuel consumed (not ratio) per provider.</returns>
-    public List<(IGravshipFuelProvider, float)> ConsumeFuelRatio(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders);
+    public List<(IGravshipFuelProvider provider, float fuelUsed)> ConsumeFuelRatio(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders);
 
     /// <summary>
     /// Add fuel to this container.
@@ -77,6 +77,8 @@ public interface IGravshipFuelProvider
     /// <param name="amount">Amount of fuel to be added.</param>
     /// <returns>Actual amount of fuel added.</returns>
     public float AddFuelAmount(Building_GravEngine engine, float amount);
-    
+
     public FuelTabEntry GetFuelTabEntry(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders);
+
+    public (string report, float sortingOrder) GetFuelUsageReport(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders);
 }

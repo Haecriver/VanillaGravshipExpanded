@@ -231,4 +231,25 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
 
         return entry;
     }
+
+    public (string, float) GetFuelUsageReport(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
+    {
+        if (!IsActive(engine, activeThrusters, otherProviders))
+            return (null, 0);
+
+        if (Props.pipeNet == null)
+            return (null, storage.AmountStored * fuelConsumedRatio);
+
+        var amount = storage.AmountStored * fuelConsumedRatio;
+        otherProviders?.RemoveAll(x =>
+        {
+            if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
+                return false;
+
+            amount += other.storage.AmountStored * fuelConsumedRatio;
+            return true;
+        });
+
+        return ($"{Mathf.RoundToInt(amount)} {Props.pipeNet.resource.name.UncapitalizeFirst()}", amount);
+    }
 }

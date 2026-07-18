@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace VanillaGravshipExpanded;
@@ -70,6 +73,53 @@ public static class GravshipFuelProviderUtility
         }
     }
 
+    public static StringBuilder GetFuelConsumptionReport(Building_GravEngine engine, float fuelCostRatio, int maxEntries = int.MaxValue, string startingText = null, string extraTextAtMaxEntries = null)
+    {
+        var list = new List<(string report, float sortingOrder)>();
+    
+        var builder = new StringBuilder(startingText);
+        var entries = 0;
+        var otherFuel = 0f;
+
+        ForEachActiveProvider(engine, GetFuelConsumptionReports, HandleRefuelables);
+
+        foreach (var (text, _) in list.OrderByDescending(x => x.sortingOrder))
+        {
+            if (entries >= maxEntries)
+            {
+                if (!extraTextAtMaxEntries.NullOrEmpty())
+                    builder.AppendInNewLine(extraTextAtMaxEntries);
+                break;
+            }
+
+            builder.AppendInNewLine(text);
+            entries++;
+        }
+
+        if (otherFuel > 0f && entries <= maxEntries)
+            builder.AppendInNewLine($"{Mathf.RoundToInt(otherFuel)} {"VGE_OtherFuel".Translate()}");
+
+        return builder;
+
+        void GetFuelConsumptionReports(IGravshipFuelProvider provider, Building_GravEngine gravEngine, List<CompGravshipThruster> thrusters, List<IGravshipFuelProvider> otherProviders)
+        {
+            var entry = provider.GetFuelUsageReport(gravEngine, fuelCostRatio, thrusters, otherProviders);
+            if (entry.report.NullOrEmpty())
+            {
+                if (entry.sortingOrder > 0)
+                    otherFuel += entry.sortingOrder;
+            }
+            else
+                list.Add(entry);
+        }
+
+        void HandleRefuelables(CompRefuelable refuelable, CompGravshipFacility facility)
+        {
+            if (facility.CanBeActive)
+                otherFuel += refuelable.Fuel;
+        }
+    }
+
     public static List<FuelTabEntry> GetFuelTabEntriesForAllProviders(Building_GravEngine engine)
     {
         var list = new List<FuelTabEntry>();
@@ -78,21 +128,7 @@ public static class GravshipFuelProviderUtility
             title = "VGE_FuelTab_OtherFuelTitle".Translate()
         };
 
-        foreach (var comp in engine.GravshipComponents)
-        {
-            if (comp.Props.providesFuel && comp.parent.Spawned && comp.CanBeActive)
-            {
-                var refuelable = comp.parent.GetComp<CompRefuelable>();
-                if (refuelable != null)
-                {
-                    genericEntry.fuelProviders.Add(refuelable.parent);
-                    genericEntry.currentFuel += refuelable.fuel;
-                    genericEntry.maxFuel += refuelable.Props.fuelCapacity;
-                }
-            }
-        }
-
-        ForEachActiveProvider(engine, GetAllEntries, false, false);
+        ForEachActiveProvider(engine, GetAllEntries, HandleRefuelables, false, false);
 
         if (genericEntry.maxFuel > 0f)
             list.Add(genericEntry);
@@ -113,9 +149,16 @@ public static class GravshipFuelProviderUtility
                 genericEntry.maxFuel += provider.MaxFuel(gravEngine);
             }
         }
+
+        void HandleRefuelables(CompRefuelable refuelable, CompGravshipFacility facility)
+        {
+            genericEntry.fuelProviders.Add(refuelable.parent);
+            genericEntry.currentFuel += refuelable.fuel;
+            genericEntry.maxFuel += refuelable.Props.fuelCapacity;
+        }
     }
 
-    public static void ForEachActiveProvider(Building_GravEngine engine, Action<IGravshipFuelProvider, Building_GravEngine, List<CompGravshipThruster>, List<IGravshipFuelProvider>> action, bool includeCompActiveCheck = true, bool includeProviderActiveCheck = true)
+    public static void ForEachActiveProvider(Building_GravEngine engine, Action<IGravshipFuelProvider, Building_GravEngine, List<CompGravshipThruster>, List<IGravshipFuelProvider>> action, Action<CompRefuelable, CompGravshipFacility> refuelableAction = null, bool includeCompActiveCheck = true, bool includeProviderActiveCheck = true)
     {
         if (engine == null || action == null)
             return;
@@ -134,7 +177,11 @@ public static class GravshipFuelProviderUtility
                 // We don't change vanilla handling of CompRefuelable
                 if (comp.Props.providesFuel && (!includeCompActiveCheck || comp.CanBeActive) && !comp.parent.HasComp<CompRefuelable>())
                 {
-                    if (comp.parent is IGravshipFuelProvider thingProvider)
+                    var refuelable = comp.parent.GetComp<CompRefuelable>();
+
+                    if (refuelable != null)
+                        refuelableAction?.Invoke(refuelable, comp);
+                    else if (comp.parent is IGravshipFuelProvider thingProvider)
                         TmpProvidersList.Add(thingProvider);
                     else if (comp is IGravshipFuelProvider compProvider)
                         TmpProvidersList.Add(compProvider);
