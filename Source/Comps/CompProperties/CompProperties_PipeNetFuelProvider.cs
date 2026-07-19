@@ -8,6 +8,7 @@ public class CompProperties_PipeNetFuelProvider : CompProperties_GravshipFacilit
 {
     public PipeNetDef pipeNet;
     public float resourceToRangeRatio = 10f;
+    public bool isGenericFuel = false;
 
     public CompProperties_PipeNetFuelProvider() => compClass = typeof(CompPipeNetGravshipFuelProvider);
 }

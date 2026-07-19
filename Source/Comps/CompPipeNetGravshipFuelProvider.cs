@@ -36,7 +36,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
 
     public bool IsActive(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
     {
-        if (Props.pipeNet == null)
+        if (Props.isGenericFuel)
             return true;
 
         if (activeThrusters.Any(t => t.parent.GetComps<CompResource>().Any(r => r.Props.pipeNet == Props.pipeNet)))
@@ -54,7 +54,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
     public float CurrentRangeProvidedByFuel(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
     {
         var range = storage.AmountStored / Props.resourceToRangeRatio;
-        if (Props.pipeNet == null)
+        if (Props.isGenericFuel)
             return range;
 
         otherProviders?.RemoveAll(x =>
@@ -73,7 +73,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
     public float MaxRangeProvidedByFuel(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
     {
         var maxRange = storage.Props.storageCapacity / Props.resourceToRangeRatio;
-        if (Props.pipeNet == null)
+        if (Props.isGenericFuel)
             return maxRange;
 
         otherProviders?.RemoveAll(x =>
@@ -124,7 +124,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
     {
         var list = new List<(IGravshipFuelProvider, float)>();
 
-        if (Props.pipeNet == null)
+        if (Props.isGenericFuel)
         {
             var amountToConsume = storage.AmountStored * fuelConsumedRatio;
             storage.DrawResource(amountToConsume);
@@ -184,7 +184,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
 
     public FuelTabEntry GetFuelTabEntry(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
     {
-        if (Props.pipeNet == null)
+        if (Props.isGenericFuel)
             return null;
 
         var entry = new SimpleMultiLineTextEntry(engine)
@@ -237,7 +237,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         if (!IsActive(engine, activeThrusters, otherProviders))
             return (null, 0);
 
-        if (Props.pipeNet == null)
+        if (Props.isGenericFuel)
             return (null, storage.AmountStored * fuelConsumedRatio);
 
         var amount = storage.AmountStored * fuelConsumedRatio;
