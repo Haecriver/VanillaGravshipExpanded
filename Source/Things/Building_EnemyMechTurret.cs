@@ -82,6 +82,10 @@ namespace VanillaGravshipExpanded
 
         public override LocalTargetInfo TryFindNewTarget()
         {
+            if (GravshipUtility.GetPlayerGravEngine_NewTemp(Map) != null)
+            {
+                return GetTargetForMap(Map);
+            }
             if (compWorldArtillery != null)
             {
                 if (cachedMapsInRange == null || this.IsHashIntervalTick(250))
@@ -98,7 +102,13 @@ namespace VanillaGravshipExpanded
                             }
                         }
                     }
-                    mapsWithDist.Sort((a, b) => a.distance.CompareTo(b.distance));
+                    mapsWithDist.Sort((a, b) =>
+                    {
+                        int cmp = (GravshipUtility.GetPlayerGravEngine_NewTemp(b.map) != null ? 1 : 0)
+                                - (GravshipUtility.GetPlayerGravEngine_NewTemp(a.map) != null ? 1 : 0);
+                        if (cmp != 0) return cmp;
+                        return a.distance.CompareTo(b.distance);
+                    });
                     cachedMapsInRange = mapsWithDist.Select(x => x.map).ToList();
                 }
                 foreach (var map in cachedMapsInRange)

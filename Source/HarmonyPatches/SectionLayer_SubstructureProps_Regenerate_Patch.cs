@@ -143,11 +143,15 @@ namespace VanillaGravshipExpanded
                     {
                         instance.DrawEdges(item, edgeEdgeDirections, altitude);
                         instance.DrawCorners(item, cornerDirections, edgeEdgeDirections, altitude);
-                        SectionLayer_GravshipHull.ShouldDrawCornerPiece(item + IntVec3.South, map, terrainGrid, out var cornerType, out var _);
-                        bool flag = cornerType == SectionLayer_GravshipHull.CornerType.Corner_NW || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NW || cornerType == SectionLayer_GravshipHull.CornerType.Corner_NE || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NE;
-                        if (edgeEdgeDirections.HasFlag(EdgeDirections.South) && !flag)
+                        var bottomCell = item + IntVec3.South;
+                        if (bottomCell.InBounds(map))
                         {
-                            instance.AddQuad(subMesh, item + IntVec3.South, altitude, Rot4.North, SectionLayer_GravshipMask.IsValidSubstructure(item));
+                            SectionLayer_GravshipHull.ShouldDrawCornerPiece(bottomCell, map, terrainGrid, out var cornerType, out var _);
+                            bool flag = cornerType == SectionLayer_GravshipHull.CornerType.Corner_NW || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NW || cornerType == SectionLayer_GravshipHull.CornerType.Corner_NE || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NE;
+                            if (edgeEdgeDirections.HasFlag(EdgeDirections.South) && !flag)
+                            {
+                                instance.AddQuad(subMesh, item + IntVec3.South, altitude, Rot4.North, SectionLayer_GravshipMask.IsValidSubstructure(item));
+                            }
                         }
                     }
                     SectionLayer_SubstructureProps_ShouldDrawPropsOn_Patch.doVanilla = false;
@@ -188,11 +192,15 @@ namespace VanillaGravshipExpanded
                         if (bottomMat != null)
                         {
                             LayerSubMesh subMesh = instance.GetSubMesh(bottomMat);
-                            SectionLayer_GravshipHull.ShouldDrawCornerPiece(item + IntVec3.South, map, terrainGrid, out var cornerType, out var _);
-                            bool flag = cornerType == SectionLayer_GravshipHull.CornerType.Corner_NW || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NW || cornerType == SectionLayer_GravshipHull.CornerType.Corner_NE || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NE;
-                            if (edgeEdgeDirections.HasFlag(EdgeDirections.South) && !flag)
+                            var bottomCell = item + IntVec3.South;
+                            if (bottomCell.InBounds(map))
                             {
-                                instance.AddQuad(subMesh, item + IntVec3.South, altitude, Rot4.North, true);
+                                SectionLayer_GravshipHull.ShouldDrawCornerPiece(bottomCell, map, terrainGrid, out var cornerType, out var _);
+                                bool flag = cornerType == SectionLayer_GravshipHull.CornerType.Corner_NW || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NW || cornerType == SectionLayer_GravshipHull.CornerType.Corner_NE || cornerType == SectionLayer_GravshipHull.CornerType.Diagonal_NE;
+                                if (edgeEdgeDirections.HasFlag(EdgeDirections.South) && !flag)
+                                {
+                                    instance.AddQuad(subMesh, bottomCell, altitude, Rot4.North, true);
+                                }
                             }
                         }
                     }
