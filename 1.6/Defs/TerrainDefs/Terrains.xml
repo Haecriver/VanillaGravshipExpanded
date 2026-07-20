@@ -137,6 +137,7 @@
 		<defName>VGE_Compressed_Vacstone_Floor</defName>
 		<label>compressed vacstone</label>
 		<texturePath>Things/Terrain/CompressedHewnRock/CompressedHewnRock</texturePath>
+		<color>(115,106,98)</color>
 		<spaceEdgeGraphicData Inherit="False">
 			<OShapeTexPath>Terrain/Surfaces/OrbitalPlatform/BorderInside/OrbitalPlatformBorderInside_OShape</OShapeTexPath>
 			<UShapeTexPath>Terrain/Surfaces/OrbitalPlatform/BorderInside/OrbitalPlatformBorderInside_UShape</UShapeTexPath>
