@@ -13,6 +13,8 @@ public abstract class FuelTabEntry(Building_GravEngine engine)
 
     public virtual float SortingOrder => 0;
 
+    public virtual bool Active => true;
+
     public abstract string Title { get; }
 
     public virtual float TitleHeight(float width)

@@ -140,7 +140,8 @@ public static class GravshipFuelProviderUtility
             var entry = provider.GetFuelTabEntry(gravEngine, thrusters, otherProviders);
             if (entry != null)
             {
-                list.Add(entry);
+                if (entry.Active)
+                    list.Add(entry);
             }
             else
             {

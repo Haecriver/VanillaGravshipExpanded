@@ -67,7 +67,7 @@ public interface IGravshipFuelProvider
     /// <param name="fuelConsumedRatio">The ratio of fuel that should be consumed for travel. For example, 0.1 means that 10% of current fuel amount should be consumed.</param>
     /// <param name="activeThrusters">List of thrusters linked to this gravship.</param>
     /// <param name="otherProviders">All the other providers that are currently active (excluding this one), or null. A single provider is allowed to handle other, related providers, to avoid recalculating the same shared data for every single provider. Removing other providers from the list prevents them from calling this method themselves.</param>
-    /// <returns>Actual amount of fuel consumed (not ratio) per provider.</returns>
+    /// <returns>(Tuple will be changed into its own class before release.) Actual amount of fuel consumed (not ratio) per provider.</returns>
     public List<(IGravshipFuelProvider provider, float fuelUsed)> ConsumeFuelRatio(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders);
 
     /// <summary>
@@ -78,7 +78,22 @@ public interface IGravshipFuelProvider
     /// <returns>Actual amount of fuel added.</returns>
     public float AddFuelAmount(Building_GravEngine engine, float amount);
 
+    /// <summary>
+    /// An entry to the gravship fuel ITab to display fuel info, like current/max fuel or any other relevant information.
+    /// </summary>
+    /// <param name="engine">Grav engine that this is linked to.</param>
+    /// <param name="activeThrusters">List of thrusters linked to this gravship.</param>
+    /// <param name="otherProviders">All the other providers that are currently active (excluding this one), or null. A single provider is allowed to handle other, related providers, to avoid recalculating the same shared data for every single provider. Removing other providers from the list prevents them from calling this method themselves.</param>
+    /// <returns>A fuel tab entry for the fuel ITab, or null if it's a generic fuel.</returns>
     public FuelTabEntry GetFuelTabEntry(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders);
 
+    /// <summary>
+    /// A report (and sorting order) for the fuel usage by the providers.
+    /// </summary>
+    /// <param name="engine">Grav engine that this is linked to.</param>
+    /// <param name="fuelConsumedRatio">The ratio of fuel that would be consumed for travel. For example, 0.1 means that 10% of current fuel amount would be consumed.</param>
+    /// <param name="activeThrusters">List of thrusters linked to this gravship.</param>
+    /// <param name="otherProviders">All the other providers that are currently active (excluding this one), or null. A single provider is allowed to handle other, related providers, to avoid recalculating the same shared data for every single provider. Removing other providers from the list prevents them from calling this method themselves.</param>
+    /// <returns>(Tuple will be changed into its own class before release.) Currently, it's a string report (or null if generic fuel), and sorting order when displaying the report (higher value = higher position). If generic, the sorting order is amount of fuel consumed (if positive) for the generic report.</returns>
     public (string report, float sortingOrder) GetFuelUsageReport(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders);
 }
