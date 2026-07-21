@@ -99,10 +99,6 @@
             <key>VGE_GiantThruster</key>
             <value>0.03</value>
           </li>
-          <li MayRequire="vanillaexpanded.gravship2">
-            <key>VGE_GiantElectricThruster</key>
-            <value>0.03</value>
-          </li>
         </facilityQualityOffsets>
       </li>
       <li Class="VanillaGravshipExpanded.RitualOutcomeComp_AverageMaintenance">

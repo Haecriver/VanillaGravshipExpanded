@@ -74,10 +74,6 @@
             <key>SmallThruster</key>
             <value>0.01</value>
           </li>
-          <li MayRequire="vanillaexpanded.gravship2">
-            <key>VGE_SmallElectricThruster</key>
-            <value>0.01</value>
-          </li>
         </facilityQualityOffsets>
       </li>
       <li Class="RitualOutcomeComp_GravshipFacilities">
@@ -87,10 +83,6 @@
             <key>LargeThruster</key>
             <value>0.02</value>
           </li>
-          <li MayRequire="vanillaexpanded.gravship2">
-            <key>VGE_LargeElectricThruster</key>
-            <value>0.02</value>
-          </li>
         </facilityQualityOffsets>
       </li>
       <li Class="RitualOutcomeComp_GravshipFacilities">
@@ -98,10 +90,6 @@
         <facilityQualityOffsets>
           <li>
             <key>VGE_GiantThruster</key>
-            <value>0.03</value>
-          </li>
-          <li MayRequire="vanillaexpanded.gravship2">
-            <key>VGE_GiantElectricThruster</key>
             <value>0.03</value>
           </li>
         </facilityQualityOffsets>
@@ -213,10 +201,6 @@
             <key>SmallThruster</key>
             <value>0.01</value>
           </li>
-          <li MayRequire="vanillaexpanded.gravship2">
-            <key>VGE_SmallElectricThruster</key>
-            <value>0.01</value>
-          </li>
         </facilityQualityOffsets>
       </li>
       <li Class="RitualOutcomeComp_GravshipFacilities">
@@ -226,10 +210,6 @@
             <key>LargeThruster</key>
             <value>0.02</value>
           </li>
-          <li MayRequire="vanillaexpanded.gravship2">
-            <key>VGE_LargeElectricThruster</key>
-            <value>0.02</value>
-          </li>
         </facilityQualityOffsets>
       </li>
       <li Class="RitualOutcomeComp_GravshipFacilities">
@@ -237,10 +217,6 @@
         <facilityQualityOffsets>
           <li>
             <key>VGE_GiantThruster</key>
-            <value>0.03</value>
-          </li>
-          <li MayRequire="vanillaexpanded.gravship2">
-            <key>VGE_GiantElectricThruster</key>
             <value>0.03</value>
           </li>
         </facilityQualityOffsets>
