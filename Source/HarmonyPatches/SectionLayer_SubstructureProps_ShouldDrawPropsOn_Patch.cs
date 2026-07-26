@@ -34,7 +34,14 @@ namespace VanillaGravshipExpanded
             if (ext != null && ext.renderAsSubstructure)
             {
                 CalculateSubstructureDirections(terrain, c, terrGrid, out edgeEdgeDirections, out cornerDirections);
-                __result = true;
+                if (edgeEdgeDirections == SectionLayer_SubstructureProps.EdgeDirections.None)
+                {
+                    __result = cornerDirections != SectionLayer_SubstructureProps.CornerDirections.None;
+                }
+                else
+                {
+                    __result = true;
+                }
                 return false;
             }
 
