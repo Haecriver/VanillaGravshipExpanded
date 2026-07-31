@@ -350,6 +350,11 @@
             <flyOverhead>true</flyOverhead>
             <stoppingPower>2</stoppingPower>
         </projectile>
+        <modExtensions>
+            <li Class="VanillaGravshipExpanded.SubstructureDamageExtension">
+                <substructureDamageRadius>1.9</substructureDamageRadius>
+            </li>
+        </modExtensions>
     </ThingDef>
 
     <ThingDef ParentName="VGE_GravshipArtillerySmallBase">
@@ -504,6 +509,9 @@
                 <velocityMultiplierRange>0.8~1.2</velocityMultiplierRange>
                 <rotationOverTimeRange>-180.0~180</rotationOverTimeRange>
                 <scaleRange>1.5~3</scaleRange>
+            </li>
+            <li Class="VanillaGravshipExpanded.SubstructureDamageExtension">
+                <substructureDamageRadius>1.9</substructureDamageRadius>
             </li>
         </modExtensions>
     </ThingDef>

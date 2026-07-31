@@ -21,6 +21,7 @@ namespace VanillaGravshipExpanded
                 gravdataCorruptionOccurred[gravship.Engine] = false;
                 ApplyCrashlanding(gravship, __instance.map);
                 RegenScaffondingSections(gravship, __instance.map);
+                AbortEnemyTurretFiringStates(gravship);
                 __state = (gravship, new Dictionary<LandingOutcomeDef, float>());
                 var customOutcomes = DefDatabase<LandingOutcomeDef>.AllDefsListForReading
                     .Where(x => x.Worker is LandingOutcomeWorker_GravshipBase)
@@ -69,6 +70,25 @@ namespace VanillaGravshipExpanded
             catch (System.Exception ex)
             {
                 Log.Error($"[VGE] Exception in LandingEnded Postfix: {ex}");
+            }
+        }
+
+        private static void AbortEnemyTurretFiringStates(Gravship gravship)
+        {
+            foreach (var map in Find.Maps)
+            {
+                foreach (var thing in map.listerThings.ThingsInGroup(ThingRequestGroup.BuildingArtificial))
+                {
+                    if (thing is Building_GravshipTurret gravshipTurret && gravshipTurret.Faction != null && gravshipTurret.Faction.HostileTo(Faction.OfPlayer))
+                    {
+                        var comp = gravshipTurret.TryGetComp<CompWorldArtillery>();
+                        if (comp == null || !comp.worldTarget.IsValid || !gravship.Things.Contains(comp.worldTarget.Thing))
+                        {
+                            continue;
+                        }
+                        gravshipTurret.AbortFiringState();
+                    }
+                }
             }
         }
 

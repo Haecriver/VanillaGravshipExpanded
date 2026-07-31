@@ -40,6 +40,18 @@ namespace VanillaGravshipExpanded
             }
         }
 
+        public virtual void AbortFiringState()
+        {
+            burstActivated = false;
+            if (AttackVerb != null)
+            {
+                AttackVerb.state = VerbState.Idle;
+                AttackVerb.burstShotsLeft = 0;
+                AttackVerb.ticksToNextBurstShot = 0;
+            }
+            ResetForcedTarget();
+        }
+
         public virtual bool CanFire => !permanentlyDisabled && (linkedTerminal?.MannedByPlayer ?? false);
 
         public virtual bool CanAutoAttack => false;

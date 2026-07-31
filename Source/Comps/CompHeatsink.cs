@@ -143,6 +143,12 @@ namespace VanillaGravshipExpanded
             base.CompTick();
             if (parent.Map is null) return;
 
+            var tickInterval = 30;
+            if (!parent.IsHashIntervalTick(tickInterval))
+            {
+                return;
+            }
+
             if (storedHeat <= 0 || !CanBeOn(out _))
             {
                 if (powerComp != null)
@@ -152,7 +158,7 @@ namespace VanillaGravshipExpanded
 
             if (powerComp == null || powerComp.PowerOn)
             {
-                float heatToConsume = (CachedStats.heatConsumptionPerHour * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier) / 2500f;
+                float heatToConsume = (CachedStats.heatConsumptionPerHour * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier) / 2500f * tickInterval;
                 if (storedHeat >= heatToConsume)
                 {
                     storedHeat -= heatToConsume;
@@ -161,7 +167,7 @@ namespace VanillaGravshipExpanded
                     var room = parent.Position.GetRoom(parent.Map);
                     if (room != null)
                     {
-                        room.PushHeat(CachedStats.heatPushedPerSecond / 60f);
+                        room.PushHeat(CachedStats.heatPushedPerSecond / 60f * tickInterval);
                     }
                 }
                 else
