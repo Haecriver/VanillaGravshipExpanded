@@ -19,7 +19,7 @@ namespace VanillaGravshipExpanded
                 Vector3 pos = drawLoc + Altitudes.AltIncVect + v;
                 if (WorldComponent_GravshipController.CutsceneInProgress is false)
                 {
-                    pos.y += 6.19f;
+                    pos.y = Altitudes.AltitudeFor(AltitudeLayer.FogOfWar) + 0.1f;
                 }
                 Map map = __instance.parentTurret.Map;
                 if (map != null)
