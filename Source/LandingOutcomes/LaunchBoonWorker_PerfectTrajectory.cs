@@ -22,7 +22,8 @@ namespace VanillaGravshipExpanded
         public override void ApplyBoon(Gravship gravship)
         {
             var engine = gravship.Engine;
-            if (!LaunchInfo_ExposeData_Patch.fuelSpentPerTank.TryGetValue(engine.launchInfo, out var spentFuelData))
+            var spentFuelData = engine.launchInfo.ExtendedInfo(false)?.fuelSpentPerTank;
+            if (spentFuelData == null || spentFuelData.fuelData.Count <= 0)
                 return;
 
             foreach (var entry in spentFuelData.fuelData)

@@ -18,10 +18,10 @@ namespace VanillaGravshipExpanded
 
         public override void ApplyOutcome(Gravship gravship)
         {
-            var heatManager = gravship.Engine.GetComp<CompHeatManager>();
-            if (LaunchInfo_ExposeData_Patch.lastCost.TryGetValue(gravship.Engine.launchInfo, out float cost))
+            if (gravship.Engine.launchInfo.ExtendedInfo(false) is { lastCost: > 0 } extendedInfo)
             {
-                heatManager.AddHeat(cost);
+                var heatManager = gravship.Engine.GetComp<CompHeatManager>();
+                heatManager.AddHeat(extendedInfo.lastCost);
                 SendStandardLetter(gravship.Engine, null, gravship.Engine);
             }
         }

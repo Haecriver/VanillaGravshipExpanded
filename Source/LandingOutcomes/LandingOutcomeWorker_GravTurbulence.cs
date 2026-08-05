@@ -22,10 +22,13 @@ namespace VanillaGravshipExpanded
         {
             var landingTile = gravship.Engine.Tile;
             var launchInfo = gravship.Engine?.launchInfo;
-            var launchSourceTile = LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo];
-            int distanceTravelled = GravshipHelper.GetDistance(launchSourceTile, landingTile);
-            WorldComponent_GravshipController_LandingEnded_Patch.CalculateMaintenanceLoss(gravship, distanceTravelled,0.25f);
-            SendStandardLetter(gravship.Engine, null, null);
+            var extendedInfo = launchInfo.ExtendedInfo(false);
+            if (extendedInfo is { launchSourceTile.Valid: true })
+            {
+                int distanceTravelled = GravshipHelper.GetDistance(extendedInfo.launchSourceTile, landingTile);
+                WorldComponent_GravshipController_LandingEnded_Patch.CalculateMaintenanceLoss(gravship, distanceTravelled,0.25f);
+                SendStandardLetter(gravship.Engine, null, null);
+            }
         }
     }
 }

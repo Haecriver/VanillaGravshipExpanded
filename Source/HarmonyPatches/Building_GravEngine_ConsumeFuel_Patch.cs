@@ -22,14 +22,14 @@ public static class Building_GravEngine_ConsumeFuel_Patch
 
         OverrideFuelCostIfGravlift(__instance, ref cost);
 
+        var extendedInfo = __instance.launchInfo.ExtendedInfo(true);
         // Divide cost by total fuel (cached before vanilla code started lowering it) to get a ratio of fuel we'll need to set each fuel tank to
-        LaunchInfo_ExposeData_Patch.lastCost[__instance.launchInfo] = cost;
+        extendedInfo.lastCost = cost;
         var ratio = cost / __state;
 
         // Create the fuel spent data directly
-        var fuelSpentData = new FuelSpentData();
-        GravshipFuelProviderUtility.ConsumeFuelRatioForAllProviders(__instance, ratio, fuelSpentData);
-        LaunchInfo_ExposeData_Patch.fuelSpentPerTank[__instance.launchInfo] = fuelSpentData;
+        extendedInfo.fuelSpentPerTank ??= new FuelSpentData();
+        GravshipFuelProviderUtility.ConsumeFuelRatioForAllProviders(__instance, ratio, extendedInfo.fuelSpentPerTank);
 
         var heatManager = __instance.GetComp<CompHeatManager>();
         heatManager.AddHeat(cost);
@@ -87,7 +87,7 @@ public static class Building_GravEngine_ConsumeFuel_Patch
 
     private static void OverrideFuelCostIfGravlift(Building_GravEngine engine, ref float fuel)
     {
-        if (LaunchInfo_ExposeData_Patch.isGravliftLaunch.TryGetValue(engine.launchInfo, out var isLiftLaunch) && isLiftLaunch)
+        if (engine.launchInfo.ExtendedInfo(false)?.isGravliftLaunch == true)
             fuel = 20f;
     }
 }

@@ -66,6 +66,13 @@ namespace VanillaGravshipExpanded
                 {
                     kvp.Key.weight = kvp.Value;
                 }
+
+                var extendedInfo = gravship.Engine?.launchInfo.ExtendedInfo(false);
+                if (extendedInfo != null)
+                {
+                    extendedInfo.LandingEnded(gravship);
+                    LaunchInfo_ExposeData_Patch.extendedLaunchInfos.Remove(gravship.Engine.launchInfo);
+                }
             }
             catch (System.Exception ex)
             {
@@ -95,7 +102,8 @@ namespace VanillaGravshipExpanded
         private static void ApplyGravDataYield(Gravship gravship, out int distanceTravelled)
         {
             var launchInfo = gravship.Engine?.launchInfo;
-            if (launchInfo == null || LaunchInfo_ExposeData_Patch.launchSourceTiles.TryGetValue(launchInfo, out var launchSourceTile) is false)
+            var extendedInfo = launchInfo.ExtendedInfo(false);
+            if (launchInfo == null || extendedInfo == null || !extendedInfo.launchSourceTile.Valid)
             {
                 Log.Error($"[VGE] No launch info found, skipping gravdata yield");
                 distanceTravelled = 0;
@@ -105,15 +113,14 @@ namespace VanillaGravshipExpanded
             float quality = launchInfo.quality;
             float gravdataYield;
 
-            LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.TryGetValue(launchInfo, out var researcherPawn);
-            distanceTravelled = GravshipHelper.GetDistance(launchSourceTile, landingTile);
+            distanceTravelled = GravshipHelper.GetDistance(extendedInfo.launchSourceTile, landingTile);
             if (gravdataCorruptionOccurred.TryGetValue(gravship.Engine, out bool corruptionOccurred) && corruptionOccurred)
             {
                 gravdataYield = 0;
             }
             else
             {
-                gravdataYield = GravdataUtility.CalculateGravdataYield(distanceTravelled, quality, gravship.Engine, researcherPawn);
+                gravdataYield = GravdataUtility.CalculateGravdataYield(distanceTravelled, quality, gravship.Engine, extendedInfo.gravtechResearcherPawns);
             }
 
             float remainingGravdata = gravdataYield;
@@ -135,9 +142,6 @@ namespace VanillaGravshipExpanded
             {
                 blackBox.AddGravdata(remainingGravdata);
             }
-
-            LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.Remove(launchInfo);
-            LaunchInfo_ExposeData_Patch.launchSourceTiles.Remove(launchInfo);
         }
 
         public static void CalculateMaintenanceLoss(Gravship gravship, int distanceTravelled, float chance)
