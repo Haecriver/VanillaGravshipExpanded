@@ -70,7 +70,7 @@ namespace VanillaGravshipExpanded
                 var extendedInfo = gravship.Engine?.launchInfo.ExtendedInfo(false);
                 if (extendedInfo != null)
                 {
-                    extendedInfo.LandingEnded(gravship);
+                    extendedInfo.LandingEnded(__instance);
                     LaunchInfo_ExposeData_Patch.extendedLaunchInfos.Remove(gravship.Engine.launchInfo);
                 }
             }

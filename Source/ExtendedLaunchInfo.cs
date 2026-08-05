@@ -30,11 +30,11 @@ public class ExtendedLaunchInfo : IExposable
             extraData ??= [];
     }
 
-    public void LandingEnded(Gravship gravship)
+    public void LandingEnded(WorldComponent_GravshipController controller)
     {
-        vge2Data?.LandingEnded(gravship);
+        vge2Data?.LandingEnded(controller);
         for (var i = 0; i < extraData.Count; i++)
-            extraData[i].LandingEnded(gravship);
+            extraData[i].LandingEnded(controller);
     }
 }
 
@@ -44,7 +44,7 @@ public abstract class ExtendedLaunchInfoComp : IExposable
     {
     }
 
-    public virtual void LandingEnded(Gravship gravship)
+    public virtual void LandingEnded(WorldComponent_GravshipController controller)
     {
     }
 }
