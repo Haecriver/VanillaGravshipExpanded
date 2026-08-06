@@ -32,6 +32,7 @@
     </Door>
     <VGE_SmallOxygenTank>
       <position>(2, 0, 5)</position>
+      <hp>200</hp>
     </VGE_SmallOxygenTank>
     <GravshipHull>
       <rects>
@@ -146,6 +147,7 @@
     </li>
   </modExtensions>
 </PrefabDef>
+
 
 <PrefabDef>
   <defName>StartingGravjumper_OdysseyDLC</defName>
@@ -267,6 +269,8 @@
     </li>
   </modExtensions>
 </PrefabDef>
+
+
 
 
 <PrefabDef>
@@ -654,6 +658,7 @@
   </modExtensions>
 </PrefabDef>
 
+
 <PrefabDef>
   <defName>StartingGravjumper_Fighter</defName>
   <size>(14,13)</size>
@@ -684,6 +689,7 @@
         <li>(8,8,8,8)</li>
       </rects>
       <stuff>Steel</stuff>
+      <colorDef>Structure_Olive</colorDef>
     </Door>
     <Stool>
       <position>(8, 0, 6)</position>
@@ -699,29 +705,39 @@
         <li>(3,12,3,12)</li>
       </rects>
       <stuff>Steel</stuff>
+      <colorDef>Structure_Slate</colorDef>
     </Barricade>
     <GravshipHull>
       <rects>
-        <li>(1,1,4,1)</li>
-        <li>(4,2,6,2)</li>
+        <li>(1,1,3,1)</li>
         <li>(0,3,1,3)</li>
-        <li>(6,3,6,4)</li>
         <li>(1,4,1,5)</li>
+        <li>(0,5,0,7)</li>
+        <li>(1,7,1,9)</li>
+        <li>(0,9,0,9)</li>
+        <li>(1,11,3,11)</li>
+      </rects>
+      <stuff>Steel</stuff>
+      <colorDef>Structure_Slate</colorDef>
+    </GravshipHull>
+    <GravshipHull>
+      <rects>
+        <li>(4,1,4,2)</li>
+        <li>(5,2,6,2)</li>
+        <li>(6,3,6,4)</li>
         <li>(7,4,7,4)</li>
         <li>(9,4,10,4)</li>
-        <li>(0,5,0,7)</li>
         <li>(10,5,12,5)</li>
         <li>(12,6,13,6)</li>
-        <li>(1,7,1,9)</li>
         <li>(10,7,12,7)</li>
         <li>(6,8,7,8)</li>
         <li>(9,8,10,8)</li>
-        <li>(0,9,0,9)</li>
         <li>(6,9,6,10)</li>
         <li>(4,10,5,10)</li>
-        <li>(1,11,4,11)</li>
+        <li>(4,11,4,11)</li>
       </rects>
       <stuff>Steel</stuff>
+      <colorDef>Structure_Olive</colorDef>
     </GravshipHull>
     <VGE_PilotCockpit>
       <position>(9, 0, 6)</position>
@@ -817,156 +833,6 @@
   </modExtensions>
 </PrefabDef>
 
-<PrefabDef>
-  <defName>StartingGravjumper_TradingVessel</defName>
-  <size>(13,9)</size>
-  <things>
-    <Battery>
-      <position>(7, 0, 4)</position>
-      <relativeRotation>Clockwise</relativeRotation>
-    </Battery>
-    <VGE_AstrofuelPipe>
-      <rects>
-        <li>(2,0,8,0)</li>
-        <li>(2,1,2,8)</li>
-        <li>(3,8,8,8)</li>
-      </rects>
-    </VGE_AstrofuelPipe>
-    <VGE_GravjumperEngine>
-      <position>(6, 0, 4)</position>
-      <hp>373</hp>
-    </VGE_GravjumperEngine>
-    <Door>
-      <rects>
-        <li>(4,0,4,0)</li>
-        <li>(4,8,4,8)</li>
-      </rects>
-      <stuff>Steel</stuff>
-    </Door>
-    <Stool>
-      <position>(3, 0, 4)</position>
-      <relativeRotation>Clockwise</relativeRotation>
-      <stuff>Steel</stuff>
-      <quality>Normal</quality>
-    </Stool>
-    <GravshipHull>
-      <rects>
-        <li>(2,0,3,0)</li>
-        <li>(5,0,11,0)</li>
-        <li>(2,1,2,8)</li>
-        <li>(11,1,12,1)</li>
-        <li>(12,2,12,3)</li>
-        <li>(11,3,11,5)</li>
-        <li>(12,5,12,7)</li>
-        <li>(11,7,11,8)</li>
-        <li>(3,8,3,8)</li>
-        <li>(5,8,10,8)</li>
-      </rects>
-      <stuff>Steel</stuff>
-    </GravshipHull>
-    <VGE_PilotCockpit>
-      <position>(4, 0, 4)</position>
-      <relativeRotation>Clockwise</relativeRotation>
-    </VGE_PilotCockpit>
-    <WallLamp>
-      <position>(5, 0, 1)</position>
-      <relativeRotation>Opposite</relativeRotation>
-    </WallLamp>
-    <WallLamp>
-      <position>(5, 0, 7)</position>
-    </WallLamp>
-    <ShelfSmall>
-      <rects>
-        <li>(11,2,11,2)</li>
-        <li>(10,4,10,4)</li>
-        <li>(11,6,11,6)</li>
-      </rects>
-      <relativeRotation>Counterclockwise</relativeRotation>
-      <stuff>Steel</stuff>
-    </ShelfSmall>
-    <SmallThruster>
-      <positions>
-        <li>(0, 0, 2)</li>
-        <li>(0, 0, 6)</li>
-      </positions>
-      <relativeRotation>Clockwise</relativeRotation>
-    </SmallThruster>
-    <PowerConduit>
-      <rects>
-        <li>(5,0,8,0)</li>
-        <li>(8,1,8,3)</li>
-        <li>(8,5,8,8)</li>
-        <li>(5,8,7,8)</li>
-      </rects>
-    </PowerConduit>
-    <ChemfuelTank>
-      <positions>
-        <li>(7, 0, 1)</li>
-        <li>(7, 0, 6)</li>
-      </positions>
-    </ChemfuelTank>
-    <Shelf>
-      <positions>
-        <li>(3, 0, 2)</li>
-        <li>(3, 0, 7)</li>
-      </positions>
-      <relativeRotation>Clockwise</relativeRotation>
-      <stuff>Steel</stuff>
-    </Shelf>
-    <Shelf>
-      <positions>
-        <li>(5, 0, 1)</li>
-        <li>(9, 0, 1)</li>
-      </positions>
-      <stuff>Steel</stuff>
-    </Shelf>
-    <Shelf>
-      <positions>
-        <li>(6, 0, 7)</li>
-        <li>(10, 0, 7)</li>
-      </positions>
-      <relativeRotation>Opposite</relativeRotation>
-      <stuff>Steel</stuff>
-    </Shelf>
-  </things>
-  <terrain>
-    <Space>
-      <rects>
-        <li>(0,0,1,1)</li>
-        <li>(12,0,12,0)</li>
-        <li>(0,3,1,5)</li>
-        <li>(12,4,12,4)</li>
-        <li>(0,7,1,8)</li>
-        <li>(12,8,12,8)</li>
-      </rects>
-    </Space>
-    <Substructure>
-      <rects>
-        <li>(2,0,11,8)</li>
-        <li>(12,1,12,3)</li>
-        <li>(0,2,1,2)</li>
-        <li>(12,5,12,7)</li>
-        <li>(0,6,1,6)</li>
-      </rects>
-    </Substructure>
-  </terrain>
-  <modExtensions>
-    <li Class="VEF.Storyteller.PrefabExtension">
-      <roofs>
-        <li>
-          <def>RoofConstructed</def>
-          <rects>
-            <li>(2,0,11,8)</li>
-            <li>(12,1,12,3)</li>
-            <li>(0,2,1,2)</li>
-            <li>(12,5,12,7)</li>
-            <li>(0,6,1,6)</li>
-          </rects>
-        </li>
-      </roofs>
-    </li>
-  </modExtensions>
-</PrefabDef>
 
 <PrefabDef>
   <defName>StartingGravjumper_TransportBarge</defName>
@@ -981,7 +847,11 @@
     <Door>
       <position>(3, 0, 4)</position>
       <stuff>Steel</stuff>
+      <colorDef>Structure_Auburn</colorDef>
     </Door>
+    <VGE_AstrofuelDrain>
+      <position>(2, 0, 1)</position>
+    </VGE_AstrofuelDrain>
     <Fence>
       <rects>
         <li>(10,0,11,0)</li>
@@ -992,13 +862,13 @@
     </Fence>
     <GravshipHull>
       <rects>
-        <li>(2,1,2,1)</li>
         <li>(2,4,2,7)</li>
         <li>(4,4,6,4)</li>
         <li>(6,5,6,7)</li>
         <li>(3,7,5,7)</li>
       </rects>
       <stuff>Steel</stuff>
+      <colorDef>Structure_Auburn</colorDef>
     </GravshipHull>
     <VGE_PilotCockpit>
       <position>(4, 0, 6)</position>
@@ -1233,6 +1103,8 @@
     </li>
   </modExtensions>
 </PrefabDef>
+
+
 
 
 
