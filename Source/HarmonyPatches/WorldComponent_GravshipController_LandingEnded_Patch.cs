@@ -18,6 +18,9 @@ namespace VanillaGravshipExpanded
             try
             {
                 var gravship = __instance.gravship;
+                var extendedInfo = gravship.Engine.launchInfo.ExtendedInfo(false);
+                if (extendedInfo != null && (extendedInfo.forcedBoon != null || extendedInfo.forcedMishap != null))
+                    gravship.Engine.launchInfo.doNegativeOutcome = false;
                 gravdataCorruptionOccurred[gravship.Engine] = false;
                 ApplyCrashlanding(gravship, __instance.map);
                 RegenScaffondingSections(gravship, __instance.map);
@@ -70,7 +73,7 @@ namespace VanillaGravshipExpanded
                 var extendedInfo = gravship.Engine?.launchInfo.ExtendedInfo(false);
                 if (extendedInfo != null)
                 {
-                    extendedInfo.LandingEnded(__instance);
+                    extendedInfo.LandingEnded(gravship, __instance);
                     LaunchInfo_ExposeData_Patch.extendedLaunchInfos.Remove(gravship.Engine.launchInfo);
                 }
             }
@@ -172,6 +175,25 @@ namespace VanillaGravshipExpanded
             var launchInfo = gravship.Engine?.launchInfo;
             if (launchInfo == null)
             {
+                return;
+            }
+
+            var extendedInfo = launchInfo.ExtendedInfo(false);
+            if (extendedInfo.forcedMishap != null)
+            {
+                if (extendedInfo.forcedMishap.weight > 0)
+                    extendedInfo.forcedMishap.Worker.ApplyOutcome(gravship);
+                return;
+            }
+            if (extendedInfo.forcedBoon != null)
+            {
+                if (extendedInfo.forcedBoon.weight > 0 && extendedInfo.forcedBoon.Worker.CanTrigger(gravship))
+                {
+                    extendedInfo.forcedBoon.Worker.ApplyBoon(gravship);
+                    if (extendedInfo.forcedBoon.negateMaintenance)
+                        negateMaintenance = true;
+                }
+
                 return;
             }
 
