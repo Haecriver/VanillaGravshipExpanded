@@ -16,6 +16,7 @@
       <li>VGE_Gravlift</li>
       <li>VGE_GravtechConsole</li>
       <li>VGE_GravshipBlackBox</li>
+      <li MayRequire="vanillaexpanded.gravship2">VGE_AuxiliaryAstrofuelTank</li>
       <li>VGE_GiantAstrofuelTank</li>
       <li>VGE_CopilotConsole</li>
       <li>VGE_EngineeringConsole</li>
