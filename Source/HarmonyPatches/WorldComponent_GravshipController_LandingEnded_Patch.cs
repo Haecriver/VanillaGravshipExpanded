@@ -43,6 +43,8 @@ namespace VanillaGravshipExpanded
                 // Remove cooldown if there's a grav anchor
                 if (__instance.map.listerThings.AnyThingWithDef(ThingDefOf.GravAnchor))
                     __instance.gravship.engine.cooldownCompleteTick = GenTicks.TicksGame;
+
+                extendedInfo?.PreLandingEnded(__instance);
             }
             catch (System.Exception ex)
             {
@@ -51,7 +53,7 @@ namespace VanillaGravshipExpanded
             }
         }
 
-        public static void Postfix(WorldComponent_GravshipController __instance, (Gravship gravship, Dictionary<LandingOutcomeDef, float> outcomes) __state)
+        public static void Postfix((Gravship gravship, Dictionary<LandingOutcomeDef, float> outcomes) __state)
         {
             try
             {
@@ -73,7 +75,7 @@ namespace VanillaGravshipExpanded
                 var extendedInfo = gravship.Engine?.launchInfo.ExtendedInfo(false);
                 if (extendedInfo != null)
                 {
-                    extendedInfo.LandingEnded(gravship, __instance);
+                    extendedInfo.PostLandingEnded(gravship);
                     LaunchInfo_ExposeData_Patch.extendedLaunchInfos.Remove(gravship.Engine.launchInfo);
                 }
             }

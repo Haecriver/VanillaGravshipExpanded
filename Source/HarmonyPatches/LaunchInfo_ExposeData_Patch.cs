@@ -18,7 +18,7 @@ namespace VanillaGravshipExpanded
             if (!extendedLaunchInfos.TryGetValue(info, out var value) && createIfMissing)
             {
                 extendedLaunchInfos[info] = value = new ExtendedLaunchInfo();
-                value.Init();
+                value.Init(info);
             }
             return value;
         }

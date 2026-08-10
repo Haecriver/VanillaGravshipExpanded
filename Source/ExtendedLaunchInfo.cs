@@ -8,7 +8,7 @@ namespace VanillaGravshipExpanded;
 
 public class ExtendedLaunchInfo : IExposable
 {
-    public static Action<ExtendedLaunchInfo> onInit;
+    public static Action<LaunchInfo, ExtendedLaunchInfo> onInit;
 
     public Pawn gravtechResearcherPawns = null;
     public PlanetTile launchSourceTile = PlanetTile.Invalid;
@@ -20,7 +20,7 @@ public class ExtendedLaunchInfo : IExposable
     public ExtendedLaunchInfoComp vge2Data = null;
     public List<ExtendedLaunchInfoComp> extraData = [];
 
-    internal void Init() => onInit?.Invoke(this);
+    internal void Init(LaunchInfo info) => onInit?.Invoke(info, this);
 
     public void ExposeData()
     {
@@ -40,11 +40,18 @@ public class ExtendedLaunchInfo : IExposable
             extraData ??= [];
     }
 
-    public void LandingEnded(Gravship gravship, WorldComponent_GravshipController controller)
+    public void PreLandingEnded(WorldComponent_GravshipController controller)
     {
-        vge2Data?.LandingEnded(gravship, controller);
+        vge2Data?.PreLandingEnded(controller);
         for (var i = 0; i < extraData.Count; i++)
-            extraData[i].LandingEnded(gravship, controller);
+            extraData[i].PreLandingEnded(controller);
+    }
+
+    public void PostLandingEnded(Gravship gravship)
+    {
+        vge2Data?.PostLandingEnded(gravship);
+        for (var i = 0; i < extraData.Count; i++)
+            extraData[i].PostLandingEnded(gravship);
     }
 }
 
@@ -54,7 +61,11 @@ public abstract class ExtendedLaunchInfoComp : IExposable
     {
     }
 
-    public virtual void LandingEnded(Gravship gravship, WorldComponent_GravshipController controller)
+    public virtual void PreLandingEnded(WorldComponent_GravshipController controller)
+    {
+    }
+
+    public virtual void PostLandingEnded(Gravship gravship)
     {
     }
 }
