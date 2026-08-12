@@ -16,6 +16,8 @@ namespace VanillaGravshipExpanded
         [Unsaved]
         public CachedHeatsinkStats cachedStats = null;
 
+        public HazeSettings hazeSettings = new();
+
         public CompProperties_Heatsink()
         {
             compClass = typeof(CompHeatsink);
@@ -98,6 +100,8 @@ namespace VanillaGravshipExpanded
         private Graphic overlayGraphic;
         public Graphic OverlayGraphic => overlayGraphic ??= GraphicDatabase.Get<Graphic_Multi>(parent.Graphic.path + "_Overlay", parent.Graphic.Shader, parent.Graphic.drawSize, parent.Graphic.color);
         public CompGlower glower;
+
+        public Effecter haze;
 
         public bool ShouldBeLitNow() => StoredHeat > 0;
 
@@ -182,6 +186,14 @@ namespace VanillaGravshipExpanded
             {
                 powerComp.PowerOutput = powerComp.Props.basePowerConsumption;
             }
+
+            if(this.haze == null)
+            {
+                this.haze        = VGEDefOf.VGE_HazeEffecter.Spawn(this.parent, this.parent.Map, Props.hazeSettings.scale);
+                this.haze.offset = this.parent.TrueCenter() - this.parent.DrawPos + Props.hazeSettings.offset.ToVector3();
+            }
+
+            this.haze.Trigger(this.parent, this.parent);
         }
 
         public override void PostDraw()

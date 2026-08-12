@@ -18,4 +18,14 @@
     </children>
   </EffecterDef>
 
+  <EffecterDef>
+    <defName>VGE_HazeEffecter</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>VGE_HazeFleck</fleckDef>
+        <spawnLocType>OnSource</spawnLocType>
+      </li>
+    </children>
+  </EffecterDef>
 </Defs>

@@ -53,5 +53,8 @@ namespace VanillaGravshipExpanded
         public static ThingDef VGE_CompactBiosculpterPod;
 
         public static OptionalFeaturesDef VFE_TileMutatorMechanics;
+
+        public static FleckDef    VGE_HazeFleck;
+        public static EffecterDef VGE_HazeEffecter;
     }
 }

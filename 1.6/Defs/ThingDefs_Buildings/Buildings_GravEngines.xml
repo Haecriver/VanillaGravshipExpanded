@@ -64,6 +64,12 @@
       <Steel>60</Steel>
     </costList>
     <comps>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravEngineHaze">
+        <hazeSettings>
+            <scale>1.5</scale>
+            <offset>(0, 0)</offset>
+        </hazeSettings>
+      </li>
       <li Class="CompProperties_SubstructureFootprint">
         <radius>7.9</radius>
       </li>
