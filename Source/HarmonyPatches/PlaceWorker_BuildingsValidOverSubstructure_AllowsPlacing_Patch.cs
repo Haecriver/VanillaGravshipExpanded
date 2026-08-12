@@ -43,7 +43,7 @@ public static class PlaceWorker_BuildingsValidOverSubstructure_AllowsPlacing_Pat
 
     private static ThingDef CheckIfGravEngine(ThingDef def)
     {
-        if (def == VGEDefOf.VGE_GravjumperEngine || def == VGEDefOf.VGE_GravhulkEngine)
+        if (def.thingClass.SameOrSubclassOf<Building_GravEngine>())
             return ThingDefOf.GravEngine;
         return def;
     }

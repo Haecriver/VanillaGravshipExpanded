@@ -11,8 +11,15 @@ public class Map_AnyBuildingBlockingMapRemoval_Patch
         // If false, check if there's any of our own engines on the map to prevent the map from being removed.
         if (!__result)
         {
-            __result = __instance.listerThings.AnyThingWithDef(VGEDefOf.VGE_GravjumperEngine) ||
-                       __instance.listerThings.AnyThingWithDef(VGEDefOf.VGE_GravhulkEngine);
+            for (var i = 0; i < GravshipHelper.GravEngineDefs.Length; i++)
+            {
+                var def = GravshipHelper.GravEngineDefs[i];
+                if (def != null && __instance.listerThings.AnyThingWithDef(def))
+                {
+                    __result = true;
+                    break;
+                }
+            }
         }
     }
 }

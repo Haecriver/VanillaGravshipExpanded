@@ -43,17 +43,10 @@ public class CompMultipleGravEnginesHandler : ThingComp
         if (!parent.Spawned)
             return;
 
-        DrawLinesTowards(ThingDefOf.GravEngine);
-        DrawLinesTowards(VGEDefOf.VGE_GravjumperEngine);
-        DrawLinesTowards(VGEDefOf.VGE_GravhulkEngine);
-
-        void DrawLinesTowards(ThingDef def)
+        foreach (var other in ActiveGravEngines)
         {
-            foreach (var thing in parent.Map.listerThings.ThingsOfDef(def))
-            {
-                if (thing != parent)
-                    GenDraw.DrawLineBetween(parent.TrueCenter(), thing.TrueCenter(), SimpleColor.Red);
-            }
+            if (other != this && parent.Map == other.parent.Map)
+                GenDraw.DrawLineBetween(parent.TrueCenter(), other.parent.TrueCenter(), SimpleColor.Red);
         }
     }
 

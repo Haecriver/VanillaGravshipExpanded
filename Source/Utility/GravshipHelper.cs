@@ -23,7 +23,9 @@ namespace VanillaGravshipExpanded
         public static readonly Texture2D GravshipTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravship_WorldIcon");
         public static readonly Texture2D GravhulkTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravhulk_WorldIcon");
 
-        public static readonly List<ThingDef> GravEngineDefs = [ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine];
+        public static readonly ThingDef[] GravEngineDefs;
+
+        static GravshipHelper() => GravEngineDefs = DefDatabase<ThingDef>.AllDefs.Where(x => x.thingClass.SameOrSubclassOf<Building_GravEngine>()).ToArray();
 
         public static void AddScaffoldQuad(LayerSubMesh subMesh, IntVec3 cell, float y)
         {
