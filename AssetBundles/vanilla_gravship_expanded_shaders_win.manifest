@@ -1,0 +1,20 @@
+ManifestFileVersion: 0
+CRC: 2353285295
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f60606d60f55319940a17a3124930298
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0df1dec30b5d061d422d3e6493d27647
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: f60606d60f55319940a17a3124930298
+HashAppended: 0
+ClassTypes:
+- Class: 48
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Data/vanillaexpanded.gravship/Materials/Haze.shader
+Dependencies: []
