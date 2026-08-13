@@ -35,10 +35,9 @@
       <li>
         <compClass>VanillaGravshipExpanded.CompAffectedByConstantGravshipFacilityBonus</compClass>
       </li>
-      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-
-      </li>
-      <li Class="CompProperties_Breakdownable" />
+      <li Class="VanillaGravshipExpanded.CompProperties_HeatManager"/>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable"/>
+      <li Class="CompProperties_Breakdownable"/>
       <!-- Make grav engine a power plant -->
       <li Class="CompProperties_Power">
         <compClass>VanillaGravshipExpanded.CompPowerPlantGravEngine</compClass>
@@ -48,6 +47,12 @@
       <!-- Add extra handling for situation of multiple grav engines -->
       <li>
         <compClass>VanillaGravshipExpanded.CompMultipleGravEnginesHandler</compClass>
+      </li>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravEngineHaze">
+        <hazeSettings>
+          <scale>3</scale>
+          <offset>(0, 0.5)</offset>
+        </hazeSettings>
       </li>
     </value>
   </Operation>

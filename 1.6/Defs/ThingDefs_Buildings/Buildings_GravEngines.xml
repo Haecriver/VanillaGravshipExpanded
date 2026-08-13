@@ -64,12 +64,6 @@
       <Steel>60</Steel>
     </costList>
     <comps>
-      <li Class="VanillaGravshipExpanded.CompProperties_GravEngineHaze">
-        <hazeSettings>
-            <scale>1.5</scale>
-            <offset>(0, 0)</offset>
-        </hazeSettings>
-      </li>
       <li Class="CompProperties_SubstructureFootprint">
         <radius>7.9</radius>
       </li>
@@ -126,6 +120,12 @@
       <li>
         <compClass>VanillaGravshipExpanded.CompMultipleGravEnginesHandler</compClass>
       </li>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravEngineHaze">
+        <hazeSettings>
+          <scale>1.5</scale>
+          <offset>(0, 0)</offset>
+        </hazeSettings>
+      </li>
     </comps>
     <placeWorkers>
       <li>VanillaGravshipExpanded.PlaceWorker_OnlySingleGravEngine</li>
@@ -163,7 +163,7 @@
       <VGE_MaintenanceSensitivity>3</VGE_MaintenanceSensitivity>
       <VGE_GlobalMaintenanceSensitivity>0</VGE_GlobalMaintenanceSensitivity>
       <WorkToBuild>94000</WorkToBuild>
-	    <VGE_GravshipVisibilityFactor MayRequire="vanillaexpanded.gravship2">1</VGE_GravshipVisibilityFactor>
+      <VGE_GravshipVisibilityFactor MayRequire="vanillaexpanded.gravship2">1</VGE_GravshipVisibilityFactor>
       <VGE_GravshipLaunchVisibilityOffset MayRequire="vanillaexpanded.gravship2">0</VGE_GravshipLaunchVisibilityOffset>
     </statBases>
     <uiIconPath>Things/Structures/GravEngines/GravHulkEngine/GravHulkEngine_MenuIcon</uiIconPath>
@@ -250,6 +250,12 @@
       </li>
       <li>
         <compClass>VanillaGravshipExpanded.CompMultipleGravEnginesHandler</compClass>
+      </li>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravEngineHaze">
+        <hazeSettings>
+          <scale>5</scale>
+          <offset>(0, 0.5)</offset>
+        </hazeSettings>
       </li>
     </comps>
     <placeWorkers>
