@@ -42,7 +42,8 @@ public abstract class RitualPosition_GravshipLaunchBase : RitualPosition_Copilot
         var result = base.GetCell(spot, p, ritual);
 
         // Make sure the pawn is facing the correct building, rather than the pilot console
-        if (faceThing)
+        // (After checking that result is not null and cell is valid)
+        if (faceThing && result is { cell.IsValid: true })
         {
             foreach (var cell in GenAdjFast.AdjacentCells8Way(result.cell))
             {
