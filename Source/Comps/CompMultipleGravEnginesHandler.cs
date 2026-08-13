@@ -23,12 +23,34 @@ public class CompMultipleGravEnginesHandler : ThingComp
         ActiveGravEngines.Add(this);
         overlayDrawer = parent.Map.GetComponent<CustomOverlayDrawer>();
         Notify_GravEngineCountChanged();
+
+        if (parent is Building_GravEngine engine)
+            GravEngineTracker.Notify_GravEngineStateChanged(engine);
     }
 
     public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
     {
         ActiveGravEngines.Remove(this);
         Notify_GravEngineCountChanged();
+
+        if (parent is Building_GravEngine engine)
+            GravEngineTracker.Notify_GravEngineStateChanged(engine);
+    }
+
+    public override void PostPostMake()
+    {
+        base.PostPostMake();
+
+        if (parent is Building_GravEngine engine)
+            GravEngineTracker.Notify_GravEngineStateChanged(engine);
+    }
+
+    public override void PostDestroy(DestroyMode mode, Map previousMap)
+    {
+        base.PostDestroy(mode, previousMap);
+
+        if (parent is Building_GravEngine engine)
+            GravEngineTracker.Notify_GravEngineStateChanged(engine);
     }
 
     public override void Notify_MapRemoved()

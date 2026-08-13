@@ -9,7 +9,7 @@ namespace VanillaGravshipExpanded;
 
 public static class GravEngineTracker
 {
-    private const int CooldownTicksAfterFailedCheck = 60;
+    private const int CooldownTicksAfterFailedCheck = GenTicks.TickRareInterval;
 
     private static Building_GravEngine Cached = null;
     private static int LastFailedRecacheTick = -1000000;
@@ -32,7 +32,7 @@ public static class GravEngineTracker
     {
         if (Cached != null)
         {
-            if (IsCurrentEngineStillValid())
+            if (IsGravEngineValid(Cached))
                 return Cached;
             Cached = null;
             ResetLastFailedRecacheTimer();
@@ -141,25 +141,55 @@ public static class GravEngineTracker
         return null;
     }
 
-    private static bool IsCurrentEngineStillValid()
+    private static bool IsGravEngineValid(Building_GravEngine engine)
     {
         // Destroyed, not valid engine
-        if (Cached.Destroyed)
+        if (engine.Destroyed)
             return false;
 
         // Spawned or on a map, valid engine
-        if (Cached.SpawnedOrAnyParentSpawned)
+        if (engine.SpawnedOrAnyParentSpawned)
             return true;
 
         // Held by a Gravship world object
-        if (Find.CurrentGravship?.engine == Cached)
+        if (Find.CurrentGravship?.engine == engine)
             return true;
 
         // Not spawned and no parent holder, not valid engine
-        if (Cached.ParentHolder == null)
+        if (engine.ParentHolder == null)
             return false;
 
         // Parent is a WorldObject of player faction that isn't a MapParent is a valid engine
-        return Cached.ParentHolder is WorldObject { Faction.IsPlayer: true } and not MapParent;
+        return engine.ParentHolder is WorldObject { Faction.IsPlayer: true } and not MapParent;
+    }
+
+    public static void Notify_GravEngineStateChanged(Building_GravEngine engine)
+    {
+        if (engine == null)
+            return;
+
+        // Cached engine is the same as the one whose state changed - either do nothing, or clear cache.
+        if (engine == Cached)
+        {
+            if (!IsGravEngineValid(engine))
+            {
+                Cached = null;
+                ResetLastFailedRecacheTimer();
+            }
+            return;
+        }
+
+        // We currently have something cache - either return early (if current Cached engine is valid), or reset cached engine
+        if (Cached != null)
+        {
+            if (IsGravEngineValid(Cached))
+                return;
+            Cached = null;
+            ResetLastFailedRecacheTimer();
+        }
+
+        // If the new engine is valid - cache it immediately
+        if (IsGravEngineValid(engine))
+            Cached = engine;
     }
 }
