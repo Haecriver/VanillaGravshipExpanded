@@ -10,8 +10,8 @@ namespace VanillaGravshipExpanded;
 
 public static class GravshipFuelProviderUtility
 {
-    private static List<CompGravshipThruster> TmpThrustersList = [];
-    private static List<IGravshipFuelProvider> TmpProvidersList = [];
+    private static readonly List<CompGravshipThruster> TmpThrustersList = [];
+    private static readonly List<IGravshipFuelProvider> TmpProvidersList = [];
 
     public static void ConsumeFuelRatioForAllProviders(Building_GravEngine engine, float ratio, FuelSpentData fuelSpentData = null)
     {
