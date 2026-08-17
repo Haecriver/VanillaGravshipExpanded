@@ -25,7 +25,11 @@ public class CompMultipleGravEnginesHandler : ThingComp
         Notify_GravEngineCountChanged();
 
         if (parent is Building_GravEngine engine)
+        {
             GravEngineTracker.Notify_GravEngineStateChanged(engine);
+            if (!engine.nameHidden && !engine.gravshipName.NullOrEmpty())
+                World_ExposeData_Patch.lastGravshipName = engine.gravshipName;
+        }
     }
 
     public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)

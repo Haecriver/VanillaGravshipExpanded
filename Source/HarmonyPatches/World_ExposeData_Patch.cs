@@ -16,6 +16,8 @@ namespace VanillaGravshipExpanded
 
         public static int gravcoresPurchasedCount = 0;
 
+        public static string lastGravshipName = null;
+
         public static void Reset()
         {
             currentGravtechProject = null;
@@ -29,6 +31,7 @@ namespace VanillaGravshipExpanded
             Scribe_Values.Look(ref countDownSinceElectricityTickCounter, "countDownSinceElectricityTickCounter");
             Scribe_Values.Look(ref maintenanceThreshold, "maintenanceThreshold", 0.7f, false);
             Scribe_Values.Look(ref gravcoresPurchasedCount, "gravcoresPurchasedCount", 0, false);
+            Scribe_Values.Look(ref lastGravshipName, "lastGravshipName");
         }
     }
 }
