@@ -64,7 +64,7 @@
             <roleId>copilot</roleId>
             <dutyDef>ArriveToCell</dutyDef>
             <customPositions>
-              <li Class="RitualPosition_Copilot">
+              <li Class="VanillaGravshipExpanded.RitualPosition_CopilotWithConsole">
                 <faceThing>true</faceThing>
               </li>
             </customPositions>
@@ -150,7 +150,7 @@
             <roleId>copilot</roleId>
             <dutyDef>ArriveToCell</dutyDef>
             <customPositions>
-              <li Class="RitualPosition_Copilot">
+              <li Class="VanillaGravshipExpanded.RitualPosition_CopilotWithConsole">
                 <faceThing>true</faceThing>
               </li>
             </customPositions>
