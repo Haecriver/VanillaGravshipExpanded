@@ -38,9 +38,8 @@ namespace VanillaGravshipExpanded
                 List<Thing> things = cell.GetThingList(map);
                 for (int j = things.Count - 1; j >= 0; j--)
                 {
-                    if (things[j] is Building building && building.def == parent.def && !building.Destroyed && !collapsingBeams.Contains(building))
+                    if (things[j] is Building building && building.def == parent.def && !building.Destroyed && collapsingBeams.Add(building))
                     {
-                        collapsingBeams.Add(building);
                         building.Destroy(mode);
                     }
                 }

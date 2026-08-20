@@ -156,11 +156,12 @@ namespace VanillaGravshipExpanded
                 Log.Error("[VGE] gravship engine has no map, skipping maintenance loss.");
                 return;
             }
-            MaintenanceAndDeterioration_MapComponent comp = gravship.Engine.Map.GetComponent<MaintenanceAndDeterioration_MapComponent>();
+
+            MaintenanceAndDeterioration_MapComponent comp = MaintenanceAndDeterioration_MapComponent.GetCompFast(gravship.Engine.Map);
 
             if (comp != null)
             {
-                gravship.Engine.Map.GetComponent<MaintenanceAndDeterioration_MapComponent>().ChangeGlobalMaintenance(-0.001f * distanceTravelled
+                comp.ChangeGlobalMaintenance(-0.001f * distanceTravelled
                     * GravshipsMod_Settings.maintenanceLossMultiplier, chance);
 
             }

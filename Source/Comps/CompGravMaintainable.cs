@@ -47,20 +47,18 @@ namespace VanillaGravshipExpanded
             });
             parent.Map.flecks.HandOverSystem(system);
 
-            MaintenanceAndDeterioration_MapComponent mapComp = parent.Map?.GetComponent<MaintenanceAndDeterioration_MapComponent>();
-            if (mapComp != null)
+            if (parent.Map != null)
             {
-                mapComp.AddMaintainableToMap(this.parent);
+                MaintenanceAndDeterioration_MapComponent.GetCompFast(parent.Map)?.AddMaintainableToMap(this.parent);
             }
 
             LongEventHandler.ExecuteWhenFinished(UpdateRequiresMaintenance);
         }
         public override void PostDestroy(DestroyMode mode, Map previousMap)
         {
-            MaintenanceAndDeterioration_MapComponent mapComp = parent.Map?.GetComponent<MaintenanceAndDeterioration_MapComponent>();
-            if (mapComp != null)
+            if (parent.Map != null)
             {
-                mapComp.RemoveMaintainableFromMap(this.parent);
+                MaintenanceAndDeterioration_MapComponent.GetCompFast(parent.Map)?.RemoveMaintainableFromMap(this.parent);
             }
             base.PostDestroy(mode, previousMap);
         }

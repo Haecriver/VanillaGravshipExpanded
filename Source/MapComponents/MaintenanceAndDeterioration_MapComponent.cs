@@ -12,8 +12,6 @@ namespace VanillaGravshipExpanded
         
         private Dictionary<Thing, int> timeInSpace = new Dictionary<Thing, int>();
         
-        private int tickCounter = 0;
-        
         private const int CHECK_INTERVAL = 60;
         
         private const float DAMAGE_PER_TICK = 0.01f / 60f;
@@ -22,29 +20,30 @@ namespace VanillaGravshipExpanded
 
         public List<Color> vacBarrierColorGrid;
 
+        private static Map cachedMap;
+        private static MaintenanceAndDeterioration_MapComponent cachedComp;
+
         public MaintenanceAndDeterioration_MapComponent(Map map) : base(map)
         {
             vacBarrierColorGrid = GetDefaultList();
         }
 
+        public static MaintenanceAndDeterioration_MapComponent GetCompFast(Map map) => map == cachedMap ? cachedComp : cachedComp = (cachedMap = map).GetComponent<MaintenanceAndDeterioration_MapComponent>();
+
         public override void MapComponentTick()
         {
-            if (map.Tile.LayerDef.isSpace)
+            // Use map.IsHashIntervalTick rather than using a counter to ensure that different maps process deterioration
+            // at different ticks, spreading the performance impact on multiple tics rather than doing everything in a single
+            // tick, potentially causing longer stutters.
+            if (map.Tile.LayerDef.isSpace && map.IsHashIntervalTick(CHECK_INTERVAL))
             {
-                tickCounter++;
-                if (tickCounter >= CHECK_INTERVAL)
-                {
-                    tickCounter = 0;
-                    ProcessSpaceDeterioration();
-                }
+                ProcessSpaceDeterioration();
             }
         }
 
         private void ProcessSpaceDeterioration()
         {
             var allThings = map.listerThings.AllThings;
-            
-            var currentlyInSpace = new HashSet<Thing>();
             
             for (int i = 0; i < allThings.Count; i++)
             {
@@ -57,11 +56,9 @@ namespace VanillaGravshipExpanded
                 
                 if (IsOnSpaceTerrain(thing))
                 {
-                    currentlyInSpace.Add(thing);
-                    
-                    if (!thingsInSpace.Contains(thing))
+                    // Add returns true if the value was added, or false if it already existed
+                    if (thingsInSpace.Add(thing))
                     {
-                        thingsInSpace.Add(thing);
                         timeInSpace[thing] = 0;
                     }
                     
@@ -71,9 +68,9 @@ namespace VanillaGravshipExpanded
                 }
                 else
                 {
-                    if (thingsInSpace.Contains(thing))
+                    // Remove returns true if value existed and was removed, or false if it didn't exist
+                    if (thingsInSpace.Remove(thing))
                     {
-                        thingsInSpace.Remove(thing);
                         timeInSpace.Remove(thing);
                     }
                 }
@@ -137,9 +134,9 @@ namespace VanillaGravshipExpanded
         
         public int GetTimeInSpace(Thing thing)
         {
-            if (timeInSpace.ContainsKey(thing))
+            if (timeInSpace.TryGetValue(thing, out var time))
             {
-                return timeInSpace[thing];
+                return time;
             }
             return 0;
         }
@@ -151,18 +148,12 @@ namespace VanillaGravshipExpanded
 
         public void AddMaintainableToMap(Thing thing)
         {
-            if (!maintainables_InMap.Contains(thing))
-            {
-                maintainables_InMap.Add(thing);
-            }
+            maintainables_InMap.Add(thing);
         }
 
         public void RemoveMaintainableFromMap(Thing thing)
         {
-            if (maintainables_InMap.Contains(thing))
-            {
-                maintainables_InMap.Remove(thing);
-            }
+            maintainables_InMap.Remove(thing);
         }
 
         public float AverageMaintenanceForEngine(Building_GravEngine engine)
