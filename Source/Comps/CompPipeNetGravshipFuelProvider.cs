@@ -120,20 +120,20 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         return amountStored;
     }
 
-    public List<(IGravshipFuelProvider, float)> ConsumeFuelRatio(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
-        => ConsumeFuelRatio(engine, fuelConsumedRatio, activeThrusters, otherProviders, true);
-
-    public List<(IGravshipFuelProvider, float)> ConsumeFuelRatio(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders, bool consumeResource)
+    public FuelUsageData ConsumeFuelRatio(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders, bool consumeFuel)
     {
-        var list = new List<(IGravshipFuelProvider, float)>();
+        var data = new FuelUsageData();
 
         if (Props.isGenericFuel)
         {
             var amountToConsume = storage.AmountStored * fuelConsumedRatio;
-            if (consumeResource)
+            if (consumeFuel)
                 storage.DrawResource(amountToConsume);
-            list.Add((this, amountToConsume));
-            return list;
+            data.fuelData[this] = amountToConsume;
+            data.totalAmount = amountToConsume;
+            data.sortingOrder = amountToConsume / fuelConsumedRatio;
+            data.isGenericFuel = false;
+            return data;
         }
 
         var totalFuel = CurrentFuel(engine);
@@ -157,22 +157,27 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         var toConsumeRatio = toConsume / totalFuel;
 
         var amount = storage.AmountStored * toConsumeRatio;
-        if (consumeResource)
-            storage.DrawResource(storage.AmountStored * toConsumeRatio);
-        list.Add((this, amount));
+        if (consumeFuel)
+            storage.DrawResource(amount);
+        data.fuelData[this] = amount;
         otherProviders?.RemoveAll(x =>
         {
             if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
                 return false;
 
             var amount = other.storage.AmountStored * toConsumeRatio;
-            if (consumeResource)
+            if (consumeFuel)
                 other.storage.DrawResource(amount);
-            list.Add((x, amount));
+            data.fuelData[x] = amount;
+            data.totalAmount += amount;
             return true;
         });
 
-        return list;
+        data.sortingOrder = range * fuelConsumedRatio;
+        if (data.totalAmount > 0)
+            data.reportString = $"{Mathf.RoundToInt(data.totalAmount)} {Props.pipeNet.resource.name.UncapitalizeFirst()}";
+
+        return data;
     }
 
     public float AddFuelAmount(Building_GravEngine engine, float amount)
@@ -236,21 +241,5 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         entry.text.Add("VGE_FuelTab_UsagePerTile".Translate((Props.resourceToRangeRatio * engine.FuelUseageFactor).Named("COST"), Props.pipeNet.resource.name.UncapitalizeFirst().Named("RESOURCE")).CapitalizeFirst());
 
         return entry;
-    }
-
-    public (string, float) GetFuelUsageReport(Building_GravEngine engine, float fuelConsumedRatio, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
-    {
-        if (!IsActive(engine, activeThrusters, otherProviders))
-            return (null, 0);
-
-        var report = ConsumeFuelRatio(engine, fuelConsumedRatio, activeThrusters, otherProviders, false);
-        var amount = 0f;
-        for (var i = 0; i < report.Count; i++)
-            amount += report[i].Item2;
-
-        if (Props.isGenericFuel || amount <= 0f)
-            return (null, amount);
-
-        return ($"{Mathf.RoundToInt(amount)} {Props.pipeNet.resource.name.UncapitalizeFirst()}", amount);
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using RimWorld;
 using UnityEngine;
@@ -19,10 +18,10 @@ public static class GravshipFuelProviderUtility
 
         void ConsumeFuel(IGravshipFuelProvider provider, Building_GravEngine gravEngine, List<CompGravshipThruster> thrusters, List<IGravshipFuelProvider> otherProviders)
         {
-            var consumptionList = provider.ConsumeFuelRatio(gravEngine, ratio, thrusters, otherProviders);
-            if (fuelSpentData != null)
+            var consumptionList = provider.ConsumeFuelRatio(gravEngine, ratio, thrusters, otherProviders, true);
+            if (fuelSpentData?.fuelData != null)
             {
-                foreach (var (p, amount) in consumptionList)
+                foreach (var (p, amount) in consumptionList.fuelData)
                 {
                     if (p.ParentThing is { } thing)
                         fuelSpentData.fuelData[thing] = amount;
@@ -75,7 +74,7 @@ public static class GravshipFuelProviderUtility
 
     public static StringBuilder GetFuelConsumptionReport(Building_GravEngine engine, float fuelCostRatio, int maxEntries = int.MaxValue, string startingText = null, string extraTextAtMaxEntries = null)
     {
-        var list = new List<(string report, float sortingOrder)>();
+        var list = new List<FuelUsageData>();
     
         var builder = new StringBuilder(startingText);
         var entries = 0;
@@ -83,7 +82,9 @@ public static class GravshipFuelProviderUtility
 
         ForEachActiveProvider(engine, GetFuelConsumptionReports, HandleRefuelables);
 
-        foreach (var (text, _) in list.OrderByDescending(x => x.sortingOrder))
+        list.SortByDescending(x => x);
+
+        foreach (var data in list)
         {
             if (entries >= maxEntries)
             {
@@ -92,7 +93,9 @@ public static class GravshipFuelProviderUtility
                 break;
             }
 
-            builder.AppendInNewLine(text);
+            builder.AppendInNewLine(data.reportString);
+            if (DebugActions.EnableFuelUsageOrder)
+                builder.Append($" (order: {data.sortingOrder})");
             entries++;
         }
 
@@ -103,14 +106,14 @@ public static class GravshipFuelProviderUtility
 
         void GetFuelConsumptionReports(IGravshipFuelProvider provider, Building_GravEngine gravEngine, List<CompGravshipThruster> thrusters, List<IGravshipFuelProvider> otherProviders)
         {
-            var entry = provider.GetFuelUsageReport(gravEngine, fuelCostRatio, thrusters, otherProviders);
-            if (entry.report.NullOrEmpty())
+            var entry = provider.ConsumeFuelRatio(gravEngine, fuelCostRatio, thrusters, otherProviders, false);
+            if (entry != null)
             {
-                if (entry.sortingOrder > 0)
-                    otherFuel += entry.sortingOrder;
+                if (entry.isGenericFuel)
+                    otherFuel += entry.totalAmount;
+                else if (!entry.reportString.NullOrEmpty())
+                    list.Add(entry);
             }
-            else
-                list.Add(entry);
         }
 
         void HandleRefuelables(CompRefuelable refuelable, CompGravshipFacility facility)
@@ -203,4 +206,5 @@ public static class GravshipFuelProviderUtility
         TmpThrustersList.Clear();
         TmpProvidersList.Clear();
     }
+
 }

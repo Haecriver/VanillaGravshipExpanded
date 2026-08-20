@@ -15,7 +15,11 @@ namespace VanillaGravshipExpanded
     [HotSwappable]
     public static class DebugActions
     {
-        [DebugAction("Vanilla Gravship Expanded", "Spawn Structure as Skyfaller", actionType = DebugActionType.Action, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        private const string CategoryName = "Vanilla Gravship Expanded";
+
+        public static bool EnableFuelUsageOrder = false;
+
+        [DebugAction(CategoryName, "Spawn Structure as Skyfaller", actionType = DebugActionType.Action, allowedGameStates = AllowedGameStates.PlayingOnMap)]
         private static List<DebugActionNode> SpawnStructure()
         {
             List<DebugActionNode> list = new List<DebugActionNode>();
@@ -45,5 +49,8 @@ namespace VanillaGravshipExpanded
             IntVec3 spawnCell = target.Cell;
             GenSpawn.Spawn(landingStructure, spawnCell, Find.CurrentMap, Rot4.North);
         }
+
+        [DebugAction(CategoryName, allowedGameStates = AllowedGameStates.Playing)]
+        private static void ToggleDisplayFuelUseOrder() => EnableFuelUsageOrder = !EnableFuelUsageOrder;
     }
 }
