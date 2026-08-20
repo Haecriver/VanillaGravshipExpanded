@@ -241,6 +241,7 @@ namespace VanillaGravshipExpanded
             {
                 var parent = this.parent as Building_TurretGun;
                 parent.ResetForcedTarget();
+                Reset();
             }
         }
 

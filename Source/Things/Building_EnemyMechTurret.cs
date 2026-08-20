@@ -120,9 +120,8 @@ namespace VanillaGravshipExpanded
                     var target = GetTargetForMap(map);
                     if (target.IsValid)
                     {
-                        if (target.Thing.Map != Map)
+                        if (map != Map)
                         {
-                            compWorldArtillery.StartAttack(new GlobalTargetInfo(target.Thing), target, this);
                             return LocalTargetInfo.Invalid;
                         }
                         return target;
@@ -204,6 +203,10 @@ namespace VanillaGravshipExpanded
             }
             foreach (var building in map.listerBuildings.allBuildingsColonist)
             {
+                if (building == searcherThing || !searcherThing.HostileTo(building))
+                {
+                    continue;
+                }
                 if (!seenTargets.ContainsKey(building))
                 {
                     int priority = GetTargetPriority(building);
@@ -225,7 +228,10 @@ namespace VanillaGravshipExpanded
                 }
                 else
                 {
-                    return target;
+                    compWorldArtillery.worldTarget = new GlobalTargetInfo(target);
+                    compWorldArtillery.target = new LocalTargetInfo(target);
+                    this.forcedTarget = compWorldArtillery.FindEdgeCell(Map, compWorldArtillery.worldTarget);
+                    return this.forcedTarget;
                 }
             }
             return LocalTargetInfo.Invalid;
