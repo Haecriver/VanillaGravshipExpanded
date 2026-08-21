@@ -159,7 +159,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         var amount = storage.AmountStored * toConsumeRatio;
         if (consumeFuel)
             storage.DrawResource(amount);
-        data.fuelData[this] = amount;
+        data.fuelData[this] = data.totalAmount = amount;
         otherProviders?.RemoveAll(x =>
         {
             if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
