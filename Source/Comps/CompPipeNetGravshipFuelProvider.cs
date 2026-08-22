@@ -11,6 +11,7 @@ namespace VanillaGravshipExpanded;
 public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFuelProvider
 {
     protected CompResourceStorage storage;
+    protected GravshipFuelExtension extension;
 
     public Thing ParentThing => parent;
 
@@ -32,6 +33,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
     private void InitializeComps()
     {
         storage = parent.GetComps<CompResourceStorage>().FirstOrDefault(c => c.Props.pipeNet == Props.pipeNet);
+        extension = Props.pipeNet.GetModExtension<GravshipFuelExtension>();
     }
 
     public bool IsActive(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
@@ -53,18 +55,29 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
 
     public float CurrentRangeProvidedByFuel(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
     {
-        var range = storage.AmountStored / Props.resourceToRangeRatio;
         if (Props.isGenericFuel)
-            return range;
+        {
+            // If specified, use the generic ratio
+            if (Props.genericResourceToRangeRatio > 0)
+                return storage.AmountStored / Props.genericResourceToRangeRatio;
+            // If not specified, use the extension's ratio
+            if (extension != null)
+                return storage.AmountStored / extension.resourceToRangeRatio;
+            // If extension is null, use the default chemfuel ratio of 10
+            return storage.AmountStored / 10f;
+        }
 
+        var range = storage.AmountStored;
         otherProviders?.RemoveAll(x =>
         {
             if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
                 return false;
 
-            range += other.storage.AmountStored / other.Props.resourceToRangeRatio;
+            range += other.storage.AmountStored;
             return true;
         });
+
+        range /= extension.resourceToRangeRatio;
 
         // Grab either the range provided by thrusters or max range of all thrusters
         return Mathf.Min(range, GetMaxRangeForThrusters(activeThrusters));
@@ -72,18 +85,29 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
 
     public float MaxRangeProvidedByFuel(Building_GravEngine engine, List<CompGravshipThruster> activeThrusters, List<IGravshipFuelProvider> otherProviders)
     {
-        var maxRange = storage.Props.storageCapacity / Props.resourceToRangeRatio;
         if (Props.isGenericFuel)
-            return maxRange;
+        {
+            // If specified, use the generic ratio
+            if (Props.genericResourceToRangeRatio > 0)
+                return storage.Props.storageCapacity / Props.genericResourceToRangeRatio;
+            // If not specified, use the extension's ratio
+            if (extension != null)
+                return storage.Props.storageCapacity / extension.resourceToRangeRatio;
+            // If extension is null, use the default chemfuel ratio of 10
+            return storage.Props.storageCapacity / 10f;
+        }
 
+        var maxRange = storage.Props.storageCapacity;
         otherProviders?.RemoveAll(x =>
         {
             if (x is not CompPipeNetGravshipFuelProvider other || Props.pipeNet != other.Props.pipeNet)
                 return false;
 
-            maxRange += other.storage.Props.storageCapacity / other.Props.resourceToRangeRatio;
+            maxRange += other.storage.Props.storageCapacity;
             return true;
         });
+
+        maxRange /= extension.resourceToRangeRatio;
 
         // return maxRange;
         // Grab either the range provided by thrusters or max range of all thrusters
@@ -131,8 +155,9 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
                 storage.DrawResource(amountToConsume);
             data.fuelData[this] = amountToConsume;
             data.totalAmount = amountToConsume;
+            // Sorting order shouldn't matter for generic providers, but let's include in case it's ever needed
             data.sortingOrder = amountToConsume / fuelConsumedRatio;
-            data.isGenericFuel = false;
+            data.isGenericFuel = true;
             return data;
         }
 
@@ -153,7 +178,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         }
 
         range = Mathf.Min(range, GetMaxRangeForThrusters(activeThrusters));
-        var toConsume = range * fuelConsumedRatio * Props.resourceToRangeRatio;
+        var toConsume = range * fuelConsumedRatio * extension.resourceToRangeRatio;
         var toConsumeRatio = toConsume / totalFuel;
 
         var amount = storage.AmountStored * toConsumeRatio;
@@ -204,8 +229,6 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         };
         var currentFuel = CurrentFuel(engine);
         var maxFuel = MaxFuel(engine);
-        var range = storage.AmountStored / Props.resourceToRangeRatio;
-        var maxRange = storage.Props.storageCapacity / Props.resourceToRangeRatio;
         entry.fuelProviders.Add(ParentThing);
 
         otherProviders?.RemoveAll(x =>
@@ -216,11 +239,12 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
             entry.fuelProviders.Add(other.ParentThing);
             currentFuel += other.CurrentFuel(engine);
             maxFuel += other.MaxFuel(engine);
-            range += other.storage.AmountStored / other.Props.resourceToRangeRatio;
-            maxRange += other.storage.Props.storageCapacity / other.Props.resourceToRangeRatio;
 
             return true;
         });
+
+        var range = currentFuel / extension.resourceToRangeRatio;
+        var maxRange = maxFuel / extension.resourceToRangeRatio;
 
         for (var i = 0; i < activeThrusters.Count; i++)
         {
@@ -238,7 +262,7 @@ public class CompPipeNetGravshipFuelProvider : CompGravshipFacility, IGravshipFu
         entry.text.Add($"{"VGE_FuelTab_Thrusters".Translate().CapitalizeFirst()}: {entry.thrusters.Count}");
         entry.text.Add($"{Props.pipeNet.resource.name.CapitalizeFirst()}: {currentFuel} / {maxFuel}");
         entry.text.Add($"{"VGE_FuelTab_Range".Translate().CapitalizeFirst()}: {range} / {maxRange}");
-        entry.text.Add("VGE_FuelTab_UsagePerTile".Translate((Props.resourceToRangeRatio * engine.FuelUseageFactor).Named("COST"), Props.pipeNet.resource.name.UncapitalizeFirst().Named("RESOURCE")).CapitalizeFirst());
+        entry.text.Add("VGE_FuelTab_UsagePerTile".Translate((extension.resourceToRangeRatio * engine.FuelUseageFactor).Named("COST"), Props.pipeNet.resource.name.UncapitalizeFirst().Named("RESOURCE")).CapitalizeFirst());
 
         return entry;
     }

@@ -128,7 +128,7 @@ public static class GravshipFuelProviderUtility
         var list = new List<FuelTabEntry>();
         var genericEntry = new GenericFuelTabEntry(engine)
         {
-            title = "VGE_FuelTab_OtherFuelTitle".Translate()
+            title = "VGE_FuelTab_OtherFuelTitle".Translate().CapitalizeFirst()
         };
 
         ForEachActiveProvider(engine, GetAllEntries, HandleRefuelables, false, false);
