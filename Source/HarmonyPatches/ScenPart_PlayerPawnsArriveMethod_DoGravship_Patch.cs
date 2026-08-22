@@ -123,23 +123,33 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
         var storages = spawned
             .OfType<ThingWithComps>()
             .SelectMany(t => t.GetComps<CompResourceStorage>())
-            .Where(c => c.Props.pipeNet == pipeNet)
+            .Where(c => c.Props.pipeNet == pipeNet && c.Props.storageCapacity - c.AmountStored > 0f)
             .ToList();
         var remaining = amount;
-        foreach (var storage in storages)
+        while (remaining > 0f && storages.Count > 0)
         {
-            var free = storage.Props.storageCapacity - storage.AmountStored;
-            if (free <= 0f)
+            var share = remaining / storages.Count;
+            var capped = false;
+            for (var i = storages.Count - 1; i >= 0; i--)
+            {
+                var free = storages[i].Props.storageCapacity - storages[i].AmountStored;
+                if (free <= share)
+                {
+                    storages[i].AddResource(free);
+                    remaining -= free;
+                    storages.RemoveAt(i);
+                    capped = true;
+                }
+            }
+            if (capped)
             {
                 continue;
             }
-            var toAdd = Mathf.Min(free, remaining);
-            storage.AddResource(toAdd);
-            remaining -= toAdd;
-            if (remaining <= 0f)
+            foreach (var storage in storages)
             {
-                return;
+                storage.AddResource(share);
             }
+            remaining = 0f;
         }
         if (remaining > 0f && overflowItem != null)
         {
