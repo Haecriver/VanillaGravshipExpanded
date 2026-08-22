@@ -28,7 +28,6 @@
 		<value>
 			<li Class="VanillaGravshipExpanded.CompProperties_PipeNetFuelProvider">
         <pipeNet>VGE_AstrofuelNet</pipeNet>
-        <resourceToRangeRatio>5</resourceToRangeRatio>
 				<providesFuel>true</providesFuel>
 				<componentTypeDef>FuelStorage</componentTypeDef>
 				<requiresLOS>false</requiresLOS>
@@ -145,7 +144,6 @@
 		<value>
 			<li Class="VanillaGravshipExpanded.CompProperties_PipeNetFuelProvider">
         <pipeNet>VGE_AstrofuelNet</pipeNet>
-        <resourceToRangeRatio>5</resourceToRangeRatio>
 				<providesFuel>true</providesFuel>
 				<componentTypeDef>FuelStorage</componentTypeDef>
 				<requiresLOS>false</requiresLOS>
