@@ -5,7 +5,7 @@ using Verse;
 
 namespace VanillaGravshipExpanded
 {
-    public class ScenPart_ChooseStartingGravship : ScenPart_ConfigPage
+    public class ScenPart_ChooseStartingGravship : ScenPart
     {
         public string tag;
         public StartingGravshipDef chosenDef;
