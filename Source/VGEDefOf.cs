@@ -25,7 +25,7 @@ namespace VanillaGravshipExpanded
         public static GameConditionDef VGE_SpaceSolarFlare, VGE_GravitationalAnomaly, VGE_DustCloud;
         public static ThingDef VGE_SmallDebris, VGE_MediumDebris, VGE_LargeDebris, VGE_SmallAsteroid_Projectile, VGE_MediumAsteroid, VGE_LargeAsteroid;
         public static WeatherDef VGE_ToxicDustCloud;
-        public static PipeNetDef VGE_OxygenNet;
+        public static PipeNetDef VGE_OxygenNet, VGE_AstrofuelNet;
         public static PawnKindDef Rat, VGE_Astropede, VGE_Hunter;
         public static ThoughtDef VGE_CrewEuphoria;
         public static ThingDef VGE_GiantThruster, VGE_GiantAstrofuelTank, LargeChemfuelTank;
@@ -56,5 +56,6 @@ namespace VanillaGravshipExpanded
 
         public static FleckDef    VGE_HazeFleck;
         public static EffecterDef VGE_HazeEffecter;
+        public static ScenPartDef VGE_ChooseStartingGravship;
     }
 }

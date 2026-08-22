@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
 using KCSG;
+using PipeSystem;
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace VanillaGravshipExpanded;
@@ -13,10 +15,16 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
 {
     public static bool Prefix(Map map, List<Thing> startingItems)
     {
+        var choosePart = Find.Scenario.AllParts.OfType<ScenPart_ChooseStartingGravship>().FirstOrDefault();
+        if (choosePart == null || choosePart.chosenDef == null)
+        {
+            return true;
+        }
         var orGenerateVar = MapGenerator.GetOrGenerateVar<List<CellRect>>("UsedRects");
         map.regionAndRoomUpdater.Enabled = true;
         var playerStartSpot = MapGenerator.PlayerStartSpot;
-        var cellRect = CellRect.CenteredOn(playerStartSpot, VGEDefOf.VGE_StartingGravjumper.Sizes.x, VGEDefOf.VGE_StartingGravjumper.Sizes.z);
+        var prefab = choosePart.chosenDef.prefab;
+        var cellRect = CellRect.CenteredOn(playerStartSpot, prefab.size.x, prefab.size.z);
         var hashSet = cellRect.Cells.ToHashSet();
         if (!MapGenerator.PlayerStartSpotValid)
         {
@@ -27,8 +35,12 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
         var list = new HashSet<Thing>();
         cellRect = CellRect.CenteredOn(playerStartSpot, cellRect.Width, cellRect.Height);
         GenOption.GetAllMineableIn(cellRect, map);
-        LayoutUtils.CleanRect(VGEDefOf.VGE_StartingGravjumper, map, cellRect, true);
-        VGEDefOf.VGE_StartingGravjumper.Generate(cellRect, map, list, Faction.OfPlayer);
+        var spawned = new List<Thing>();
+        PrefabUtility.SpawnPrefab(prefab, map, playerStartSpot, Rot4.North, Faction.OfPlayer, spawned);
+        list.AddRange(spawned);
+
+        DistributeIntoPipeNet(map, playerStartSpot, spawned, VGEDefOf.VGE_AstrofuelNet, choosePart.startingAstrofuel, VGEDefOf.VGE_Astrofuel);
+        DistributeIntoPipeNet(map, playerStartSpot, spawned, VGEDefOf.VGE_OxygenNet, choosePart.startingOxygen, null);
 
         orGenerateVar.Add(cellRect);
         foreach (var startingAndOptionalPawn in Find.GameInitData.startingAndOptionalPawns)
@@ -104,5 +116,40 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
             }
         }
         return false;
+    }
+
+    private static void DistributeIntoPipeNet(Map map, IntVec3 center, List<Thing> spawned, PipeNetDef pipeNet, float amount, ThingDef overflowItem)
+    {
+        var storages = spawned
+            .OfType<ThingWithComps>()
+            .SelectMany(t => t.GetComps<CompResourceStorage>())
+            .Where(c => c.Props.pipeNet == pipeNet)
+            .ToList();
+        var remaining = amount;
+        foreach (var storage in storages)
+        {
+            var free = storage.Props.storageCapacity - storage.AmountStored;
+            if (free <= 0f)
+            {
+                continue;
+            }
+            var toAdd = Mathf.Min(free, remaining);
+            storage.AddResource(toAdd);
+            remaining -= toAdd;
+            if (remaining <= 0f)
+            {
+                return;
+            }
+        }
+        if (remaining > 0f && overflowItem != null)
+        {
+            while (remaining >= 1f)
+            {
+                var thing = ThingMaker.MakeThing(overflowItem);
+                thing.stackCount = Mathf.Min(Mathf.FloorToInt(remaining), overflowItem.stackLimit);
+                remaining -= thing.stackCount;
+                GenPlace.TryPlaceThing(thing, center, map, ThingPlaceMode.Near);
+            }
+        }
     }
 }
