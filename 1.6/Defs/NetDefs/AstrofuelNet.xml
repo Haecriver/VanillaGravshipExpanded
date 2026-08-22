@@ -29,6 +29,13 @@
 				<ratio>1</ratio>
 			</li>
 		</linkToRefuelables>
+    <modExtensions>
+      <li Class="VanillaGravshipExpanded.GravshipFuelExtension">
+        <!-- How many resources are required for a single tile of flight. -->
+        <!-- Chemfuel would be 10, since it costs 10 chemfuel per tile. -->
+        <resourceToRangeRatio>5</resourceToRangeRatio>
+      </li>
+    </modExtensions>
 	</PipeSystem.PipeNetDef>
 	<ThingDef ParentName="BuildingBase">
 		<defName>VGE_AstrofuelPipe</defName>
@@ -261,8 +268,8 @@
 		</costList>
 		<comps Inherit="False">
 			<li Class="VanillaGravshipExpanded.CompProperties_PipeNetFuelProvider">
-        <resourceToRangeRatio>5</resourceToRangeRatio> <!-- Resource amount divided by this gives total range provided by the tank. -->
         <pipeNet>VGE_AstrofuelNet</pipeNet> <!-- Which pipe net to use, in case there's multiple. -->
+        <!-- PipeNetFuelProvider also has <isGenericFuel> and <genericResourceToRangeRatio>. -->
 				<providesFuel>true</providesFuel>
 				<componentTypeDef>FuelStorage</componentTypeDef>
 				<requiresLOS>false</requiresLOS>
