@@ -658,6 +658,158 @@
   </modExtensions>
 </PrefabDef>
 
+<PrefabDef>
+  <defName>StartingGravjumper_Trader</defName>
+  <size>(13,9)</size>
+  <things>
+    <Battery>
+      <position>(7, 0, 4)</position>
+      <relativeRotation>Clockwise</relativeRotation>
+    </Battery>
+    <VGE_AstrofuelPipe>
+      <rects>
+        <li>(2,0,8,0)</li>
+        <li>(2,1,2,8)</li>
+        <li>(3,8,8,8)</li>
+      </rects>
+    </VGE_AstrofuelPipe>
+    <VGE_GravjumperEngine>
+      <position>(6, 0, 4)</position>
+      <hp>373</hp>
+    </VGE_GravjumperEngine>
+    <Door>
+      <rects>
+        <li>(4,0,4,0)</li>
+        <li>(4,8,4,8)</li>
+      </rects>
+      <stuff>Steel</stuff>
+    </Door>
+    <Stool>
+      <position>(3, 0, 4)</position>
+      <relativeRotation>Clockwise</relativeRotation>
+      <stuff>Steel</stuff>
+      <quality>Normal</quality>
+    </Stool>
+    <GravshipHull>
+      <rects>
+        <li>(2,0,3,0)</li>
+        <li>(5,0,11,0)</li>
+        <li>(2,1,2,8)</li>
+        <li>(11,1,12,1)</li>
+        <li>(12,2,12,3)</li>
+        <li>(11,3,11,5)</li>
+        <li>(12,5,12,7)</li>
+        <li>(11,7,11,8)</li>
+        <li>(3,8,3,8)</li>
+        <li>(5,8,10,8)</li>
+      </rects>
+      <stuff>Steel</stuff>
+    </GravshipHull>
+    <VGE_PilotCockpit>
+      <position>(4, 0, 4)</position>
+      <relativeRotation>Clockwise</relativeRotation>
+    </VGE_PilotCockpit>
+    <WallLamp>
+      <position>(5, 0, 1)</position>
+      <relativeRotation>Opposite</relativeRotation>
+    </WallLamp>
+    <WallLamp>
+      <position>(5, 0, 7)</position>
+    </WallLamp>
+    <ShelfSmall>
+      <rects>
+        <li>(11,2,11,2)</li>
+        <li>(10,4,10,4)</li>
+        <li>(11,6,11,6)</li>
+      </rects>
+      <relativeRotation>Counterclockwise</relativeRotation>
+      <stuff>Steel</stuff>
+    </ShelfSmall>
+    <SmallThruster>
+      <positions>
+        <li>(0, 0, 2)</li>
+        <li>(0, 0, 6)</li>
+      </positions>
+      <relativeRotation>Clockwise</relativeRotation>
+    </SmallThruster>
+    <PowerConduit>
+      <rects>
+        <li>(5,0,8,0)</li>
+        <li>(8,1,8,3)</li>
+        <li>(8,5,8,8)</li>
+        <li>(5,8,7,8)</li>
+      </rects>
+    </PowerConduit>
+    <ChemfuelTank>
+      <positions>
+        <li>(7, 0, 1)</li>
+        <li>(7, 0, 6)</li>
+      </positions>
+    </ChemfuelTank>
+    <Shelf>
+      <positions>
+        <li>(3, 0, 2)</li>
+        <li>(3, 0, 7)</li>
+      </positions>
+      <relativeRotation>Clockwise</relativeRotation>
+      <stuff>Steel</stuff>
+    </Shelf>
+    <Shelf>
+      <positions>
+        <li>(5, 0, 1)</li>
+        <li>(9, 0, 1)</li>
+      </positions>
+      <stuff>Steel</stuff>
+    </Shelf>
+    <Shelf>
+      <positions>
+        <li>(6, 0, 7)</li>
+        <li>(10, 0, 7)</li>
+      </positions>
+      <relativeRotation>Opposite</relativeRotation>
+      <stuff>Steel</stuff>
+    </Shelf>
+  </things>
+  <terrain>
+    <Space>
+      <rects>
+        <li>(0,0,1,1)</li>
+        <li>(12,0,12,0)</li>
+        <li>(0,3,1,5)</li>
+        <li>(12,4,12,4)</li>
+        <li>(0,7,1,8)</li>
+        <li>(12,8,12,8)</li>
+      </rects>
+    </Space>
+    <Substructure>
+      <rects>
+        <li>(2,0,11,8)</li>
+        <li>(12,1,12,3)</li>
+        <li>(0,2,1,2)</li>
+        <li>(12,5,12,7)</li>
+        <li>(0,6,1,6)</li>
+      </rects>
+    </Substructure>
+  </terrain>
+  <modExtensions>
+    <li Class="VEF.Storyteller.PrefabExtension">
+      <roofs>
+        <li>
+          <def>RoofConstructed</def>
+          <rects>
+            <li>(2,0,11,8)</li>
+            <li>(12,1,12,3)</li>
+            <li>(0,2,1,2)</li>
+            <li>(12,5,12,7)</li>
+            <li>(0,6,1,6)</li>
+          </rects>
+        </li>
+      </roofs>
+    </li>
+  </modExtensions>
+</PrefabDef>
+
+
 
 <PrefabDef>
   <defName>StartingGravjumper_Fighter</defName>
