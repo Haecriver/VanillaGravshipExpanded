@@ -160,7 +160,7 @@ namespace VanillaGravshipExpanded
                 }
                 if (thing.Map == Map)
                 {
-                    float num3 = verb.verbProps.EffectiveMinRange(thing, searcherThing);
+                    float num3 = Mathf.Max(59.9f, verb.verbProps.EffectiveMinRange(thing, searcherThing));
                     if (num3 > 0f && (float)(searcherThing.Position - thing.Position).LengthHorizontalSquared < num3 * num3)
                     {
                         return false;
