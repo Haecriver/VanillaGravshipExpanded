@@ -45,7 +45,7 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
         orGenerateVar.Add(cellRect);
         foreach (var startingAndOptionalPawn in Find.GameInitData.startingAndOptionalPawns)
         {
-            if (!cellRect.TryRandomElement(c => c.Standable(map) && (c.GetTerrain(map)?.IsSubstructure ?? false), out var result))
+            if (!cellRect.TryRandomElement(c => c.Standable(map) && (map.terrainGrid.FoundationAt(c)?.IsSubstructure ?? false), out var result))
             {
                 Log.Error("Could not find a valid spawn location for pawn " + startingAndOptionalPawn.Name);
             }
@@ -77,7 +77,7 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
                     cell = shelf.OccupiedRect().RandomCell;
                 }
                 // Try to pick any substructure tile
-                else if (!cellRect.TryFindRandomCell(out cell, x => x.SupportsStructureType(map, VGEDefOf.Substructure) && x.GetFirstThing<Building_Door>(map) == null && x.GetRoof(map) != null))
+                else if (!cellRect.TryFindRandomCell(out cell, x => (map.terrainGrid.FoundationAt(x)?.IsSubstructure ?? false) && x.GetFirstThing<Building_Door>(map) == null && x.GetRoof(map) != null))
                 {
                     // Pick any tile in the rect
                     cell = cellRect.RandomCell;
@@ -121,7 +121,7 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
         }
         foreach (var cell in cellRect)
         {
-            if (cell.SupportsStructureType(map, VGEDefOf.Substructure))
+            if (map.terrainGrid.FoundationAt(cell)?.IsSubstructure ?? false)
             {
                 map.areaManager.Home[cell] = true;
             }
