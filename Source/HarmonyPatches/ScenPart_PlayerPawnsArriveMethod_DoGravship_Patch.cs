@@ -13,6 +13,12 @@ namespace VanillaGravshipExpanded;
 [HarmonyPatch(typeof(ScenPart_PlayerPawnsArriveMethod), nameof(ScenPart_PlayerPawnsArriveMethod.DoGravship))]
 public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
 {
+    public delegate void ShipSpawnedDelegate(Map map, IntVec3 playerStartingCell, HashSet<Thing> spawnedThings, List<Thing> startingItems);
+
+    public static ShipSpawnedDelegate postPrefabSpawned = (_, _, _, _) => { };
+    public static ShipSpawnedDelegate postStartingItemsSpawned = (_, _, _, _) => { };
+    public static ShipSpawnedDelegate postGravshipGenerated = (_, _, _, _) => { };
+
     public static bool Prefix(Map map, List<Thing> startingItems)
     {
         var choosePart = Find.Scenario.AllParts.OfType<ScenPart_ChooseStartingGravship>().FirstOrDefault();
@@ -41,6 +47,9 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
 
         DistributeIntoPipeNet(map, playerStartSpot, spawned, VGEDefOf.VGE_AstrofuelNet, choosePart.startingAstrofuel, VGEDefOf.VGE_Astrofuel);
         DistributeIntoPipeNet(map, playerStartSpot, spawned, VGEDefOf.VGE_OxygenNet, choosePart.startingOxygen, null);
+        foreach (var thing in list)
+            thing.TryGetComp<CompPowerBattery>()?.SetStoredEnergyPct(1f);
+        postPrefabSpawned(map, playerStartSpot, list, startingItems);
 
         orGenerateVar.Add(cellRect);
         foreach (var startingAndOptionalPawn in Find.GameInitData.startingAndOptionalPawns)
@@ -126,6 +135,8 @@ public static class ScenPart_PlayerPawnsArriveMethod_DoGravship_Patch
                 map.areaManager.Home[cell] = true;
             }
         }
+
+        postGravshipGenerated(map, playerStartSpot, list, startingItems);
         return false;
     }
 
