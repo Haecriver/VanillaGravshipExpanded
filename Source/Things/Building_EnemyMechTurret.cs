@@ -136,6 +136,7 @@ namespace VanillaGravshipExpanded
             var searcher = this;
             var verb = AttackVerb;
             var searcherThing = searcher;
+            var playerEngine = map == Map ? GravshipUtility.GetPlayerGravEngine_NewTemp(map) : null;
             TargetScanFlags flags = TargetScanFlags.NeedThreat | TargetScanFlags.NeedAutoTargetable;
             if (!AttackVerb.ProjectileFliesOverhead())
             {
@@ -160,7 +161,11 @@ namespace VanillaGravshipExpanded
                 }
                 if (thing.Map == Map)
                 {
-                    float num3 = Mathf.Max(59.9f, verb.verbProps.EffectiveMinRange(thing, searcherThing));
+                    if (playerEngine == null || !playerEngine.OnValidSubstructure(thing))
+                    {
+                        return false;
+                    }
+                    float num3 = verb.verbProps.EffectiveMinRange(thing, searcherThing);
                     if (num3 > 0f && (float)(searcherThing.Position - thing.Position).LengthHorizontalSquared < num3 * num3)
                     {
                         return false;
@@ -204,6 +209,10 @@ namespace VanillaGravshipExpanded
             foreach (var building in map.listerBuildings.allBuildingsColonist)
             {
                 if (building == searcherThing || !searcherThing.HostileTo(building))
+                {
+                    continue;
+                }
+                if (map == Map && (playerEngine == null || !playerEngine.OnValidSubstructure(building)))
                 {
                     continue;
                 }
