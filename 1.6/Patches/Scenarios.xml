@@ -41,4 +41,12 @@
     </value>
   </Operation>
 
+  <!-- Don't keep starting map from scenario -->
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/MapGeneratorDef[defName="OrbitalRelay"]</xpath>
+    <value>
+      <li Class="VanillaGravshipExpanded.NeverKeepThisMapAfterTakeoffExtension"/>
+    </value>
+  </Operation>
+
 </Patch>
