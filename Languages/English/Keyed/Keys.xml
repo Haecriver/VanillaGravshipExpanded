@@ -14,12 +14,13 @@
     <VGE_NeedsMannedTargetingTerminal>Needs a manned targeting terminal.</VGE_NeedsMannedTargetingTerminal>
     <VGE_LinkWithTurret>Link with a turret</VGE_LinkWithTurret>
     <VGE_LinkWithTurretDesc>Select a turret to link with. This targeting terminal will be used to operate that turret.</VGE_LinkWithTurretDesc>
-    <VGE_UnlinkWithTurret>Unlink turret</VGE_UnlinkWithTurret>
+    <VGE_UnlinkWithTurret>Unlink {0}</VGE_UnlinkWithTurret>
     <VGE_UnlinkWithTurretDesc>Break the current link to a turret, allowing you to link with a different turret.</VGE_UnlinkWithTurretDesc>
-    <VGE_SelectLinkedTurret>Select linked turret</VGE_SelectLinkedTurret>
+    <VGE_SelectLinkedTurret>Select linked {0}</VGE_SelectLinkedTurret>
     <VGE_SelectLinkedTurretDesc>Show the linked turret.</VGE_SelectLinkedTurretDesc>
     <VGE_GravshipArtilleryNeedsVisibleMap>Gravship artillery needs to target a visible, explored map.</VGE_GravshipArtilleryNeedsVisibleMap>
-    <VGE_GravshipArtilleryOutOfRange>Target is out of range.</VGE_GravshipArtilleryOutOfRange>
+    <VGE_TargetOutOfRange>Target is out of range.</VGE_TargetOutOfRange>
+    <VGE_MustBeAimedViaEquippedTargeter>Must be aimed using an equipped targeting device.</VGE_MustBeAimedViaEquippedTargeter>
     <VGE_GravshipArtilleryInvalidFiringMode>Artillery cannot fire in this direction.</VGE_GravshipArtilleryInvalidFiringMode>
     <VGE_GravshipArtilleryInvalidGroundToSpace>Artillery cannot fire from planet to space.</VGE_GravshipArtilleryInvalidGroundToSpace>
     <VGE_GravshipArtilleryInvalidSpaceToSpace>Artillery cannot fire from space to space.</VGE_GravshipArtilleryInvalidSpaceToSpace>
@@ -138,6 +139,9 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_SetDesiredMaintenance>Set desired maintenance</VGE_SetDesiredMaintenance>
     <VGE_SetDesiredMaintenanceDesc>Set the desired maintenance for all gravship components on this gravship. Colonists assigned to construction will maintain the structures if they fall below the set level.</VGE_SetDesiredMaintenanceDesc>
 
+    <VGE_ToggleMaintainBuilding>Automatic maintenance</VGE_ToggleMaintainBuilding>
+    <VGE_ToggleMaintainBuildingDesc>This determines whether colonists will automatically maintain this building.</VGE_ToggleMaintainBuildingDesc>
+
     <!-- Gravdata -->
     <VGE_GravdataYieldInfo>Estimated gravdata yield: {0}</VGE_GravdataYieldInfo>
     <VGE_NoGravtechProjectSelected>No gravtech research project selected. Launching will not yield any gravdata.</VGE_NoGravtechProjectSelected>
@@ -162,10 +166,6 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_RemainingShieldTime>Remaining shield time: {0}</VGE_RemainingShieldTime>
     <VGE_CooldownRemaining>Cooldown remaining: {0}</VGE_CooldownRemaining>
     <VGE_ResourceProcessorInfo>{0} {1} production completes in: {2}\nRemaining production processes to complete: {3}</VGE_ResourceProcessorInfo>
-
-    <!-- Chemfuel to astrofuel replacements -->
-    <VGE_StoredAstrofuel>stored astrofuel</VGE_StoredAstrofuel>
-    <VGE_AstrofuelPerTile>{0} astrofuel per tile</VGE_AstrofuelPerTile>
 
     <!-- Astrofire alert -->
     <VGE_AstrofireInHomeArea>Astrofire!</VGE_AstrofireInHomeArea>
@@ -232,6 +232,23 @@ Please note that keeping several maps open may affect your performance.</VGE_Map
     <VGE_ScannerCluster_UndergroundResource>Deep {RESOURCE}</VGE_ScannerCluster_UndergroundResource>
     <VGE_ScannerCluster_LongRangeResource>Long-range {RESOURCE}</VGE_ScannerCluster_LongRangeResource>
     <VGE_ScannerCluster_MissingResearchPrerequisite>Missing {RESEARCH_label} research</VGE_ScannerCluster_MissingResearchPrerequisite>
+
+    <!-- Fuel providers -->
+    <VGE_GravshipFuelTab>Fuel</VGE_GravshipFuelTab>
+    <VGE_FuelTab_ThrustersTitle>{RESOURCE} thrusters</VGE_FuelTab_ThrustersTitle> <!-- Used for category title, like "astrofuel thrusters", or "chemfuel thrusters". -->
+    <VGE_FuelTab_Thrusters>connected thrusters</VGE_FuelTab_Thrusters>
+    <VGE_FuelTab_OtherFuelTitle>other fuel</VGE_FuelTab_OtherFuelTitle> <!-- Used for generic fuels (any vanilla refuelable), specifically the tab title -->
+    <VGE_FuelTab_OtherFuel>fuel</VGE_FuelTab_OtherFuel> <!-- Used for generic fuels "Fuel: 123 / 456" -->
+    <VGE_FuelTab_Range>range</VGE_FuelTab_Range>
+    <VGE_FuelTab_UsagePerTile>fuel consumption: {COST} {RESOURCE} per tile</VGE_FuelTab_UsagePerTile>
+    <!-- Pipe net providers uses the pipe net resource name. Electric thruster translation in Chapter 2. -->
+    <VGE_OtherFuel>other fuel</VGE_OtherFuel> <!-- Used for generic fuels in a full fuel report, like: "Cost:\n50 astrofuel\n100 other fuel" (separate key in case it's translated differently) -->
+
     <VGE_ProtectingFromSpaceSolarFlare>Protecting from space solar flare</VGE_ProtectingFromSpaceSolarFlare>
     <VGE_GravcoreTax>gravcore tax</VGE_GravcoreTax>
+    <VGE_PermanentlyDisabled>Permanently disabled (warcomputer destroyed)</VGE_PermanentlyDisabled>
+    <VGE_ChooseAStartingGravship>Choose a starting gravship</VGE_ChooseAStartingGravship>
+    <VGE_ChooseAStartingGravshipDesc>Choose which gravship you’d like to start the scenario with. Starting resources will be deposited on that gravship. Different gravships may start with different structures.</VGE_ChooseAStartingGravshipDesc>
+    <VGE_SourceMod>Source: {0}</VGE_SourceMod>
+    <VGE_GravshipRangeCurrentLayer>gravship range ({0})</VGE_GravshipRangeCurrentLayer>
 </LanguageData>

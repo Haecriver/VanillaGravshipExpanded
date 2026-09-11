@@ -1,12 +1,16 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using RimWorld;
+using VEF.Buildings;
 using Verse;
 
 namespace VanillaGravshipExpanded;
 
 public class RitualOutcomeComp_MannedGravshipFacilities : RitualOutcomeComp_GravshipFacilities
 {
+    protected static HashSet<ThingDef> tmpUsedFacilitiesForCount = [];
+
     [NoTranslate]
     public string roleId;
 
@@ -74,9 +78,15 @@ public class RitualOutcomeComp_MannedGravshipFacilities : RitualOutcomeComp_Grav
 
         tmpFacilityCount.Clear();
 
+        tmpUsedFacilitiesForCount.Clear();
         var maxSimultaneous = 0;
         foreach (var (thingDef, _) in facilityQualityOffsets)
-            maxSimultaneous += thingDef.GetCompProperties<CompProperties_GravshipFacility>().maxSimultaneous;
+        {
+            var facilityDef = thingDef.GetModExtension<FacilityExtension>()?.equivalentToFacility ?? thingDef;
+            if (tmpUsedFacilitiesForCount.Add(facilityDef))
+                maxSimultaneous += facilityDef.GetCompProperties<CompProperties_GravshipFacility>().maxSimultaneous;
+        }
+        tmpUsedFacilitiesForCount.Clear();
 
         var text = stringBuilder.ToString();
 

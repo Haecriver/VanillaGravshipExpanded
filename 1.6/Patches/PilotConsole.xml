@@ -44,4 +44,23 @@
       </li>
 		</value>
 	</Operation>
+
+  <!-- Add our ITab to the pilot console -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="PilotConsole"]/inspectorTabs</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="PilotConsole"]</xpath>
+      <value>
+        <inspectorTabs>
+          <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+        </inspectorTabs>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="PilotConsole"]/inspectorTabs</xpath>
+      <value>
+        <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+      </value>
+    </match>
+  </Operation>
 </Patch>

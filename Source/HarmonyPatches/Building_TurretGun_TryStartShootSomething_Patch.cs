@@ -12,11 +12,16 @@ namespace VanillaGravshipExpanded
     {
         public static bool Prefix(Building_TurretGun __instance)
         {
-            if (__instance.def == VGEDefOf.VGE_PointDefenseTurret)
+            if (__instance.def.IsPointDefenseTurret())
             {
                 return false;
             }
             return true;
+        }
+        
+        public static bool IsPointDefenseTurret(this ThingDef def)
+        {
+            return def == VGEDefOf.VGE_PointDefenseTurret || def.defName == "VGE_EnemyPointDefenseTurret";
         }
 
         public static void Postfix(Building_TurretGun __instance)

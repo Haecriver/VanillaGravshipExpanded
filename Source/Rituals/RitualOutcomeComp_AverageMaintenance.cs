@@ -14,7 +14,7 @@ public class RitualOutcomeComp_AverageMaintenance : RitualOutcomeComp_QualitySin
 
         if (ritualTarget.Map != null && ritualTarget.Thing.TryGetComp<CompPilotConsole>() is { engine: not null } console)
         {
-            averageMaintenance = ritualTarget.Map.GetComponent<MaintenanceAndDeterioration_MapComponent>()?.AverageMaintenanceForEngine(console.engine) ?? 1;
+            averageMaintenance = MaintenanceAndDeterioration_MapComponent.GetCompFast(ritualTarget.Map)?.AverageMaintenanceForEngine(console.engine) ?? 1;
         }
 
         return new QualityFactor

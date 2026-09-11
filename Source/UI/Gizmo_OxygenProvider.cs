@@ -12,7 +12,7 @@ public class Gizmo_OxygenProvider(CompApparelOxygenProvider oxygenProvider) : Gi
 
     protected CompApparelOxygenProvider oxygenProvider = oxygenProvider;
 
-    public override bool IsDraggable => oxygenProvider.Wearer == null || oxygenProvider.Wearer.IsColonistPlayerControlled || oxygenProvider.Wearer.IsPrisonerOfColony;
+    public override bool IsDraggable => oxygenProvider.IsGizmoConfigurable;
 
     public override float Target
     {

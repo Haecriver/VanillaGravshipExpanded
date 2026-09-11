@@ -61,7 +61,7 @@
             <Beauty>-40</Beauty>
         </statBases>
         <size>(5,5)</size>
-        <passability>Impassable</passability>
+        <passability>PassThroughOnly</passability>
         <building>
             <turretGunDef>VGE_Gun_MassDriver</turretGunDef>
             <turretBurstCooldownTime>60</turretBurstCooldownTime>
@@ -96,6 +96,7 @@
         <killedLeavings>
             <GravlitePanel>30</GravlitePanel>
             <ChunkSlagSteel>5</ChunkSlagSteel>
+            <li MayRequire="Ludeon.RimWorld.Biotech">SubcoreHigh</li>
         </killedLeavings>
     </ThingDef>
 
@@ -127,11 +128,6 @@
                 </targetParams>
             </li>
         </verbs>
-        <modExtensions>
-            <li Class="VanillaGravshipExpanded.TurretExtension_SubstructureDamage">
-                <substructureDamageRadius>1.9</substructureDamageRadius>
-            </li>
-        </modExtensions>
     </ThingDef>
 
     <ThingDef ParentName="BaseBullet">
@@ -157,6 +153,11 @@
             <soundImpactAnticipate>MortarRound_PreImpact</soundImpactAnticipate>
             <soundAmbient>MortarRound_Ambient</soundAmbient>
         </projectile>
+        <modExtensions>
+            <li Class="VanillaGravshipExpanded.SubstructureDamageExtension">
+                <substructureDamageRadius>1.9</substructureDamageRadius>
+            </li>
+        </modExtensions>
     </ThingDef>
 
     <ThingDef ParentName="VGE_MechTurretBase">

@@ -16,12 +16,15 @@
       <li>VGE_Gravlift</li>
       <li>VGE_GravtechConsole</li>
       <li>VGE_GravshipBlackBox</li>
+      <li MayRequire="vanillaexpanded.gravship2">VGE_AuxiliaryAstrofuelTank</li>
       <li>VGE_GiantAstrofuelTank</li>
       <li>VGE_CopilotConsole</li>
       <li>VGE_EngineeringConsole</li>
       <li>VGE_MaintenanceHub</li>
       <li>VGE_FlightComputer</li>
       <li>VGE_GravshipStructuralBeam</li>
+      <li MayRequire="vanillaexpanded.gravship2">VGE_LargeGravshipShieldGenerator</li>
+      <li MayRequire="vanillaexpanded.gravship2">VGE_EmergencyGenerator</li>
     </value>
   </Operation>
 
@@ -33,10 +36,9 @@
       <li>
         <compClass>VanillaGravshipExpanded.CompAffectedByConstantGravshipFacilityBonus</compClass>
       </li>
-      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">
-
-      </li>
-      <li Class="CompProperties_Breakdownable" />
+      <li Class="VanillaGravshipExpanded.CompProperties_HeatManager"/>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable"/>
+      <li Class="CompProperties_Breakdownable"/>
       <!-- Make grav engine a power plant -->
       <li Class="CompProperties_Power">
         <compClass>VanillaGravshipExpanded.CompPowerPlantGravEngine</compClass>
@@ -46,6 +48,12 @@
       <!-- Add extra handling for situation of multiple grav engines -->
       <li>
         <compClass>VanillaGravshipExpanded.CompMultipleGravEnginesHandler</compClass>
+      </li>
+      <li Class="VanillaGravshipExpanded.CompProperties_GravEngineHaze">
+        <hazeSettings>
+          <scale>3</scale>
+          <offset>(0, 0.5)</offset>
+        </hazeSettings>
       </li>
     </value>
   </Operation>
@@ -220,6 +228,25 @@
     <match Class="PatchOperationAdd">
       <xpath>Defs/ThingDef[defName="GravEngine"]/uiOrder</xpath>
       <value>2001</value>
+    </match>
+  </Operation>
+
+  <!-- Add our ITab to the grav engine console -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/ThingDef[defName="GravEngine"]/inspectorTabs</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GravEngine"]</xpath>
+      <value>
+        <inspectorTabs>
+          <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+        </inspectorTabs>
+      </value>
+    </nomatch>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/ThingDef[defName="GravEngine"]/inspectorTabs</xpath>
+      <value>
+        <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+      </value>
     </match>
   </Operation>
 

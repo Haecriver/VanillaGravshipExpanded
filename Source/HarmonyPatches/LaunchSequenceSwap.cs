@@ -149,9 +149,10 @@ namespace VanillaGravshipExpanded
             var engine = jobRitual.selectedTarget.Thing?.TryGetComp<CompPilotConsole>()?.engine;
             if (engine is null) return;
             var launchInfo = engine.launchInfo;
-            LaunchInfo_ExposeData_Patch.launchSourceTiles[launchInfo] = engine.Map.Tile;
+            var extendedInfo = launchInfo.ExtendedInfo(true);
+            extendedInfo.launchSourceTile = engine.Map.Tile;
             if (Dialog_BeginRitual_ShowRitualBeginWindow_Patch.IsGravliftLaunch)
-                LaunchInfo_ExposeData_Patch.isGravliftLaunch[launchInfo] = true;
+                extendedInfo.isGravliftLaunch = true;
             RememberResearcher(jobRitual);
         }
 
@@ -161,7 +162,7 @@ namespace VanillaGravshipExpanded
             if (pawn != null)
             {
                 var engine = lordJob!.selectedTarget.Thing.TryGetComp<CompPilotConsole>().engine;
-                LaunchInfo_ExposeData_Patch.gravtechResearcherPawns[engine.launchInfo] = pawn;
+                engine.launchInfo.ExtendedInfo(true).gravtechResearcherPawns = pawn;
             }
         }
     }

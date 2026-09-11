@@ -41,7 +41,7 @@
         <maxDistance>9999</maxDistance>
       </li>
       <li Class="CompProperties_SubstructureFootprint">
-        <radius>2.9</radius>
+        <radius>3.9</radius>
       </li>
       <li Class="VanillaGravshipExpanded.CompProperties_StructuralBeam"/>
     </comps>

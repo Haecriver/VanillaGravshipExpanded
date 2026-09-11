@@ -13,7 +13,7 @@ namespace VanillaGravshipExpanded
 
         public override bool CanTrigger(Gravship gravship)
         {
-            return gravship.engine.launchInfo.quality > 0 && LaunchInfo_ExposeData_Patch.gravtechResearcherPawns.TryGetValue(gravship.engine.launchInfo, out var researcherPawn) && researcherPawn != null;
+            return gravship.engine.launchInfo.quality > 0 && gravship.engine.launchInfo.ExtendedInfo(false)?.gravtechResearcherPawns != null;
         }
 
         public override void ApplyOutcome(Gravship gravship)

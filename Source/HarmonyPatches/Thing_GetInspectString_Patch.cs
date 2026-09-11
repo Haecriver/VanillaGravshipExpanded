@@ -19,7 +19,7 @@ namespace VanillaGravshipExpanded
                 return;
             }
 
-            var spaceComp = __instance.Map.GetComponent<MaintenanceAndDeterioration_MapComponent>();
+            var spaceComp = MaintenanceAndDeterioration_MapComponent.GetCompFast(__instance.Map);
             if (spaceComp.IsThingInSpace(__instance))
             {
                 var message = "VGE_RapidlyDeterioratingInSpace".Translate();

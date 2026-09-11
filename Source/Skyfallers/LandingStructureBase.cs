@@ -1,21 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using KCSG;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace VanillaGravshipExpanded
 {
     [HotSwappable]
     [StaticConstructorOnStartup]
-    public class LandingStructure : Thing
+    public abstract class LandingStructureBase : Thing
     {
-        private int ticksToImpact;
+        public int ticksToImpact;
 
         public int ticksToImpactMax;
 
@@ -23,27 +19,27 @@ namespace VanillaGravshipExpanded
         public Vector3 drawSize;
         public Vector3 captureCenter;
         public CellRect captureBounds;
-        public KCSG.StructureLayoutDef layoutDef;
+        public Vector3 textureOffset;
         public HashSet<Thing> thrusters = new HashSet<Thing>();
         public List<IntVec3> gravFieldExtenderPositions = new List<IntVec3>();
         public IntVec3 enginePos;
         public Rot4 landingRotation;
         public IntVec3 launchDirection;
-        public bool forceNullFaction;
-        private static readonly int ShaderPropertyGravshipHeight = Shader.PropertyToID("_GravshipHeight");
-        private static readonly int ShaderPropertyIsTakeoff = Shader.PropertyToID("_IsTakeoff");
-        private static readonly int GravshipCaptureLayerMaskExclude = LayerMask.GetMask("UI", "GravshipExclude");
-        private static readonly int GravshipCaptureLayerMaskInclude = LayerMask.GetMask("GravshipMask");
-        private static readonly Material MatGravshipBlit = MatLoader.LoadMat("Map/Gravship/GravshipBlit");
-        private static readonly Material MatGravshipChromaKey = MatLoader.LoadMatDirect("Map/Gravship/GravshipChromaKey");
-        private static readonly Material MatGravshipDownwash = MatLoader.LoadMat("Map/Gravship/GravshipDownwash");
-        private static readonly Material MatGravshipLensFlare = MatLoader.LoadMat("Map/Gravship/GravshipLensFlare");
-        private static readonly Material MatGravFieldExtenderGlow = MatLoader.LoadMat("Map/Gravship/GravFieldExtenderGlow");
-        private static readonly Material MatGravEngineGlow = MatLoader.LoadMat("Map/Gravship/GravEngineGlow");
+        public int randomSeed;
+        protected static readonly int ShaderPropertyGravshipHeight = Shader.PropertyToID("_GravshipHeight");
+        protected static readonly int ShaderPropertyIsTakeoff = Shader.PropertyToID("_IsTakeoff");
+        protected static readonly int GravshipCaptureLayerMaskExclude = LayerMask.GetMask("UI", "GravshipExclude");
+        protected static readonly int GravshipCaptureLayerMaskInclude = LayerMask.GetMask("GravshipMask");
+        protected static readonly Material MatGravshipBlit = MatLoader.LoadMat("Map/Gravship/GravshipBlit");
+        protected static readonly Material MatGravshipChromaKey = MatLoader.LoadMatDirect("Map/Gravship/GravshipChromaKey");
+        protected static readonly Material MatGravshipDownwash = MatLoader.LoadMat("Map/Gravship/GravshipDownwash");
+        protected static readonly Material MatGravshipLensFlare = MatLoader.LoadMat("Map/Gravship/GravshipLensFlare");
+        protected static readonly Material MatGravFieldExtenderGlow = MatLoader.LoadMat("Map/Gravship/GravFieldExtenderGlow");
+        protected static readonly Material MatGravEngineGlow = MatLoader.LoadMat("Map/Gravship/GravEngineGlow");
 
-        private MaterialPropertyBlock flareBlock;
-        private MaterialPropertyBlock thrusterFlameBlock;
-        static LandingStructure()
+        protected MaterialPropertyBlock flareBlock;
+        protected MaterialPropertyBlock thrusterFlameBlock;
+        static LandingStructureBase()
         {
             var graphic = VGEDefOf.VGE_FakeTerrain.graphic as Graphic_Single;
             var cache = GraphicDatabase.allGraphics;
@@ -70,6 +66,7 @@ namespace VanillaGravshipExpanded
             if (respawningAfterLoad is false)
             {
                 ticksToImpact = ticksToImpactMax = 600;
+                randomSeed = Rand.Int;
                 Find.CameraDriver.shaker.DoShake(0.2f, 120);
             }
         }
@@ -89,43 +86,12 @@ namespace VanillaGravshipExpanded
 
         }
 
-        private bool coroutineStarted;
-        private IEnumerator CaptureGravshipCoroutine()
-        {
-            coroutineStarted = true;
-            var maxSize = Mathf.Max(layoutDef.Sizes.x, layoutDef.Sizes.z) + 3;
-            CreateTempMap(new IntVec3(maxSize, 1, maxSize), Map, out var mapParent, out var tempMap);
-            var originalMap = Current.Game.CurrentMap;
-            var mainCamera = Find.Camera;
-            var cameraDriver = mainCamera.GetComponent<CameraDriver>();
+        protected bool coroutineStarted;
+        protected abstract IEnumerator CaptureGravshipCoroutine();
 
-            var wasCamDriverEnabled = cameraDriver.enabled;
-            var wasCamEnabled = mainCamera.enabled;
-            cameraDriver.enabled = false;
-            mainCamera.enabled = false;
-            Current.Game.CurrentMap = tempMap;
-            yield return new WaitForEndOfFrame();
-            yield return new WaitForEndOfFrame();
-            try
-            {
-                DoCapture(tempMap, mainCamera);
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Failed to capture " + layoutDef + ": " + ex.ToString());
-            }
-            Current.Game.CurrentMap = originalMap;
-            mainCamera.enabled = wasCamEnabled;
-            cameraDriver.enabled = wasCamDriverEnabled;
-            Find.WorldObjects.Remove(mapParent);
-            Find.Maps.Remove(tempMap);
-            coroutineStarted = false;
-        }
-
-        private void DoCapture(Map tempMap, Camera mainCamera)
+        protected void ScanGeneratedLayout(Map tempMap, CellRect cellRect, out Building_GravEngine engine)
         {
-            CellRect cellRect = SpawnLayout(tempMap, tempMap.Center);
-            Building_GravEngine engine = null;
+            engine = null;
             Building pilotConsole = null;
             foreach (var pos in cellRect)
             {
@@ -135,14 +101,13 @@ namespace VanillaGravshipExpanded
                     {
                         pilotConsole = (Building)thing;
                     }
-                    else if (thing.TryGetComp<CompGravshipThruster>() != null)
+                    else if (thing.TryGetComp<CompGravshipThruster>() != null || thing.def.HasModExtension<EnemyThrusterExtension>())
                     {
                         thrusters.Add(thing);
                     }
                     else if (thing.def == ThingDefOf.GravFieldExtender)
                     {
                         gravFieldExtenderPositions.Add(thing.Position);
-
                     }
                     else if (thing is Building_GravEngine gravEngine)
                     {
@@ -151,31 +116,39 @@ namespace VanillaGravshipExpanded
                     }
                 }
             }
-
-            this.launchDirection = IntVec3.Zero;
-            foreach (var thruster in this.thrusters)
+            launchDirection = IntVec3.Zero;
+            foreach (var thruster in thrusters)
             {
                 var comp = thruster.TryGetComp<CompGravshipThruster>();
                 if (comp != null)
                 {
-                    this.launchDirection += thruster.Rotation.AsIntVec3 * comp.Props.directionInfluence;
+                    launchDirection += thruster.Rotation.AsIntVec3 * comp.Props.directionInfluence;
+                }
+                else
+                {
+                    var ext = thruster.def.GetModExtension<EnemyThrusterExtension>();
+                    if (ext != null)
+                    {
+                        launchDirection += thruster.Rotation.AsIntVec3 * ext.directionInfluence;
+                    }
                 }
             }
-
-            if (this.launchDirection == IntVec3.Zero && pilotConsole != null)
+            if (launchDirection == IntVec3.Zero && pilotConsole != null)
             {
-                this.launchDirection = pilotConsole.Rotation.AsIntVec3;
+                launchDirection = pilotConsole.Rotation.AsIntVec3;
             }
-
             if (engine != null)
             {
-                this.landingRotation = engine.Rotation;
+                landingRotation = engine.Rotation;
             }
             else
             {
-                this.landingRotation = Rot4.Random;
+                landingRotation = Rot4.Random;
             }
+        }
 
+        protected void RenderAndSaveTexture(Map tempMap, Camera mainCamera, CellRect cellRect, Building_GravEngine engine)
+        {
             captureBounds = CellRect.FromCellList(cellRect.Cells).ExpandedBy(1);
             var captureCam = GravshipCacheCameraManager.GravshipCacheCamera;
             captureCam.cullingMask = (mainCamera.cullingMask & ~GravshipCaptureLayerMaskExclude) | GravshipCaptureLayerMaskInclude;
@@ -183,9 +156,9 @@ namespace VanillaGravshipExpanded
             drawSize = captureBounds.Size.ToVector3().WithY(1f);
             captureCenter = captureBounds.CenterVector3;
 
-            int screenshotWidth = Mathf.RoundToInt((float)Screen.height * captureCam.aspect);
-            int screenshotHeight = Screen.height;
-            RenderTexture screenshot = RenderTexture.GetTemporary(screenshotWidth, screenshotHeight, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear, 1);
+            var screenshotWidth = Mathf.RoundToInt((float)Screen.height * captureCam.aspect);
+            var screenshotHeight = Screen.height;
+            var screenshot = RenderTexture.GetTemporary(screenshotWidth, screenshotHeight, 24, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear, 1);
             captureCam.targetTexture = screenshot;
             captureCam.clearFlags = CameraClearFlags.Color;
             captureCam.backgroundColor = MatGravshipChromaKey.color;
@@ -208,7 +181,7 @@ namespace VanillaGravshipExpanded
             MapUpdate(tempMap);
             captureCam.Render();
 
-            RenderTexture temporary = RenderTexture.GetTemporary(screenshotWidth, screenshotHeight, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default, 1);
+            var temporary = RenderTexture.GetTemporary(screenshotWidth, screenshotHeight, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Default, 1);
             Graphics.Blit(screenshot, temporary, MatGravshipBlit);
             capturedTexture = (SavedTexture2D)temporary.CreateTexture2D(TextureFormat.ARGB32, mipChain: true);
             capturedTexture.Texture.filterMode = FilterMode.Bilinear;
@@ -219,11 +192,13 @@ namespace VanillaGravshipExpanded
             captureCam.targetTexture = null;
             captureCam.clearFlags = CameraClearFlags.Color;
             captureCam.backgroundColor = new Color(0, 0, 0, 0);
+            var xCorrection = launchDirection.x > 0 ? -1f : 0f;
+            var zCorrection = launchDirection.z > 0 ? -1f : 0f;
+            textureOffset = captureCenter - tempMap.Center.ToVector3Shifted() + new Vector3(xCorrection, 0f, zCorrection);
         }
 
         public void MapUpdate(Map map)
         {
-            SkyManagerUpdate(this.Map, map.skyManager);
             map.glowGrid.GlowGridUpdate_First();
             map.waterInfo.SetTextures();
             map.mapDrawer.MapMeshDrawerUpdate_First();
@@ -233,28 +208,15 @@ namespace VanillaGravshipExpanded
 
         public void SkyManagerUpdate(Map original, SkyManager sky)
         {
-            MatBases.LightOverlay.color = new Color(1f, 1f, 1f, 0f);
-            MatBases.FogOfWar.color = SkyManager.FogOfWarBaseColor;
             sky.curSky = original.skyManager.CurSky;
             sky.curSkyGlowInt = original.skyManager.CurSkyGlow;
-            sky.curSky.colors.sky = Color.Lerp(sky.curSky.colors.sky, Color.white, 0.5f);
-            SkyTarget originalMapSkyTarget = sky.curSky;
-            if (original.Biome != null && original.Biome.disableSkyLighting)
-            {
-                MatBases.LightOverlay.color = new Color(1f, 1f, 1f, 0f);
-                MatBases.FogOfWar.color = original.FogOfWarColor ?? SkyManager.FogOfWarBaseColor;
-            }
-            else
-            {
-                MatBases.LightOverlay.color = originalMapSkyTarget.colors.sky;
-                Find.CameraColor.saturation = originalMapSkyTarget.colors.saturation;
-                Color skyColor = originalMapSkyTarget.colors.sky;
-                skyColor.a = 1f;
-                skyColor *= original.FogOfWarColor ?? SkyManager.FogOfWarBaseColor;
-                MatBases.FogOfWar.color = skyColor;
-            }
-            Color shadowColor = originalMapSkyTarget.colors.shadow;
-            Vector3? overridenShadowVector = original.skyManager.GetOverridenShadowVector();
+            sky.curSky.colors.sky = original.skyManager.CurSky.colors.sky;
+
+            MatBases.LightOverlay.color = original.skyManager.CurSky.colors.sky;
+            MatBases.FogOfWar.color = original.FogOfWarColor ?? SkyManager.FogOfWarBaseColor;
+
+            var shadowColor = original.skyManager.CurSky.colors.shadow;
+            var overridenShadowVector = original.skyManager.GetOverridenShadowVector();
             if (overridenShadowVector.HasValue)
             {
                 sky.SetSunShadowVector(overridenShadowVector.Value);
@@ -264,41 +226,18 @@ namespace VanillaGravshipExpanded
                 sky.SetSunShadowVector(GenCelestial.GetLightSourceInfo(original, GenCelestial.LightType.Shadow).vector);
                 shadowColor = Color.Lerp(Color.white, shadowColor, GenCelestial.CurShadowStrength(original));
             }
-            GenCelestial.LightInfo lightSourceInfo = GenCelestial.GetLightSourceInfo(original, GenCelestial.LightType.LightingSun);
-            GenCelestial.LightInfo lightSourceInfo2 = GenCelestial.GetLightSourceInfo(original, GenCelestial.LightType.LightingMoon);
+            var lightSourceInfo = GenCelestial.GetLightSourceInfo(original, GenCelestial.LightType.LightingSun);
+            var lightSourceInfo2 = GenCelestial.GetLightSourceInfo(original, GenCelestial.LightType.LightingMoon);
             Shader.SetGlobalVector(ShaderPropertyIDs.WaterCastVectSun, new Vector4(lightSourceInfo.vector.x, 0f, lightSourceInfo.vector.y, lightSourceInfo.intensity));
             Shader.SetGlobalVector(ShaderPropertyIDs.WaterCastVectMoon, new Vector4(lightSourceInfo2.vector.x, 0f, lightSourceInfo2.vector.y, lightSourceInfo2.intensity));
-            Shader.SetGlobalFloat(SkyManager.LightsourceShineSizeReduction, 20f * (1f / originalMapSkyTarget.lightsourceShineSize));
-            Shader.SetGlobalFloat(SkyManager.LightsourceShineIntensity, originalMapSkyTarget.lightsourceShineIntensity);
+            Shader.SetGlobalFloat(SkyManager.LightsourceShineSizeReduction, 20f * (1f / original.skyManager.CurSky.lightsourceShineSize));
+            Shader.SetGlobalFloat(SkyManager.LightsourceShineIntensity, original.skyManager.CurSky.lightsourceShineIntensity);
             Shader.SetGlobalFloat(SkyManager.DayPercent, GenLocalDate.DayPercent(original));
             MatBases.SunShadow.color = shadowColor;
             MatBases.SunShadowFade.color = shadowColor;
-            sky.UpdateOverlays(originalMapSkyTarget);
         }
 
-        private CellRect SpawnLayout(Map map, IntVec3 position)
-        {
-            CellRect cellRect = CellRect.CenteredOn(position, layoutDef.Sizes.x, layoutDef.Sizes.z);
-            GenOption.GetAllMineableIn(cellRect, map);
-            LayoutUtils.CleanRect(layoutDef, map, cellRect, true);
-            var things = new List<Thing>();
-            AutoHomeAreaMaker_MarkHomeAroundThing_Patch.preventHomeArea = true;
-            layoutDef.Generate(cellRect, map, things, Faction, forceNullFaction: forceNullFaction);
-            var engine = things.OfType<Building_GravEngine>().FirstOrDefault();
-            if (engine != null && engine.Faction != Faction.OfPlayer)
-            {
-                engine.SetFaction(Faction.OfPlayer);
-                engine.ForceSubstructureDirty();
-            }
-            AutoHomeAreaMaker_MarkHomeAroundThing_Patch.preventHomeArea = false;
-            return cellRect;
-        }
-
-        public void Impact()
-        {
-            SpawnLayout(Map, Position);
-            Destroy(DestroyMode.Vanish);
-        }
+        public abstract void Impact();
 
         public static void CreateTempMap(IntVec3 size, Map source, out MapParent mapParent, out Map map)
         {
@@ -309,18 +248,17 @@ namespace VanillaGravshipExpanded
             map = MapGenerator.GenerateMap(size, mapParent, mapParent.MapGeneratorDef);
         }
 
-        private static readonly Material MatGravship = MatLoader.LoadMat("Map/Gravship/Gravship");
-        private static readonly Material MatGravshipShadow = MatLoader.LoadMat("Map/Gravship/GravshipShadow");
-        private static readonly Material MatGravshipDistortion = MatLoader.LoadMat("Map/Gravship/GravshipDistortion");
-        private static Material MatGravshipShadowFallback;
-        private MaterialPropertyBlock distortionBlock;
-        private FleckSystem exhaustFleckSystem;
-        private Dictionary<Thing, EventQueue> exhaustTimers = new Dictionary<Thing, EventQueue>();
+        protected static readonly Material MatGravship = MatLoader.LoadMat("Map/Gravship/Gravship");
+        protected static readonly Material MatGravshipShadow = MatLoader.LoadMat("Map/Gravship/GravshipShadow");
+        protected static readonly Material MatGravshipDistortion = MatLoader.LoadMat("Map/Gravship/GravshipDistortion");
+        protected static Material MatGravshipShadowFallback;
+        protected MaterialPropertyBlock distortionBlock;
+        protected FleckSystem exhaustFleckSystem;
+        protected Dictionary<Thing, EventQueue> exhaustTimers = new Dictionary<Thing, EventQueue>();
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Defs.Look(ref layoutDef, "layoutDef");
             Scribe_Values.Look(ref drawSize, "drawSize");
             Scribe_Values.Look(ref captureCenter, "captureCenter");
             Scribe_Values.Look(ref captureBounds, "captureBounds");
@@ -329,14 +267,13 @@ namespace VanillaGravshipExpanded
             Scribe_Values.Look(ref enginePos, "enginePos");
             Scribe_Values.Look(ref landingRotation, "landingRotation");
             Scribe_Values.Look(ref launchDirection, "launchDirection");
-            Scribe_Values.Look(ref ticksToImpact, "ticksToImpact");
-            Scribe_Values.Look(ref ticksToImpactMax, "ticksToImpactMax");
-            Scribe_Values.Look(ref forceNullFaction, "forceNullFaction");
+            Scribe_Values.Look(ref textureOffset, "textureOffset");
+            Scribe_Values.Look(ref randomSeed, "randomSeed");
         }
 
         public override void DrawAt(Vector3 drawLoc, bool flip = false)
         {
-            DrawGravship(drawLoc + new Vector3(-0.5f, 0, 0));
+            DrawGravship(drawLoc + textureOffset);
         }
 
         private void DrawGravship(Vector3 drawLoc)
@@ -353,9 +290,9 @@ namespace VanillaGravshipExpanded
                 return;
             }
 
-            float progress = 1f - (float)ticksToImpact / (float)ticksToImpactMax;
+            var progress = 1f - (float)ticksToImpact / (float)ticksToImpactMax;
             progress = progress.RemapClamped(0f, 0.95f, 0f, 1f);
-            float height = Mathf.Pow(1f - progress, 5f);
+            var height = Mathf.Pow(1f - progress, 5f);
 
             Vector3 vector;
             Vector3 vector2;
@@ -370,11 +307,11 @@ namespace VanillaGravshipExpanded
                 vector2 = landingRotation.AsQuat * -launchDirection.ToVector3().normalized * 100f * Mathf.Pow(1f - progress, 9f);
             }
 
-            Vector3 groundEffectsCenter = drawLoc + vector2;
-            Vector3 gravshipDrawCenter = (drawLoc + vector + vector2);
+            var groundEffectsCenter = drawLoc + vector2;
+            var gravshipDrawCenter = drawLoc + vector + vector2;
             gravshipDrawCenter.y = AltitudeLayer.Skyfaller.AltitudeFor();
 
-            Vector3 vector3 = Find.Camera.WorldToViewportPoint(gravshipDrawCenter);
+            var vector3 = Find.Camera.WorldToViewportPoint(gravshipDrawCenter);
             distortionBlock.SetFloat(ShaderPropertyIDs.Progress, progress);
             distortionBlock.SetFloat(ShaderPropertyGravshipHeight, height);
             distortionBlock.SetVector(ShaderPropertyIDs.DrawPos, vector3);
@@ -393,11 +330,11 @@ namespace VanillaGravshipExpanded
             MatGravshipShadowFallback.SetFloat(ShaderPropertyGravshipHeight, height);
             MatGravshipShadowFallback.SetFloat(ShaderPropertyIsTakeoff, 0f);
             MatGravshipShadowFallback.color = MatGravshipShadow.color.WithAlpha(progress.RemapClamped(0.9f, 1f, 1f, 0f));
-            float shadowAlpha = progress.RemapClamped(0.9f, 1f, 0.35f, 0f);
+            var shadowAlpha = progress.RemapClamped(0.9f, 1f, 0.35f, 0f);
 
-            Vector3 shadowPos = (drawLoc + vector2).SetToAltitude(AltitudeLayer.Gas).WithYOffset(0.03658537f);
-            float blurOffset = 0.15f;
-            Vector3[] offsets = new Vector3[]
+            var shadowPos = (drawLoc + vector2).SetToAltitude(AltitudeLayer.Gas).WithYOffset(0.03658537f);
+            var blurOffset = 0.15f;
+            var offsets = new Vector3[]
             {
                 new Vector3(0, 0, 0),
                 new Vector3(blurOffset, 0, 0),
@@ -413,19 +350,19 @@ namespace VanillaGravshipExpanded
                 MatGravshipDownwash.SetVector(ShaderPropertyIDs.DrawPos, Find.Camera.WorldToViewportPoint(groundEffectsCenter));
                 MatGravshipDownwash.SetFloat(ShaderPropertyIsTakeoff, 0f);
                 DrawLayer(MatGravshipDownwash, Find.Camera.transform.position.SetToAltitude(AltitudeLayer.Gas).WithYOffset(0.03658537f), null, Find.Camera);
-            }
 
-            foreach (var offset in offsets)
-            {
-                MatGravshipShadowFallback.color = new Color(0.1f, 0.1f, 0.1f, shadowAlpha / offsets.Length);
-                GenDraw.DrawQuad(MatGravshipShadowFallback, shadowPos + offset, Quaternion.identity, this.drawSize * 1.08f);
+                foreach (var offset in offsets)
+                {
+                    MatGravshipShadowFallback.color = new Color(0.1f, 0.1f, 0.1f, shadowAlpha / offsets.Length);
+                    GenDraw.DrawQuad(MatGravshipShadowFallback, shadowPos + offset, Quaternion.identity, this.drawSize * 1.08f);
+                }
             }
 
             if (thrusters.NullOrEmpty()) return;
 
-            Color value = new Color(1f, 1f, 1f, 1f);
+            var value = new Color(1f, 1f, 1f, 1f);
             value *= Mathf.Lerp(0.75f, 1f, Mathf.PerlinNoise1D(progress * 100f));
-            value.a = Mathf.InverseLerp(0f, 0.1f, (1f - progress));
+            value.a = Mathf.InverseLerp(0f, 0.1f, 1f - progress);
 
             foreach (var thruster in thrusters)
             {
@@ -433,59 +370,72 @@ namespace VanillaGravshipExpanded
                 if (comp != null)
                 {
                     var props = comp.Props;
-                    float num = (float)thruster.def.size.x * props.flameSize;
-                    Vector3 vector4 = thruster.Rotation.AsQuat * props.flameOffsetsPerDirection[thruster.Rotation.AsInt];
-                    Vector3 vector5 = GenThing.TrueCenter(thruster.Position, thruster.Rotation, thruster.def.size, 0f) - thruster.Rotation.AsIntVec3.ToVector3() * ((float)thruster.def.size.z * 0.5f + num * 0.5f) + vector4;
-                    Vector3 position2 = (gravshipDrawCenter + (vector5 - captureCenter)).SetToAltitude(AltitudeLayer.Skyfaller).WithYOffset(0.07317074f);
-                    MaterialRequest req = new MaterialRequest(props.FlameShaderType.Shader);
-                    req.renderQueue = 3201;
-                    Material mat = MaterialPool.MatFrom(req);
-                    thrusterFlameBlock.Clear();
-                    thrusterFlameBlock.SetColor("_Color2", value);
-                    foreach (ShaderParameter flameShaderParameter in props.flameShaderParameters)
+                    DrawThrusterFlame(thruster, gravshipDrawCenter, value, props.flameSize, props.flameOffsetsPerDirection, props.FlameShaderType, props.flameShaderParameters, props.exhaustSettings);
+                }
+                else
+                {
+                    var ext = thruster.def.GetModExtension<EnemyThrusterExtension>();
+                    if (ext != null)
                     {
-                        flameShaderParameter.Apply(thrusterFlameBlock);
-                    }
-                    GenDraw.DrawQuad(mat, position2, landingRotation.AsQuat * thruster.Rotation.AsQuat, num, thrusterFlameBlock);
-
-                    Vector3 vector6 = Find.Camera.WorldToViewportPoint(position2);
-                    flareBlock.SetVector(ShaderPropertyIDs.DrawPos, vector6);
-                    MatGravshipLensFlare.SetColor("_Color2", value);
-                    DrawLayer(MatGravshipLensFlare, Find.Camera.transform.position.SetToAltitude(AltitudeLayer.MetaOverlays).WithYOffset(0.03658537f), flareBlock, Find.Camera);
-
-                    if (props.exhaustSettings.enabled)
-                    {
-                        if (!exhaustTimers.ContainsKey(thruster))
-                        {
-                            exhaustFleckSystem.handledDefs.AddUnique(props.exhaustSettings.ExhaustFleckDef);
-                            exhaustTimers.Add(thruster, new EventQueue(1f / props.exhaustSettings.emissionsPerSecond));
-                        }
-                        EventQueue eventQueue = exhaustTimers[thruster];
-                        eventQueue.Push(Time.deltaTime);
-                        while (eventQueue.Pop())
-                        {
-                            EmitSmoke(props.exhaustSettings, position2, landingRotation.AsQuat, thruster.Rotation.AsQuat);
-                        }
+                        DrawThrusterFlame(thruster, gravshipDrawCenter, value, ext.flameSize, ext.flameOffsetsPerDirection, ext.FlameShaderType, ext.flameShaderParameters, ext.exhaustSettings);
                     }
                 }
             }
 
             MatGravFieldExtenderGlow.SetColor("_Color2", value);
-            foreach (IntVec3 gravFieldExtenderPosition in gravFieldExtenderPositions)
+            foreach (var gravFieldExtenderPosition in gravFieldExtenderPositions)
             {
-                Vector3 vector7 = gravFieldExtenderPosition.ToVector3() + ThingDefOf.GravFieldExtender.graphicData.drawSize.ToVector3() * 0.5f;
-                Vector3 position3 = (gravshipDrawCenter + (vector7 - captureCenter)).SetToAltitude(AltitudeLayer.MetaOverlays).WithYOffset(0.07317074f);
+                var vector7 = gravFieldExtenderPosition.ToVector3() + ThingDefOf.GravFieldExtender.graphicData.drawSize.ToVector3() * 0.5f;
+                var position3 = (gravshipDrawCenter + (vector7 - captureCenter)).SetToAltitude(AltitudeLayer.MetaOverlays).WithYOffset(0.07317074f);
                 GenDraw.DrawQuad(MatGravFieldExtenderGlow, position3, Quaternion.identity, 8f);
             }
 
             MatGravEngineGlow.SetColor("_Color2", value);
-            Vector3 position4 = (gravshipDrawCenter + (enginePos.ToVector3() + new Vector3(0.5f, 0, 0.5f) - captureCenter)).SetToAltitude(AltitudeLayer.MetaOverlays).WithYOffset(0.07317074f);
+            var position4 = (gravshipDrawCenter + (enginePos.ToVector3() + new Vector3(0.5f, 0, 0.5f) - captureCenter)).SetToAltitude(AltitudeLayer.MetaOverlays).WithYOffset(0.07317074f);
             GenDraw.DrawQuad(MatGravEngineGlow, position4, Quaternion.identity, 12.5f);
+        }
+
+        private void DrawThrusterFlame(Thing thruster, Vector3 gravshipDrawCenter, Color value, float flameSize, List<Vector3> flameOffsetsPerDirection, ShaderTypeDef flameShaderType, List<ShaderParameter> flameShaderParameters, CompProperties_GravshipThruster.ExhaustSettings exhaustSettings)
+        {
+            var num = (float)thruster.def.size.x * flameSize;
+            var vector4 = thruster.Rotation.AsQuat * flameOffsetsPerDirection[thruster.Rotation.AsInt];
+            var vector5 = GenThing.TrueCenter(thruster.Position, thruster.Rotation, thruster.def.size, 0f) - thruster.Rotation.AsIntVec3.ToVector3() * ((float)thruster.def.size.z * 0.5f + num * 0.5f) + vector4;
+            var position2 = (gravshipDrawCenter + (vector5 - captureCenter)).SetToAltitude(AltitudeLayer.Skyfaller).WithYOffset(0.07317074f);
+            var req = new MaterialRequest(flameShaderType.Shader);
+            req.renderQueue = 3201;
+            var mat = MaterialPool.MatFrom(req);
+            thrusterFlameBlock.Clear();
+            thrusterFlameBlock.SetColor("_Color2", value);
+            foreach (var flameShaderParameter in flameShaderParameters)
+            {
+                flameShaderParameter.Apply(thrusterFlameBlock);
+            }
+            GenDraw.DrawQuad(mat, position2, landingRotation.AsQuat * thruster.Rotation.AsQuat, num, thrusterFlameBlock);
+
+            var vector6 = Find.Camera.WorldToViewportPoint(position2);
+            flareBlock.SetVector(ShaderPropertyIDs.DrawPos, vector6);
+            MatGravshipLensFlare.SetColor("_Color2", value);
+            DrawLayer(MatGravshipLensFlare, Find.Camera.transform.position.SetToAltitude(AltitudeLayer.MetaOverlays).WithYOffset(0.03658537f), flareBlock, Find.Camera);
+
+            if (exhaustSettings.enabled)
+            {
+                if (!exhaustTimers.ContainsKey(thruster))
+                {
+                    exhaustFleckSystem.handledDefs.AddUnique(exhaustSettings.ExhaustFleckDef);
+                    exhaustTimers.Add(thruster, new EventQueue(1f / exhaustSettings.emissionsPerSecond));
+                }
+                var eventQueue = exhaustTimers[thruster];
+                eventQueue.Push(Time.deltaTime);
+                while (eventQueue.Pop())
+                {
+                    EmitSmoke(exhaustSettings, position2, landingRotation.AsQuat, thruster.Rotation.AsQuat);
+                }
+            }
         }
 
         private void EmitSmoke(CompProperties_GravshipThruster.ExhaustSettings settings, Vector3 position, Quaternion gravshipRotation, Quaternion thrusterRotation)
         {
-            Quaternion quaternion = Quaternion.identity;
+            var quaternion = Quaternion.identity;
             if (settings.inheritThrusterRotation)
             {
                 quaternion = thrusterRotation * quaternion;
@@ -498,7 +448,6 @@ namespace VanillaGravshipExpanded
             {
                 def = settings.ExhaustFleckDef,
                 spawnPosition = position + quaternion * settings.spawnOffset + UnityEngine.Random.insideUnitSphere.WithY(0f).normalized * settings.spawnRadiusRange.RandomInRange,
-                scale = settings.scaleRange.RandomInRange,
                 velocity = quaternion * Quaternion.Euler(0f, settings.velocityRotationRange.RandomInRange, 0f) * (settings.velocity * settings.velocityMultiplierRange.RandomInRange),
                 rotationRate = settings.rotationOverTimeRange.RandomInRange,
                 ageTicksOverride = -1
@@ -507,8 +456,8 @@ namespace VanillaGravshipExpanded
 
         private void DrawLayer(Material mat, Vector3 position, MaterialPropertyBlock props, Camera camera)
         {
-            float num = camera.orthographicSize * 2f;
-            Matrix4x4 matrix = Matrix4x4.TRS(s: new Vector3(num * camera.aspect, 1f, num), pos: position, q: Quaternion.identity);
+            var num = camera.orthographicSize * 2f;
+            var matrix = Matrix4x4.TRS(s: new Vector3(num * camera.aspect, 1f, num), pos: position, q: Quaternion.identity);
             Graphics.DrawMesh(MeshPool.plane10, matrix, mat, 0, null, 0, props);
         }
     }

@@ -23,12 +23,38 @@ public class CompMultipleGravEnginesHandler : ThingComp
         ActiveGravEngines.Add(this);
         overlayDrawer = parent.Map.GetComponent<CustomOverlayDrawer>();
         Notify_GravEngineCountChanged();
+
+        if (parent is Building_GravEngine engine)
+        {
+            GravEngineTracker.Notify_GravEngineStateChanged(engine);
+            if (!engine.nameHidden && !engine.gravshipName.NullOrEmpty())
+                World_ExposeData_Patch.lastGravshipName = engine.gravshipName;
+        }
     }
 
     public override void PostDeSpawn(Map map, DestroyMode mode = DestroyMode.Vanish)
     {
         ActiveGravEngines.Remove(this);
         Notify_GravEngineCountChanged();
+
+        if (parent is Building_GravEngine engine)
+            GravEngineTracker.Notify_GravEngineStateChanged(engine);
+    }
+
+    public override void PostPostMake()
+    {
+        base.PostPostMake();
+
+        if (parent is Building_GravEngine engine)
+            GravEngineTracker.Notify_GravEngineStateChanged(engine);
+    }
+
+    public override void PostDestroy(DestroyMode mode, Map previousMap)
+    {
+        base.PostDestroy(mode, previousMap);
+
+        if (parent is Building_GravEngine engine)
+            GravEngineTracker.Notify_GravEngineStateChanged(engine);
     }
 
     public override void Notify_MapRemoved()
@@ -43,17 +69,10 @@ public class CompMultipleGravEnginesHandler : ThingComp
         if (!parent.Spawned)
             return;
 
-        DrawLinesTowards(ThingDefOf.GravEngine);
-        DrawLinesTowards(VGEDefOf.VGE_GravjumperEngine);
-        DrawLinesTowards(VGEDefOf.VGE_GravhulkEngine);
-
-        void DrawLinesTowards(ThingDef def)
+        foreach (var other in ActiveGravEngines)
         {
-            foreach (var thing in parent.Map.listerThings.ThingsOfDef(def))
-            {
-                if (thing != parent)
-                    GenDraw.DrawLineBetween(parent.TrueCenter(), thing.TrueCenter(), SimpleColor.Red);
-            }
+            if (other != this && parent.Map == other.parent.Map)
+                GenDraw.DrawLineBetween(parent.TrueCenter(), other.parent.TrueCenter(), SimpleColor.Red);
         }
     }
 

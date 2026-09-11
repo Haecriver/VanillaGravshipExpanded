@@ -4,7 +4,7 @@
 	<ThingDef ParentName="GravshipComponentBase">
 		<defName>VGE_GravtechConsole</defName>
 		<label>gravtech console</label>
-		<description>An interface used to analyze gravdata gathered from gravship launches and travel. It draws power directly from the grav engine.</description>
+		<description>An interface used to analyze gravdata gathered from gravship launches and travel. In orbit, gravtech researcher can work the console to generate a continuous stream of gravdata. It draws power directly from the grav engine.</description>
 		<graphicData>
 			<graphicClass>Graphic_Multi</graphicClass>
 			<texPath>Things/Structures/GravtechResearchBench/GravtechResearchBench</texPath>
@@ -24,6 +24,7 @@
 			<VGE_MaintenanceSensitivity>2</VGE_MaintenanceSensitivity>
 		</statBases>
 		<size>(3,1)</size>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
 		<passability>PassThroughOnly</passability>
 		<pathCost>50</pathCost>
 		<tickerType>Normal</tickerType>
@@ -35,7 +36,7 @@
 				<requiresLOS>false</requiresLOS>
 			</li>
 			<li Class="VanillaGravshipExpanded.CompProperties_GravdataYield">
-				<multiplier>5</multiplier>
+				<multiplier>3</multiplier>
 			</li>
 			<li Class="CompProperties_Breakdownable"/>
 			<li Class="VanillaGravshipExpanded.CompProperties_GravMaintainable">

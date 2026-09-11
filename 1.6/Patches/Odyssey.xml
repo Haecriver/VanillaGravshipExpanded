@@ -7,13 +7,6 @@
     </Operation>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>Defs/ThingDef[defName="GravEngine"]/comps</xpath>
-        <value>
-            <li Class="VanillaGravshipExpanded.CompProperties_HeatManager"></li>
-        </value>
-    </Operation>
-
-    <Operation Class="PatchOperationAdd">
         <xpath>Defs/TerrainDef[defName="Substructure"]</xpath>
         <value>
             <uiIconPath>UI/MenuIcons/Substructure_MenuIcon</uiIconPath>

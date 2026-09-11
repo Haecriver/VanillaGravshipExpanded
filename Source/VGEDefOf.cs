@@ -9,7 +9,7 @@ namespace VanillaGravshipExpanded
     [DefOf]
     public static class VGEDefOf
     {
-        public static StatDef VGE_GravshipTargeting, VGE_AccuracyGlobal, VGE_MaintenanceSensitivity, VGE_GravshipMaintenance, VGE_GravshipResearch, VGE_GravPowerAdjacency, VGE_GlobalMaintenanceSensitivity;
+        public static StatDef VGE_GravshipTargeting, VGE_AccuracyGlobal, VGE_MaintenanceSensitivity, VGE_MaintenanceDifficulty, VGE_GravshipMaintenance, VGE_GravshipResearch, VGE_GravPowerAdjacency, VGE_GlobalMaintenanceSensitivity;
         public static WorldObjectDef VGE_ArtilleryProjectile, AsteroidMiningSite, VGE_GravshipGenerationSite;
         public static ThingDef Gun_MiniTurret, VGE_PointDefenseTurret, VGE_GaussSmoke, VGE_SealantGoop, VGE_Filth_DamagedSubstructure, VGE_Astrofire, VGE_AstrofireSpark, VGE_GravtechConsole, VGE_PilotCockpit, VGE_PilotBridge, PilotConsole, VGE_Compressed_Vacstone, VGE_OxygenCanister, VGE_MaintenanceHub, VGE_CapacitorHarmonizer, VGE_DamagedEscapePod, VGE_EscapePodSkyfaller, VGE_GravhulkEngine, VGE_GravjumperEngine, VGE_SolarPanelling, VGE_GravheatAbsorber, VGE_GravshipShelf, VGE_Gravlift, VGE_CommsTerminal, VGE_VacCheckpoint, VacBarrier;
         public static ThingDef VGE_AstrofuelPipe, VGE_Filth_Astrofuel, VGE_MechanoidGravEngine, VGE_GravFieldAmplifier;
@@ -25,7 +25,7 @@ namespace VanillaGravshipExpanded
         public static GameConditionDef VGE_SpaceSolarFlare, VGE_GravitationalAnomaly, VGE_DustCloud;
         public static ThingDef VGE_SmallDebris, VGE_MediumDebris, VGE_LargeDebris, VGE_SmallAsteroid_Projectile, VGE_MediumAsteroid, VGE_LargeAsteroid;
         public static WeatherDef VGE_ToxicDustCloud;
-        public static PipeNetDef VGE_OxygenNet;
+        public static PipeNetDef VGE_OxygenNet, VGE_AstrofuelNet;
         public static PawnKindDef Rat, VGE_Astropede, VGE_Hunter;
         public static ThoughtDef VGE_CrewEuphoria;
         public static ThingDef VGE_GiantThruster, VGE_GiantAstrofuelTank, LargeChemfuelTank;
@@ -53,5 +53,9 @@ namespace VanillaGravshipExpanded
         public static ThingDef VGE_CompactBiosculpterPod;
 
         public static OptionalFeaturesDef VFE_TileMutatorMechanics;
+
+        public static FleckDef    VGE_HazeFleck;
+        public static EffecterDef VGE_HazeEffecter;
+        public static ScenPartDef VGE_ChooseStartingGravship;
     }
 }

@@ -69,4 +69,30 @@
     </graphicData>
   </FleckDef>
 
+
+  <FleckDef ParentName="FleckBase">
+    <defName>VGE_HazeFleck</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0</fadeInTime>
+    <solidTime>0.5</solidTime>
+    <fadeOutTime>0</fadeOutTime>
+    <graphicData>
+      <texPath>Things/Mote/Black</texPath>
+      <shaderType>VGE_Haze</shaderType>
+      <shaderParameters>
+        <_NoiseTexA>/Effects/Haze/HazeNoiseA</_NoiseTexA>
+        <_NoiseTexB>/Effects/Haze/HazeNoiseB</_NoiseTexB>
+        <_NoiseScaleA>0.171</_NoiseScaleA>
+        <_NoiseScaleB>0.075</_NoiseScaleB>
+        <_NoiseSpeedA>(0.08, 0.03, 0, 0)</_NoiseSpeedA>
+        <_NoiseSpeedB>(-0.02, 0.03, 0, 0)</_NoiseSpeedB>
+        <_DistortionIntensity>0.035</_DistortionIntensity>
+        <_RippleIntensity>1</_RippleIntensity>
+        <_HazeIntensity>0.4</_HazeIntensity>
+        <_BrightnessMultiplier>1.0</_BrightnessMultiplier>
+        <_EdgeFadePower>1.8</_EdgeFadePower>
+      </shaderParameters>
+      <drawSize>(1, 1)</drawSize>
+    </graphicData>
+  </FleckDef>
 </Defs>

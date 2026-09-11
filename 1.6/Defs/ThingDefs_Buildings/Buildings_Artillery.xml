@@ -19,7 +19,7 @@
             <graphicClass>Graphic_Single</graphicClass>
             <texPath>Things/Structures/Artillery/GravshipArtillery_Base_Normal</texPath>
         </graphicData>
-        <passability>Impassable</passability>
+        <passability>PassThroughOnly</passability>
         <fillPercent>1</fillPercent>
         <tickerType>Normal</tickerType>
         <stealable>false</stealable>
@@ -54,6 +54,7 @@
         </graphicData>
         <passability>PassThroughOnly</passability>
         <designationCategory>VGE_Combat</designationCategory>
+        <altitudeLayer>BuildingOnTop</altitudeLayer>
         <pathCost>50</pathCost>
         <fillPercent>0.4</fillPercent>
         <statBases>
@@ -94,7 +95,7 @@
             <drawSize>(3,3)</drawSize>
         </graphicData>
         <altitudeLayer>Building</altitudeLayer>
-        <passability>Impassable</passability>
+        <passability>PassThroughOnly</passability>
         <fillPercent>1</fillPercent>
         <tickerType>Normal</tickerType>
         <statBases>
@@ -135,9 +136,9 @@
                 <!-- Using a lower value will end up with the turret still shooting roughly once every 15 ticks if you're not looking at it. -->
                 <interceptionAttemptInterval>15</interceptionAttemptInterval>
                 <blacklistedProjectileDefs>
-                  <li>Bullet_HellsphereCannonGun</li>
-                  <li>Bullet_InfernoCannon</li>
-                  <li>Bullet_Heatspike</li>
+                    <li>Bullet_HellsphereCannonGun</li>
+                    <li>Bullet_InfernoCannon</li>
+                    <li>Bullet_Heatspike</li>
                 </blacklistedProjectileDefs>
             </li>
         </comps>
@@ -251,11 +252,13 @@
             <turretGunDef>VGE_Gun_GaussGun</turretGunDef>
             <turretBurstCooldownTime>8</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
+            <turretTopOffset>(0, 0.25)</turretTopOffset>
             <turretBurstWarmupTime>4</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
                 <li>VGE_AmmoBox_GaussShell</li>
                 <li>VGE_TargetingTerminal</li>
+                <li MayRequire="vanillaexpanded.gravship2">VGE_TargetingConsole</li>
             </relatedBuildCommands>
         </building>
         <comps>
@@ -280,7 +283,7 @@
                 <mustUseBoxes>true</mustUseBoxes>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
-                <worldMapAttackRange>16</worldMapAttackRange>
+                <worldMapAttackRange>20</worldMapAttackRange>
                 <firingMode>GroundToSpace, GroundToGround, SpaceToSpace, SpaceToGround</firingMode>
             </li>
         </comps>
@@ -306,7 +309,6 @@
         <graphicData>
             <texPath>Things/Structures/Artillery/GaussGun_TurretTop</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawOffset>(0,0,0.1)</drawOffset>
         </graphicData>
         <verbs>
             <li>
@@ -349,6 +351,11 @@
             <flyOverhead>true</flyOverhead>
             <stoppingPower>2</stoppingPower>
         </projectile>
+        <modExtensions>
+            <li Class="VanillaGravshipExpanded.SubstructureDamageExtension">
+                <substructureDamageRadius>1.9</substructureDamageRadius>
+            </li>
+        </modExtensions>
     </ThingDef>
 
     <ThingDef ParentName="VGE_GravshipArtillerySmallBase">
@@ -380,10 +387,12 @@
             <turretGunDef>VGE_Gun_JavelinPod</turretGunDef>
             <turretBurstCooldownTime>30</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
+            <turretTopOffset>(0, 0.25)</turretTopOffset>
             <turretBurstWarmupTime>5</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
                 <li>VGE_TargetingTerminal</li>
+                <li MayRequire="vanillaexpanded.gravship2">VGE_TargetingConsole</li>
             </relatedBuildCommands>
         </building>
         <comps>
@@ -402,13 +411,13 @@
                 <outOfFuelMessage>Missing rockets</outOfFuelMessage>
             </li>
             <li Class="VanillaGravshipExpanded.CompProperties_WorldArtillery">
-                <worldMapAttackRange>16</worldMapAttackRange>
+                <worldMapAttackRange>20</worldMapAttackRange>
                 <firingMode>GroundToSpace, GroundToGround, SpaceToSpace, SpaceToGround</firingMode>
             </li>
         </comps>
         <modExtensions>
             <li Class="VanillaGravshipExpanded.TurretExtension_RotationSpeed">
-                <rotationSpeed>45</rotationSpeed>
+                <rotationSpeed>80</rotationSpeed>
             </li>
             <li Class="VanillaGravshipExpanded.TurretExtension_Barrels">
                 <barrels>
@@ -430,7 +439,6 @@
         <graphicData>
             <texPath>Things/Structures/Artillery/JavelinPod_TurretTop</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawOffset>(0,0,0.1)</drawOffset>
         </graphicData>
         <building>
             <turretTopLoadedGraphic>
@@ -503,6 +511,9 @@
                 <rotationOverTimeRange>-180.0~180</rotationOverTimeRange>
                 <scaleRange>1.5~3</scaleRange>
             </li>
+            <li Class="VanillaGravshipExpanded.SubstructureDamageExtension">
+                <substructureDamageRadius>1.9</substructureDamageRadius>
+            </li>
         </modExtensions>
     </ThingDef>
 
@@ -548,10 +559,12 @@
             <turretGunDef>VGE_Gun_AnticraftCaster</turretGunDef>
             <turretBurstCooldownTime>8</turretBurstCooldownTime>
             <turretTopDrawSize>4</turretTopDrawSize>
+            <turretTopOffset>(0, 0.25)</turretTopOffset>
             <turretBurstWarmupTime>6.66</turretBurstWarmupTime>
             <ai_combatDangerous>true</ai_combatDangerous>
             <relatedBuildCommands>
                 <li>VGE_TargetingTerminal</li>
+                <li MayRequire="vanillaexpanded.gravship2">VGE_TargetingConsole</li>
             </relatedBuildCommands>
         </building>
         <modExtensions>
@@ -571,7 +584,6 @@
         <graphicData>
             <texPath>Things/Structures/Artillery/AnticraftCaster_TurretTop</texPath>
             <graphicClass>Graphic_Single</graphicClass>
-            <drawOffset>(0,0,0.1)</drawOffset>
         </graphicData>
         <statBases>
             <AccuracyTouch>0.86</AccuracyTouch>

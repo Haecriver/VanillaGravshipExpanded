@@ -12,6 +12,7 @@ namespace VanillaGravshipExpanded
     [HotSwappable]
     public class Building_EnemyMechTurret : Building_GravshipTurret
     {
+        private List<Map> cachedMapsInRange;
         public override bool CanFire => true;
         public override bool CanAutoAttack => true;
         public override float GravshipTargeting => 1f;
@@ -19,6 +20,43 @@ namespace VanillaGravshipExpanded
         public override bool HideForceTargetGizmo => true;
 
         protected override bool ShowNoLinkedTerminalOverlay => false;
+
+        private CompWorldArtillery compWorldArtillery;
+
+        public override void SpawnSetup(Map map, bool respawningAfterLoad)
+        {
+            base.SpawnSetup(map, respawningAfterLoad);
+            compWorldArtillery = GetComp<CompWorldArtillery>();
+        }
+
+        public override float BurstCooldownTime()
+        {
+            float cooldown = base.BurstCooldownTime();
+            float factor = 1f;
+            float flat = 0f;
+            int bufferLinks = 0;
+            foreach (var b in Map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (b.Faction == Faction)
+                {
+                    if (b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                    {
+                        factor *= terminal.Props.cooldownFactor;
+                        flat += terminal.Props.cooldownFlatOffset;
+                    }
+                    if (b.TryGetComp<CompEnemyTurretBuffer>() is CompEnemyTurretBuffer buffer && buffer.Active && buffer.Props.validTurrets.Contains(this.def) && b.Position.DistanceTo(this.Position) <= buffer.Props.radius)
+                    {
+                        if (buffer.Props.cooldownReductionTicks > 0)
+                        {
+                            flat += buffer.Props.cooldownReductionTicks;
+                            bufferLinks++;
+                            if (bufferLinks >= buffer.Props.maxLinks) break;
+                        }
+                    }
+                }
+            }
+            return Mathf.Max(6.33f, (cooldown * factor) - (flat / 60f));
+        }
         private int GetTargetPriority(Thing t)
         {
             if (t is Building_GravshipTurret)
@@ -44,18 +82,46 @@ namespace VanillaGravshipExpanded
 
         public override LocalTargetInfo TryFindNewTarget()
         {
-            var comp = this.GetComp<CompWorldArtillery>();
-            if (comp != null)
+            if (GravshipUtility.GetPlayerGravEngine_NewTemp(Map) != null)
             {
-                var maps = Find.Maps.Where(x => GravshipHelper.GetDistance(Map.Tile, x.Tile) <= comp.Props.worldMapAttackRange).OrderBy(x => GravshipHelper.GetDistance(Map.Tile, x.Tile)).ToList();
-                foreach (var map in maps)
+                return GetTargetForMap(Map);
+            }
+            if (compWorldArtillery != null)
+            {
+                if (cachedMapsInRange == null || this.IsHashIntervalTick(250))
                 {
+                    var mapsWithDist = new List<(Map map, float distance)>();
+                    foreach (var map in Find.Maps)
+                    {
+                        if (map.IsPocketMap is false)
+                        {
+                            float dist = GravshipHelper.GetDistance(Map.Tile, map.Tile);
+                            if (dist <= compWorldArtillery.Props.worldMapAttackRange)
+                            {
+                                mapsWithDist.Add((map, dist));
+                            }
+                        }
+                    }
+                    mapsWithDist.Sort((a, b) =>
+                    {
+                        int cmp = (GravshipUtility.GetPlayerGravEngine_NewTemp(b.map) != null ? 1 : 0)
+                                - (GravshipUtility.GetPlayerGravEngine_NewTemp(a.map) != null ? 1 : 0);
+                        if (cmp != 0) return cmp;
+                        return a.distance.CompareTo(b.distance);
+                    });
+                    cachedMapsInRange = mapsWithDist.Select(x => x.map).ToList();
+                }
+                foreach (var map in cachedMapsInRange)
+                {
+                    if (map == null || map.Disposed)
+                    {
+                        continue;
+                    }
                     var target = GetTargetForMap(map);
                     if (target.IsValid)
                     {
-                        if (target.Thing.Map != Map)
+                        if (map != Map)
                         {
-                            comp.StartAttack(new GlobalTargetInfo(target.Thing), target, this);
                             return LocalTargetInfo.Invalid;
                         }
                         return target;
@@ -70,6 +136,7 @@ namespace VanillaGravshipExpanded
             var searcher = this;
             var verb = AttackVerb;
             var searcherThing = searcher;
+            var playerEngine = map == Map ? GravshipUtility.GetPlayerGravEngine_NewTemp(map) : null;
             TargetScanFlags flags = TargetScanFlags.NeedThreat | TargetScanFlags.NeedAutoTargetable;
             if (!AttackVerb.ProjectileFliesOverhead())
             {
@@ -94,6 +161,10 @@ namespace VanillaGravshipExpanded
                 }
                 if (thing.Map == Map)
                 {
+                    if (playerEngine == null || !playerEngine.OnValidSubstructure(thing))
+                    {
+                        return false;
+                    }
                     float num3 = verb.verbProps.EffectiveMinRange(thing, searcherThing);
                     if (num3 > 0f && (float)(searcherThing.Position - thing.Position).LengthHorizontalSquared < num3 * num3)
                     {
@@ -127,20 +198,50 @@ namespace VanillaGravshipExpanded
                 return true;
             };
 
-            var potentialTargets = new List<Thing>();
+            var seenTargets = new Dictionary<Thing, int>();
             foreach (IAttackTarget target in map.attackTargetsCache.GetPotentialTargetsFor(this))
             {
                 if (innerValidator(target))
                 {
-                    potentialTargets.Add(target.Thing);
+                    seenTargets.TryAdd(target.Thing, GetTargetPriority(target.Thing));
                 }
             }
-            potentialTargets.AddRange(map.listerBuildings.allBuildingsColonist.Where(x => GetTargetPriority(x) < 10));
-            potentialTargets = potentialTargets.Distinct().ToList();
-            potentialTargets.SortBy(t => GetTargetPriority(t));
+            foreach (var building in map.listerBuildings.allBuildingsColonist)
+            {
+                if (building == searcherThing || !searcherThing.HostileTo(building))
+                {
+                    continue;
+                }
+                if (map == Map && (playerEngine == null || !playerEngine.OnValidSubstructure(building)))
+                {
+                    continue;
+                }
+                if (!seenTargets.ContainsKey(building))
+                {
+                    int priority = GetTargetPriority(building);
+                    if (priority < 10)
+                    {
+                        seenTargets[building] = priority;
+                    }
+                }
+            }
+            var potentialTargets = seenTargets.OrderBy(x => x.Value).Select(x => x.Key).ToList();
             foreach (Thing target in potentialTargets)
             {
-                return target;
+                if (map == Map)
+                {
+                    if (verb.CanHitTarget(target))
+                    {
+                        return target;
+                    }
+                }
+                else
+                {
+                    compWorldArtillery.worldTarget = new GlobalTargetInfo(target);
+                    compWorldArtillery.target = new LocalTargetInfo(target);
+                    this.forcedTarget = compWorldArtillery.FindEdgeCell(Map, compWorldArtillery.worldTarget);
+                    return this.forcedTarget;
+                }
             }
             return LocalTargetInfo.Invalid;
         }

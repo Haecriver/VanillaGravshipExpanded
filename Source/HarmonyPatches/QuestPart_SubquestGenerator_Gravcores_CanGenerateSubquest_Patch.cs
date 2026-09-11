@@ -34,5 +34,14 @@ public static class QuestPart_SubquestGenerator_Gravcores_CanGenerateSubquest_Pa
             Log.Error($"Patching QuestPart_SubquestGenerator_Gravcores:CanGenerateSubquest - unexpected amount of patches. Expected patches: {expectedPatches}, actual patch amount: {replacedColonistsHaveBuildingCalls}. Game may fail to find custom VE grav engines.");
     }
 
-    private static bool ColonistsHaveAnyGravship(ListerBuildings lister, ThingDef def) => lister.ColonistsHaveBuilding(def) || lister.ColonistsHaveBuilding(VGEDefOf.VGE_GravjumperEngine) || lister.ColonistsHaveBuilding(VGEDefOf.VGE_GravhulkEngine);
+    private static bool ColonistsHaveAnyGravship(ListerBuildings lister, ThingDef def)
+    {
+        for (var i = 0; i < GravshipHelper.GravEngineDefs.Length; i++)
+        {
+            if (lister.ColonistsHaveBuilding(GravshipHelper.GravEngineDefs[i]))
+                return true;
+        }
+
+        return false;
+    }
 }

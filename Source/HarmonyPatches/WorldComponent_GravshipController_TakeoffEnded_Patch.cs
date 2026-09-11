@@ -95,7 +95,7 @@ namespace VanillaGravshipExpanded
         }
 
         public static bool CanEverKeepThisMap(this MapParent mapParent)
-            => mapParent.Map is not { IsStartingMap: true, IsPlayerHome: true } || Find.Scenario.AllParts.OfType<ScenPart_ForcedMap>().All(x => x.mapGenerator != MapGeneratorDefOf.OrbitalRelay);
+            => mapParent.Map is not { IsStartingMap: true, IsPlayerHome: true } || Find.Scenario.AllParts.OfType<ScenPart_ForcedMap>().All(x => !x.mapGenerator.HasModExtension<NeverKeepThisMapAfterTakeoffExtension>());
 
         public static bool ShouldAlwaysKeepThisMap(this MapParent mapParent)
         {

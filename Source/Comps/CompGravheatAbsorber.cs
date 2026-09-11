@@ -10,6 +10,9 @@ namespace VanillaGravshipExpanded
     {
         public int cooldownTicks = 900000;
         public float heatPushedPerSecond = 21f;
+
+        public HazeSettings hazeSettings = new();
+
         public CompProperties_GravheatAbsorber()
         {
             compClass = typeof(CompGravheatAbsorber);
@@ -29,6 +32,9 @@ namespace VanillaGravshipExpanded
         public bool IsOnCooldown => Find.TickManager.TicksGame < cooldownEndTick;
         public bool IsAbsorbing => isAbsorbing;
         public CompGlower glower;
+
+        public Effecter haze;
+        public float    hazeDelta;
 
         public bool ShouldBeLitNow() => IsOnCooldown;
 
@@ -62,6 +68,20 @@ namespace VanillaGravshipExpanded
                 {
                     isAbsorbing = false;
                     glower.UpdateLit(parent.Map);
+                }
+
+                if (this.haze == null)
+                {
+                    this.haze        = VGEDefOf.VGE_HazeEffecter.Spawn(this.parent, this.parent.Map, Props.hazeSettings.scale);
+                    this.haze.offset = this.parent.TrueCenter() - this.parent.DrawPos + Props.hazeSettings.offset.ToVector3();
+                }
+
+                this.hazeDelta += delta;
+
+                if(this.hazeDelta >= GenTicks.TicksPerRealSecond * 0.5f)
+                {
+                    this.haze.Trigger(this.parent, this.parent);
+                    this.hazeDelta = 0;
                 }
             }
         }

@@ -22,17 +22,16 @@ namespace VanillaGravshipExpanded
         public override void ApplyBoon(Gravship gravship)
         {
             var engine = gravship.Engine;
-            if (!LaunchInfo_ExposeData_Patch.fuelSpentPerTank.TryGetValue(engine.launchInfo, out var spentFuelData))
+            var spentFuelData = engine.launchInfo.ExtendedInfo(false)?.fuelSpentPerTank;
+            if (spentFuelData == null || spentFuelData.fuelData.Count <= 0)
                 return;
-                
+
             foreach (var entry in spentFuelData.fuelData)
             {
-                var thing = entry.Key;
-                var amountSpent = entry.Value;
-                var storageComp = thing.TryGetComp<CompResourceStorage>();
-                float amountToRefund = amountSpent * 0.25f;
-                storageComp.AddResource(amountToRefund);
+                entry.Key.TryGetComp<CompRefuelable>()?.Refuel(entry.Value * 0.25f);
             }
+
+            GravshipFuelProviderUtility.RefundFuelForAllProviders(gravship.engine, 0.25f, spentFuelData);
 
             SendStandardLetter(engine, null, engine);
         }

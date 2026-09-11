@@ -18,7 +18,7 @@ public static class VacBarrierRoofUtility
     public static Color? VacBarrierRoofColorAt(this Map map, IntVec3 pos)
     {
         if (map.roofGrid.RoofAt(pos)?.GetModExtension<RoofExtension>()?.customRoofGraphic is ColorableVacBarrierRoofGraphic)
-            return map.GetComponent<MaintenanceAndDeterioration_MapComponent>().vacBarrierColorGrid[map.cellIndices.CellToIndex(pos)];
+            return MaintenanceAndDeterioration_MapComponent.GetCompFast(map).vacBarrierColorGrid[map.cellIndices.CellToIndex(pos)];
         return null;
     }
 
@@ -32,7 +32,7 @@ public static class VacBarrierRoofUtility
     public static void SetVacBarrierRoofColorAt(this Map map, IntVec3 pos, Color color)
     {
         if (map.roofGrid.RoofAt(pos)?.GetModExtension<RoofExtension>()?.customRoofGraphic is ColorableVacBarrierRoofGraphic)
-            map.GetComponent<MaintenanceAndDeterioration_MapComponent>().vacBarrierColorGrid[map.cellIndices.CellToIndex(pos)] = color;
+            MaintenanceAndDeterioration_MapComponent.GetCompFast(map).vacBarrierColorGrid[map.cellIndices.CellToIndex(pos)] = color;
     }
 
     public static void SetVacBarrierRoofColorAtSafe(this Map map, IntVec3 pos, Color color)

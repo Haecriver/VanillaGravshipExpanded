@@ -26,7 +26,8 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[defName="ChemfuelTank"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
 		<value>
-			<li Class="CompProperties_GravshipFacility">
+			<li Class="VanillaGravshipExpanded.CompProperties_PipeNetFuelProvider">
+        <pipeNet>VGE_AstrofuelNet</pipeNet>
 				<providesFuel>true</providesFuel>
 				<componentTypeDef>FuelStorage</componentTypeDef>
 				<requiresLOS>false</requiresLOS>
@@ -141,7 +142,8 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[defName="LargeChemfuelTank"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
 		<value>
-			<li Class="CompProperties_GravshipFacility">
+			<li Class="VanillaGravshipExpanded.CompProperties_PipeNetFuelProvider">
+        <pipeNet>VGE_AstrofuelNet</pipeNet>
 				<providesFuel>true</providesFuel>
 				<componentTypeDef>FuelStorage</componentTypeDef>
 				<requiresLOS>false</requiresLOS>

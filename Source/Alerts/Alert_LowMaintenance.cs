@@ -48,7 +48,7 @@ namespace VanillaGravshipExpanded
         public IEnumerable<Thing> GetLowMaintenance(Map map)
         {
             maintainablesInternal.Clear();
-            HashSet<Thing> maintainables = map.GetComponent<MaintenanceAndDeterioration_MapComponent>()?.maintainables_InMap;
+            HashSet<Thing> maintainables = MaintenanceAndDeterioration_MapComponent.GetCompFast(map)?.maintainables_InMap;
 
             if (!maintainables.NullOrEmpty()) {
                 foreach (Thing maintainable in maintainables)

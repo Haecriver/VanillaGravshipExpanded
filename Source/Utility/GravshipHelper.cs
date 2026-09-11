@@ -23,7 +23,9 @@ namespace VanillaGravshipExpanded
         public static readonly Texture2D GravshipTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravship_WorldIcon");
         public static readonly Texture2D GravhulkTexture = ContentFinder<Texture2D>.Get("UI/MapIcons/Gravhulk_WorldIcon");
 
-        public static readonly List<ThingDef> GravEngineDefs = [ThingDefOf.GravEngine, VGEDefOf.VGE_GravjumperEngine, VGEDefOf.VGE_GravhulkEngine];
+        public static readonly ThingDef[] GravEngineDefs;
+
+        static GravshipHelper() => GravEngineDefs = DefDatabase<ThingDef>.AllDefs.Where(x => x.thingClass.SameOrSubclassOf<Building_GravEngine>()).ToArray();
 
         public static void AddScaffoldQuad(LayerSubMesh subMesh, IntVec3 cell, float y)
         {
@@ -46,8 +48,8 @@ namespace VanillaGravshipExpanded
 
         public static bool IsSustructureOrScaffold(this TerrainDef terrainDef)
         {
-            return terrainDef.HasTag("Substructure") || terrainDef == VGEDefOf.VGE_DamagedSubstructure
-            || terrainDef == VGEDefOf.VGE_GravshipSubscaffold;
+            return terrainDef.HasTag("Substructure") || terrainDef == VGEDefOf.VGE_DamagedSubstructure || terrainDef == VGEDefOf.VGE_GravshipSubscaffold
+            || terrainDef.HasModExtension<SubstructureEdgeGraphicsExtension>();
         }
 
         public static bool IsScaffold(this TerrainDef terrainDef)
@@ -198,6 +200,36 @@ namespace VanillaGravshipExpanded
                 };
                 Find.WindowStack.Add(dialog_NodeTree);
             }
+        }
+
+        public static float CalculateAdjustedForcedMissRadius(float baseMissRadius, Map map, ThingDef turretDef, IntVec3 turretPosition, Faction turretFaction, float targetingStat, bool useMapMultiplier)
+        {
+            var mapMultiplier = useMapMultiplier ? GetMapMultiplier(map) : 1f;
+            var targetingMultiplier = 0.5f + (targetingStat * 0.5f);
+            var forcedMiss = (baseMissRadius * mapMultiplier) / targetingMultiplier;
+            foreach (var b in map.listerBuildings.allBuildingsNonColonist)
+            {
+                if (b.Faction == turretFaction)
+                {
+                    if (b.TryGetComp<CompEnemyTerminal>() is CompEnemyTerminal terminal && terminal.IsManned)
+                    {
+                        forcedMiss -= terminal.Props.forcedMissRadiusOffset;
+                    }
+                    if (b.TryGetComp<CompEnemyTurretBuffer>() is CompEnemyTurretBuffer buffer && buffer.Active && buffer.Props.validTurrets.Contains(turretDef) && b.Position.DistanceTo(turretPosition) <= buffer.Props.radius)
+                    {
+                        if (buffer.Props.maxForcedMissRadius > 0f)
+                        {
+                            forcedMiss = Mathf.Min(forcedMiss, buffer.Props.maxForcedMissRadius);
+                        }
+                    }
+                }
+            }
+            return Mathf.Max(forcedMiss, 1.9f);
+        }
+
+        private static float GetMapMultiplier(Map map)
+        {
+            return map != null && map.gameConditionManager.ConditionIsActive(VGEDefOf.VGE_DustCloud) ? 3f : 1f;
         }
     }
 }

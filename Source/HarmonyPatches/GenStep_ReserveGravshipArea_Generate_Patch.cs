@@ -11,10 +11,13 @@ namespace VanillaGravshipExpanded
     {
         public static bool Prefix(Map map, GenStepParams parms)
         {
+            bool enabled = map.regionAndRoomUpdater.Enabled;
+            map.regionAndRoomUpdater.Enabled = true;
             if (!MapGenerator.PlayerStartSpotValid)
             {
                 GenStep_ReserveGravshipArea.SetStartSpot(map, new HashSet<IntVec3>(), new List<CellRect>());
             }
+            map.regionAndRoomUpdater.Enabled = enabled;
             return false;
         }
 

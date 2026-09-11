@@ -7,9 +7,9 @@ namespace VanillaGravshipExpanded
     [HarmonyPatch(typeof(DamageWorker), nameof(DamageWorker.ExplosionDamageTerrain))]
     public static class DamageWorker_ExplosionDamageTerrain_Patch
     {
-        public static void Postfix(DamageWorker __instance, Explosion explosion, IntVec3 c)
+        public static void Postfix(Explosion explosion, IntVec3 c)
         {
-            var modExtension = explosion.weapon?.GetModExtension<TurretExtension_SubstructureDamage>();
+            var modExtension = explosion.weapon?.GetModExtension<SubstructureDamageExtension>() ?? explosion.projectile?.GetModExtension<SubstructureDamageExtension>();
             if (modExtension == null)
             {
                 return;
@@ -23,17 +23,39 @@ namespace VanillaGravshipExpanded
             {
                 return;
             }
+            DamageTerrain(cell, map);
+        }
 
+        public static void DamageTerrain(IntVec3 cell, Map map)
+        {
             var terrain = cell.GetTerrain(map);
-            if (terrain == TerrainDefOf.Substructure)
+            var ext = terrain.GetModExtension<DamagedTerrainReplacementExtension>();
+            if (ext?.damagedTerrain != null)
+            {
+                map.terrainGrid.SetTerrain(cell, ext.damagedTerrain);
+                SpawnDebrisFilth(cell, map);
+                ThingUtility.CheckAutoRebuildTerrainOnDestroyed(terrain, cell, map);
+            }
+            else if (terrain == TerrainDefOf.Substructure)
             {
                 map.terrainGrid.SetTerrain(cell, VGEDefOf.VGE_DamagedSubstructure);
                 SpawnDebrisFilth(cell, map);
-                ThingUtility.CheckAutoRebuildTerrainOnDestroyed(TerrainDefOf.Substructure, c, map);
+                ThingUtility.CheckAutoRebuildTerrainOnDestroyed(TerrainDefOf.Substructure, cell, map);
             }
-            else if (terrain == VGEDefOf.VGE_DamagedSubstructure || terrain == VGEDefOf.VGE_GravshipSubscaffold)
+            else if (terrain.HasTag("DestroyableByArtillery"))
             {
-                map.terrainGrid.RemoveFoundation(cell, false);
+                if (terrain.isFoundation)
+                {
+                    map.terrainGrid.RemoveFoundation(cell, false);
+                }
+                else
+                {
+                    var top = map.terrainGrid.TopTerrainAt(cell);
+                    if (top == terrain)
+                    {
+                        map.terrainGrid.RemoveTopLayer(cell, false);
+                    }
+                }
             }
         }
 

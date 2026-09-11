@@ -25,6 +25,7 @@
 		</statBases>
 		<size>(1, 2)</size>
 		<rotatable>true</rotatable>
+    <altitudeLayer>BuildingOnTop</altitudeLayer>
 		<fillPercent>0.4</fillPercent>
 		<passability>PassThroughOnly</passability>
 		<pathCost>14</pathCost>
@@ -60,6 +61,9 @@
         <overlayDef>VGE_NoLinkedGrajumper</overlayDef>
       </li>
 		</comps>
+    <inspectorTabs>
+      <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+    </inspectorTabs>
 		<uiOrder>2099</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="GravshipComponentBase">
@@ -119,6 +123,9 @@
         <overlayDef>VGE_NoLinkedGravhulk</overlayDef>
       </li>
 		</comps>
+    <inspectorTabs>
+      <li>VanillaGravshipExpanded.ITab_GravshipFuel</li>
+    </inspectorTabs>
 		<uiOrder>2101</uiOrder>
 	</ThingDef>
 	<ThingDef ParentName="GravshipComponentBase">

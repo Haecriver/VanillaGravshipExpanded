@@ -16,6 +16,8 @@ namespace VanillaGravshipExpanded
         [Unsaved]
         public CachedHeatsinkStats cachedStats = null;
 
+        public HazeSettings hazeSettings = new();
+
         public CompProperties_Heatsink()
         {
             compClass = typeof(CompHeatsink);
@@ -99,6 +101,8 @@ namespace VanillaGravshipExpanded
         public Graphic OverlayGraphic => overlayGraphic ??= GraphicDatabase.Get<Graphic_Multi>(parent.Graphic.path + "_Overlay", parent.Graphic.Shader, parent.Graphic.drawSize, parent.Graphic.color);
         public CompGlower glower;
 
+        public Effecter haze;
+
         public bool ShouldBeLitNow() => StoredHeat > 0;
 
         public override void PostPostMake()
@@ -118,7 +122,7 @@ namespace VanillaGravshipExpanded
 
         public void AddHeat(float amount)
         {
-            storedHeat = Mathf.Min(storedHeat + amount, CachedStats.maxHeat * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier);
+            storedHeat = Mathf.Min(storedHeat + amount, EffectiveMaxHeat);
             UpdateLit();
         }
 
@@ -143,6 +147,12 @@ namespace VanillaGravshipExpanded
             base.CompTick();
             if (parent.Map is null) return;
 
+            var tickInterval = 30;
+            if (!parent.IsHashIntervalTick(tickInterval))
+            {
+                return;
+            }
+
             if (storedHeat <= 0 || !CanBeOn(out _))
             {
                 if (powerComp != null)
@@ -152,7 +162,7 @@ namespace VanillaGravshipExpanded
 
             if (powerComp == null || powerComp.PowerOn)
             {
-                float heatToConsume = (CachedStats.heatConsumptionPerHour * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier) / 2500f;
+                float heatToConsume = (CachedStats.heatConsumptionPerHour * CompHeatManager.HeatMultiplier * CompHeatManager.HeatsinkCapacityMultiplier) / 2500f * tickInterval;
                 if (storedHeat >= heatToConsume)
                 {
                     storedHeat -= heatToConsume;
@@ -161,7 +171,7 @@ namespace VanillaGravshipExpanded
                     var room = parent.Position.GetRoom(parent.Map);
                     if (room != null)
                     {
-                        room.PushHeat(CachedStats.heatPushedPerSecond / 60f);
+                        room.PushHeat(CachedStats.heatPushedPerSecond / 60f * tickInterval);
                     }
                 }
                 else
@@ -176,6 +186,14 @@ namespace VanillaGravshipExpanded
             {
                 powerComp.PowerOutput = powerComp.Props.basePowerConsumption;
             }
+
+            if(this.haze == null)
+            {
+                this.haze        = VGEDefOf.VGE_HazeEffecter.Spawn(this.parent, this.parent.Map, Props.hazeSettings.scale);
+                this.haze.offset = this.parent.TrueCenter() - this.parent.DrawPos + Props.hazeSettings.offset.ToVector3();
+            }
+
+            this.haze.Trigger(this.parent, this.parent);
         }
 
         public override void PostDraw()

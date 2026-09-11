@@ -14,6 +14,10 @@ public class CompProperties_ApparelOxygenProvider : CompProperties
     public float percentageToAutoRefill;
     public bool destroyOnEmpty;
     public bool replenishAfterCooldown;
+    // If a newly crafted oxygen provider should be recharged automatically by default
+    public bool automaticRechargeByDefault = true;
+    // If an oxygen provider should be configurable at all
+    public bool automaticRechargeConfigurable = true;
 
     public float minResistanceToActivate = 0.12f;
     public float consumptionPerTick = 1f / GenTicks.TickLongInterval;

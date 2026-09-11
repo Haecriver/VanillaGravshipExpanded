@@ -84,35 +84,25 @@ namespace VanillaGravshipExpanded
             float hitChance = hitFactor * targetingMultiplier;
             return hitChance;
         }
-
         public virtual float FinalForcedMissRadius(GlobalTargetInfo target)
         {
-            var launcher = parent as Building_GravshipTurret;
-            var verb = launcher.AttackVerb;
-            var baseMissRadius = verb.verbProps.ForcedMissRadius;
-            var distance = GravshipHelper.GetDistance(launcher.Map.Tile, target.Tile);
-            var worldMultiplier = 1f;
-            if (distance > 49)
-            {
-                worldMultiplier = 2.0f;
-            }
-            else if (distance > 25)
-            {
-                worldMultiplier = 1.6f;
-            }
-            else if (distance > 9)
-            {
-                worldMultiplier = 1.2f;
-            }
-            var mapMultiplier = 1f;
-            if (launcher.Map.gameConditionManager.ConditionIsActive(VGEDefOf.VGE_DustCloud))
-            {
-                mapMultiplier = 3f;
-            }
-
-            var targetingStat = launcher.GravshipTargeting;
-            var forcedMiss = (baseMissRadius * worldMultiplier * mapMultiplier) / GetTargetingMultiplier(targetingStat);
-            return forcedMiss;
+        	var launcher = parent as Building_GravshipTurret;
+        	var baseMissRadius = launcher.AttackVerb.verbProps.ForcedMissRadius;
+        	var distance = GravshipHelper.GetDistance(launcher.Map.Tile, target.Tile);
+        	var worldMultiplier = 1f;
+        	if (distance > 49)
+        	{
+        		worldMultiplier = 2.0f;
+        	}
+        	else if (distance > 25)
+        	{
+        		worldMultiplier = 1.6f;
+        	}
+        	else if (distance > 9)
+        	{
+        		worldMultiplier = 1.2f;
+        	}
+        	return GravshipHelper.CalculateAdjustedForcedMissRadius(baseMissRadius * worldMultiplier, launcher.Map, launcher.def, launcher.Position, launcher.Faction, launcher.GravshipTargeting, useMapMultiplier: true);
         }
 
         public override void PostExposeData()
@@ -140,7 +130,11 @@ namespace VanillaGravshipExpanded
                 action = delegate { StartWorldTargeting(); }
             };
 
-            if (!Turret.CanFire)
+            if (Turret.linkedTerminal is Apparel)
+            {
+                worldTargetGizmo.Disable("VGE_MustBeAimedViaEquippedTargeter".Translate());
+            }
+            else if (!Turret.CanFire)
             {
                 worldTargetGizmo.Disable("VGE_NeedsMannedTargetingTerminal".Translate());
             }
@@ -186,7 +180,14 @@ namespace VanillaGravshipExpanded
                         var turret = parent as Building_TurretGun;
                         Find.Targeter.BeginTargeting(targetingParameters, delegate (LocalTargetInfo target)
                         {
-                            StartAttack(globalTarget, target, turret);
+                            if (globalTarget.Tile == parent.Map.Tile)
+                            {
+                                turret.OrderAttack(target);
+                            }
+                            else
+                            {
+                                StartAttack(globalTarget, target, turret);
+                            }
                             Current.Game.CurrentMap = turret.Map;
                             Find.CameraDriver.JumpToCurrentMapLoc(turret.Position);
                         }, highlightAction: delegate (LocalTargetInfo x)
@@ -243,10 +244,11 @@ namespace VanillaGravshipExpanded
         public override void CompTickInterval(int delta)
         {
             base.CompTickInterval(delta);
-            if (target.IsValid && target.ThingDestroyed)
+            if (target.IsValid && target.ThingDestroyed || worldTarget.WorldObject != null && worldTarget.WorldObject.Destroyed)
             {
                 var parent = this.parent as Building_TurretGun;
                 parent.ResetForcedTarget();
+                Reset();
             }
         }
 
@@ -331,7 +333,7 @@ namespace VanillaGravshipExpanded
         {
             var distance = GravshipHelper.GetDistance(parent.Map.Tile, target.Tile);
             bool isWithinRange = distance <= Props.worldMapAttackRange;
-            failReason = isWithinRange ? null : "VGE_GravshipArtilleryOutOfRange".Translate();
+            failReason = isWithinRange ? null : "VGE_TargetOutOfRange".Translate();
             return isWithinRange;
         }
 

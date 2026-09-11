@@ -70,9 +70,8 @@ public static class ListAllGravEngines_Patch
             return lister.ThingsOfDef(def);
 
         TmpList.Clear();
-        TmpList.AddRange(lister.ThingsOfDef(def));
-        TmpList.AddRange(lister.ThingsOfDef(VGEDefOf.VGE_GravjumperEngine));
-        TmpList.AddRange(lister.ThingsOfDef(VGEDefOf.VGE_GravhulkEngine));
+        for (var i = 0; i < GravshipHelper.GravEngineDefs.Length; i++)
+            TmpList.AddRange(lister.ThingsOfDef(GravshipHelper.GravEngineDefs[i]));
 
         return TmpList;
     }

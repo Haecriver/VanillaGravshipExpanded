@@ -39,7 +39,7 @@ namespace VanillaGravshipExpanded
                 doNegativeOutcome = true,
             };
             // Set the launch tile to prevent errors
-            LaunchInfo_ExposeData_Patch.launchSourceTiles[comp.engine.launchInfo] = comp.engine.Map.Tile;
+            comp.engine.launchInfo.ExtendedInfo(true).launchSourceTile = comp.engine.Map.Tile;
             // Destroy trees around the starting grav engine
             WorldComponent_GravshipController.DestroyTreesAroundSubstructure(comp.engine.Map, comp.engine.ValidSubstructure);
             // Close world rendering, just in case

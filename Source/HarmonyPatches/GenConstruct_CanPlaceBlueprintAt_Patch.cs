@@ -37,6 +37,7 @@ namespace VanillaGravshipExpanded
                 {
                     yield return new CodeInstruction(OpCodes.Ldarg_1);
                     yield return new CodeInstruction(OpCodes.Ldarg_3);
+                    yield return new CodeInstruction(OpCodes.Ldloc_3);
                     yield return new CodeInstruction(OpCodes.Call,
                         AccessTools.Method(typeof(GenConstruct_CanPlaceBlueprintAt_Patch), nameof(ShouldSkip)));
                     yield return new CodeInstruction(OpCodes.Brtrue_S, code[i].operand);
@@ -49,9 +50,13 @@ namespace VanillaGravshipExpanded
                 Log.Warning("[VGE] GenConstruct.CanPlaceBlueprintAt transpiler failed to find its patch point.");
             }
         }
-        private static bool ShouldSkip(IntVec3 cell, Map map)
+        private static bool ShouldSkip(IntVec3 cell, Map map, TerrainDef terrainDef)
         {
             if (map.terrainGrid.FoundationAt(cell) == VGEDefOf.VGE_DamagedSubstructure)
+            {
+                return true;
+            }
+            if (terrainDef.HasTag("VGE_Subarmor"))
             {
                 return true;
             }
