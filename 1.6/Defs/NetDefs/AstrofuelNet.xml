@@ -40,7 +40,7 @@
 	<ThingDef ParentName="BuildingBase">
 		<defName>VGE_AstrofuelPipe</defName>
 		<label>astrofuel pipe</label>
-		<description>A large pipe for transporting high-grade astrofuel around. Unlike other pipes, it’s big, bulky, acts as cover and can’t be stood on. Astrofuel pipes can’t be placed on workbench interaction spots and in doorways.</description>
+		<description>A large pipe for transporting high-grade astrofuel around. Unlike other pipes, it’s big, bulky and acts as cover.</description>
 		<thingClass>PipeSystem.Building_Pipe</thingClass>
 		<category>Building</category>
 		<pathCost>30</pathCost>
@@ -493,7 +493,7 @@
 	<ThingDef ParentName="GravshipComponentBase">
 		<defName>VGE_AstrofuelGenerator</defName>
 		<label>astrofuel generator</label>
-		<description>Produces power by consuming astrofuel. Much more efficient than chemfuel generators.</description>
+		<description>Produces power by consuming astrofuel. Marginally more efficient than chemfuel generators.</description>
 		<minifiedDef IsNull="True"/>
 		<thingCategories IsNull="True"/>
 		<drawerType>MapMeshAndRealTime</drawerType>
