@@ -24,21 +24,17 @@ namespace VanillaGravshipExpanded
 
             foreach (var instruction in instructions)
             {
+                yield return instruction;
                 if (instruction.Calls(forcedMissRadiusGetter))
                 {
                     yield return new CodeInstruction(OpCodes.Ldarg_0);
                     yield return new CodeInstruction(OpCodes.Call, helperMethod);
                 }
-                else
-                {
-                    yield return instruction;
-                }
             }
         }
 
-        public static float GetAdjustedForcedMissRadius(VerbProperties props, Verb verb)
+        public static float GetAdjustedForcedMissRadius(float baseMiss, Verb verb)
         {
-            float baseMiss = props.ForcedMissRadius;
             if (verb != null && verb.caster is Building_GravshipTurret turret)
             {
                 return turret.GetLocalForcedMissRadius(baseMiss);
